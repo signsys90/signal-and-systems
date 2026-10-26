@@ -1,82 +1,141 @@
 ---
 title: Mobile Ham Radio Install
-description: A dual-band 2 m / 70 cm mobile antenna on an NMO door mount, fed to a handheld radio in the F-150's console.
-summary: Dual-band 2 m / 70 cm antenna on an NMO door mount, feeding a handheld radio in the F-150 console.
+description: A dual-band 2 m / 70 cm mobile antenna on an NMO door mount, fed to a handheld radio in the F-150's console, kept electrically separate from the emergency lighting system.
+summary: Dual-band 2 m / 70 cm antenna on an NMO door mount, feeding a handheld radio in the F-150 console, on its own power and ground.
 status: Installed
 category: Radio and Emergency Comms
-started: TBD
+started: 2026-10-21
 updated: 2026-10-26
 project: true
 ---
 
 import ProjectHeader from '../../../../components/ProjectHeader.astro';
 import PartsTable from '../../../../components/PartsTable.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import Gallery from '../../../../components/Gallery.astro';
 import Callout from '../../../../components/Callout.astro';
 import Changelog from '../../../../components/Changelog.astro';
+import antenna from '../../../../assets/ham/antenna-on-door.jpg';
+import antennaHero from '../../../../assets/ham/antenna-hero.jpg';
+import radio from '../../../../assets/ham/radio-in-console.jpg';
 
-<ProjectHeader />
+<ProjectHeader hero={antennaHero} heroAlt="Passenger side of the white F-150 with a short black dual-band antenna on an NMO bracket at the top rear corner of the rear door." />
+
+## Photos
+
+Both photos are from install day, 21 October 2026, with location data removed.
+
+<Gallery
+	photos={[
+		{ src: antenna, alt: 'The 7.5 inch dual-band antenna standing on the Comet NMO bracket at the top rear corner of the rear passenger door.', caption: 'The antenna on the Comet HD-5NMO bracket at the top rear corner of the rear passenger-side door. The panoramic roof rules out a roof mount.' },
+		{ src: radio, alt: 'BaoFeng handheld radio standing in the console tray with a short tan SMA jumper running from its antenna port to the coax.', caption: 'The BaoFeng in the console tray, with a short SMA jumper from its antenna port to the coax\'s PL-259 connector.' },
+	]}
+/>
 
 ## Goal
 
-Put a usable 2 m / 70 cm amateur radio station in the truck, with an external antenna, without sharing power or grounds with the emergency lighting system.
+Put a usable 2 m / 70 cm amateur radio station in the truck, with an external antenna for better range than the radio's own rubber antenna, without sharing power or grounds with the emergency lighting system. As a licensed operator (KR4JSQ) and a Duval County ESF-2 emergency communications volunteer, I want a radio in the truck that works when I need it.
 
 ## Constraints
 
-- 2017 F-150 Lariat SuperCrew with a panoramic roof. The antenna mounts on the rear passenger door instead of the roof.
-- The radio must stay electrically separate from the Whelen CanTrol WC system.
-- The callsign is KR4JSQ.
+- **Roof:** 2017 F-150 Lariat SuperCrew with a panoramic roof, so there's no roof mount. The antenna goes on a door-frame bracket instead.
+- **Separation:** the radio must stay electrically separate from the Whelen CanTrol WC system. Whelen's own guide (14580G, p.1) says never to power warning equipment from the same circuit as radio equipment, or share its ground.
+- **No drilling:** the NMO bracket clamps to the door frame, so no hole goes in the aluminum body.
+- **Callsign:** KR4JSQ.
 
 ## Architecture
 
 ```text
-BaoFeng BF-F8HP (console) ── SMA jumper ── PL-259 ── Comet HD-5NMO coax ── NMO mount (rear passenger door, top rear corner) ── 7.5" dual-band antenna
+BaoFeng BF-F8HP (console tray)
+   └─ SMA jumper ─ PL-259 ─ Comet HD-5NMO coax
+                                └─ NMO bracket (rear passenger door, top rear corner)
+                                       └─ 7.5" dual-band 2 m / 70 cm antenna
+Power: radio's own battery pack (nothing shared with the truck or the CanTrol)
 ```
 
 ## Parts list
 
+Prices haven't been recorded yet. Links go to the vendor listing for each part.
+
 <PartsTable
 	parts={[
-		{ name: 'BaoFeng BF-F8HP dual-band 2 m / 70 cm handheld', specs: 'Label reads BF-F8HP PRO', source: 'https://baofengtech.com/product/bf-f8hp/', status: 'Installed' },
-		{ name: 'Compact High Performance 2M/440 Mobile Antenna, 7.5 in, NMO base', sku: 'H0-016475', status: 'Installed' },
-		{ name: 'Comet HD-5NMO NMO bracket mount with coax', sku: 'H0-019294', status: 'Installed' },
-		{ name: 'SMA to PL-259 jumper', status: 'Installed' },
+		{ name: 'BaoFeng BF-F8HP dual-band 2 m / 70 cm handheld', specs: 'Label on my radio reads BF-F8HP PRO', source: 'https://baofengtech.com/product/bf-f8hp/', status: 'Installed' },
+		{ name: 'Compact High Performance 2M/440 Mobile Antenna, 7.5 in, NMO base', sku: 'H0-016475 (HRO)', specs: 'Dual band, 2 m and 70 cm', status: 'Installed' },
+		{ name: 'Comet HD-5NMO NMO bracket mount with coax', sku: 'H0-019294 (HRO)', specs: 'Bracket mount with attached coax, PL-259 at the radio end', status: 'Installed' },
+		{ name: 'SMA to PL-259 jumper', specs: 'Short jumper, radio port to coax', status: 'Installed' },
 	]}
 />
 
-## Wiring or configuration
+<SpecBox
+	title="Station at a glance"
+	specs={[
+		['Bands', '2 m (VHF) and 70 cm (UHF)'],
+		['Radio', 'BaoFeng BF-F8HP, handheld, rides in the console tray'],
+		['Antenna', '7.5" dual-band, NMO base'],
+		['Mount', 'Comet HD-5NMO bracket, top rear corner of the rear passenger door'],
+		['Feed line', 'Coax supplied with the HD-5NMO, PL-259 at the radio end'],
+		['Power', 'Radio battery pack only'],
+		['Installed', '21 October 2026'],
+	]}
+	source={{ label: 'Radio product page (BaoFeng Tech)', href: 'https://baofengtech.com/product/bf-f8hp/' }}
+/>
 
-The radio runs on its own battery pack, so it shares nothing with the truck's electrical system. If it is ever powered from the truck, it gets its own fused battery feed and its own ground. It never uses the CanTrol fuse block, and it never grounds to the battery negative post.
+<Callout type="unverified">
+The radio's power output, frequency range and the coax length aren't documented here yet. I'll add them from the BaoFeng manual and the Comet spec sheet rather than from memory.
+</Callout>
+
+## Wiring and configuration
+
+The radio runs on its own battery pack, so it shares nothing with the truck's electrical system.
+
+If it's ever powered from the truck (a battery eliminator or a mobile rig later), the rules are fixed:
+
+- Its own fused feed from the battery, fused within 2 ft of the source.
+- Its own ground to the Ford ground point or the side of a steel frame rail.
+- Never the CanTrol's fuse block or grounds.
+- Never the battery negative post. On a 2015+ F-150 all negative current has to pass through the battery monitoring sensor (Ford SVE Bulletin Q-231).
 
 ## Build steps
 
 1. Mount the Comet HD-5NMO at the top rear corner of the rear passenger-side door.
 2. Fit the antenna on the NMO base.
-3. Route the coax to the console. Keep it away from lighting and siren wiring, and cross any wiring at right angles.
+3. Route the coax to the console. Keep it clear of door hinges and pinch points, and away from lighting and siren wiring. Where it has to cross them, cross at right angles.
 4. Connect the radio to the coax with a short SMA jumper.
+5. Check the door still opens and closes fully without pinching the coax.
 
 ## Testing and verification
 
 | Test | Status |
 | --- | --- |
-| Antenna and mount installed | Done |
-| SWR measurement | Not yet documented |
-| Noise check with the lights and siren running | Not yet. This waits until the CanTrol system is installed |
+| Antenna and mount installed | Done, 21 October 2026 |
+| Door opens and closes without pinching the coax | Not documented yet |
+| SWR measurement on 2 m and 70 cm | Not yet |
+| On-air check into a local repeater | Not documented yet |
+| Noise check with the lights and siren running | Not yet. Waits until the CanTrol system is installed |
+| CanTrol behavior while transmitting | Not yet. On the wiring-day test list |
 
 ## Safety notes
 
-- Keep coax clear of door hinges and pinch points.
-- After the warning system is installed, key the radio with the lights and siren running and listen for interference.
+- Keep the coax clear of door hinges and pinch points.
+- After the warning system is installed, key the radio with the lights and siren running and listen for interference both ways: noise on the radio, and any glitch on the CanTrol.
+- Don't transmit while someone is touching the antenna.
 
 ## Lessons learned
 
-None recorded yet.
+- A door-frame NMO bracket is a clean answer for a panoramic-roof truck. It needs no hole in the body, and it keeps the antenna high.
 
 ## Open items
 
-- Add prices for the radio, antenna and mount.
-- Measure and record SWR.
-- Add the install date.
+- Add prices for the radio, antenna, mount and jumper.
+- Measure and record SWR on both bands.
+- Add the radio's power and frequency specs, and the coax type and length, from the manufacturer documents.
+- Decide whether to move to a truck-powered mobile radio later. If so, it gets its own feed and ground per the rules above.
 
 ## Changelog
 
-<Changelog entries={[{ date: '2026-10-26', change: 'Project page published.', rollback: 'Revert the commit that added this page.' }]} />
+<Changelog
+	entries={[
+		{ date: '2026-10-26', change: 'Added install-day photos, install date, station summary, separation rules and an expanded test list.', rollback: 'Revert the commit that changed this page.' },
+		{ date: '2026-10-26', change: 'Project page published.', rollback: 'Revert the commit that added this page.' },
+	]}
+/>
