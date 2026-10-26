@@ -1,0 +1,341 @@
+---
+title: Big Time Sandwich Co.
+description: Business plan, Florida licensing research, Shopify go-live plan and brand website for a Jacksonville all-natural PB&J brand sold through bars and yoga studios.
+summary: Turning a Jacksonville PB&J idea into a licensable, sellable business. Business plan, Florida food-permit research, venue partner program, Shopify and tap-to-pay go-live plan, and the brand website.
+status: In progress
+category: Business Systems
+started: 2026-10-24
+updated: 2026-10-26
+project: true
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import Gallery from '../../../../components/Gallery.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+import hero from '../../../../assets/big-time/hero.jpg';
+import menu from '../../../../assets/big-time/menu.jpg';
+import ingredients from '../../../../assets/big-time/ingredients.jpg';
+import where from '../../../../assets/big-time/where.jpg';
+import carry from '../../../../assets/big-time/carry.jpg';
+
+<ProjectHeader hero={hero} heroAlt="Top of the Big Time Sandwich Co. website draft: a black page with the marker-lettered headline 'Healthy sandwiches, made Big Time' and the sticker logo tilted on the right." />
+
+<Callout type="open" title="What this page leaves out">
+Big Time is a real partner business I'm helping launch. This page covers the scope, the method and what I built. It leaves out the owner's name, every price, fee and financial projection, the ownership terms, and all contact details. The screenshots come from the website draft with the price tag, the email address and the menu prices hidden.
+</Callout>
+
+## Goal
+
+Big Time Sandwich Co. is a Jacksonville food brand built on one familiar sandwich made properly: thick-cut bread, natural peanut butter (peanuts and salt only) and real fruit spread, with nothing artificial. The brand line is "Zero Poison. All Natural. Jacksonville Made."
+
+The plan is to make the sandwiches in a permitted kitchen, seal and label them, and deliver them the same day to bars, yoga studios and fitness spaces across Duval County, with pop-ups and catering on the side.
+
+My role is growth and systems: the business plan, the licensing research, the venue partner program, the brand website, and the online store and payment setup. "Done" for this phase means:
+
+1. A plan the partners can approve, with every assumption written down and labelled as an assumption.
+2. A clear answer on which Florida permits the model needs before a single sandwich is sold.
+3. A website and store that are built, tested and ready, and stay password protected until the permit is in hand.
+
+<SpecBox
+	title="At a glance"
+	specs={[
+		['Business', 'Big Time Sandwich Co., Jacksonville, Florida'],
+		['Market', 'Duval County only'],
+		['Product', 'All-natural PB&J, sealed and labelled, sold same day'],
+		['Channels', 'Partner venues (bars, yoga and fitness studios), direct pop-ups, events and catering'],
+		['Licensing finding', 'Not a cottage-food business: needs an FDACS food permit and a permitted kitchen'],
+		['Storefront', 'Shopify Basic: website, online checkout and phone tap-to-pay in one account'],
+		['Launch test', '60-day pilot with 4 to 6 venues before scaling'],
+		['My role', 'Growth and strategy partner: plan, research, brand site, store, payments, venue program'],
+	]}
+	source={{ label: 'Business proposal (24 Oct 2026) and go-live plan (25 Oct 2026)' }}
+/>
+
+## Screenshots
+
+These are from the brand website draft I built for the proposal. It's a one-page site: hero, menu, ingredients, where to find us, and a "carry Big Time" section for venues.
+
+<Gallery
+	photos={[
+		{ src: hero, alt: 'Website hero with the headline Healthy sandwiches, made Big Time, two buttons and the tilted sticker logo.', caption: 'Hero. Marker lettering, the sticker logo, and buttons for the menu and for venues. The price tag under the buttons is hidden here.' },
+		{ src: menu, alt: 'Four menu cards on a dark background: The Classic, Strawberry Smash, The Big Time and The Flow.', caption: 'Menu section in the first draft, with four placeholder sandwiches. The go-live plan replaces them with the real launch item (see below). Prices hidden.' },
+		{ src: ingredients, alt: 'Ingredients section with a nutrition-label style card listing bread, peanut butter and fruit spread.', caption: 'Ingredients, laid out like a food label so the all-natural claim is easy to check.' },
+		{ src: where, alt: 'Where to find us section with neighborhood pills: Riverside, Avondale, Five Points, San Marco, Murray Hill, Springfield, Downtown, The Beaches.', caption: 'Where to find us: the pilot neighborhoods, with "at the bar" and "after class" use cases.' },
+		{ src: carry, alt: 'Purple section titled Put Big Time on your counter with four bullet points and a white card.', caption: 'The venue pitch. The email address on the card is hidden.' },
+	]}
+/>
+
+## Constraints
+
+- **Licensing decides the model.** Selling through other businesses rules out Florida's cottage food exemption (details below).
+- **Venue margin decides profit.** Every share a venue keeps comes straight off the bottom line, so channel mix matters more than any cost cut.
+- **Volume per venue is unknown.** The plan assumes a number of sandwiches per venue per day, and the pilot exists to test it.
+- **Food safety.** Peanut is a major allergen. Whether a PB&J needs refrigeration under Florida rules wasn't confirmed, so the plan keeps product chilled with a same-day shelf life until FDACS says otherwise.
+- **Claims.** "All Natural" has no formal federal definition, and "Zero Poison" works as attitude but must not read as a health claim.
+- **Owner-held accounts.** Every account that touches money, tax or bank deposits is opened in the owner's name. I build, connect, test and train, but I never hold the password.
+
+## Architecture
+
+How the business fits together, from kitchen to customer:
+
+```text
+ Suppliers ─────────► Permitted commissary kitchen ─────────► Insulated carriers
+ (natural PB, fruit      receive · assemble · seal ·             delivery by
+  spread, local bakery    label · chill · date                   neighborhood route
+  bread, packaging)                                                   │
+                                                                      ▼
+                         ┌──────────────────────┬─────────────────────┬──────────────────┐
+                         │ Partner venues        │ Direct pop-ups      │ Events / catering │
+                         │ (bars, yoga studios,  │ (class times, game  │ (run clubs,       │
+                         │  gyms) resell         │  and trivia nights) │  workshops)       │
+                         └──────────────────────┴─────────────────────┴──────────────────┘
+                                                                      │
+ Shopify Basic ◄──── online orders, Tap to Pay on the owner's phone, PayPal online, Venmo QR backup
+```
+
+## The plan, section by section
+
+The full business proposal has 14 sections and two appendices. Here's what each one covers.
+
+### 1. Concept and product
+
+Premium PB&J made fresh, sealed, labelled and delivered the same day. The launch menu in the first draft had four builds (a classic, a strawberry, a "big" double-peanut-butter build for bars, and an almond-butter option for studios). Two choices were made deliberately:
+
+- Almond butter adds a tree-nut allergen, so it could only launch with clear labelling and a cleaning plan. It was later dropped.
+- Fresh-cut fruit (banana, for example) was left off on purpose, because cut produce raises food-safety requirements.
+
+### 2. Why bars and yoga studios
+
+- **Bars:** late-night customers want food, and many neighborhood bars don't run a kitchen. A sealed, ready-to-eat sandwich gives a bar a food option with no cooking, staff or equipment. Marked in the plan as a hypothesis to confirm with owners.
+- **Yoga and fitness studios:** post-class customers want quick, clean protein and carbs, and a short, honest ingredient list fits that audience.
+
+### 3. Market (Duval County)
+
+Duval is consolidated with the City of Jacksonville, with three beach cities and Baldwin as separate municipalities. The pilot neighborhoods were chosen for dense clusters of bars and boutique studios and short drive times:
+
+- Riverside, Avondale and Five Points
+- San Marco and Southbank
+- Murray Hill
+- Springfield and Downtown
+- Jacksonville, Neptune and Atlantic Beach (separate city business tax receipts may apply)
+
+The plan says plainly that this list comes from general local knowledge, not a measured study. The first market task is a field check of 20 to 30 venues: what food they offer now, and whether they'd carry a sandwich.
+
+**Competitive landscape:** bar snacks (cheap but not a meal), food trucks and pop-ups (good product, irregular schedules), convenience-store sandwiches (everywhere, rarely premium) and studio protein bars.
+
+### 4. Sales channels and the venue partner program
+
+| Channel | How it works |
+| --- | --- |
+| Wholesale to venue | The venue buys each day and resells. The venue keeps the margin. |
+| Direct pop-up | Big Time staff sell at the venue during peak hours (class times, game and trivia nights). |
+| Events and catering | Bulk orders for run clubs, studio workshops and office events, quoted per order. |
+
+What a venue gets:
+
+- Daily delivery of sealed, labelled sandwiches before peak hours.
+- A small branded cooler or display where there's space and power.
+- A suggested retail price and a wholesale price, set after the pilot.
+- A written policy for unsold product (credit for unopened items within shelf life, or no-return pricing). This one choice drives waste cost.
+- Co-marketing: table tents, social posts and a "Big Time Night" launch.
+
+<Callout type="unverified" title="Check before signing a venue">
+Bars are licensed by the Florida DBPR. Each venue's license needs to allow reselling prepackaged food from an approved source. That wasn't verified for the proposal and is on the list to confirm with DBPR or FDACS.
+</Callout>
+
+### 5. Operations
+
+- **Kitchen:** rented time in a permitted shared or commissary kitchen in Duval County.
+- **Daily flow:** receive and check ingredients, assemble on a line, seal and label, chill if required, load insulated carriers, deliver by route.
+- **Capacity:** a labor-hour assumption plus setup and cleanup, to be replaced with timed runs during recipe testing.
+- **Schedule:** produce in the afternoon and deliver by late afternoon, ahead of evening classes and bar peak hours.
+- **Food safety:** at least one Certified Food Protection Manager; written procedures for handwashing, allergen control, cleaning, dating and holding temperature; allergen statement on every label and a venue briefing.
+
+### 6. Sourcing
+
+- **Peanut butter:** natural (peanuts and salt), bulk tubs from a restaurant supply house or wholesale club.
+- **Fruit spread:** all-natural, no artificial colors or flavors and no high-fructose corn syrup, in food-service sizes.
+- **Bread:** the biggest quality lever and the biggest freshness risk. First choice is a standing order from a local Jacksonville bakery, with a natural packaged bread as backup.
+- **Packaging:** wedges or wraps plus a printed label with ingredients, allergens, net weight and the business name and address. Compostable if cost allows.
+
+### 7. Pricing and unit economics
+
+The plan models contribution per sandwich for each channel (wholesale, direct and a blended mix) from ingredient, packaging and waste assumptions, then shows how profit moves with daily volume. The figures stay in the private proposal. What carries over here is the method and the finding:
+
+- Every number is tied to a named assumption in an assumptions register, so the partners can swap in real supplier quotes and real sales.
+- A sensitivity table tests six scenarios: owners doing the labor, a direct-heavy channel mix, a higher wholesale price, higher ingredient cost, and double the waste.
+- **Finding:** channel mix and the wholesale price are the two biggest levers. Pushing toward direct sales moves profit more than any cost cut.
+
+### 8. Licensing and compliance (Florida and Duval)
+
+<Callout type="lesson" title="The finding that shaped the whole plan">
+Florida's cottage food law (s. 500.80, F.S.) lets people sell certain home-made foods with no state permit, but FDACS guidance excludes wholesale, consignment, sales to restaurants or stores, and sales through other licensed vendors. Selling through bars and yoga studios falls squarely in those exclusions. Cottage food labels also have to say the food wasn't made under Florida's food safety rules, which doesn't fit a premium brand. So Big Time needs an FDACS food permit and a permitted kitchen before it sells to any venue.
+</Callout>
+
+| Requirement | Agency | Notes |
+| --- | --- | --- |
+| LLC, plus a fictitious name if needed for "Big Time Sandwich Co." | Florida Division of Corporations (Sunbiz) | Then an EIN from the IRS |
+| Food permit | FDACS Division of Food Safety | Apply no more than 14 days before opening. An inspector typically calls in 3 to 5 business days and inspects within about two weeks. The fee category is set at inspection (Rule 5K-4.020) |
+| Certified Food Protection Manager | FDACS | Needed for potentially hazardous foods; recommended regardless |
+| Local Business Tax Receipt | Duval County Tax Collector | The state permit comes first |
+| Beach city receipt | Jacksonville, Neptune or Atlantic Beach | Only if based there |
+| Sales tax registration | Florida Department of Revenue | Prepared food is very likely taxable; confirm direct vs. resale treatment |
+| Insurance | Private carrier | General and product liability; kitchens and venues often ask for a certificate |
+
+**Labelling:** product name, ingredients by weight, net weight, allergen statement (peanut, wheat and anything in the bread) and the business name and address. FDA's long-standing policy treats "natural" as nothing artificial or synthetic added, so every ingredient has to fit that. "Zero Poison" gets reviewed before it goes on packaging.
+
+The proposal states that this section summarizes public guidance and isn't legal advice, and that the permit category and any refrigeration rule get confirmed directly with FDACS before any equipment is bought.
+
+### 9. Marketing
+
+- **Brand:** black-and-white sticker logo, brush lettering, peanut-butter orange and grape purple. Bold, a little rebellious, never corporate.
+- **Instagram and TikTok:** production behind the scenes, venue shout-outs, "where to find Big Time tonight."
+- **Stickers** with every sandwich, since the logo already works as one.
+- **Venue activation:** table tents, a QR code to the website, a launch night at each new venue.
+- **Community:** run clubs, studio workshops and local markets where permitted.
+- **Website:** the one-page site shown above.
+
+### 10. Risks and mitigations
+
+| Risk | Mitigation |
+| --- | --- |
+| Permit category or refrigeration rule is stricter than expected | Talk to FDACS before buying equipment; plan for chilled carriers and venue coolers |
+| Venues sell fewer per day than assumed | The pilot measures sell-through first; add pop-ups at the best venues |
+| Venue margin squeezes profit | Higher wholesale target, more direct sales, minimum orders |
+| Waste from unsold sandwiches | Order-ahead with venues, a clear return policy, daily sell-through tracking |
+| Peanut allergy incident | Clear labels, venue briefing, product liability insurance, never sold unlabelled |
+| Bread quality or supply gaps | Two bakery sources plus a packaged backup |
+| Owner time and burnout | Defined roles and a part-time helper after the pilot |
+| Marketing claims challenged | Review "All Natural" and "Zero Poison" before printing |
+
+### 11. Milestones
+
+| Timing | Milestone |
+| --- | --- |
+| Weeks 1 to 2 | Partner agreement, LLC and EIN, bank account, call FDACS on permit category and refrigeration |
+| Weeks 2 to 4 | Choose a kitchen, supplier quotes, recipe testing and timing, insurance, Food Protection Manager certification |
+| Weeks 3 to 6 | Visit 20 to 30 venues, sign 4 to 6 for the pilot, finalize labels and packaging |
+| Weeks 5 to 8 | FDACS application and inspection, Duval business tax receipt, website live |
+| Months 3 to 4 | 60-day pilot; track sell-through, waste and feedback by venue |
+| Months 4 to 6 | Decision point: scale up, or adjust pricing and channel mix |
+
+### 12. Questions for the owner
+
+The proposal ends with 16 short questions in four groups (operations, product and sourcing, sales and venues, money and structure), written so the owner can type answers straight into the doc. They cover kitchen access, hours available, food-service credentials, delivery vehicle, bread source, brands, whether to add gluten-free or nut-free options, existing venue relationships, the unsold-product policy, and what success looks like at 6 and 12 months.
+
+## Go-live plan: website, phone payments and menu
+
+The second deliverable (25 October 2026) turns the plan into a store.
+
+### Phase A: the owner does these (about 30 to 45 minutes)
+
+1. Create the Shopify account and start the trial on the Basic plan.
+2. Add a card for the plan bill.
+3. Turn on Shopify Payments with the legal name, EIN and bank account. Identity checks can take a day or two.
+4. Pick a domain from three available names I suggest, bought inside Shopify so it connects itself.
+5. Invite me as staff or approve my collaborator request. No password sharing.
+6. Install the free Shopify POS app. Tap to Pay needs an iPhone XS or newer, or Android 13 or newer with NFC.
+
+### Phase B: I do these
+
+1. Set up a free Shopify theme (Dawn or similar, so checkout and updates stay supported) and carry over the draft design: Permanent Marker and Archivo fonts, the black-and-white sticker look, PB orange, grape purple and toast brown.
+2. Rebuild the hero, ingredients, where-to-find and "Put Big Time on your counter" sections as editable theme sections, so the owner can change text without code. A Custom Liquid section carries anything the theme can't match.
+3. Build the menu product (below).
+4. Write the pages: Home, Menu, Where to Find Us, Carry Big Time (a short wholesale inquiry form), Contact, and the refund, privacy, terms and pickup policies.
+5. Set Florida sales tax, pickup and local delivery, and order notifications.
+6. Connect the domain and confirm SSL.
+7. Set up Tap to Pay on the owner's phone, PayPal at online checkout, and the Venmo backup.
+8. Run test orders online and in person, refund them, and confirm the payout reaches the bank.
+9. Train the owner for about an hour and hand over a one-page cheat sheet.
+
+### Phase C: launch
+
+1. Final review together on the owner's phone.
+2. Remove the store password.
+3. Share the link on Instagram, Google Business Profile and the counter card.
+
+<Callout type="safety" title="No paid orders before the permit">
+The store gets built and tested now, but it stays password protected or set to inquiry-only until the FDACS permit is in hand.
+</Callout>
+
+### Choosing how to take payments
+
+I compared five ways to take money on a phone: Shopify POS with Tap to Pay, Square Free, PayPal/Zettle, a Venmo business profile, and Venmo Tap to Pay. Each was checked against the provider's official pricing page on 25 October 2026.
+
+The method: work out the fee on one sandwich for each option, then find the monthly card-sale volume where Shopify's lower in-person rate pays for its monthly plan. Below that volume Square Free costs less. Above it Shopify wins, and it brings the website with it. At the owners' daily target, Shopify comes out ahead.
+
+**Recommendation:** Shopify POS Tap to Pay as the main method, a Venmo business QR code on the counter card as backup (logged in POS as a "Venmo" custom payment so daily totals stay right), and PayPal at online checkout. Two items are flagged to confirm in the store settings rather than assumed: whether Shopify's third-party provider fee applies to PayPal while Shopify Payments is on, and the custom payment setting.
+
+### The menu, set up as one product
+
+The first menu item is **The PB&J**: one sandwich at one price, built as a single product with two options instead of six separate products. Customers make two quick choices, and the owner gets reports on which combinations sell.
+
+| # | Jelly | Peanut butter | SKU |
+| --- | --- | --- | --- |
+| 1 | Mango | Creamy | BT-MAN-CRM |
+| 2 | Mango | Crunchy | BT-MAN-CRN |
+| 3 | Blueberry | Creamy | BT-BLU-CRM |
+| 4 | Blueberry | Crunchy | BT-BLU-CRN |
+| 5 | Grape | Creamy | BT-GRP-CRM |
+| 6 | Grape | Crunchy | BT-GRP-CRN |
+
+- **Tax:** on, since it's prepared food. Rate to confirm with Florida DOR.
+- **Inventory tracking:** off at launch, turned on per variant once batch sizes are steady, so the site can show "sold out" by combination.
+- **Sales channels:** Online Store and Point of Sale, so the same product appears in the phone app.
+- **POS tile:** on the home screen. One tap opens the jelly and peanut butter picker.
+- **Allergens:** "Contains peanuts." Dropping the almond-butter sandwich made peanut the only major allergen to call out. Full label wording, including the bread, gets checked against the permit.
+- **Later:** a wholesale "Counter Pack" for bars and studios, priced from the cost model.
+
+## Testing and verification
+
+| Item | Status |
+| --- | --- |
+| Business proposal drafted with an assumptions register and cited sources | Done, 24 October 2026 |
+| Cottage food vs. food permit question researched against FDACS, the statute and UF/IFAS guidance | Done |
+| Website draft built | Done |
+| Payment providers compared against official pricing pages | Done, 25 October 2026 |
+| Shopify store built | Not yet. Waits on the owner's Phase A |
+| Test orders and refunds, online and in person | Not yet |
+| FDACS permit category and refrigeration rule confirmed with FDACS | Not yet |
+| Venue license allows reselling prepackaged food | Not yet |
+| 60-day pilot | Not started |
+
+No sales have happened. Every volume and cost in the plan is an assumption until the pilot replaces it.
+
+## Lessons learned
+
+- **Check the license before the business model.** The cottage food question changed the kitchen, the timeline and the budget. Finding it on day one was worth more than any spreadsheet.
+- **One product with variants beats six products.** Cleaner menu, faster POS, better reports.
+- **The owner owns the accounts.** It's the right way to set up anyone's business, and it makes the handoff clean.
+- **Label every number.** Writing "assumption" next to each input keeps a plan honest and makes it easy to update.
+
+## Open items
+
+- Owner's phone model and OS, for Tap to Pay.
+- Business entity and EIN, for Shopify Payments verification.
+- FDACS permit timeline, which sets when paid orders turn on.
+- Florida sales tax registration and the Duval rate.
+- Whether the third-party fee applies to PayPal with Shopify Payments active.
+- Final domain name.
+- Whether the "Zero Poison" tagline stays.
+
+## Sources
+
+- [FDACS, Cottage Food Operations guide](https://ccmedia.fdacs.gov/content/download/70108/file/Cottage-Food-Operations.pdf)
+- [Florida Statutes s. 500.80, Cottage food operations](https://www.flsenate.gov/Laws/Statutes/2025/0500.80)
+- [UF/IFAS Extension, Florida's Cottage Food Law (FS425)](https://edis.ifas.ufl.edu/publication/FS425)
+- [Fla. Admin. Code R. 5K-4.020, Food permits](https://www.law.cornell.edu/regulations/florida/Fla-Admin-Code-Ann-R-5K-4-020)
+- [UF/IFAS Extension Duval County, Obtaining a Food Permit](https://sfyl.ifas.ufl.edu/media/sfylifasufledu/duval/fcs/nutritionx2f-financial-management/Obtaining-a-Food-Permit.pdf)
+- [FDACS food permit portal](https://foodpermit.fdacs.gov)
+- [Duval County Tax Collector, Local Business Tax Receipt](https://taxcollector.jacksonville.gov/Taxes/Local-Business-Tax)
+- [Shopify pricing](https://www.shopify.com/pricing) and [Shopify POS pricing](https://www.shopify.com/pos/pricing)
+- [Shopify Tap to Pay on iPhone](https://help.shopify.com/en/manual/sell-in-person/shopify-pos/payment-management/tap-to-pay-iphone) and [on Android](https://help.shopify.com/en/manual/sell-in-person/shopify-pos/payment-management/tap-to-pay-android)
+- [Square pricing](https://squareup.com/us/en/pricing)
+- [PayPal business fees](https://www.paypal.com/us/business/paypal-business-fees)
+- [Venmo business profile fees](https://help.venmo.com/cs/articles/business-profile-transaction-fees-vhel221)
+
+## Changelog
+
+<Changelog entries={[{ date: '2026-10-26', change: 'Project page published from the business proposal, the go-live plan and the website draft, with names, prices and contacts left out.', rollback: 'Revert the commit that added this page.' }]} />
