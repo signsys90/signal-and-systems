@@ -7,9 +7,9 @@ export default defineConfig({
 	site: 'https://signal-and-systems.pages.dev',
 	integrations: [
 		starlight({
-			title: 'Signal & Systems',
+			title: 'Signal & Systems Engineering, LLC.',
 			description: 'Systems built in the field and in the business. Build logs and project documentation by William A. Atkins, KR4JSQ.',
-			logo: { src: './src/assets/mark.svg', alt: 'Signal & Systems' },
+			logo: { src: './src/assets/mark.svg', alt: 'Signal & Systems Engineering, LLC.' },
 			favicon: '/favicon.svg',
 			customCss: [
 				'@fontsource/inter/400.css',
@@ -37,7 +37,7 @@ export default defineConfig({
 							items: [
 								{ label: 'Responder ID Scanner', link: '/projects/responder-id-scanner/' },
 								{ label: 'AI Outbound Sales Platform', link: '/projects/ai-outbound-platform/' },
-								{ label: 'Signal & Systems Website', link: '/projects/signal-and-systems-site/' },
+								{ label: 'Signal & Systems Engineering Website', link: '/projects/signal-and-systems-site/' },
 								{ label: 'Vehicle Light Controller', link: '/projects/vehicle-light-controller/' },
 							],
 						},
@@ -61,7 +61,10 @@ export default defineConfig({
 								{ label: 'AI-Assisted Executive Search', link: '/projects/ai-assisted-executive-search/' },
 							],
 						},
-						{ label: 'Fabrication and 3D Printing', items: [], collapsed: true },
+						{
+							label: 'Fabrication and 3D Printing',
+							items: [{ label: 'SDS200 Glare Shroud', link: '/projects/sds200-glare-shroud/' }],
+						},
 					],
 				},
 				{ label: 'Build Log', items: [{ autogenerate: { directory: 'log' } }] },
