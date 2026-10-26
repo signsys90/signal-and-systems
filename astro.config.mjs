@@ -37,6 +37,7 @@ export default defineConfig({
 							items: [
 								{ label: 'Responder ID Scanner', link: '/projects/responder-id-scanner/' },
 								{ label: 'AI Outbound Sales Platform', link: '/projects/ai-outbound-platform/' },
+								{ label: 'Signal & Systems Website', link: '/projects/signal-and-systems-site/' },
 							],
 						},
 						{

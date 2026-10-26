@@ -1,0 +1,119 @@
+---
+title: Signal & Systems Website
+description: This site. A $0 documentation and portfolio site built with Astro and Starlight, hosted on Cloudflare Pages, and built with Claude.
+summary: This site. A $0 documentation and portfolio site on Astro, Starlight and Cloudflare Pages, built with Claude.
+status: In progress
+category: Software and Automation
+started: 2026-10-25
+updated: 2026-10-26
+project: true
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import PartsTable from '../../../../components/PartsTable.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+
+<ProjectHeader />
+
+## Release
+
+<SpecBox
+	title="Site details"
+	specs={[
+		['Framework', 'Astro 7.4.2'],
+		['Docs theme', 'Starlight 0.42.7'],
+		['Hosting', 'Cloudflare Pages, free tier'],
+		['Deploys', 'Automatic on every push to main'],
+		['Address', 'signal-and-systems.pages.dev'],
+		['Budget', '$0'],
+	]}
+	source={{ label: 'Source on GitHub', href: 'https://github.com/signsys90/signal-and-systems' }}
+/>
+
+## Goal
+
+Give every project one public home where the parts, wiring, code and test results are written down in the same format, and where it is always clear what has and has not been tested. The site also serves as a portfolio of how I plan, build and document systems.
+
+## Constraints
+
+- **Budget:** $0. Free hosting, free tools, and no paid services without a decision first.
+- **Privacy:** no home address, phone number, VIN, plate, permit numbers or parking locations. Photos have location data stripped. Scanner examples use synthetic IDs only. No employer confidential data and no unpublished emergency-communications details.
+- **Honesty:** no invented metrics. Every page has a testing section that says what was not tested.
+- **Consistency:** every project page follows the same 12-section template.
+
+## Architecture
+
+```text
+MDX pages in GitHub ─► push to main ─► Cloudflare Pages build (astro build, Node 24) ─► static site on pages.dev
+```
+
+The site is fully static. Content lives in `src/content/docs/` as MDX files, and reusable components (header card, status badges, spec box, parts table, wiring table, callouts, changelog, gallery, before/after slider, download card and project grid) live in `src/components/`.
+
+## How it was built with Claude
+
+I wrote the site plan: the name, design tokens, menu, categories, status badges, page template and privacy rules. Claude built the site from that plan, checked the name and domain options, wrote the components and the first project pages, and turned my F-150 project document into the upfit overview and CanTrol output plan. Changes ship as pull requests that I review before they reach main.
+
+## Parts list
+
+<PartsTable
+	parts={[
+		{ name: 'Astro', specs: 'Static site framework', source: 'https://astro.build/', status: 'Installed' },
+		{ name: 'Starlight', specs: 'Documentation theme with built-in search', source: 'https://starlight.astro.build/', status: 'Installed' },
+		{ name: 'Fontsource: Space Grotesk, Inter, JetBrains Mono', specs: 'Self-hosted fonts', source: 'https://fontsource.org/', status: 'Installed' },
+		{ name: 'Cloudflare Pages', specs: 'Free static hosting', source: 'https://pages.cloudflare.com/', price: '$0', status: 'Installed' },
+		{ name: 'Cloudflare Web Analytics', specs: 'Cookie-free, aggregate page views', price: '$0', status: 'Planned' },
+	]}
+/>
+
+## Configuration
+
+- **Build command:** `npm run build`
+- **Output directory:** `dist`
+- **Environment:** `NODE_VERSION=24`
+- **New project page:** copy `src/content/docs/projects/_template.mdx`, fill in the frontmatter, and set `project: true` so it appears in the project grid.
+
+## Build steps
+
+1. Write the site plan: name, design, menu, page template and privacy rules.
+2. Scaffold Astro and Starlight, and add the design tokens and fonts.
+3. Build the documentation components.
+4. Publish the first project pages.
+5. Connect the GitHub repository to Cloudflare Pages.
+
+## Testing and verification
+
+| Check | Status |
+| --- | --- |
+| `npm run build` passes | Yes, on every change before it is merged |
+| Dark mode, light mode and phone width | Checked by screenshot at launch |
+| WCAG AA color contrast | Computed for every token pairing at launch. All pass |
+| Live deploy on Cloudflare Pages | Yes (2026-10-26) |
+| Broken-link check on the live site | Not yet |
+| Page-speed check on the live site | Not yet |
+
+## Safety notes
+
+- Run the [publishing checklist](/reference/publishing-checklist/) before every new page.
+- Never commit secrets or tokens to the repository.
+
+## Lessons learned
+
+- A fixed page template keeps every project honest about what has and has not been tested.
+
+## Open items
+
+- Turn on Cloudflare Web Analytics.
+- Set up the contact form.
+- Decide on a custom domain.
+- Run a broken-link and page-speed check on the live site.
+
+## Changelog
+
+<Changelog
+	entries={[
+		{ date: '2026-10-26', change: 'Project page published.', rollback: 'Revert the commit that added this page.' },
+		{ date: '2026-10-26', change: 'Site launched on Cloudflare Pages.', rollback: 'Roll back to an earlier deployment in the Cloudflare Pages dashboard.', log: '/log/2026-10-26-site-launch/' },
+	]}
+/>
