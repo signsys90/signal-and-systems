@@ -63,6 +63,34 @@ Lights
 
 The relay driver layer has a simulation (mock) driver, a generic serial driver and a KMTronic-style driver. Command templates are set in config, so another board can be supported by changing the byte format rather than the code.
 
+### Inside the controller
+
+- **One command at a time:** every channel, profile, pulse and ALL OFF command runs under a single lock, so two taps can never interleave on the serial line.
+- **Fault handling:** if a relay command fails, the system state goes to FAULT, the fault is recorded (the last 25 are kept in memory and all are logged to disk), and the controller immediately tries ALL OFF. Channels switched off this way are marked as controlled by the "safety lockout".
+- **Honest ALL OFF:** if ALL OFF itself fails, every channel is shown as FAULT with "ALL OFF could not be confirmed" instead of pretending the lights are off.
+- **Pulse:** a channel can be pulsed for a set number of milliseconds and is left off afterwards.
+- **Watchdog:** a background health check runs once per watchdog interval (5 seconds by default, never more often than once a second) and triggers the fault path if the board stops responding.
+- **Command templates:** each template renders the channel number, a zero-based channel index and the on/off state into either hex bytes (`hex:FF 01 01`) or ASCII text, and malformed templates are rejected with a clear error. A write that sends fewer bytes than expected is treated as a timeout fault.
+- **Raw command logging:** an optional debug setting logs the exact bytes sent to the board, which helps when confirming a board's protocol on the bench.
+- **Live status:** the dashboard updates over a WebSocket, so every open screen shows the same channel states, faults and active profile.
+
+### API
+
+| Endpoint | Purpose |
+| --- | --- |
+| `GET /api/health` | Compact read-only summary for a parent dashboard tile: ok flag, connection state, simulation mode, watchdog state, active channel count, recent fault count |
+| `GET /api/status` | Full status, including every channel's state, who last controlled it, and faults |
+| `GET /api/config` | Public configuration (channels and profiles) |
+| `POST /api/connect`, `POST /api/disconnect` | Open or close the relay board connection |
+| `POST /api/channel/{id}/on`, `/off`, `/toggle`, `/pulse` | Channel commands |
+| `POST /api/profile/{id}/activate` | Apply a profile |
+| `POST /api/all-off` | ALL OFF |
+| `POST /api/simulation-mode` | Turn simulation mode on or off |
+| `GET /api/logs/recent` | Recent command and fault log entries |
+| `WS /ws/status` | Live status stream |
+
+Logs are written as JSON Lines files (`command_log.jsonl` and `fault_log.jsonl`), one timestamped entry per command or fault.
+
 ## Parts list
 
 <PartsTable
@@ -113,6 +141,13 @@ The default relay byte templates are starting examples. The exact command format
 | Windows install and run scripts | Not re-run for this page |
 | Relay board on the bench | Not yet tested |
 | In-vehicle installation | Not installed |
+
+The 14 tests:
+
+- **Config:** the default config loads correctly; a malformed config fails with a clear error; an environment override file layers over the defaults.
+- **Mock relay driver:** turns channels on and off; ALL OFF turns every channel off; an invalid channel is rejected.
+- **Controller:** an invalid channel is rejected; activating a profile applies its channel states; ALL OFF turns every channel off.
+- **API:** the status endpoint returns the expected structure; the health endpoint is usable by a parent dashboard; the dashboard page renders; simulation mode works with no serial hardware; the buttons toggle profiles and ALL OFF.
 
 ## Safety notes
 

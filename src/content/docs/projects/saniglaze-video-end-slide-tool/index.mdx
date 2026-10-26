@@ -1,0 +1,127 @@
+---
+title: SaniGLAZE Video End-Slide Generator
+description: A self-service web app that let SaniGLAZE franchise members turn corporate or local videos into co-branded marketing videos with a personalized contact end slide.
+summary: A self-service web app that turned a manual video-production request into a few clicks, so franchise members could add their own contact end slide to brand videos while branding stayed consistent across the network.
+category: Business Systems
+updated: 2026-10-26
+project: true
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+
+<ProjectHeader />
+
+<Callout type="open" title="Private tool, public write-up">
+The tool was built for SaniGLAZE International franchise members, so there is no public link. This page describes my own design and build work. It contains no SaniGLAZE data, franchise records or internal system details.
+</Callout>
+
+## Goal
+
+Franchise owners needed marketing video they could use in their own markets, with their own contact information. Corporate video was produced centrally and carried only national branding, so getting a local version meant a manual request and a wait in a queue. The same task was repeated across the whole network.
+
+The real problem wasn't video editing. It was a repeatable operational task that didn't scale with the number of franchise locations. It sat between the brand standard the franchisor needed to protect and the local flexibility franchisees needed to market well. Without a controlled process, there was also a risk that franchises would make their own versions with inconsistent branding.
+
+The goal was to turn that request into a guided, self-service workflow that a franchise member could finish without design or video skills, and to build the brand standard into the output instead of checking it afterwards.
+
+## Constraints
+
+- **No design or video skills required.** The common case had to take only a few clicks.
+- **Brand-consistent by default.** Every end slide uses the same branded template, and franchise members only control their contact details and how long the slide stays on screen.
+- **Flexible when needed.** Franchises with their own footage or contact details could upload them instead of using the defaults.
+- **One finished file.** The output had to be a single download, ready to post, with no editing afterwards.
+
+## Architecture
+
+The workflow has four steps:
+
+1. **Choose a video.** Pick one from a library of approved, server-hosted corporate videos, or upload your own.
+2. **Choose contact information.** Select the stored franchise details, or enter or upload your own.
+3. **Set the end slide.** The tool builds a personalized contact slide on the branded template, and the user sets how long it stays on screen.
+4. **Merge and download.** The server joins the source video and the end slide into one finished file for the user to download.
+
+There are two paths through it on purpose. A quick-select path (a hosted corporate video plus the stored franchise information) handles the most common request in a few clicks. Full upload options stay available for everything else, so the corporate standard is the default and local customization still fits inside the same template.
+
+### Key capabilities
+
+- **Corporate video library:** pick from approved, server-hosted brand videos.
+- **Custom upload:** use a franchise's own video instead.
+- **Stored franchise information:** select existing contact details in one click.
+- **Manual contact entry or upload:** replace or supply the contact information directly.
+- **Generated end slide:** a personalized contact slide on a consistent branded template.
+- **Adjustable slide duration:** the user decides how long the end slide shows.
+- **Quick-select path:** the fastest route for the most common choices.
+- **Server-side merge:** the source video and end slide become one finished file.
+- **Single download:** one ready-to-use file per request.
+
+### Technical details
+
+<Callout type="unverified" title="Details still to confirm">
+These details haven't been recorded yet, so this page leaves them out rather than guessing:
+
+- front-end and back-end stack
+- what performed the video merge (for example FFmpeg)
+- how the end slide was rendered
+- where the app and video library were hosted
+- how users signed in
+- output format and resolution
+- the range of slide durations users could pick
+
+</Callout>
+
+## Build steps
+
+1. Identified the manual, request-based video localization step as a bottleneck for franchise marketing.
+2. Defined the requirements: self-service, brand-consistent by default, flexible uploads, and one finished file.
+3. Built the selection flow with a quick-select path and full upload options.
+4. Built the end-slide generator on a fixed branded template, with a duration the user can set.
+5. Built the server-side merge that joins the source video and end slide into one downloadable file.
+
+## Testing and verification
+
+No test records or usage figures are documented for this tool. This page describes how it was designed to work and doesn't claim measured results.
+
+## Impact
+
+- Replaced a manual, request-based video production step with self-service.
+- Took repeated localization work off the central production queue.
+- Kept branding consistent across franchise locations by building the brand standard into the template instead of reviewing videos afterwards.
+- Gave franchise members a faster path to local marketing content they could use right away.
+
+<Callout type="unverified" title="Results not yet recorded">
+Figures such as how many locations had access, how many videos were produced, turnaround time before and after, and cost or hours saved aren't documented. They will be added only if they can be confirmed.
+</Callout>
+
+## Safety notes
+
+- Nothing on this page comes from SaniGLAZE systems: no franchise names, contact details, territories, video files or internal links.
+- Screenshots will only be added once they are sanitized, with no franchise contact information visible.
+
+## Lessons learned
+
+<Callout type="unverified" title="Draft lessons for William to confirm">
+These come from how the tool was designed, not from usage data.
+</Callout>
+
+<Callout type="lesson" title="Make the standard the easy path">
+When the branded default is also the fastest option, consistency doesn't depend on policing. The quick-select path makes the on-brand choice the one most people take.
+</Callout>
+
+<Callout type="lesson" title="Keep an exit for real exceptions">
+Full upload options mean franchises with their own footage or details don't fall back to making videos outside the tool, which is where inconsistent branding would come from.
+</Callout>
+
+## Open items
+
+- Record the technical details listed above.
+- Record the timeframe, version history and current status (in use, retired or handed off).
+- Add any confirmed results.
+- Add sanitized screenshots of the workflow.
+- Record known limits, such as upload size, processing time and supported file types.
+
+## Changelog
+
+<Changelog
+	entries={[{ date: '2026-10-26', change: 'Project page published from William\'s description of the tool.', rollback: 'Revert the commit that added this page.' }]}
+/>

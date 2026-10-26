@@ -1,0 +1,282 @@
+---
+title: Quest Angler 10' Upfit
+description: Parts-only 12 V upfit plan for a 10-foot rotomolded fishing boat with a Minn Kota Endura C2 30, fish finder, nav lights, switch panel, decking and Georgia registration.
+summary: A DIY 12 V plan for a 10-foot rotomolded fishing boat. Trolling motor circuit, fused 4-gang switch panel, fish finder on the motor shaft, nav and courtesy lights, paddle, anchor, foam deck and Georgia registration, in budget, mid and high tiers.
+status: Planned
+category: Vehicle Upfit and 12V
+started: 2026-10-21
+updated: 2026-10-26
+project: true
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import PartsTable from '../../../../components/PartsTable.astro';
+import Gallery from '../../../../components/Gallery.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+import wiring from '../../../../assets/quest-angler/wiring.jpg';
+import specs from '../../../../assets/quest-angler/specs.jpg';
+
+<ProjectHeader hero={wiring} heroAlt="Master wiring diagram: a 12 V battery feeding a 40 A breaker to the Minn Kota Endura C2 and a 15 A fuse to a 4-gang switch panel, which feeds nav lights, the fish finder, LED strips and a spare, with every negative returning to a bus bar." />
+
+<Callout type="open" title="A client build">
+This is an upfit plan I wrote for a client's boat. The client's name, what they've spent so far, and the client's own boat photo are left off. Part prices are public retailer prices, checked on 21 October 2026 where marked "verified". Nothing here has been installed, bench tested or fit-checked on the boat yet.
+</Callout>
+
+## Goal
+
+Turn a bare 10-foot Quest Angler 10 rotomolded fishing boat, already fitted with a Minn Kota Endura C2 30 lb tiller trolling motor, into a complete small fishing rig: a powered fish finder, front and side lighting through one switch panel, legal navigation lights, a paddle and anchor, foam decking, and Georgia registration. The client does the labor, so the plan is parts-only, with step-by-step install instructions. The target was a budget build under $1,000 in parts, with mid and high tiers alongside for comparison.
+
+## Screenshots
+
+From the plan document (revision E, 22 October 2026).
+
+<Gallery
+	photos={[
+		{ src: specs, alt: 'Spec strip: length 10 ft 3 in, beam 4 ft 1.5 in, deck height 1 ft 8 in, hull weight 138 lb, max capacity 525 lb, budget build parts about 655 dollars.', caption: 'Hull specs from the maker, and the budget build total.' },
+		{ src: wiring, alt: 'The master wiring diagram from the plan.', caption: 'Master wiring diagram. Plastic hull, so there is no hull ground: every negative returns to a bus bar, and the bus bar to battery negative.' },
+	]}
+/>
+
+<SpecBox
+	title="The boat"
+	specs={[
+		['Hull', 'Quest Angler 10, rotomolded polyethylene'],
+		['Length / beam', '10 ft 3 in / 4 ft 1.5 in'],
+		['Deck height', '1 ft 8 in'],
+		['Hull weight', '138 lb'],
+		['Max capacity', '525 lb'],
+		['Motor', 'Minn Kota Endura C2, 30 lb thrust, 30 A max draw, 5 ft factory 10 AWG leads'],
+		['Registration', 'Georgia'],
+		['Budget build', 'About $655 in parts (midpoint of ranges), tax and shipping extra'],
+	]}
+	source={{ label: 'Quest Angler 10 (Public Lands product page)', href: 'https://www.publiclands.com/p/quest-angler-10-fishing-boat-22queunglr10fshngpso/22queunglr10fshngpso' }}
+/>
+
+## Constraints
+
+- **Plastic hull.** No hull ground, so a dedicated negative bus bar. Polyethylene also rules out 3M 5200 and most adhesives without a primer.
+- **Don't touch the motor leads.** Minn Kota says not to extend or alter the 30 lb motor's factory leads, so the battery has to sit at the stern within reach of the 5 ft leads.
+- **Weight.** Two adults plus the motor and gear leave about 75 lb of the 525 lb capacity for the battery. A Group 27 lead-acid battery (roughly 55 to 65 lb, estimate) fits, but tightly.
+- **Client-supplied battery and charger.** Their type, chemistry, size and age set runtime and charger mode, and still need confirming.
+- **Drill as little as possible,** above the waterline only.
+
+## Layout
+
+The plan places every part on the hull with a numbered marker:
+
+1. Endura on the transom notch, with the fish finder transducer on its shaft.
+2. Battery box strapped to the floor just ahead of the transom, within reach of the 5 ft leads, with the 40 A breaker on the box.
+3. Switch panel and fish finder display on the gunwale shelf beside the stern seat, reachable while steering.
+4. All-round white stern light on a plug-in pole.
+5. Red/green bi-color bow light, centered on the bow deck.
+6. Anchor line to the bow cleat (or a trolley pulley in the mid build).
+7. Paddle clips on the inner side wall.
+8. EVA floor mat, loose-laid.
+9. LED courtesy strip under both gunwale lips.
+
+## Budget build: parts list
+
+<PartsTable
+	parts={[
+		{ name: '12 V deep-cycle marine battery (client-supplied)', price: '$0', specs: 'Type, chemistry, group size, Ah and age to confirm', status: 'Planned' },
+		{ name: '12 V charger (client-supplied)', price: '$0', specs: 'Must have a mode for the battery chemistry', status: 'Planned' },
+		{ name: 'Battery box with strap, Group 24/27 or 31', price: '$18–25 (est.)', specs: 'Strap anchored to floor pads or through-bolted eye straps', status: 'Planned' },
+		{ name: '40 A waterproof marine manual-reset circuit breaker', price: '$15–25 (est.)', specs: 'Surface mount, within 7 in of the battery + post', status: 'Planned' },
+		{ name: '4-gang rocker switch panel with fuses, dual USB, voltmeter', price: '$25–35 (est.)', specs: 'On a Starboard plate on the gunwale shelf', status: 'Planned' },
+		{ name: 'Wiring kit', price: '$40–55 (est.)', specs: '25 ft 16/2 tinned duplex, 1 ft red 10 AWG jumper, 15 A inline ATC fuse holder, negative bus bar, heat-shrink ring terminals, split loom, clamps, grommets', status: 'Planned' },
+		{ name: 'Garmin STRIKER Vivid 4cv with GT20-TM transducer', price: '$199.99 (verified)', specs: 'Includes transom and trolling-motor mounts; 0.40 A draw', source: 'https://www.scheels.com/p/garmin-striker-vivid-4cv-with-gt20-tm-transducer/3816-010-02550-00/', status: 'Planned' },
+		{ name: 'Starboard (HDPE) sheet, 12 × 12 × 1/2 in', price: '$18–25 (est.)', specs: 'Panel/display plate and breaker pad', status: 'Planned' },
+		{ name: 'Attwood LightArmor bi-color LED bow light, 2 nm', price: '$41.99 (verified)', specs: 'Black composite deck mount, through-bolted with a backing plate', source: 'https://www.walmart.com/ip/Attwood-Marine-LightArmor-Bi-Color-2-nm-LED-Deck-Mount-Light/881588790', status: 'Planned' },
+		{ name: 'Plug-in LED all-round white pole light with deck base', price: '$30–45 (est.)', specs: 'Attwood or Seachoice', status: 'Planned' },
+		{ name: 'IP68 12 V LED strip, 2 × 5 ft', price: '$20–30 (est.)', specs: 'White or green, under each gunwale lip', status: 'Planned' },
+		{ name: 'Telescoping paddle (4–6 ft) plus 2 clips', price: '$35–45 (est.)', status: 'Planned' },
+		{ name: '3.5 lb folding grapnel anchor kit, 40–50 ft line, buoy', price: '$25–35 (est.)', status: 'Planned' },
+		{ name: 'EVA foam sheet, about 94 × 35 in, 6 mm', price: '$60–80 (est.)', specs: 'Loose floor mat cut from a template', status: 'Planned' },
+		{ name: 'Fasteners', price: '$20–30 (est.)', specs: '#10 well nuts, 316 stainless bolts, fender washers, butyl tape', status: 'Planned' },
+		{ name: 'Georgia registration, 3 years, under 16 ft', price: '$35 (est.)', specs: 'Numbers and decals on both sides of the bow', status: 'Planned' },
+	]}
+/>
+
+**Optional battery upgrade:** if the client battery is a starting battery, more than 3 to 4 years old, or too heavy, the LiTime 12V 50Ah TM ($239.99, verified) is the recommended replacement. It weighs about 13 to 15 lb (estimate) and gives roughly 1.6 hours at the motor's full 30 A. A lithium-capable charger is needed if the client's charger has no LiFePO4 mode.
+
+**Not included:** PFDs, a whistle and trailer items. Georgia requires one wearable PFD per person.
+
+## Budget, mid and high tiers
+
+| System | Budget | Mid | High |
+| --- | --- | --- | --- |
+| Battery | Client battery | LiTime 12V 100Ah TM plus a LiFePO4 charger | Dakota Lithium 12V 100Ah |
+| Switch panel | Generic 4-gang with fuses, USB, voltmeter | Blue Sea 4321 breaker panel with 12 V socket and USB | Blue Sea WeatherDeck breaker panel plus Blue Sea 4304 IP67 fuse panel |
+| Fish finder | STRIKER Vivid 4cv | Humminbird HELIX 5 CHIRP GPS G3, or STRIKER Vivid 5cv/7cv | STRIKER Vivid 9sv side imaging on a transom plate |
+| Nav lights | Attwood bi-color plus plug-in all-round | Same, plus a YakAttack VISICarbon Pro battery backup | Lumitec or Navisafe 2 nm set |
+| Side and front lights | LED strip | LED courtesy pucks plus a small bow flood | Lumitec deck flood plus courtesy lights |
+| Mount base | Starboard plates | YakAttack GearTrac GT90 on both shelves | Longer track runs plus RAM or YakAttack arms |
+| Anchor | Grapnel to the bow cleat | Anchor trolley plus stake-out pole | Power-Pole Micro Anchor |
+| Paddle or oars | Telescoping paddle | Side-mount oarlocks plus 6.5–7 ft oars | Starboard oarlock risers plus composite oars |
+| Decking | Generic EVA sheet | SeaDek or Hydro-Turf DIY sheets | Custom CNC-cut SeaDek kit |
+| Parts total | About $655 | About $1,800–2,100 | About $4,300–5,000 |
+
+## Battery and power
+
+Minn Kota's wiring guide calls for a 12 V deep-cycle marine battery, ideally at least 110 Ah in lead-acid, and rates Group 27 "better" and Group 31 "best".
+
+**Runtime (general estimate):** at the Endura's full 30 A, a 100 Ah lead-acid battery (about 50 Ah usable) lasts about 1.7 hours, a 75 Ah Group 24 about 1.2 hours, and a 50 Ah lithium about 1.6 hours. At the mid speeds used most of the day, it's several hours. Recharge within 12 to 24 hours of every trip; Minn Kota says skipping that is the leading cause of early lead-acid failure.
+
+### Trolling motor circuit
+
+| Endura | Max draw | Breaker | Wire (5 / 10 / 15 ft run) |
+| --- | --- | --- | --- |
+| **C2 30 lb (this boat)** | 30 A | 40 A (to confirm) | Don't extend or alter the factory 5 ft 10 AWG leads |
+| C2 40 / 45 lb | 42 A | 50 A | 8 / 6 / 4 AWG |
+| C2 50 / 55 lb | 50 A | 60 A | 8 / 4 / 2 AWG |
+
+The black factory lead goes straight to battery negative. The red lead lands on the breaker's load stud, with a short red 10 AWG jumper from the breaker's line stud to battery positive. Minn Kota doesn't publish a breaker size for the 30 lb motor on the pages cited; 40 A is about 1.25 times the 30 A max draw and protects the 10 AWG leads. The plan says to confirm that with Minn Kota support before installing. The factory pre-wire in the hull isn't used for the motor.
+
+## Switch panel
+
+All lighting and electronics run through one sealed 4-gang panel. Its voltmeter doubles as the battery gauge. The accessory feed is a 15 A inline fuse at the battery positive post, with red and black 16/2 (or 14/2) duplex to the panel and a negative bus bar on the battery box.
+
+| Switch | Circuit | Fuse | Wire | Load |
+| --- | --- | --- | --- | --- |
+| SW1 | Nav lights (bow bi-color and stern all-round) | 3 A | 16 AWG duplex | About 0.2–0.5 A (est.) |
+| SW2 | Fish finder | 3 A | 16 AWG (Garmin cable) | 0.40 A (verified) |
+| SW3 | Side LED strips | 5 A | 16 AWG duplex | About 0.5–1 A (est.) |
+| SW4 | Spare (bow flood, aerator, bilge) | 5–10 A | 16 or 14 AWG | Per device |
+| USB / volt | Built in | Panel | — | Up to 4.2 A |
+
+<Callout type="safety" title="Swap the panel fuses">
+Generic panels often ship with 15 to 20 A fuses in every slot. Replace them with the values above so each fuse protects its own small wire and device.
+</Callout>
+
+## Fish finder
+
+The STRIKER Vivid 4cv kit includes trolling-motor hardware for its GT20-TM transducer, so it clamps to the Endura shaft with no holes in the hull and aims wherever the motor points. For side imaging (high tier), the transducer moves to a Starboard transom plate. A shoot-through-hull mount only works through a single solid wall, which isn't confirmed for this hull.
+
+## Lighting
+
+- **Nav lights:** under USCG Inland Rule 23, a power-driven vessel under 7 m with a top speed of 7 knots or less may show a single all-round white light, and should show sidelights if practicable. The plan fits both a bi-color bow light and an all-round stern light, the clean and unambiguous setup. (Rule wording from general knowledge; confirm with USCG NavCen.)
+- **Courtesy lights:** LED strips under both gunwale lips light the cockpit for rigging and landing fish. Use them at anchor or at the ramp, not underway, because they can be mistaken for nav lights and cost night vision.
+- **Never** flashing blue or red-and-blue: those are reserved for law enforcement.
+
+## Paddle, anchor and decking
+
+- **Paddle:** a telescoping paddle in two wall clips is the backup if the battery dies. Oarlocks (mid tier) need through-bolted sockets with backing plates; the 20 in deck height makes them sit low, so risers row better.
+- **Anchor:** the grapnel ties to the bow cleat at 7:1 scope in current. Never anchor from the stern in current or wind; the low transom can swamp.
+- **Decking:** the floor has raised molded ribs, so a glued mat would only bond to the rib tops and peel in the heat. The floor piece is loose-laid so it lifts out to dry. Foam is glued only on flat areas (bow and stern decks, gunwale shelves), after cleaning with isopropyl alcohol, a light scuff and a PE/PP adhesion promoter such as 3M Primer 94.
+
+## Build steps
+
+**Tools:** drill and step bit, multimeter, ratcheting crimper for 10 and 16 AWG, heat gun, stripper, utility knife and straightedge, socket set, jigsaw or hole saw for Starboard, isopropyl alcohol, painter's tape.
+
+### Phase 0: layout and bench test (1–2 hours)
+
+1. Level the boat on the trailer, place every part loosely in its marked spot, and sit in the stern seat to confirm you can reach the panel, tiller and display.
+2. Measure every wire run along the inner wall, not across the floor. Add 12 in of slack.
+3. On the bench, connect battery, 15 A fuse, panel and each light and the fish finder with the real wires cut to length. Switch each circuit on, check polarity with a meter, and confirm the voltmeter reads about 12.6–12.8 V on a charged lead-acid battery.
+4. Photograph the bench layout. Drill only after everything works.
+
+### Phase 1: battery and trolling motor circuit (2 hours)
+
+1. Place the battery box at the stern, centered, so the 5 ft leads reach with slack for tilting and steering. Through-bolt stainless eye straps with fender washers and butyl tape.
+2. Mount the 40 A breaker on a 4 × 4 in Starboard pad within 7 in of the positive post.
+3. Route the motor leads in split loom. Don't cut, splice or extend them. Black to battery negative, red to the breaker load stud.
+4. Fit the red 10 AWG jumper from battery positive to the breaker line stud, and boot both posts.
+5. Connect the battery with the breaker tripped, reset it, and run the motor through every speed with the prop clear or in the water.
+
+### Phase 2: switch panel and accessory feed (2–3 hours)
+
+1. Cut an 8 × 6 in Starboard plate for the panel and the display bracket and mount it on the gunwale shelf with #10 well nuts or through-bolts, bedded in butyl tape.
+2. Mount the panel, fit the 15 A inline fuse at battery positive, run duplex to the panel, and mount the negative bus bar on the battery box.
+3. Swap each switch fuse to the table values and label every switch.
+
+### Phase 3: fish finder (1–1.5 hours)
+
+1. Clamp the transducer to the Endura shaft a few inches above the lower unit, face straight down, with a loose cable loop for tilt and steering.
+2. Bolt the tilt/swivel bracket to the plate. Red to the SW2 output, black to the bus bar, routed away from the motor leads to cut sonar interference.
+3. Check the depth reading at the ramp and adjust the transducer angle if bottom returns are weak.
+
+### Phase 4: navigation lights (2 hours)
+
+1. Bow light on the bow deck centerline with a Starboard backing plate if reachable, sealed in butyl tape.
+2. Stern base where the pole clears the motor head and doesn't block tilting.
+3. 16/2 from SW1 forward to the bow and a short branch to the stern, with grommets at every pass-through and a drip loop before each fixture.
+4. Test after dark: red to port, green to starboard, white all around.
+
+### Phase 5: side LED strips (1 hour)
+
+1. Clean the underside of each gunwale lip and apply adhesion promoter.
+2. Stick the strips and add a clip every 12 in, because adhesive alone won't hold on polyethylene.
+3. Join both to a 16/2 run from SW3 with heat-shrink butt connectors, and seal each cut end with its cap and silicone.
+
+### Phase 6: paddle, anchor and decking (2–3 hours)
+
+1. Mount the paddle clips with well nuts.
+2. Tie the anchor with a seized bowline, mark the line at 20, 30 and 40 ft, and keep it in a mesh bag at the bow.
+3. Template the floor with kraft paper, cut the EVA with a fresh blade against a straightedge, notch for the seat pedestals and drain, and lay it loose. Glue only flat areas, after primer, above 70°F.
+
+### Phase 7: registration and final check (1 hour plus mail time)
+
+1. Find the HIN on the transom. If it's missing or unreadable, ask DNR about a HIN inspection first.
+2. Register online at GoOutdoorsGeorgia.com, by phone or by mail. Decals arrive in about two weeks.
+3. Apply 3 in block numbers and the decals on both sides of the bow.
+4. On the water: test every switch, check the breaker and fuses stay cool after 30 minutes at full throttle, and look for chafe at every clamp.
+
+## Drilling a rotomolded hull
+
+- Drill above the waterline only.
+- Drill a small pilot first and probe behind it with a bent wire to see if the wall is solid, hollow or foam-filled.
+- Through-bolt with fender washers or a backing plate where you can reach behind; use #10 rubber well nuts or stainless blind rivets where you can't.
+- Seal with butyl tape or a PE-compatible sealant. Not 3M 5200, which doesn't bond well to polyethylene. A step bit cuts clean holes without cracking the plastic.
+- Grommet every wire pass-through and add a drip loop on the wet side.
+
+## Georgia registration and equipment
+
+- **Registration:** Georgia DNR says any boat with mechanical propulsion must be registered to operate on Georgia waters, and an electric trolling motor counts. The only listed exemption is boats used only on private ponds. Registration lasts three calendar years; Georgia issues electronic titles; trailers register separately at the county tag office.
+- **HIN:** required on boats built after 1 November 1972. If there isn't one, DNR does a HIN inspection.
+- **Numbers:** both sides of the bow, left to right, block letters at least 3 in tall in a contrasting color, with the letter groups separated by spaces or hyphens.
+- **Boater education:** required for anyone born on or after 1 January 1998 to operate a motorized vessel (third-party source; confirm with DNR).
+- **PFDs:** one wearable USCG-approved PFD per person; children under 13 must wear one while the boat is moving. No throwable required under 16 ft.
+- **Also required:** a sound device (a whistle is fine) and nav lights from sunset to sunrise and in reduced visibility.
+
+## Testing and verification
+
+Nothing has been installed, bench tested or fit-checked on the boat. The plan builds a full bench test into Phase 0 before any hole is drilled.
+
+**Not verified:** every price marked estimate; the generic panel's specs; the hull wall construction; the factory pre-wire gauge; the Rule 23 wording; the Georgia fee, boater-education cutoff and decal placement (third-party sources); battery weights; and LED current draws.
+
+## Safety notes
+
+- 40 A breaker within 7 in of battery positive on the motor circuit; 15 A fuse at the post on the accessory feed; one small fuse per switch.
+- Every negative to the bus bar, the bus bar to battery negative. No hull ground on a plastic boat.
+- Boots on both battery posts; loom and clamps every 12 to 18 in along the wall; grommets at every pass-through.
+- Never anchor from the stern; never fit flashing blue or red-and-blue lights.
+
+## Lessons learned
+
+- **The manufacturer's "don't extend the leads" decides the layout.** On a small motor, the battery goes to the motor, not the other way around.
+- **Polyethylene changes everything about fastening and gluing.** Well nuts, butyl tape and an adhesion promoter, not marine 5200.
+
+## Open items
+
+- Client battery: deep-cycle, chemistry, group size, Ah rating, age and resting voltage.
+- Client charger: has a mode for that chemistry.
+- Factory pre-wire gauge (printed on the jacket).
+- Solo or two people, which sets where the passenger sits to keep the stern from riding low.
+- Breaker size confirmed with Minn Kota support.
+
+## Sources
+
+- [Quest Angler 10 hull specs (Public Lands)](https://www.publiclands.com/p/quest-angler-10-fishing-boat-22queunglr10fshngpso/22queunglr10fshngpso)
+- [Minn Kota Trolling Motor Wiring and Battery Guide](https://minnkota.johnsonoutdoors.com/us/support/trolling-motor-installation-guides/trolling-motor-wiring-and-battery-guide)
+- [Minn Kota Help: amp draw, circuit breakers, fuses and extending the battery leads](https://minnkota-help.johnsonoutdoors.com/hc/en-us/articles/24943541720471-Trolling-Motor-Amp-Draw-Circuit-Breakers-Fuses-and-Extending-the-Battery-Leads)
+- [Endura C2 amp draw (Defender)](https://defender.com/en_us/minn-kota-endura-c2-freshwater-trolling-motor)
+- [LiTime 12V 50Ah TM](https://www.litime.com/products/12v-50ah-tm-lifepo4-battery-with-bluetooth) and [12V 100Ah TM](https://www.litime.com/products/litime-12v-100ah-tm-deep-cycle-lifepo4-battery-for-trolling-motors)
+- Georgia DNR Boat Registration FAQ; Dockwa Georgia guide; Boat-Ed Georgia numbering and PFD pages
+- [USCG NavCen, navigation rules](https://www.navcen.uscg.gov/navigation-rules-amalgamated)
+- Product pages for every verified price, checked 21 October 2026
+
+## Changelog
+
+<Changelog entries={[{ date: '2026-10-26', change: 'Project page published from plan revision E (22 October 2026). Client name, spend to date and the client photo left off.', rollback: 'Revert the commit that added this page.' }]} />

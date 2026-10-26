@@ -1,0 +1,311 @@
+---
+title: Wicks Surplus
+description: Business plan, Ohio LLC and compliance research, buyer verification policy, intake workflow and brand website for an emergency vehicle equipment surplus reseller.
+summary: Formalizing an Ohio surplus emergency-lighting reseller. Business plan, LLC and tax steps, red-and-blue buyer verification policy, bench-test intake workflow, demo vehicle and brand website.
+status: In progress
+category: Business Systems
+started: 2026-10-24
+updated: 2026-10-26
+project: true
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import Gallery from '../../../../components/Gallery.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+import demoSide from '../../../../assets/wicks/demo-side.jpg';
+import demoRear from '../../../../assets/wicks/demo-rear-lit.jpg';
+import demoLiftgate from '../../../../assets/wicks/demo-liftgate.jpg';
+import siteHero from '../../../../assets/wicks/site-hero.jpg';
+import siteGear from '../../../../assets/wicks/site-gear.jpg';
+import siteGrades from '../../../../assets/wicks/site-grades.jpg';
+import siteBuy from '../../../../assets/wicks/site-buy.jpg';
+import siteDemo from '../../../../assets/wicks/site-demo.jpg';
+
+<ProjectHeader hero={demoSide} heroAlt="Side view of the Wicks Surplus demo unit: a black Ford Police Interceptor Utility with white doors carrying the WICKS SURPLUS wordmark, DEMO UNIT on the front fender and DONUT PREVENTION on the rear quarter." />
+
+<Callout type="open" title="What this page leaves out">
+Wicks Surplus is a real business run by its proprietor, and I'm helping formalize and grow it. This page covers the scope, the method and what I built. It leaves out the proprietor's name, every dollar figure and financial scenario, the ownership terms, and contact details.
+</Callout>
+
+## Goal
+
+Wicks Surplus resells surplus and new emergency vehicle equipment: light bars, interior and exterior warning lights, sirens and speakers, controllers and PA systems, push bumpers and guards, rocker and running-board lights, and the wiring and hardware that tie a build together. The focus is on the brands departments and upfitters already run, including Whelen, Federal Signal, SoundOff Signal, Feniex, Code 3, Setina and Westin.
+
+Today it runs informally through Facebook groups with personal payment apps. That proved the demand and built a buyer network. The next step is to make it a real company: an Ohio LLC, business payments, licensing and bookkeeping, a website and a second sales channel, and a branded demo vehicle that shows the gear working in person.
+
+The value is simple. A new light bar or siren system is a major expense for a small department, a volunteer fire company or an upfitter. Used equipment that's been bench tested, honestly graded and photographed gives those buyers a lower-cost option they can trust.
+
+My role: the business plan, the legal and compliance research, the policies, the website, and marketing and automation support.
+
+<SpecBox
+	title="At a glance"
+	specs={[
+		['Business', 'Wicks Surplus, emergency vehicle equipment surplus and supply'],
+		['Base', 'Ohio (city to confirm); ships nationwide'],
+		['Tagline', '"Pulled. Tested. Ready to run."'],
+		['Brands carried', 'Whelen, Federal Signal, SoundOff Signal, Feniex, Code 3, Setina, Westin'],
+		['Condition grades', 'New, Open Box, Grade A, Grade B, Parts'],
+		['Restricted items', 'Red, blue, green lights and sirens, sold only under a written buyer verification policy'],
+		['Demo vehicle', 'Display-only Ford Police Interceptor Utility, build in progress since October 2026'],
+		['My role', 'Business plan, compliance research, policies, website, marketing systems'],
+	]}
+	source={{ label: 'Business proposal and website draft, 24 October 2026' }}
+/>
+
+## Photos: the demo unit
+
+These three photos come from the business and appear in the proposal and on the website draft. No plates or house numbers are visible.
+
+<Gallery
+	photos={[
+		{ src: demoSide, alt: 'Side view of the black and white demo SUV with Wicks Surplus door graphics.', caption: 'Side view: black and white patrol livery, the WICKS SURPLUS door wordmark, "DEMO UNIT" on the fender and the "Donut Prevention" joke on the quarter panel.' },
+		{ src: demoRear, alt: 'Rear of the demo SUV in a driveway with red warning lights glowing in the rear window and liftgate, and a blue flash in the right taillight.', caption: 'Rear view during a stationary test: rear-window and liftgate warning lights and the taillight flashers lit, fed from an extension cord on the driveway.' },
+		{ src: demoLiftgate, alt: 'Looking up at the open liftgate from inside, with two small LED warning heads mounted under the rear glass and their leads hanging down.', caption: 'Inside the liftgate: two rear-window LED warning heads mounted, wiring still in progress.' },
+	]}
+/>
+
+## Screenshots: the website draft
+
+A one-page site with the brand, categories, condition grades, how to buy, the buyer policy, the demo unit and a parts request form.
+
+<Gallery
+	photos={[
+		{ src: siteHero, alt: 'Website hero: Pulled. Tested. Ready to run. in heavy italic type, with the demo unit photo and a red and blue lightbar rule under the header.', caption: 'Hero. The red-and-blue bar under the header flashes like a lightbar (it holds still for visitors who prefer reduced motion).' },
+		{ src: siteGear, alt: 'Light grey section listing eight inventory categories with tags.', caption: 'Eight inventory categories on a white "door panel" band.' },
+		{ src: siteGrades, alt: 'Five condition grade cards: New, Open Box, Grade A, Grade B, Parts.', caption: 'One condition grade on every item, each defined in plain words.' },
+		{ src: siteBuy, alt: 'How to buy section with three columns.', caption: 'How to buy in three steps: find it (Facebook group first, or send a part request), pay securely (business accounts, agency POs coming), and get it (tracked shipping, freight quotes for bars and bumpers).' },
+		{ src: siteDemo, alt: 'Demo unit section with a spec table and two photos.', caption: 'Demo unit section: status, livery, purpose, equipment rules and two build photos.' },
+	]}
+/>
+
+## Constraints
+
+- **Sell clean, every time.** Ohio restricts who may display red and blue flashing lights on the road, and some states go further and restrict who may buy or possess them.
+- **Sourcing decides the margin.** In surplus, profit is made when the equipment is bought.
+- **Trust is the product.** Testing, consistent grades, real photos and a fair return policy are what let a buyer pay a stranger for an expensive part.
+- **Trademarks.** Brand names may describe genuine products being resold, but no manufacturer logos, no implied dealer relationship, and no brand names in the business name.
+- **No real sales history in the plan yet.** Every financial figure in the private proposal is a labelled planning assumption until the proprietor's Facebook sales history replaces it.
+
+## Architecture: from auction lot to buyer
+
+```text
+ Sources                     Intake (every item)                         Channels
+ ─────────                   ───────────────────                         ────────
+ GovDeals / Municibid  ─┐    1 Receive  (log source, date, receipt)  ┌─► Facebook groups (first)
+ Public Surplus         │    2 Tag      (stock no. WS-0001)          ├─► Wicks Surplus website
+ Agency fleet managers  ├──► 3 Bench test on fused 12 V supply   ────┼─► eBay store
+ Upfitter take-offs     │    4 Clean and grade                       ├─► Direct to agencies (PO / invoice)
+ Overstock, closeouts   │    5 Photograph + short working video      └─► Events with the demo unit
+ Trade-ins             ─┘    6 List  7 Verify buyer if restricted  8 Pack and ship
+```
+
+## Products and condition grades
+
+| Category | Examples | Notes |
+| --- | --- | --- |
+| Light bars | Full size, mini, low profile | Oversized to ship; high value per sale |
+| Interior lighting | Deck, dash, visor, rear window, split bars | Popular for slick-top and unmarked builds |
+| Exterior lighting | Surface mounts, grille mounts, hideaways, LED sticks, perimeter lights | High volume, small to ship |
+| Sirens and speakers | Siren amplifiers, 100 W speakers, brackets, low-frequency sirens | Restricted category |
+| Controllers and PA | Light controllers, siren control heads, PA systems | Test every function; check firmware where relevant |
+| Push bumpers and guards | Setina and Westin push bumpers, wraps, fender guards | Vehicle-specific fitment; heavy freight |
+| Rocker and running board | Rocker panel and running-board warning lights | Growing with newer upfits |
+| Wiring and hardware | Harnesses, cables, brackets, flashers, mounting hardware | Low price, high attach rate on big orders |
+
+| Grade | Definition |
+| --- | --- |
+| New | Factory new, never installed. May be overstock or prior-year stock. |
+| Open Box | Unused or test-fit only. Packaging may be opened or missing. |
+| Grade A | Used, fully functional on bench test, light cosmetic wear. |
+| Grade B | Used, fully functional, visible wear such as scuffs or hazed lenses. |
+| Parts | Not fully working or incomplete. Sold as is. |
+
+**Future lines, not modeled:** complete matched vehicle packages, refurbishment (lens polishing, module swaps, harness repair), regular upfitter supply, and installation only after licensing, insurance and liability are confirmed.
+
+## Customers and competition
+
+| Customer | Why they buy surplus | What they can buy |
+| --- | --- | --- |
+| Small police departments and sheriff's offices | Tight budgets, quick repairs | All categories, with agency verification |
+| Volunteer and career fire departments | Volunteers often outfit their own vehicles where state law allows | All categories, with verification |
+| EMS and ambulance services | Fleet repairs and replacements | All categories, with verification |
+| Upfitters and installers | Lower-cost parts for budget builds | All categories, with business verification |
+| Tow, construction, utility, security, plow | Amber and white work lights | Amber and white lighting, hardware |
+| Collectors and show vehicle owners | Retired cruiser builds | Case by case under the policy |
+
+**Competition:** other Facebook sellers (fast, but inconsistent testing and protection), eBay and marketplace sellers (reach, but uneven quality), the government auctions themselves (buyers test their own), and new dealers (full warranty at full price). Wicks Surplus sits between auction junk and full-price new: tested, graded, photographed, fairly priced, and sold by someone the community knows.
+
+No formal pricing study exists yet. The first task is to record sold prices for the 25 to 50 items sold most often, across Facebook, eBay sold listings and new dealer pricing.
+
+## Operations
+
+**Test bench (starter):** a 12 V DC bench supply sized for the biggest light bar or siren, with inline fusing; a multimeter, test leads and common connector pigtails; a spare controller for each major brand family; eye protection for high-output lights and hearing protection for sirens.
+
+**Inventory records:** a shared spreadsheet to start (stock number, item, brand, model and part number, grade, cost, source, date, listed and sold price, buyer, verification on file, ship date), moving to inventory software when volume justifies it.
+
+**Policies to publish:** returns (a dead-on-arrival window for New through Grade B; Parts sold as is), shipping and freight quotes for bars and bumpers, no manufacturer warranty on used items unless stated, and buyer verification.
+
+**Space:** a home garage or workshop first, then a storage unit or shop for bumpers and bars. Check zoning before customers pick up at the house.
+
+<Callout type="safety" title="Provenance rule">
+Buy only from sources that can show ownership: an auction invoice, an agency bill of sale, or a seller with a receipt. Keep that record with the stock number. Emergency equipment is sometimes stolen from vehicles, and clean records protect the business. Some Ohio cities and counties license secondhand dealers, so that gets checked at the HQ address.
+</Callout>
+
+## Sales channels and payments
+
+| Channel | Role | Phase |
+| --- | --- | --- |
+| Facebook groups | Core channel and community; keep posting here first | Now |
+| Website | Brand home, categories, grades, buyer policy, parts request form; a store later | Launch |
+| eBay store | National buyers searching by part number, after checking eBay's emergency lighting rules | Months 2 to 4 |
+| Direct to agencies and upfitters | Quotes, invoices and purchase orders | Months 3 to 6 |
+| Events with the demo unit | Show the gear lit and sounding, collect leads | After the demo build |
+| Instagram, TikTok, YouTube | Bench test videos, pattern demos, before-and-after builds | Launch |
+
+**Moving payments from personal to business:** a PayPal Business account using Goods and Services for buyer and seller protection (never Friends and Family for sales); Venmo and Zelle business profiles tied to the LLC bank account, with Zelle limited to repeat buyers because it offers little purchase protection; invoicing for agencies once the LLC, EIN and W-9 exist; and all business money kept apart from personal accounts to protect the LLC.
+
+## Legal, licensing and compliance
+
+### Forming the Ohio LLC, step by step
+
+| Step | What to do | Where |
+| --- | --- | --- |
+| 1. Check the name | Search "Wicks Surplus LLC"; check domain and social handles | Ohio Secretary of State |
+| 2. Statutory agent | An Ohio resident or business with an Ohio street address | Named in the filing |
+| 3. Articles of Organization | Domestic LLC filing (Form 610) | Ohio Secretary of State, online |
+| 4. Operating agreement | Ownership, capital, decision rights, distributions, exits | Internal document |
+| 5. EIN | Free, online, after approval | IRS |
+| 6. Business bank account | Move PayPal, Venmo and Zelle to it | Bank or credit union |
+| 7. Vendor's license | Regular license from the county for a fixed location; transient license for shows | Ohio Business Gateway / county |
+| 8. Trade name | Only if selling under a name other than the LLC's | Ohio Secretary of State |
+| 9. Local permits | Home business, zoning, secondhand dealer rules | City or county |
+| 10. Insurance | General and product liability; commercial auto for the demo vehicle | Private carrier |
+
+### Taxes
+
+- Collect and remit Ohio sales tax on taxable Ohio retail sales (state plus county rate).
+- Government agencies and many fire departments are exempt; keep a valid exemption certificate for each exempt sale.
+- Give suppliers a resale exemption certificate for inventory bought to resell (confirm with a tax professional).
+- Track sales by state from day one for economic-nexus thresholds. Marketplaces collect tax on their own sales.
+- A single-member LLC is taxed on the owner's return by default; a CPA advises on structure.
+
+### Emergency lighting and siren laws
+
+- **Ohio (ORC 4513.17)** regulates how flashing lights are displayed on vehicles, not who may buy them. Flashing red in the right-of-way is limited to public safety vehicles, certain emergency management vehicles and school buses; flashing blue to on-duty law enforcement; amber is allowed for emergency, road service, highway maintenance and similar vehicles. Violation is a minor misdemeanor.
+- **Sirens:** Ohio separately restricts sirens to emergency vehicles (ORC 4513.21, from general knowledge; current text to confirm).
+- **A stricter state, Louisiana (La. R.S. 32:327):** bans selling blue dash, hood, grille or roof emergency lights to anyone, and limits red to peace officers, firefighters and certain emergency, construction and utility workers.
+- **Other states** vary widely on red, blue, green and amber, and on sirens. They weren't surveyed state by state.
+
+### The buyer verification policy
+
+Rather than track 50 sets of laws on every sale, the plan adopts one national policy.
+
+| Item type | Who may buy | What to collect |
+| --- | --- | --- |
+| Red, blue, red-and-blue or green lights; sirens and speakers; siren amps and combination controllers | Law enforcement, fire (including volunteers), EMS, agencies, licensed upfitters and installers | Agency or department ID, an agency letter or purchase order, or upfitter business details, plus a signed statement that use will comply with state law |
+| Amber and white lighting | Commercial and private buyers where legal | Standard sale; buyer acknowledges state law |
+| Hardware, wiring, brackets, push bumpers | Anyone | Standard sale |
+
+**Privacy:** look at the document, record that verification happened and how, and don't keep ID copies unless needed. Any stored copies are kept secure.
+
+### Brands, platforms and the demo vehicle
+
+- The website carries a non-affiliation statement: brand names only describe products being resold.
+- Used items carry no manufacturer warranty unless stated; the store's own return policy covers the gap.
+- Facebook, eBay and payment processors each have their own rules on emergency equipment, to be reviewed before scaling (not verified for the proposal).
+- Agency decals and markings come off surplus items and push bumpers before resale.
+
+<Callout type="safety" title="Demo vehicle rules">
+The demo unit is a display vehicle. Red and blue lights and sirens are never operated on public roads; restricted lights are covered or disabled when driving, and the vehicle is clearly marked as a demo unit. The plan also says to ask local law enforcement how they view the vehicle before taking it on the road.
+</Callout>
+
+## Pricing and financial model (method only)
+
+The private proposal sizes the business with a blended order model (average order value, gross margin, payment fees, packaging, shipping passed through) across three phases: Formalize, Expand and Scale. It includes startup cost ranges, monthly scenarios, a break-even point, a cash note on inventory tied up on the shelf, and a sensitivity table. Those figures stay private. The finding carries over:
+
+- **Buying price and average order size move profit far more than overhead does.**
+- The best levers are disciplined auction buying (set a maximum bid from recent sold prices before bidding), bundling wiring and hardware with large items, and building repeat agency and upfitter accounts.
+- Growth gets funded from profit as items sell, not from debt.
+
+## Brand and marketing
+
+- **Brand:** black-and-white patrol livery, a heavy italic WICKS wordmark with SURPLUS between double rules, red and blue accents. Tagline "Pulled. Tested. Ready to run.", with the "Donut Prevention" humor from the demo unit.
+- **Demo vehicle:** the centerpiece. Product videos, event displays and photos, with inventory rotated onto it so buyers see real patterns and hear real tones.
+- **Content:** a short bench test video for every featured item, night pattern demos, siren tone comparisons, "on the shelf this week" posts.
+- **Community:** the Facebook group stays home base; reward repeat buyers and referrals.
+- **Direct outreach:** a short, honest introduction to fleet managers, volunteer fire chiefs and local upfitters, with the website and the grading explained.
+- **Events:** regional fire and EMS events, police equipment shows and car shows (vendor rules and transient vendor licensing to confirm).
+
+## Risks and mitigations
+
+| Risk | Mitigation |
+| --- | --- |
+| Selling restricted equipment to an unauthorized buyer | Written verification policy, applied every time |
+| Buying stolen equipment | Proof of ownership; records by stock number |
+| Overpaying at auction | Maximum bid set from recent sold prices |
+| Payment disputes and chargebacks | Business accounts, tracking, photos and a test video before shipping |
+| Platform account restrictions | Follow each platform's rules; build the website and email list as owned channels |
+| Shipping damage | Proper packing; insurance on high-value shipments |
+| Failure after sale | Bench test, clear grades, a fair return window |
+| Cash tied up in slow stock | Track days in stock; discount items older than 90 days |
+| Demo vehicle misuse or a traffic stop | Display-only use; restricted lights covered or disabled on the road |
+| Owner time | Batch testing and photo days; part-time help in Phase 3 |
+
+## Milestones
+
+| Timing | Milestone |
+| --- | --- |
+| Weeks 1 to 2 | Agree structure and roles, check the name, choose a statutory agent, file the Articles |
+| Weeks 2 to 3 | EIN, bank account, operating agreement, vendor's license, move payment accounts |
+| Weeks 2 to 4 | Verification, return and shipping policies; inventory spreadsheet and stock numbers; build the test bench |
+| Weeks 3 to 6 | Insurance quotes, domain and website live, Instagram and TikTok, first bench test videos |
+| Months 2 to 3 | Pricing study, eBay store, outreach to agencies and upfitters |
+| Months 2 to 4 | Finish the demo vehicle (started October 2026), then a photo and video shoot |
+| Months 4 to 6 | First events with the demo unit; review real numbers against the plan; decide on space and help |
+
+## Testing and verification
+
+| Item | Status |
+| --- | --- |
+| Business proposal with assumptions register and cited sources | Done, 24 October 2026 |
+| Ohio LLC, vendor's license and lighting-law research | Done (fees and some items to confirm with the agencies) |
+| Website draft | Done |
+| Demo unit rear warning lights | Mounted and lit in a stationary test (per the business's photos). I haven't inspected it |
+| Demo unit wiring | In progress |
+| LLC filed, EIN, bank account | Not yet |
+| Pricing study of top sellers | Not yet |
+
+## Lessons learned
+
+- **One national policy beats 50 state rules.** Verifying every restricted sale the same way is simpler to run and easier to defend.
+- **Provenance is part of the product.** Clean purchase records protect both the business and the buyer.
+- **A demo vehicle is a brand, not just a display.** It gives a surplus seller an identity most marketplace sellers don't have.
+
+## Open items
+
+- HQ city and county, and whether the address is a home.
+- Statutory agent: the proprietor or a service.
+- Space for inventory, the bench, light bars and push bumpers.
+- Current sales volume and best sellers, to replace the planning assumptions.
+- eBay store, website store, or both.
+- Return policy wording.
+- Whether "Donut Prevention" stays in the brand.
+
+## Sources
+
+- [Ohio Revised Code 4513.17, Lights and flashing lights](https://codes.ohio.gov/ohio-revised-code/section-4513.17)
+- [Louisiana R.S. 32:327, Special restrictions on lamps](https://www.legis.la.gov/legis/law.aspx?d=88269)
+- [Cuyahoga County Fiscal Officer, Vendor's Licenses](https://cuyahogacounty.gov/fiscal-officer/departments/general-services/vendor's-licenses)
+- [Ohio Secretary of State, business filings](https://www.ohiosos.gov/businesses/)
+- [Ohio Business Gateway](https://gateway.ohio.gov)
+- [IRS, Apply for an EIN online](https://www.irs.gov/businesses/small-businesses-self-employed/apply-for-an-employer-identification-number-ein-online)
+- [Municibid, example Ohio government auction listing for a Whelen light bar](https://municibid.com/Listing/Details/81009501/whelen-legacy-lightbar-48-super-led-red-blue-with-wecan-control)
+- [Liquidity Services, agencies selling surplus on GovDeals](https://liquidityservices.com/news/cruisers-office-furniture-and-nikes-local-government-agencies-selling-unneeded-inventory-on-govdeals)
+
+The proposal states that its legal section summarizes public sources and general knowledge and isn't legal or tax advice.
+
+## Changelog
+
+<Changelog entries={[{ date: '2026-10-26', change: 'Project page published from the business proposal and website draft, with demo unit photos and site screenshots. Names, money and contacts left out.', rollback: 'Revert the commit that added this page.' }]} />
