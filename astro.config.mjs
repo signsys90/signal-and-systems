@@ -37,6 +37,7 @@ export default defineConfig({
 							items: [
 								{ label: 'Responder ID Scanner', link: '/projects/responder-id-scanner/' },
 								{ label: 'AI Outbound Sales Platform', link: '/projects/ai-outbound-platform/' },
+								{ label: 'Signal & Systems Website', link: '/projects/signal-and-systems-site/' },
 								{ label: 'Vehicle Light Controller', link: '/projects/vehicle-light-controller/' },
 							],
 						},
@@ -52,7 +53,14 @@ export default defineConfig({
 								{ label: 'ARES GIS Command Dashboard', link: '/projects/ares-gis-dashboard/' },
 							],
 						},
-						{ label: 'Business Systems', items: [], collapsed: true },
+						{
+							label: 'Business Systems',
+							items: [
+								{ label: 'SaniGLAZE Opportunity Map', link: '/projects/saniglaze-opportunity-map/' },
+								{ label: 'SaniGLAZE Trade Show Map', link: '/projects/saniglaze-trade-show-map/' },
+								{ label: 'AI-Assisted Executive Search', link: '/projects/ai-assisted-executive-search/' },
+							],
+						},
 						{ label: 'Fabrication and 3D Printing', items: [], collapsed: true },
 					],
 				},

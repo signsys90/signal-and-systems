@@ -1,0 +1,159 @@
+---
+title: SaniGLAZE 2026 Trade Show Map
+description: A distance-aware trade show planner that ranks 54 facilities-industry events for each franchise territory by ROI, travel distance and coverage.
+summary: A trade show planner that ranks the 2026 event calendar for each franchise owner by ROI, travel distance and territory coverage.
+status: Installed
+category: Business Systems
+started: Spring 2026
+updated: 2026-10-26
+project: true
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import PartsTable from '../../../../components/PartsTable.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+
+<ProjectHeader />
+
+<Callout type="open" title="Private tool, public write-up">
+The dashboard sits behind a shared login for SaniGLAZE franchise members, so there is no public link. This page documents how it works. It leaves out every franchise name, address, territory code and CRM link.
+</Callout>
+
+## Goal
+
+Trade shows are one of the most expensive line items a small franchise owner chooses, and the calendar is crowded: facilities management, property management, healthcare environmental services, K-12 and higher-ed facilities, government procurement, and architecture and design-build all run their own conferences.
+
+The Trade Show Map turns that calendar into a short, ranked list for each franchise owner. Pick a territory, and the map shows which 2026 events are worth the booth fee and the drive, based on each event's ROI score, how far it is from the franchise headquarters, and whether it sits inside the states that franchise serves. It is a companion to the [National Opportunity Map](/projects/saniglaze-opportunity-map/).
+
+<SpecBox
+	title="At a glance"
+	specs={[
+		['Events', '54 events across 21 states and DC, January to November 2026'],
+		['Pre-flagged', '10 events flagged as recommended'],
+		['Priority lists', '37 Core List, 12 Watch List, 5 High ROI'],
+		['Franchise profiles', '70, each with HQ location and covered states'],
+		['Territory coverage', '84 franchise-by-state coverage rows with ZIP counts'],
+		['Facility overlay', '39 example facility nodes tied to events'],
+		['ROI score range', '45 to 90'],
+		['Runs on', 'Any modern browser, no install'],
+	]}
+	source={{ label: 'Dashboard build, reviewed 2026-10-26' }}
+/>
+
+## Constraints
+
+- **Built for franchise owners, not event planners.** One dropdown (franchise territory) should be enough to get a useful answer.
+- **Verifiable.** Every event links to its official organizer page and carries an audit status, so an owner can confirm the dates and venue before booking.
+- **No server.** A single static HTML file with the event data embedded, hosted behind the same shared login as the Opportunity Map.
+- **Free tooling.** Open-source mapping libraries and free basemap tiles.
+
+## Architecture
+
+The whole app is one HTML file with four embedded datasets and a render loop.
+
+**Data**
+
+- **Events (54).** Each record has: quarter, month, start and end date, region, sector, event name, city, state, venue, format, organizer, official URL, hours, audit status, why it matters, source type, latitude and longitude, placement accuracy (venue-level or city-level), target tags (for example Facility Mgmt, Restrooms, Floors), ROI score, recommended flag, and priority list.
+- **Franchise profiles (70).** Territory ID, HQ city, state and coordinates, ZIP, state and county counts, primary states, and a link to the franchise's HubSpot location page.
+- **State coverage (84 rows).** Which states each franchise covers, and how many ZIP codes in each.
+- **Facility overlay (39 nodes).** Example government, commercial, education, healthcare, hospitality and aquatics facilities tied to a related event, to show the buyers each show reaches.
+
+The events came from the original planning workbook (45) plus a second research pass that added overlooked events (9). Event organizers include BOMA, IFMA, APPA, ASHE, AHE, NIGP and its regional chapters, state school business official associations, AIA, DBIA, CSI, NRPA and Greenbuild.
+
+**Scoring**
+
+With no territory selected, the map shows every event with its base ROI score. Selecting a territory switches on three calculations:
+
+- **Event recommendation score** = ROI score + a distance bonus + a coverage bonus. The distance bonus is up to 22 points and drops by 1 point for every 35 miles from the franchise HQ. The coverage bonus is 10 points when the event is in a state the franchise covers.
+- **Territory opportunity score** = the sum of (ROI score × distance weight × state weight) across the filtered events. The distance weight falls from 1.0 to a floor of 0.15 at 1,020 miles or more. The state weight is 1.15 in a covered state and 0.75 outside one.
+- **Distance** is great-circle (haversine) miles from the franchise HQ to the event.
+
+**Presentation**
+
+- Leaflet map with clustered event markers. Each marker is colored by sector group and sized by ROI score.
+- Territory coverage bubbles for the selected franchise, plus the optional facility overlay.
+- KPI tiles: filtered events, recommended events, territory ZIPs and the territory opportunity score.
+- A franchise summary card, a "top recommended events" box for that franchise, and a full event list with popups.
+- CSV export of the filtered list, and Zoom Territory.
+
+## Parts list
+
+<PartsTable
+	parts={[
+		{ name: 'Leaflet 1.9.4', price: '$0 (open source)', specs: 'Interactive map', source: 'https://leafletjs.com/' },
+		{ name: 'Leaflet.markercluster 1.5.3', price: '$0 (open source)', specs: 'Clusters nearby event markers', source: 'https://github.com/Leaflet/Leaflet.markercluster' },
+		{ name: 'CARTO Light basemap', price: '$0 (free tier)', specs: 'Map tiles; OpenStreetMap data', source: 'https://carto.com/basemaps' },
+		{ name: 'Event research workbook', price: 'Internal', specs: '54 events with official URLs, audit status and ROI scores' },
+		{ name: 'Franchise and territory tables', price: 'Internal', specs: 'HQ coordinates and state coverage (not published)' },
+		{ name: 'Vanilla JavaScript, HTML and CSS', price: '$0', specs: 'One static file, no build step' },
+	]}
+/>
+
+## Configuration
+
+Filters in the sidebar:
+
+- **Franchise territory:** turns on distance, recommendations and the opportunity score.
+- **Search:** matches event, city, venue, organizer, region, sector, tags and notes.
+- **Quarter, region and sector.**
+- **Distance:** maximum miles from the franchise HQ.
+- **Source set:** the original workbook, or added and overlooked events.
+- **Priority:** Core List, Watch List or High ROI.
+- **Audit:** all events, verified or official only, or a watch list of events whose details still need a recheck.
+- **Territory match:** all events, in-territory states only, or out-of-territory only.
+- **Facility overlay:** off, all, or one facility type.
+- **Minimum ROI score:** a slider.
+
+## Build steps
+
+1. Compiled the 2026 event calendar across the sectors that buy restroom and surface restoration.
+2. Scored each event for ROI and tagged it by sector, region, priority and target buyer.
+3. Audited event details against the official organizer sites and recorded an audit status on each one. Events are placed at venue level where the venue was confirmed (25) and at city level otherwise (29).
+4. Ran a second research pass that added 9 overlooked events.
+5. Joined the franchise HQ locations and state coverage from the territory tables.
+6. Built the Leaflet map, the filters, and the distance and coverage scoring.
+7. Added the facility overlay, the recommendations box and CSV export.
+
+## Testing and verification
+
+- **Checked on 2026-10-26:** the production page loads with no script errors once its map libraries are available. With no territory selected it shows all 54 events and 10 recommended. Clustering, the KPI tiles and the event list all render.
+- **Not tested on 2026-10-26:** the territory-specific scoring in the browser. The formulas above come from reading the source, not from checking output for a specific franchise.
+- **Event data:** 18 events have a recorded audit result (verified against the official site, or added with official dates and venue). The remaining 36 come from the original workbook with no audit note, and 1 event's dates were not yet announced.
+
+<Callout type="unverified">
+Event dates, venues and hours change. Confirm every event on its official site before booking a booth or travel.
+</Callout>
+
+## Safety notes
+
+- Nothing on this site comes from the franchise or territory records: no franchise names, addresses, HQ locations or CRM links.
+- The event data is public information from organizer websites.
+
+## Lessons learned
+
+<Callout type="unverified" title="Draft lessons for William to confirm">
+These come from how the tool is built, not from usage data.
+</Callout>
+
+<Callout type="lesson" title="Distance changes the answer">
+A national show with a high ROI score can still be the wrong choice for a franchise on the other side of the country. That is why the score weights distance and territory coverage instead of ranking every owner from the same list.
+</Callout>
+
+<Callout type="lesson" title="Show the audit trail">
+An event list is only useful if owners trust the dates. Putting an audit status and an official link on every event, plus a filter for them, lets an owner check the list instead of researching it again.
+</Callout>
+
+## Open items
+
+- Add sanitized screenshots once SaniGLAZE approves them, with no franchise selected.
+- Record the version history.
+- Fill the 2 events that are missing a sector, and recheck the events flagged for a venue recheck.
+- Plan the 2027 calendar refresh.
+
+## Changelog
+
+<Changelog
+	entries={[{ date: '2026-10-26', change: 'Project page published from a review of the live 2026 v1 dashboard.', rollback: 'Revert the commit that added this page.' }]}
+/>
