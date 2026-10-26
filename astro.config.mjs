@@ -8,7 +8,7 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Signal & Systems Engineering, LLC.',
-			description: 'Systems built in the field and in the business. Build logs and project documentation by William A. Atkins, KR4JSQ.',
+			description: 'BUILT IN THE FIELD. ENGINEERED FOR BUSINESS. System documentation & technical architecture by William A. Atkins | KR4JSQ',
 			logo: { src: './src/assets/mark.svg', alt: 'Signal & Systems Engineering, LLC.' },
 			favicon: '/favicon.svg',
 			customCss: [
