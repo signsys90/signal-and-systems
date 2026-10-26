@@ -40,6 +40,27 @@ import Changelog from '../../../../components/Changelog.astro';
 
 **Live deployment:** [ares-duval-gis-render-v2-1.onrender.com](https://ares-duval-gis-render-v2-1.onrender.com/). It is protected by a login for authorized operators, so the screenshots on this page come from a local copy loaded with fictional demo data instead.
 
+The hosted build is labeled **ARES Duval GIS v3.7.2 (Development)** and currently works best on a desktop browser. Its version label follows a different numbering from the local release line in the version history below (7.1.5), so treat the two as separate tracks until they are reconciled.
+
+## What the platform does
+
+The dashboard is built to support real-time situational awareness and operational decision-making for ARES Duval during activations. It pulls many sources into one operational view of Duval County, and it is designed to complement Net Control operations by making it easier to see resources, spot gaps and coordinate activity in a fast-moving environment.
+
+**One operational picture of Duval County:**
+
+- JFRD fire stations, law enforcement, hospitals and shelter locations, using official City of Jacksonville ERAT (Emergency Response) map services where they are available. If the live ERAT service is unreachable, the map falls back to locally stored, validated points.
+- Flood zones, weather alerts and other hazard overlays.
+- ARES and SKYWARN frequency references and repeater locations, for operators' quick reference. (Specific frequencies are not reproduced on this website.)
+- Live and fallback data integration with a priority-based system, so the picture stays usable if external feeds fail.
+
+**A lightweight command tool, not only a map:**
+
+- **Operational Status Layer:** operators can mark facilities as Available, Monitoring or Unavailable, and each change is timestamped.
+- **Action-driven interface:** quick access to zoom, directions and tasking workflows from any map feature.
+- **Offline-aware design:** cached data and low-bandwidth usability for degraded communications.
+
+The project is still a work in progress. A future step is plugging in an operator roster with call signs, which would only be done with the group's approval and with contact details kept off any public view.
+
 ## Goal
 
 Give a net control station or command post one map that shows where ARES operators are, what incidents and tasks are open, and who is assigned to what, no matter which radio system each operator is reporting through.
@@ -255,6 +276,8 @@ At least one fire station on the map uses an approximate coordinate that still n
 - Record a green Playwright run on Windows, including the visual baselines.
 - Replace approximate station coordinates with authoritative county GIS data, and work through the 62 manual-review records.
 - Decide whether the repository will be public.
+- Reconcile the hosted build's version label (v3.7.2 Development) with the local 7.1.x release line.
+- Walk ARES Duval leadership through the platform and collect feedback on how it fits activations and exercises.
 
 ## Version history
 
