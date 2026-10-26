@@ -14,6 +14,15 @@ import SpecBox from '../../../../components/SpecBox.astro';
 import PartsTable from '../../../../components/PartsTable.astro';
 import Callout from '../../../../components/Callout.astro';
 import Changelog from '../../../../components/Changelog.astro';
+import Gallery from '../../../../components/Gallery.astro';
+import shotDay from '../../../../assets/ares-gis/desktop-map-day.webp';
+import shotNight from '../../../../assets/ares-gis/desktop-map-night.webp';
+import shotOperators from '../../../../assets/ares-gis/desktop-operators-drawer.webp';
+import shotDispatch from '../../../../assets/ares-gis/desktop-dispatch-drawer.webp';
+import shotTasks from '../../../../assets/ares-gis/desktop-tasks-drawer.webp';
+import shotLayers from '../../../../assets/ares-gis/desktop-layers-drawer.webp';
+import shotDiagnostics from '../../../../assets/ares-gis/desktop-diagnostics-drawer.webp';
+import shotMobile from '../../../../assets/ares-gis/mobile-map-day.webp';
 
 <ProjectHeader />
 
@@ -175,7 +184,20 @@ The sources policy is "live-preferred": live feeds and official layers are alway
 
 ## Screenshots
 
-Screenshots are being captured from a local copy loaded with fictional demo operators and incidents. They will be added here.
+These screenshots come from a local copy of version 7.1.5 on the CF-33, captured on 2026-10-26. It was loaded with fictional demo data only: operators DEMO1 to DEMO3, two "Demo:" incidents in Jacksonville and two demo tasks. Carto tile requests were blocked so the map shows the app's built-in OpenStreetMap fallback (see Testing). Before publishing, every image was checked for real names, call sign lists, phone numbers, addresses, credentials and file paths. Two candidate shots were thrown out because they showed real repeater call signs and hospital contact details.
+
+<Gallery
+	photos={[
+		{ src: shotDay, alt: 'ARES Duval Command View in day mode, showing the command bar and clustered facility markers over Duval County', caption: 'Day mode: the command bar, the facility legend (Fire / Rescue, Hospitals, Shelters, Law Enforcement, ARES / Radio, Flood / Weather) and clustered reference points across Duval County.' },
+		{ src: shotNight, alt: 'The same command view in night mode with a dark basemap', caption: 'Night mode: the same view on a dark basemap for overnight operations.' },
+		{ src: shotOperators, alt: 'Operator Reachability drawer showing live, aging and stale counts and a demo operator card', caption: 'Operator Reachability: live, aging and stale counts, per-source filters (APRS, Meshtastic, DMR, GPS, Manual) and a demo operator with locate, inspect, edit and dispatch actions.' },
+		{ src: shotDispatch, alt: 'Dispatch and Assignment drawer recommending the nearest available demo operator for a demo incident', caption: 'Dispatch + Assignment: the nearest available operator for the selected incident, with distance, ready for one-click assignment.' },
+		{ src: shotTasks, alt: 'Incident and Tasking panel listing two demo incidents with priority badges', caption: 'Incident + Tasking: open incidents and tasks with priority, location and assignment, editable without leaving the map.' },
+		{ src: shotLayers, alt: 'Layer records drawer showing the Major Bridges reference layer with validation fields', caption: 'Layer records: each reference record shows its criticality, validation status and whether it still needs manual review (Major Bridges layer shown).' },
+		{ src: shotDiagnostics, alt: 'System Diagnostics drawer showing read-only console auth, provider counts and runtime JSON', caption: 'System Diagnostics: read-only until an admin token is entered, provider and request counts, and a runtime status report.' },
+		{ src: shotMobile, alt: 'Mobile layout showing the command-ready card and dock buttons with no map drawn', caption: 'Mobile layout: the command card and dock work, but the map area currently renders 0 px wide. This is a known bug listed under Open items.' },
+	]}
+/>
 
 ## API
 
@@ -313,5 +335,6 @@ Taken from the release note files in the project folder.
 	entries={[
 		{ date: '2026-10-26', change: 'Project page published.', rollback: 'Revert the commit that added this page.' },
 		{ date: '2026-10-26', change: 'Expanded with the live deployment, architecture, workflows, layers, API, root cause of the test failures and version history.', rollback: 'Revert the commit that expanded this page.' },
+		{ date: '2026-10-26', change: 'Added the hosted v3.7.2 feature overview, the Windows Playwright results and eight demo-data screenshots.', rollback: 'Revert the commits that added them.' },
 	]}
 />
