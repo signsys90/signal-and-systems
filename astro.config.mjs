@@ -61,7 +61,10 @@ export default defineConfig({
 								{ label: 'AI-Assisted Executive Search', link: '/projects/ai-assisted-executive-search/' },
 							],
 						},
-						{ label: 'Fabrication and 3D Printing', items: [], collapsed: true },
+						{
+							label: 'Fabrication and 3D Printing',
+							items: [{ label: 'SDS200 Glare Shroud', link: '/projects/sds200-glare-shroud/' }],
+						},
 					],
 				},
 				{ label: 'Build Log', items: [{ autogenerate: { directory: 'log' } }] },
