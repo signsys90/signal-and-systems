@@ -1,7 +1,7 @@
 ---
 title: AI-Assisted Executive Search
-description: How I run an executive job search as a system, using Claude for positioning, role research and tailored materials, with firm honesty rules.
-summary: An executive job search run as a system, with Claude used for positioning, role research and tailored materials under strict honesty rules.
+description: An executive job search engineered as a repeatable business system, using AI for positioning, research and drafting under strict honesty rules.
+summary: An executive job search engineered as a repeatable business system.
 status: In progress
 category: Business Systems
 started: TBD
@@ -10,79 +10,440 @@ project: true
 ---
 
 import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
 import Callout from '../../../../components/Callout.astro';
 import Changelog from '../../../../components/Changelog.astro';
 
 <ProjectHeader />
 
-<Callout type="open" title="What this page leaves out">
-This page documents the method, not the pipeline. It does not name target companies, applications, recruiters, contacts or compensation.
+A structured, AI-assisted workflow for executive positioning, opportunity evaluation, company research, application development and relationship-driven outreach. It brings the discipline of revenue operations to executive career development without compromising accuracy, authenticity or professional judgment.
+
+<SpecBox
+	title="Project details"
+	specs={[
+		['Focus areas', 'Business Systems · AI Automation · Revenue Operations'],
+		['Development approach', 'AI-assisted workflow design and implementation using Claude, with ChatGPT Codex used to build the supporting system'],
+		['Started', 'Date not recorded'],
+		['Last updated', '2026-10-26'],
+	]}
+/>
+
+<Callout type="open" title="What this page documents">
+This case study describes the methodology, workflow architecture and intended capabilities of the executive-search system. It does not disclose target companies, active applications, recruiters, contacts, compensation discussions or private correspondence. It does not claim verified placement results or performance improvements.
 </Callout>
 
-## Goal
+## 1. The business problem
 
-Run an executive job search the way I would run a revenue operation: a clear position, a defined target market, consistent materials, and a repeatable process. Done means each opportunity I pursue gets materials that are accurate, specific to the role, and quick to produce.
+### Executive job searching is an operational problem
 
-## Constraints
+Executive job searches are often managed through disconnected activities: reviewing job postings, researching companies, updating resumes, preparing cover letters, contacting hiring leaders and tracking follow-ups.
 
-- **Honesty:** my resume is genuine. AI helps with structure and wording, but it never adds experience, titles or metrics that are not on the record.
-- **Outreach:** every message is legitimate, written to sound like me, and aimed at one specific person and role. No mass sends and no tactics meant to slip past spam or AI filters.
-- **Privacy:** no phone number or email address on public materials. Contact goes through LinkedIn.
-- **Positioning:** I present myself as a business-transformation executive, not only as a former VP of Marketing.
+Without a consistent process, several problems emerge:
 
-## Architecture
+- Positioning changes from one application to the next.
+- Time is spent pursuing opportunities that do not match the candidate's experience or objectives.
+- Research is repeated across similar roles and companies.
+- Application materials become generic or overemphasize the wrong experience.
+- Networking becomes reactive rather than deliberate.
+- Lessons from previous applications are not systematically incorporated into future decisions.
+
+For executive candidates with experience spanning multiple business functions, positioning presents an additional challenge. A conventional resume may emphasize the most recent title while underrepresenting the broader combination of operational, commercial, technical and leadership experience.
+
+The challenge is to communicate a coherent executive narrative without misrepresenting the underlying career history.
+
+### The opportunity
+
+Apply the principles of revenue operations to executive career development.
+
+The system treats a job search as a repeatable process with a defined target market, consistent qualification criteria, research-backed decisions, reusable source material and a feedback loop.
+
+AI assists with research, synthesis and drafting. The candidate remains responsible for the underlying facts, strategic decisions, relationship development and final communications.
+
+The objective is not to automate professional judgment. It is to make better judgment easier to apply consistently.
+
+## 2. System objectives
+
+The system was designed around six objectives.
+
+- **Establish consistent positioning.** Maintain one evidence-based executive narrative connecting business growth, marketing leadership, revenue operations, AI automation, digital transformation and public-safety technology.
+- **Qualify opportunities before investing time.** Evaluate each role against a written target profile before conducting extensive research or preparing application materials.
+- **Reduce repetitive research.** Use AI to organize publicly available company information, interpret job requirements, identify relevant business priorities and surface questions that require further investigation.
+- **Produce role-specific materials efficiently.** Adapt the presentation of verified career experience to the requirements of each position without inventing qualifications, accomplishments, employment history or metrics.
+- **Improve relationship-driven outreach.** Identify appropriate professional contacts and prepare concise, personalized communications based on a legitimate professional connection or a clearly relevant business rationale.
+- **Learn from the process.** Use documented observations about role fit, recruiter feedback, application outcomes and outreach responses to improve positioning and future opportunity selection.
+
+## 3. System architecture
+
+The workflow connects executive positioning, opportunity qualification, research, document preparation, outreach and continuous improvement.
 
 ```text
-Positioning ─► Target role profile ─► Role research ─► Tailored materials ─► Targeted outreach ─► Review and adjust
-     ▲                                                                                              │
-     └──────────────────────────────────── lessons feed back ──────────────────────────────────────┘
+                 VERIFIED CAREER RECORD
+                          |
+                          v
+                EXECUTIVE POSITIONING
+                          |
+                          v
+                 TARGET ROLE PROFILE
+                          |
+                          v
+                 OPPORTUNITY INTAKE
+                          |
+                          v
+                  ROLE QUALIFICATION
+                          |
+                          v
+                  COMPANY RESEARCH
+                          |
+                          v
+                EXPERIENCE-TO-ROLE MAP
+                          |
+                          v
+                TAILORED MATERIALS
+                          |
+                          v
+                 HUMAN REVIEW GATE
+                          |
+                          v
+                 TARGETED OUTREACH
+                          |
+                          v
+                 OUTCOME TRACKING
+                          |
+                          v
+                 FEEDBACK & LEARNING
+                          |
+                          +----------> Positioning and
+                                       target refinement
 ```
 
-## How it works
+The candidate's verified career record serves as the source of truth throughout the process. Research informs how that experience is presented, but it does not change the underlying facts.
 
-1. **Positioning.** One core story that connects growth, revenue operations, AI automation, digital transformation and public-safety technology. Every other material is built from it.
-2. **Target role profile.** VP, SVP and C-level roles in growth, RevOps, digital transformation, AI automation and public-safety technology. The profile is written down, so each opening is checked against it before any time is spent on it.
-3. **Role research.** Claude helps me read a posting and the company's public information, and then map what the role needs to my verified experience. Gaps are named, not papered over.
-4. **Tailored materials.** The resume stays the same record. The emphasis, summary and cover letter change for each role. When a full package is needed, it includes a portfolio, and this site is part of that portfolio.
-5. **Targeted outreach.** Short, personal messages to the right person, written for that person. Drafts are reviewed by me before anything is sent.
-6. **Review.** What worked and what didn't feeds back into the positioning and the target profile.
+### Architectural components
 
-## Parts list
+The system can be understood as six functional components.
 
-- Claude, for research, structure and drafting.
-- Resume (genuine record), maintained by me.
-- LinkedIn profile.
-- This site, as the public portfolio.
+| Component | Responsibility |
+| --- | --- |
+| Positioning layer | Maintains the core executive narrative and professional value proposition |
+| Qualification layer | Evaluates opportunities against documented career and role criteria |
+| Research layer | Organizes public information about companies, roles and business priorities |
+| Content layer | Produces tailored resumes, cover letters, research briefs and outreach drafts |
+| Review layer | Ensures factual accuracy, professional authenticity and compliance with standing rules |
+| Feedback layer | Records outcomes and identifies opportunities to refine positioning and targeting |
 
-## Configuration
+These are functional components of the workflow. They do not imply that the original implementation contained six separate software services.
 
-The standing rules in the Constraints section are given to Claude at the start of every session, so every draft follows them.
+## 4. How the system works
 
-## Build steps
+### Step 1: Executive positioning
 
-1. Write the positioning statement and the target role profile.
-2. Lock the resume as the source of truth.
-3. Set up the research and drafting workflow with Claude.
-4. Publish the portfolio (this site).
+The system starts with a consistent professional narrative.
 
-## Testing and verification
+Rather than positioning the candidate exclusively as a former Vice President of Marketing, it presents a broader leadership profile connecting growth, commercial operations, process improvement, AI-assisted automation and digital transformation.
 
-No results are published here. This page does not claim interview, offer or response rates.
+Public-safety technology represents an additional area of industry interest where the candidate's commercial and operational background may be relevant.
 
-## Safety notes
+The positioning statement provides the foundation for resumes, professional profiles, research briefs and outreach messages.
 
-- Check every AI-drafted line against the resume before it goes out.
-- Never put another company's confidential data in an application or a portfolio sample.
+The central rule is consistency: the presentation may change according to the audience, but the underlying professional history does not.
 
-## Lessons learned
+### Step 2: Target role definition
 
-- A written target profile makes it much faster to say no to roles that don't fit.
+The target profile establishes which opportunities warrant consideration.
+
+Target roles include VP, SVP and C-level positions in areas such as:
+
+- Growth and marketing leadership.
+- Revenue operations and commercial strategy.
+- Digital transformation.
+- AI automation and business systems.
+- Public-safety technology and related business functions.
+
+A role should be evaluated against relevant factors such as:
+
+- Seniority and organizational scope.
+- Alignment with demonstrated experience.
+- Business responsibilities and strategic influence.
+- Industry relevance.
+- Location and working arrangements.
+- Compensation requirements, where known.
+- Required qualifications and material experience gaps.
+
+The profile prevents the search from becoming a collection of unrelated applications. It also creates a clear distinction between a role that is interesting and one that is strategically appropriate.
+
+### Step 3: Opportunity intake and qualification
+
+Each opportunity enters the workflow with a defined set of inputs. A typical opportunity record would contain:
+
+- Job description.
+- Company overview.
+- Position title and seniority.
+- Core responsibilities.
+- Required and preferred qualifications.
+- Location and working arrangement.
+- Compensation information, when published.
+- Initial assessment of experience alignment.
+
+AI can summarize the posting, identify its most important requirements and compare those requirements with the verified career record.
+
+The result is a structured qualification assessment. Opportunities can then be prioritized for further research, held for clarification, or rejected when they clearly fall outside the target profile.
+
+This qualification step is designed to reduce wasted effort before the more resource-intensive stages begin.
+
+### Step 4: Company and role research
+
+For qualified opportunities, the research workflow combines the job description with relevant public information about the company. Research may include:
+
+- Company products and services.
+- Business model and customer segments.
+- Publicly stated strategic priorities.
+- Relevant leadership responsibilities.
+- Market positioning and competitive environment.
+- Business challenges that appear connected to the role.
+- Evidence supporting the candidate's potential contribution.
+
+Claude assists with research synthesis and interpretation.
+
+The output is a role-research brief that separates documented facts from interpretations and unanswered questions. This distinction matters because a plausible business hypothesis is not the same as a confirmed company priority.
+
+Research should identify evidence, not manufacture a narrative that makes every opportunity appear suitable.
+
+### Step 5: Experience-to-role mapping
+
+Before drafting application materials, the system maps the role's requirements to the candidate's documented experience. A practical mapping structure is:
+
+| Role requirement | Candidate evidence | Assessment |
+| --- | --- | --- |
+| Required business capability | Relevant verified experience | Strong alignment, partial alignment, or gap |
+| Leadership responsibility | Documented leadership scope | Supported, partially supported, or unverified |
+| Industry experience | Relevant employment or transferable experience | Direct, adjacent, or absent |
+| Technical requirement | Verified tools, systems, or implementation experience | Demonstrated, limited, or unverified |
+| Business outcome | Documented accomplishment or metric | Verified, qualitative, or unavailable |
+
+This step prevents keyword matching from becoming a substitute for actual qualification. It also identifies which parts of the candidate's experience deserve emphasis and which requirements need careful treatment.
+
+Material gaps remain visible. They are not concealed through inflated wording.
+
+### Step 6: Tailored application materials
+
+The system produces materials aligned with the specific position. Depending on the opportunity, the package may include:
+
+- Executive resume.
+- Role-specific professional summary.
+- Cover letter.
+- Application-question responses.
+- Selected portfolio projects.
+- Company and role-research brief.
+- Targeted recruiter or hiring-leader message.
+
+The resume remains grounded in the verified career record. Tailoring changes emphasis, ordering, language and relevance. It does not create new employment history, titles, credentials, accomplishments or numerical results.
+
+The public portfolio provides supporting evidence of business systems, workflow design, automation and related projects where relevant to the position.
+
+### Step 7: Targeted professional outreach
+
+The outreach process focuses on relevance rather than volume.
+
+For a suitable opportunity, the candidate identifies an appropriate professional contact and develops a short message connecting the role, the recipient's responsibilities and the candidate's relevant background. Potential recipients may include recruiters, hiring leaders, department executives, or professional contacts with a legitimate connection to the opportunity.
+
+Each message is written for a specific person and professional context.
+
+The workflow explicitly excludes mass unsolicited messaging, fabricated familiarity, deceptive personalization, and tactics designed to evade spam or AI-detection systems.
+
+All messages remain drafts until reviewed and approved by the candidate.
+
+### Step 8: Outcome review and continuous improvement
+
+The final stage converts experience into learning. Where information is available, the system can record:
+
+- Whether an opportunity passed qualification.
+- Whether an application was submitted.
+- Whether a professional contact responded.
+- Whether an interview occurred.
+- Feedback received.
+- Reasons an opportunity was declined or discontinued.
+- Whether the original role assessment proved accurate.
+
+These observations can inform future targeting and positioning. For example, repeated feedback about a particular leadership capability may indicate that the relevant experience needs clearer presentation. Consistent mismatches between role requirements and actual qualifications may indicate that the target profile needs refinement.
+
+The objective is a disciplined feedback loop rather than repeated applications without learning.
+
+## 5. Technical architecture
+
+<Callout type="unverified">
+The original source code and development environment are no longer available, so the precise implementation cannot be reconstructed with certainty. This section describes a technically plausible architecture for a lightweight application supporting this workflow. It is a proposed implementation model, not a verified inventory of the original code.
+</Callout>
+
+### Application interface
+
+A web-based interface could provide a central workspace for managing positioning documents, target criteria, opportunities, research briefs, application materials and review status.
+
+A React-based frontend, potentially using Next.js and TypeScript, would be a reasonable implementation choice. The interface could organize work around an opportunity record, so that its research, supporting evidence, generated materials and status stay together.
+
+### Application logic
+
+Server-side application logic would manage the workflow between opportunity intake, research preparation, document generation, review and status tracking. Possible implementation options include Next.js server routes or a separate Node.js backend.
+
+The application would enforce the documented workflow rules, while the AI model would assist with tasks such as summarization, comparison, synthesis and drafting.
+
+### AI-assisted research and drafting
+
+Claude is the designated assistant for research, structuring and drafting in the documented process.
+
+The use of Claude does not establish that the original application connected to a model API. The workflow could have operated through manually supplied prompts and documents, a dedicated application integration, or a combination of the two.
+
+An automated implementation could use a model API to process approved inputs and return structured outputs. A manual implementation could use reusable prompt templates and candidate-reviewed source material. Both approaches can support the same business methodology.
+
+### Data and document management
+
+A practical implementation could maintain a structured record for each opportunity, linked to its source job description, research brief, experience mapping, draft materials and status history. Depending on the application's complexity, this could use:
+
+- Structured JSON or Markdown files for a lightweight local workflow.
+- SQLite or PostgreSQL for persistent opportunity records.
+- A document repository for resumes, research briefs and application materials.
+
+These are alternative implementation choices, not confirmed technologies.
+
+The verified career record should remain separate from AI-generated drafts, so that a generated document never silently becomes the authoritative source of employment history or accomplishments.
+
+### Workflow orchestration
+
+The workflow could be implemented as a sequence of explicit stages:
+
+1. Intake.
+2. Qualification.
+3. Research.
+4. Experience mapping.
+5. Drafting.
+6. Human review.
+7. Submission or outreach.
+8. Outcome recording.
+
+Each stage would have a defined input and expected output. A candidate-reviewed transition between drafting and submission prevents the system from sending communications or submitting applications without approval.
+
+### Reporting and review
+
+A lightweight reporting layer could summarize the current search by stage, qualification status, outstanding actions and recorded outcomes. This would support operational visibility without exposing sensitive contact information on the public portfolio.
+
+No particular dashboard, database, automation framework or reporting interface is claimed to have existed in the original system.
+
+## 6. Configuration and operating rules
+
+The workflow is governed by standing instructions that define how AI may assist and where human judgment remains mandatory.
+
+1. **The career record is authoritative.** The verified resume and supporting career records determine what can be claimed. AI may improve structure, clarity and relevance, but it may not invent or embellish facts.
+2. **Research must distinguish fact from inference.** Company statements, job requirements and documented accomplishments should be distinguishable from interpretations, assumptions and unanswered questions. Unsupported claims must not be presented as established facts.
+3. **Every opportunity must meet the target profile.** The system should qualify opportunities against the documented search criteria before investing substantial time in them. Exceptions require an explicit decision rather than an accidental expansion of the search.
+4. **Outreach must be authentic and specific.** Messages should be professional, relevant and written for their intended recipient. The candidate reviews and approves communications before sending them.
+5. **Public materials must protect private information.** Public-facing pages must not expose personal contact details, private correspondence, recruiter information, confidential company information or application records. Professional contact can be directed through LinkedIn.
+6. **AI output is a draft, not an authorization.** Generating a resume, message or research brief does not establish that it is accurate or ready for external use. Human review remains a required decision point.
+
+## 7. Development with ChatGPT Codex
+
+The application is positioned as an example of using AI-assisted development to structure a complex, recurring professional workflow.
+
+The business methodology and the application implementation are distinct parts of the project. The methodology defines what the system should accomplish. Codex can assist with translating that methodology into application components, data structures, workflow logic and user interfaces.
+
+A plausible development process consists of the following stages.
+
+1. **Define the operating model.** Document the executive positioning, target role profile, honesty requirements, privacy boundaries and desired workflow. These rules establish the system's functional requirements before implementation.
+2. **Structure the information.** Define consistent formats for opportunity records, role-research briefs, experience-to-role mappings, tailored materials and outcomes. Structured information makes it easier to compare opportunities and maintain continuity across a search.
+3. **Implement the workflow.** Use Codex to assist with building the interface and logic needed to move opportunities through the defined stages. Potential features include opportunity intake, qualification checklists, research templates, document generation, status tracking and review controls.
+4. **Apply the AI assistance layer.** Integrate reusable instructions and drafting workflows that reference the verified career record and relevant opportunity information. If direct model integration is used, the implementation must also manage API credentials, data handling, failures and any applicable service costs. The original implementation method is not documented.
+5. **Enforce human review.** Ensure that generated materials remain drafts until reviewed. Application submission and outreach should remain under the candidate's control.
+6. **Refine through use.** Use observed friction, feedback and documented outcomes to improve the qualification criteria, research format and document-generation process.
+
+The available project description does not establish which of these stages were implemented in software and which were performed through a repeatable manual workflow.
+
+## 8. Testing and verification
+
+<Callout type="unverified">
+No original test reports, application logs, automated test results or measured job-search outcomes are available.
+</Callout>
+
+For a software implementation, the following verification areas would be appropriate.
+
+| Test area | Verification objective |
+| --- | --- |
+| Opportunity intake | Required role information is captured consistently |
+| Qualification | Opportunities can be evaluated against documented criteria |
+| Source integrity | AI-generated claims can be traced to verified source material |
+| Role alignment | Materials reflect the actual requirements of the selected position |
+| Factual accuracy | No unsupported employment history, titles, credentials or metrics are introduced |
+| Research quality | Facts, interpretations and uncertainties remain distinguishable |
+| Document generation | Generated materials are complete, readable and appropriate for their intended audience |
+| Privacy | Public outputs exclude restricted information and personal contact details |
+| Review controls | No application or message is sent without candidate approval |
+| Outcome tracking | Recorded status changes and feedback can be reviewed consistently |
+
+These are proposed verification criteria. They are not claims that specific automated tests were written or passed.
+
+## 9. Business impact
+
+### Intended operational benefits
+
+The system is designed to improve the quality and consistency of executive-search execution.
+
+- **More consistent positioning.** A common executive narrative reduces unnecessary variation between applications.
+- **More selective opportunity targeting.** Qualification criteria help prioritize roles that align with the candidate's experience and objectives.
+- **Less repetitive preparation.** Reusable research and drafting structures reduce the need to reinvent the process for every opportunity.
+- **More relevant application materials.** Experience mapping connects documented qualifications to the requirements of each position.
+- **More deliberate networking.** Research-backed outreach gives each communication a defined professional purpose.
+- **A measurable search process.** Structured opportunity records make it possible to review progress and learn from recorded outcomes.
+
+### Measurement framework
+
+The following metrics could be used to evaluate the system once reliable records are available.
+
+| Metric | Definition |
+| --- | --- |
+| Opportunities reviewed | Number of distinct roles evaluated |
+| Qualification rate | Percentage of reviewed roles meeting the target criteria |
+| Research preparation time | Time spent preparing a research brief |
+| Application preparation time | Time spent preparing and reviewing a complete application |
+| Material revision rate | Percentage of generated packages requiring substantial correction |
+| Outreach response rate | Responses divided by eligible outreach messages sent |
+| Interview conversion rate | Interviews divided by applications submitted |
+| Target alignment | Percentage of pursued roles meeting the documented target profile |
+| Factual correction rate | Number of unsupported or incorrect claims identified during review |
+
+These measures should be interpreted carefully. Interview and response rates depend on many factors outside the system, including market conditions, candidate fit, competition and hiring processes.
+
+No interview, offer, placement or productivity improvements are claimed without evidence.
+
+## 10. Privacy, security and professional integrity
+
+The system handles career records and potentially sensitive information about employers, recruiters and hiring processes. Its operating principles are designed to limit unnecessary exposure.
+
+- **Candidate-controlled information.** The verified resume remains the authoritative record. Public-facing outputs should contain only information intentionally approved for publication.
+- **Data minimization.** Only information necessary for a specific research, application or outreach task should be included in the relevant working context. Confidential employer information should not be added to public portfolio examples.
+- **Controlled communications.** AI-generated messages remain drafts until the candidate approves them. The system is not designed to mass-message recipients, fabricate personal relationships, or circumvent anti-spam or AI-detection controls.
+- **Public portfolio separation.** The portfolio describes the methodology and professional capabilities demonstrated by the project. It excludes target-company lists, private application pipelines, contact details and confidential correspondence.
+- **Credential handling.** If the application uses external APIs or connected services, credentials should be stored outside source code and protected through appropriate environment and access controls.
+
+These are design requirements and recommended practices, not verified security features of the original implementation.
+
+## 11. Lessons learned
+
+- **A defined target profile makes opportunity selection more disciplined.** Writing down the criteria for a suitable role makes it easier to reject opportunities that do not align with the intended executive direction.
+- **Positioning should be consistent without becoming generic.** A unified professional narrative provides continuity, while role-specific tailoring ensures that the most relevant experience receives appropriate emphasis.
+- **AI is most useful when grounded in verified evidence.** AI can accelerate research and drafting, but its usefulness depends on the quality of the underlying information and the discipline applied during review.
+- **Research should inform decisions, not justify predetermined conclusions.** A good research brief can reveal both alignment and gaps. Its purpose is to support an informed decision rather than make every opportunity appear attractive.
+- **Outreach quality matters more than message volume.** Relevant, well-researched communication is more consistent with an executive-level search than indiscriminate outreach.
+- **Human review is a system control.** Accuracy and authenticity should not depend on hoping that generated content is correct. They should be built into the process as explicit review requirements.
+- **The job search benefits from operational feedback.** Documenting outcomes helps distinguish assumptions from observed patterns and creates a basis for improving positioning and targeting over time.
 
 ## Open items
 
 - Add the start date.
+- Confirm which workflow stages were implemented in software and which were run manually.
 - Add a sanitized example of a role-research brief, with no company named.
 
 ## Changelog
 
-<Changelog entries={[{ date: '2026-10-26', change: 'Project page published.', rollback: 'Revert the commit that added this page.' }]} />
+<Changelog
+	entries={[
+		{ date: '2026-10-26', change: 'Page rewritten as a full case study: business problem, objectives, architecture, workflow, technical model, operating rules, Codex development, verification criteria, measurement framework, privacy and lessons learned.', rollback: 'Revert the commit that rewrote this page.' },
+		{ date: '2026-10-26', change: 'Project page published.', rollback: 'Revert the commit that added this page.' },
+	]}
+/>
