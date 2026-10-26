@@ -48,7 +48,10 @@ export default defineConfig({
 							label: 'Radio and Emergency Comms',
 							items: [{ label: 'Mobile Ham Radio Install', link: '/projects/mobile-ham-radio/' }],
 						},
-						{ label: 'Business Systems', items: [], collapsed: true },
+						{
+							label: 'Business Systems',
+							items: [{ label: 'AI-Assisted Executive Search', link: '/projects/ai-assisted-executive-search/' }],
+						},
 						{ label: 'Fabrication and 3D Printing', items: [], collapsed: true },
 					],
 				},
