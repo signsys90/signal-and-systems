@@ -66,6 +66,7 @@ export default defineConfig({
 								{ label: 'Big Time Sandwich Co.', link: '/projects/big-time-sandwich-co/' },
 								{ label: 'Wicks Surplus', link: '/projects/wicks-surplus/' },
 								{ label: 'North FL Motorsports', link: '/projects/north-fl-motorsports/' },
+								{ label: 'Duval Fan Apparel (Panthera 16)', link: '/projects/duval-fan-apparel/' },
 							],
 						},
 						{

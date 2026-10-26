@@ -1,0 +1,401 @@
+---
+title: Duval Fan Apparel (Project Panthera 16)
+description: Business plan and clickable storefront prototype for an independent Jacksonville fan-culture apparel brand selling in the US and the UK, built around print-on-demand, Shopify and strict trademark guardrails.
+summary: Independent Jacksonville fan-culture apparel brand for the US and UK. Full business proposal, IP guardrails, unit economics and a clickable storefront prototype. Plan only; nothing launched yet.
+status: Planned
+category: Business Systems
+started: 2026-10-24
+updated: 2026-10-26
+project: true
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import Gallery from '../../../../components/Gallery.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+import home from '../../../../assets/panthera/home.jpg';
+import homeFull from '../../../../assets/panthera/home-full.jpg';
+import shop from '../../../../assets/panthera/shop.jpg';
+import product from '../../../../assets/panthera/product.jpg';
+import ukHome from '../../../../assets/panthera/uk-home.jpg';
+import cart from '../../../../assets/panthera/cart.jpg';
+import mobile from '../../../../assets/panthera/mobile.jpg';
+import placeholders from '../../../../assets/panthera/placeholders.jpg';
+
+<ProjectHeader hero={home} heroAlt="Storefront prototype home page: a dark teal hero reading DUVAL EVERY DAY with drawn hoodie and tee mockups, a Shop the drop button and a scrolling ticker." />
+
+<Callout type="open" title="Status and what this page leaves out">
+This is a plan and a prototype only. No LLC, accounts, vendors or store exist yet, and nothing has been sold, so there are no sales figures here. "Duval Fan Apparel" is a working name until a brand name clears trademark search. Startup capital scenarios and payback math from the proposal are left off this public page. "Panthera 16" is an internal codename only. The plan itself says the number 16 stays off products and the brand name.
+</Callout>
+
+## Goal
+
+Launch an online apparel brand for Jacksonville fan culture: Duval pride, 904 identity and game-day life in teal and black. It sells to local fans, Jacksonville natives who've moved away, and UK fans who follow the team's London games. The brand stays independent. It never uses NFL or team trademarks, logos, player names, numbers or likenesses, and it never presents itself as official.
+
+Done for Phase 1 means a cleared brand name, a formed business, 8 to 10 original designs approved after samples and wash tests, and a live Shopify store selling in the US and UK. It also means Meta ads tested against real gross margin per order.
+
+<SpecBox
+	title="At a glance"
+	specs={[
+		['Owner', 'William A. Atkins (own venture)'],
+		['Proposal', 'v1.1, 24 Oct 2026 (adds UK market)'],
+		['Model', 'Print-on-demand first, bulk screen print later'],
+		['Platform', 'Shopify, Dawn theme, Shopify Payments and Tax'],
+		['Markets', 'United States and United Kingdom'],
+		['Positioning', 'Game-day fan culture, plus a year-round 904 line'],
+		['Launch line', '8 to 10 designs: tees, hoodies, hats'],
+		['Phase 1 window', 'Weeks of 26 Oct to 28 Dec 2026'],
+	]}
+	source={{ label: 'Duval Fan Apparel business proposal v1.1 (owner\'s Google Doc)' }}
+/>
+
+## Screenshots: clickable storefront prototype
+
+A working front-end prototype of the store. It has a home page, collections, product pages with colour and size pickers, a cart with bundle pricing and a free-shipping progress bar, and a US/UK region switch with GBP prices and a UK cookie banner. It also has a brand-name switcher for the shortlist. Checkout, sign-up and contact forms are not live. Product images are drawn mockups, not real products. Screenshots were captured on 26 Oct 2026.
+
+<Gallery
+	photos={[
+		{ src: homeFull, alt: 'Full-length home page of the prototype: hero, deals strip, launch drop grid, collections, story with local facts, email signup and footer.', caption: 'Whole home page, top to bottom.' },
+		{ src: shop, alt: 'Shop all page with collection chips and a grid of drawn tee, hoodie and hat mockups with prices and colour dots.', caption: 'Shop all: ten launch products with collection filters.' },
+		{ src: product, alt: 'Product page for the Sunday in the 904 Tee with a black tee mockup, $28 price, colour and size pickers and Add to cart.', caption: 'Product page with colour swatches, sizes, the 2-for-$52 bundle note and details panels.' },
+		{ src: cart, alt: 'Cart drawer with two tees, the bundle discount applied, free US shipping unlocked and a total of $52.', caption: 'Cart drawer: bundle discount and free-shipping progress applied automatically.' },
+		{ src: ukHome, alt: 'Home page in UK mode with GBP ticker messages and a cookie consent banner with Reject and Accept buttons.', caption: 'UK mode: GBP, VAT-inclusive messaging and an opt-in cookie banner (PECR).' },
+		{ src: mobile, alt: 'Home page at phone width with the hero headline, region switch, cart and menu button.', caption: 'Phone width.' },
+		{ src: placeholders, alt: 'Our Story page with a highlighted yellow placeholder box for the founder story.', caption: 'Placeholder highlighting: every unfinished spot is marked so nothing ships as filler.' },
+	]}
+/>
+
+## Constraints
+
+- **No team IP, ever.** No "Jaguars," "Jags," "NFL," logos, wordmarks, helmets, uniform designs, cat heads that resemble the team logo, player names, nicknames, numbers tied to a player (including 16), faces or likenesses. No stadium names, official slogans, or the words "official," "licensed," "authentic" or "team store."
+- **Right of publicity:** Florida Statute 540.08 limits commercial use of a person's name or likeness without consent.
+- **Disclaimer everywhere:** "Independent fan apparel designed in Jacksonville. Not affiliated with, endorsed by, or sponsored by the NFL or any NFL team." It shows good faith but does not make an infringing design legal.
+- **Platform risk:** Shopify, Printful, Printify, Meta and payment processors all remove products, hold funds or restrict accounts after rights-holder complaints.
+- **Owner time:** runs alongside an executive job search and other projects, so print-on-demand and automation come first.
+- **UK VAT:** a US seller has no UK registration threshold, so VAT registration with HMRC must come before the first UK sale.
+
+## Architecture
+
+| Layer | Phase 1 (launch) | Phase 2 (2027) |
+| --- | --- | --- |
+| Storefront | Shopify, free Dawn theme | Same; Hydrogen headless only if a custom portfolio build is wanted |
+| Payments | Shopify Payments: cards, Apple Pay, Google Pay, Shop Pay; PayPal as a secondary option | Plus Shopify POS and card reader at events |
+| Tax | Shopify Tax with Florida registration; UK VAT via Shopify Markets | Same |
+| Production | Print-on-demand (Printful or Printify, chosen by side-by-side samples) | Bulk screen print through a Jacksonville contract printer for proven sellers |
+| Fulfillment | Vendor prints, packs and ships; UK orders printed in Printful's Wolverhampton facility | Self-fulfilled bulk stock, then a 3PL when packing takes too long |
+| Marketing | Meta catalog, pixel and Conversions API via the Facebook and Instagram sales channel; email capture from day one | Events, local wholesale and consignment |
+
+### Why Shopify, not a custom build
+
+| Factor | Shopify + print-on-demand | Custom Next.js + Stripe |
+| --- | --- | --- |
+| Time to first sale | Days | Weeks |
+| Payments | Built in | Stripe Checkout wired by hand |
+| Fulfillment | Printful or Printify app syncs orders | Custom API integration |
+| Sales tax | Shopify Tax | Stripe Tax or manual |
+| Facebook and Instagram | Official channel syncs catalog and pixel | Build feed and pixel yourself |
+| Upkeep | Subscription plus apps | Hosting, patches, bug fixes |
+| Control and portfolio value | Theme-level | Full control |
+
+Other platforms compared and set aside: WooCommerce (upkeep falls on the owner), Squarespace and Wix (weaker print-on-demand depth), Big Cartel (too limited for paid ads), and Etsy, Amazon Merch and Redbubble (aggressive automated takedowns for sports-adjacent items and little brand control).
+
+## Concept and positioning
+
+**Target customers:** local fans in Duval, Clay, St. Johns and Nassau counties; displaced Jacksonville natives; UK fans built by the regular London games (two in 2026: Eagles at Tottenham Hotspur Stadium on 11 Oct, Texans at Wembley on 18 Oct); gift buyers; and groups such as tailgate crews, watch-party clubs and bar staff.
+
+| Option | Description | Verdict |
+| --- | --- | --- |
+| A. Game-day fan culture | Teal-and-black, tailgate and Sunday-in-Duval themes without team marks | **Recommended** to lead |
+| B. Jacksonville city pride | 904, beaches, bridges, river, neighbourhoods | Year-round off-season line |
+| C. Multi-team First Coast | Other local teams, all unlicensed | Wait for traction; more IP exposure |
+
+**Differentiators:** designed by a Jacksonville local, better blanks than stadium-lot shirts, limited drops tied to the season calendar, and real presence in local fan groups and events.
+
+## Legal, IP and business formation
+
+**Licensing:** official NFL licensing is not realistic at launch (licensees typically need an established business, guarantees and royalties; general knowledge, not verified). The plan assumes the independent fan-culture path.
+
+**Generally safe to build on:** Duval, 904, Jacksonville, First Coast, Bold City; teal, black and gold on original art; local landmarks, the river, bridges and beaches; tailgate and game-day culture in general terms.
+
+**Check first:** "DUUUVAL" (three Us) was filed by the team in 2018 and later appeared to be dropped, status unconfirmed. Any fan slogan the brand did not invent, such as "Sacksonville," gets a USPTO search.
+
+**Own IP:** every designer signs a work-for-hire and copyright assignment. The brand name gets a federal trademark once cleared. The U.S. Copyright Office does not register purely AI-generated material, so mostly-AI artwork may not be protectable.
+
+| Formation step | Where | Who |
+| --- | --- | --- |
+| Florida LLC, or a fictitious name as a sole proprietor | Sunbiz | William |
+| EIN | IRS, free | William |
+| Florida sales and use tax registration (clothing is taxable) | Florida Department of Revenue | William |
+| Local business tax receipt check | City of Jacksonville / Duval Tax Collector | William |
+| Business bank account and card | Bank | William |
+| Bookkeeping linked to Shopify | QuickBooks, Xero or Wave | William, Claude sets up categories |
+| General liability insurance (events require it) | Insurer | William |
+| One-hour review with a Florida trademark attorney | Attorney | William |
+
+## Brand identity and naming
+
+| Name (not yet cleared) | Angle |
+| --- | --- |
+| 904 Supply Co. | Area code, broad local appeal; suits the city line |
+| First Coast Fan Co. | Regional; room for other local teams |
+| Bold City Threads | Jacksonville nickname, lower IP risk |
+| Duval Teal | Strongest fan signal; closest to the team, clear carefully |
+
+**Clearance steps:** USPTO search in Class 25 (clothing) and Class 35 (retail), Sunbiz name search, .com domain and social handles, and a Google and Etsy check for lookalikes. UK IPO search too, since the UK market is in scope.
+
+**Brand kit:** primary logo, secondary mark and one-colour version; teal, black, gold and off-white palette kept visibly distinct from the team's official colour specs; two commercially licensed typefaces; a voice guide (proud, local, funny, never mean, no implied affiliation); and templates for posts, ads, product photos and hang tags.
+
+## Design
+
+| Route | Best for | Verdict |
+| --- | --- | --- |
+| Owner in Canva, Kittl or Adobe Express | Text-led designs, quick tests | Fine for tests; check template merch licences |
+| Freelance designer (Upwork, Fiverr Pro, Dribbble, Behance) | Retail-quality illustrated art | **Recommended**, with an IP assignment |
+| Local Jacksonville designer or art student | Authentic local style | Strong story; availability varies |
+| 99designs contest | Logo concepts | Mixed quality, originality risk |
+| AI image tools | Mood boards only | Needs a human redraw; may not be copyrightable |
+
+**Launch collection (8 to 10):** four hero tees ("Sunday in the 904," Duval skyline over the river, a tailgate design, a teal-and-black stripe or badge), two wordmark basics (DUVAL or 904), two seasonal (holiday and playoff push), and one or two humour designs that never name the team. The prototype shows ten drafts: Sunday in the 904, Skyline Over the River, Arrive Early Leave Loud, Bold City Stripe Badge, Bridge Traffic Is My Cardio, Sweater Weather (68°F), DUVAL Wordmark Hoodie, 904 Outline Hoodie, 904 Patch Hat and DUVAL Dad Hat.
+
+**Workflow:** brief → sketch round → IP review against the rules above → final vector art plus a 300 DPI transparent PNG at print size → mockups on each blank colour → test-print sample.
+
+**File specs:** DTG/DTF needs a transparent 300 DPI PNG at actual size (standard front print about 12 × 16 in). Screen print needs vector art, limited spot colours, Pantone references and an underbase plan for dark garments. Embroidery needs simple shapes, no tiny text and a digitised stitch file.
+
+<Callout type="unverified" title="Sample print">
+William's first sample was a full-colour photographic transfer (likely DTF) on a dark heather crew tee. Colour was vivid. The hard rectangular edge reads like a sticker, so a cut-out subject or faded edges would look more like retail. Durability needs a five-wash test. The design, a teal statue with long blond hair, is held back from sale until it's confirmed it doesn't evoke a specific player. It's not pictured here for the same reason.
+</Callout>
+
+## Blanks, printing and production
+
+| Product | Style options (general knowledge; confirm in catalog) |
+| --- | --- |
+| Core unisex tee | Bella+Canvas 3001 (recommended), Next Level 3600, Gildan Softstyle 64000 |
+| Heavyweight tee | Comfort Colors 1717, Gildan Heavy Cotton 5000 |
+| Women's tee | Bella+Canvas 6004 or 6400, Next Level 1510 |
+| Hoodie | Independent Trading SS4500, Gildan 18500, Bella+Canvas 3719 |
+| Crewneck | Gildan 18000, Comfort Colors 1566 |
+| Hat | Yupoong 6245CM dad hat, Richardson 112 trucker |
+| Youth tee | Bella+Canvas 3001Y, Gildan 5000B |
+| Add-ons | Koozies, tumblers, stickers, flags, totes |
+
+Each design launches on 2 to 3 colours (black, a dark heather, and one teal or white), because every added colour multiplies bulk inventory later.
+
+| Method | Best for | Minimum | Trade-off |
+| --- | --- | --- | --- |
+| Screen print | Proven designs in volume | ~12 to 48 per design | Cheapest and most durable at volume; setup per colour |
+| DTG | Print-on-demand, full colour | 1 | Soft; duller on dark garments |
+| DTF | Full colour on any fabric | 1 | Vivid on darks; plastic feel on big solid areas |
+| Embroidery | Hats, chest logos | 1 to ~12 | Premium; no fine detail |
+| Sublimation | All-over prints, drinkware | 1 | Polyester and light colours only |
+| Heat-transfer vinyl | Names, one-offs | 1 | Not a retail look |
+
+**Production model:** a hybrid is recommended. Print-on-demand carries the full online catalogue, and bulk screen print or pressed transfers cover best-sellers and events. Printful (own facilities, strong branding options) and one Printify US provider each print the same design on the same blank, and the physical samples decide. Gelato is noted for later international reach.
+
+**Jacksonville contract printer checklist (Phase 2):** quotes from three shops on the same job, setup fees, minimums, turnaround and price breaks, blind shipping and custom neck labels, a misprint reprint policy, dark-garment samples, and confirmation they'll print unlicensed fan designs at all.
+
+**QC on every new design or vendor:** physical sample, five-cycle wash test, and photos of the samples for product and ad use.
+
+## Inventory and logistics
+
+- **Phase 1:** no inventory. One sample per design, plus one of each blank in the owner's size.
+- **When to go bulk:** steady weekly sales for several weeks, a confirmed event or wholesale order, or pre-orders that cover the minimum.
+- **Starting size curve (rule of thumb, not customer data):** S 8%, M 22%, L 30%, XL 24%, 2XL 12%, 3XL 4%. On a 72-piece run that's 6, 16, 22, 17, 8 and 3. Replace it with Shopify's sales-by-size report once there are a few months of orders.
+- **Approaches:** limited drops, 7 to 10 day pre-orders, core restock with a reorder point, and print-on-demand as the backstop for rare sizes.
+- **Reorder point** = (average weekly sales × printer turnaround in weeks) + safety stock.
+- **Storage:** labelled bins in a climate-controlled room, never a Florida garage.
+- **Shipping:** USPS Ground Advantage via Shopify Shipping or Pirate Ship. Thermal printer, scale and poly mailers. A free-shipping threshold just above one tee encourages a second item.
+- **Packaging:** thank-you card with care guide and a next-order code, plus a sticker in every order.
+- **Returns:** free replacement for print-on-demand misprints with a photo; 30-day exchanges on unworn bulk stock; flat-measurement size charts for every blank.
+
+## Website, payments and checkout
+
+**Store structure:** Home (hero drop, best-sellers, local story, email signup); collections (Game Day, 904 Pride, Hoodies and Crews, Hats, Accessories, Limited Drops); product pages (mockups and real photos, size chart, blank details, care, shipping time, reviews, disclaimer); and About, FAQ, Shipping, Returns, Contact, Privacy and Terms.
+
+**Apps:** Printful or Printify; the Facebook and Instagram channel; Shopify Email or Klaviyo; Judge.me for reviews; a pre-order app; Shopify Analytics plus GA4; and Shopify POS.
+
+**Site launch checklist:** domain with SSL, two real test orders refunded, iPhone and Android checks, policies in the footer, the disclaimer on product pages and the footer, the Meta domain verified, and the pixel firing on view, add-to-cart and purchase.
+
+**Payments setup:** William activates Shopify Payments and turns on two-factor authentication everywhere. Then: set the statement descriptor to the brand name (fewer chargebacks), turn on Shopify Tax, and review high-risk orders before fulfilling.
+
+## Pricing and unit economics
+
+Planned retail prices from the proposal (not yet tested with customers):
+
+| Product | US | UK (incl. 20% VAT) |
+| --- | --- | --- |
+| Core tee | $28 | £25 |
+| Heavyweight tee | $32 | |
+| Women's tee | $28 | |
+| Youth tee | $22 | |
+| Crewneck | $45 | |
+| Hoodie | $55 | £48 |
+| Embroidered dad hat | $30 | |
+| Bundle: any 2 tees | $52, free shipping | |
+| Shipping | $4.99; free at $50+ | £3.99; free at £45+ |
+
+Florida sales tax (7.5% in Duval) is collected on top and is not revenue.
+
+| Gross margin per order (print-on-demand, Printful Growth) | 1 tee | 2-tee bundle | 1 hoodie | Tee + hoodie | 1 hat |
+| --- | --- | --- | --- | --- | --- |
+| Total collected (excl. tax) | $32.99 | $52.00 | $55.00 | $83.00 | $34.99 |
+| Gross margin | $17.24 (52%) | $23.20 (45%) | $22.75 (41%) | $37.44 (45%) | $13.18 (38%) |
+
+A single UK tee leaves about $14.66 (45%) after VAT, Printful UK shipping and international card fees. That assumes Printful's UK production cost matches the US cost. Bulk screen print at 72 pieces only beats print-on-demand for in-person sales ($14.97 vs $12.73 online, where self-paid postage eats the savings). The proposal says to move online sales to bulk only at runs of about 250 or more.
+
+<Callout type="lesson" title="What paid ads can afford">
+Break-even cost per purchase equals gross margin per order. Published 2025 Meta medians are about $38.19 per purchase for e-commerce and $29.99 for lifestyle brands. Cold ads would lose money on single-tee orders at those rates. So the plan leans on bundles and hoodies, retargeting and email, organic group reach and a tight local audience. Cold ads run only as a capped test judged on real cost per purchase. These are industry benchmarks, not predictions for this brand.
+</Callout>
+
+## Marketing
+
+**Meta policy:** ad text, images, catalog titles and the landing page stay free of team names, logos and player references. Repeat IP takedowns can restrict the ad account, Page and catalog. Interest targeting on the team is a setting, not ad content, and is believed allowed (to confirm in Ads Manager).
+
+| Stage | Campaign | Audience | Creative |
+| --- | --- | --- | --- |
+| Test (weeks 6 to 7) | Sales objective, catalog and pixel | Jacksonville/First Coast radius, broad plus interest layers | Flat-lay, worn at a tailgate, short video, carousel |
+| Scale (weeks 8 to 10) | Budget to winning ad sets | Buyer and subscriber lookalikes, Florida, displaced natives | Refresh every 1 to 2 weeks |
+| UK test (weeks 6 to 10) | Separate GBP campaign | UK adults interested in American football | London and Duval themes, VAT-inclusive prices |
+| Retarget (ongoing) | Catalog retargeting | Visitors, cart abandoners, Instagram engagers | Dynamic product ads, urgency on drops |
+
+**Sample ad copy:** "Made in the 904, for the 904. Original Duval fan tees, printed to order and shipped to your door. Get yours before Sunday." · "Teal runs in the family. New First Coast designs just dropped. Independent fan apparel, not affiliated with the NFL." · "Tailgate-ready. Soft tees and hoodies for game day and every day in Duval."
+
+**Facebook groups:** read every group's rules, ask an admin before linking the store, contribute first, offer a group-only code or giveaway, and start a brand-run game-day group once there are early customers. Never fake accounts, mass posting or cold DMs.
+
+**Other channels:** Instagram Reels and product tags; TikTok behind-the-scenes printing and local humour; email and SMS with a 10% signup offer, welcome, abandoned-cart and pre-game drop flows (explicit SMS consent); co-branded giveaways with sports bars, breweries, barbers and gyms; gifted product to local creators with #ad disclosure; booths at markets such as Riverside Arts Market; Google Merchant Center free listings; and a referral discount.
+
+| Period | Focus |
+| --- | --- |
+| Late Oct to Dec | Launch, holiday gifting, Black Friday/Cyber Monday, playoff-push drop |
+| Jan | Season-end design, seasonal clearance |
+| Feb to Jun | 904 city-pride line, Father's Day, beach and summer |
+| London game weeks | UK pre-orders about 6 weeks ahead, UK drop and ads |
+| Jul to Aug | Pre-season hype, bulk build, opening-week pre-orders |
+| Sep to Dec | Weekly game-day content and drops |
+
+## Sales channels
+
+Shopify online store (home base); UK market in the same store; Facebook and Instagram Shops; pre-orders and limited drops; pop-ups and markets with Shopify POS (Phase 2, insurance and vendor rules first, and city rules on vending near stadium property); group and custom orders with minimums; local wholesale and consignment at about half of retail (general knowledge) under written agreements. Marketplaces are not recommended.
+
+## UK market expansion
+
+| Area | Approach |
+| --- | --- |
+| VAT | Register with HMRC through a UK VAT agent before selling. Charge 20% VAT at checkout on orders of £135 or less and file quarterly. |
+| Orders over £135 | Import VAT and duty at the border; rare for apparel, so cap or warn |
+| Production | Printful Wolverhampton; $4.79 first tee and $7.29 first hoodie shipping; 3 to 7 business days after 2 to 5 days of production |
+| Storefront | Shopify Markets UK market, GBP prices including VAT |
+| Cookies | PECR opt-in consent before the Meta pixel or analytics fire, with equal Accept and Reject buttons |
+| Returns | 14-day UK cancellation right on non-personalised goods (general knowledge; confirm) |
+| Labels | Fibre-content labels (general knowledge; confirm with vendor) |
+| Trademarks | Same rules; search the UK IPO register too; avoid league programme names for London games |
+
+UK marketing: a separate GBP ad set, a calendar built around London game weeks (2027 games not yet announced), "904 to London" and "Duval Abroad" style themes, UK fan groups under the same rules, and posting in UK hours. The main ongoing UK cost is the VAT agent, about $800 to $2,000 a year (estimate), so UK results get a six-month review.
+
+## Customer service and operations
+
+Brand email on the domain; Shopify Inbox for site chat, Messenger and Instagram DMs; saved replies for sizing, shipping, changes and misprints; a one-business-day response target; and order-status notifications on.
+
+| Day | Task |
+| --- | --- |
+| Monday | Review sales, ads and stock; plan content |
+| Tue to Wed | Fulfil self-shipped orders, answer messages, post in groups |
+| Thursday | Pre-game email or drop; refresh ads |
+| Weekend | Game-day content and events |
+| Monthly | Bookkeeping, Florida sales tax filing, design pipeline review |
+
+**Metrics to track (from Shopify and Meta):** revenue, orders and average order value; conversion by source; ad spend, cost per purchase and ROAS; gross margin per order; best-sellers by design, colour and size; email list size and revenue; returns and misprint rate by vendor.
+
+## Risks and mitigations
+
+| Risk | Mitigation |
+| --- | --- |
+| Trademark or likeness complaint | IP rules, attorney review, disclaimer, remove flagged items at once |
+| Seasonality | Year-round 904 line, holiday and summer drops, lean bulk stock before January |
+| Team performance swings | Lean on Jacksonville identity, not results |
+| Print quality | Samples, wash tests, free misprint replacement |
+| Ad costs exceed margin | Unit-economics worksheet, small capped tests, organic and email |
+| Unsold bulk inventory | Bulk only for proven designs, pre-orders, drops, event clearance |
+| Copycats | IP assignments, brand trademark, community loyalty |
+| Group bans | Admin approval first, contribute before selling, own group |
+| UK VAT compliance | Register before enabling the UK market; VAT agent; carts under £135 |
+| UK fixed costs outpace sales | Six-month review; pause UK if margin doesn't cover agent fees |
+| Owner time | Print-on-demand and automation first, weekly batching, 3PL later |
+
+## Build steps
+
+### Phase 1: launch (weekly, from 26 Oct 2026)
+
+| Weeks | Work |
+| --- | --- |
+| 1 to 2 | LLC, EIN, sales tax, bank (William); brand name clearance and attorney review; hire designer and write briefs; UK VAT registration starts |
+| 2 to 4 | Logo, brand kit and 8 to 10 designs; Shopify, Payments and Tax setup |
+| 3 to 5 | Samples from two print-on-demand vendors; wash tests; vendor choice; product photos; theme, products, policies and copy |
+| 4 to 5 | IP review of finals; test orders; Meta pixel and catalog; UK market setup (GBP, consent banner, Printful UK) |
+| 5 | Soft launch to friends, groups and email (Black Friday week, flagged as ambitious) |
+| 6 | UK launch once the VAT number is issued; paid ads test starts |
+| 8 to 10 | Scale winners and retarget; holiday shipping cut-off messaging |
+| 10 | Phase 1 review and Phase 2 decision |
+
+### Phase 2: grow (monthly, 2027)
+
+Review sales and pick best-sellers (Jan), 904 off-season line (Feb to Apr), optional brand trademark filing, three Jacksonville printer quotes and the first bulk run (Mar to Apr), insurance, event kit and POS, markets and pop-ups (Apr onward), wholesale outreach and summer drops (May), 2027 season designs and pre-orders (Jun), bulk inventory build (Jul to Aug), UK keep/scale/pause review (Jun), London game-week campaign (dates TBD) and the season launch (Aug). Dates follow the 2027 schedule once it's published.
+
+### Who does what
+
+| Task | William | Claude |
+| --- | --- | --- |
+| Formation, tax, bank, insurance | Does it | Checklists and reminders |
+| Brand name | Final decision, attorney | USPTO, domain and handle checks |
+| Design | Approves concepts, hires designer | Briefs, IP review, job post |
+| Vendors | Orders samples, signs | Comparison sheets, quote emails |
+| Shopify | Creates account, enters payment and tax details | Product copy, collections, policies, size charts |
+| Meta | Creates Page, Business portfolio, ad account | Ad copy, campaign structure, group drafts, calendar |
+| UK | Registers VAT, hires agent | Markets setup, UK policies, consent banner, UK ads |
+| Reporting | Shares Shopify and Ads Manager exports | Weekly review and recommendations |
+
+## Testing and verification
+
+Nothing has been launched or tested with customers. What exists:
+
+- The business proposal (v1.0 US-only, superseded by v1.1 with the UK market).
+- A build and launch plan document.
+- The clickable storefront prototype shown above. It was clicked through for these screenshots: region switch, bundle pricing in the cart, free-shipping progress, the UK cookie banner, phone layout and placeholder highlighting. Checkout is a placeholder and takes no payment.
+- One physical sample print, judged from a photo only.
+
+Vendor prices in the proposal were checked against published sources in October 2026 where marked, and estimates are labelled as such. Blank style numbers, print-method minimums, the size curve, wholesale norms and NFL licensing requirements come from general industry knowledge and were not verified.
+
+## Lessons learned
+
+- Fan apparel lives or dies on IP discipline. The guardrails come before any design work, not after a takedown.
+- At benchmark ad costs a single tee can't pay for a cold click. Order value (bundles, hoodies) and owned channels (email, groups) carry the model.
+- Bulk printing only beats print-on-demand online at much bigger runs than expected, because self-paid postage eats the savings.
+
+## Open items
+
+- Pick one or two brand names for USPTO, UK IPO, Sunbiz, domain and handle checks
+- Confirm what the teal statue sample is meant to reference
+- LLC now, or start as a sole proprietor with a fictitious name
+- Choose the designer route
+- Launch in week 5 (Black Friday) or week 6
+- Confirm the $28 tee and $55 hoodie pricing
+- Confirm UK from day one and choose a VAT agent
+- Choose Printful or Printify after same-blank samples
+- Decide whether a Hydrogen custom storefront is wanted later as a portfolio piece
+
+## Sources
+
+- Duval Fan Apparel business proposal v1.1, 24 Oct 2026 (owner's Google Doc), and the Build and Launch Plan document
+- [Meta ad standards: copyrights and trademarks](https://transparency.meta.com/policies/ad-standards/intellectual-property-infringement/copyright-and-trademarks)
+- [First Coast News on the DUUUVAL filing](https://firstcoastnews.com/article/sports/the-jaguars-appear-to-have-dropped-the-trademark-for-duuuval-on-twitter/77-527689939)
+- [USPTO trademark search](https://tmsearch.uspto.gov)
+- [Florida Sunbiz](https://dos.fl.gov/sunbiz/) · [Florida Department of Revenue sales tax](https://floridarevenue.com/taxes/taxesfees/Pages/sales_tax.aspx)
+- [U.S. Copyright Office on AI-generated material](https://www.copyright.gov/ai/)
+- [Shopify pricing](https://www.shopify.com/pricing)
+- [Printful UK shipping](https://www.printful.com/uk/shipping)
+- [HMRC VATREG37250: non-established taxable persons](https://www.gov.uk/hmrc-internal-manuals/vat-registration-manual/vatreg37250)
+- [Jaguars 2026 London matchups](https://www.jaguars.com/news/official-jaguars-2026-london-matchups-revealed)
+
+## Changelog
+
+<Changelog entries={[{ date: '2026-10-26', change: 'Project page published from the business proposal v1.1, the build and launch plan and the storefront prototype, with seven prototype screenshots. Capital scenarios and the sample print image left out.', rollback: 'Revert the commit that added this page.' }]} />
