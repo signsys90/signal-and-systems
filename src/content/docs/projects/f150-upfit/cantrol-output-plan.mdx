@@ -12,8 +12,9 @@ sidebar:
 import ProjectHeader from '../../../../components/ProjectHeader.astro';
 import Callout from '../../../../components/Callout.astro';
 import Changelog from '../../../../components/Changelog.astro';
+import conn from '../../../../assets/f150/cantrol-module-connectors.jpg';
 
-<ProjectHeader />
+<ProjectHeader hero={conn} heroAlt="Connector end of the Whelen CanTrol WC module, where the J1 and J4 outputs in this plan come out." />
 
 <Callout type="safety" title="Legal notice">
 Emergency lighting and siren use is regulated by state law and permits. This page documents a personal build and is not legal guidance.
@@ -26,6 +27,11 @@ Guide 14580G shows two different colors for LED Outputs 11 and 12 on different p
 </Callout>
 
 ## Outputs
+
+![Wiring map from the CanTrol outputs to the UBL Color Flood 2.0 bar: LED 2, LED 11, LED 1, J1-1, LED 10, J1-6 and LED 9.](../../../../assets/f150/bench-c-floodbar.png)
+
+*Example from the plan: how the Color Flood 2.0 bar's eight wires land on CanTrol outputs.*
+
 
 <div class="ss-table-wrap">
 
@@ -55,6 +61,11 @@ Guide 14580G shows two different colors for LED Outputs 11 and 12 on different p
 </div>
 
 ## What each control does
+
+![Table from the project document showing what each slide position and button turns on.](../../../../assets/f150/control-states.png)
+
+*Section 3.2 of the project document (rev. 10): what each control state should do. Button assignments are proposed and can be reprogrammed.*
+
 
 | Control | Result |
 | --- | --- |

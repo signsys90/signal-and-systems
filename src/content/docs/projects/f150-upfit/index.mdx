@@ -17,8 +17,19 @@ import PartsTable from '../../../../components/PartsTable.astro';
 import SpecBox from '../../../../components/SpecBox.astro';
 import Callout from '../../../../components/Callout.astro';
 import Changelog from '../../../../components/Changelog.astro';
+import Gallery from '../../../../components/Gallery.astro';
+import kit from '../../../../assets/f150/cantrol-kit.jpg';
+import layout from '../../../../assets/f150/grille-guard-layout.jpg';
+import diagram from '../../../../assets/f150/grille-guard-diagram.png';
+import ben3d from '../../../../assets/f150/ben3d-mount-1.jpg';
+import booyu from '../../../../assets/f150/booyu.jpg';
+import guardA from '../../../../assets/f150/guard-0723.jpg';
+import guardB from '../../../../assets/f150/guard-0725.jpg';
+import tube from '../../../../assets/f150/tube-0764.jpg';
+import spk from '../../../../assets/f150/spk-0741.jpg';
+import head from '../../../../assets/f150/cantrol-head-lit.jpg';
 
-<ProjectHeader />
+<ProjectHeader hero={layout} heroAlt="Proposal mock-up of the white F-150 front with the black Steelcraft HD grille guard, numbered positions for the siren speakers, flood bar and surface lights." />
 
 <Callout type="safety" title="Legal notice">
 Emergency lighting and siren use is regulated by state law and permits. This page documents a personal build and is not legal guidance.
@@ -37,6 +48,20 @@ Build a clean, serviceable warning light and siren package on a daily-driven tru
 - **Grounds:** nothing is ever grounded to the battery negative post, because the Ford battery monitoring sensor on that post must see all current. Grounds go to a Ford factory ground point or a steel frame rail.
 - **Radio:** amateur radio gets its own battery feed and ground, never shared with the CanTrol or its fuse block.
 - **Airbags:** all mounting and wire routing stays clear of airbag zones, including the curtain airbags along the roof rails.
+
+## Photos and diagrams
+
+<Gallery photos={[
+  { src: kit, alt: 'The complete used Whelen CanTrol WC set: module, 21-button head, microphone and cables.', caption: 'The controller: a used CanTrol WC set with the 21-button WeCan head (William, 16 Oct).' },
+  { src: head, alt: 'The 21-button control head backlit on the bench.', caption: 'Control head lit on the bench.' },
+  { src: diagram, alt: 'Line drawing of the grille guard with numbered positions for the two siren speakers, the flood bar and the two surface lights.', caption: 'Grille guard package layout: speakers through the punch plates, flood bar under the lower tube, U-Lites in the upper corners.' },
+  { src: ben3d, alt: 'Ben3DBuild overhead console mount holding a Whelen control head, seller photo.', caption: 'Ben3DBuild overhead mount for the control head (seller photo). Bought 21 Oct; not yet installed.' },
+  { src: booyu, alt: 'BooYu rear amber traffic advisor bars with controller, product photo.', caption: 'BooYu rear window traffic advisor (product photo).' },
+  { src: guardA, alt: 'Used Steelcraft grille guard in the garage before touch-up, showing worn paint on a mounting tab.', caption: 'The used Steelcraft HD guard before touch-up. Touch-up finished 23 Oct.' },
+  { src: guardB, alt: 'Grille guard mounting brackets with surface rust before refinishing.', caption: 'Brackets before sanding, primer and satin black.' },
+  { src: tube, alt: 'Tape measure against the lower tube of the grille guard.', caption: 'Measuring the lower tube for the flood bar mount (1.91 in OD, William, 7 Oct).' },
+  { src: spk, alt: 'UBL 100W siren speaker still in its bag with the warning label.', caption: 'One of the two UBL 100W siren speakers, before mounting.' },
+]} />
 
 ## Architecture
 
