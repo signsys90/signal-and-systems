@@ -1,0 +1,122 @@
+---
+title: ARES CF-33 Field Dashboard
+description: An offline Windows desktop dashboard that turns a Panasonic Toughbook CF-33 into an organized ARES emergency communications field laptop.
+summary: Offline Electron dashboard for the Toughbook CF-33 that organizes ARES field software, mission packs, PACE plans and operator logs, with no cloud and no auto-transmit.
+status: In progress
+category: Radio and Emergency Comms
+started: TBD
+updated: 2026-10-26
+project: true
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import PartsTable from '../../../../components/PartsTable.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+
+<ProjectHeader />
+
+## Release
+
+<SpecBox
+	title="Release details"
+	specs={[
+		['Version', '0.1.0'],
+		['Platform', 'Windows 11 on Panasonic Toughbook CF-33'],
+		['Stack', 'Electron, React, TypeScript, Vite'],
+		['Packaging', 'Electron Builder (NSIS installer)'],
+		['Storage', 'Local JSON only'],
+		['Network', 'None required; web links open only when clicked'],
+		['Built with', 'OpenAI Codex'],
+	]}
+	source={{ label: 'Project README and package.json (repository not public)' }}
+/>
+
+## Goal
+
+When an activation starts, every tool an ARES operator needs should be one tap away on the field laptop, and it should work with no internet. "Done" means one touch-friendly screen that launches the radio, Winlink, APRS, mesh, GPS, weather, ICS forms and documentation tools, shows which ones are installed and which are missing, and keeps the mission context (plan, PACE matrix, hardware staging and operator log) in one place.
+
+## Constraints
+
+- **Hardware:** Panasonic Toughbook CF-33 on Windows 11, used with gloves and in sunlight, so the interface is touch-first with light, dark and high-contrast modes.
+- **Offline:** no cloud dependency, no telemetry, no account and no paid service. External web resources are labeled as links.
+- **Safety:** the dashboard never transmits on amateur radio, never keys PTT, never schedules or bridges traffic, and never switches vehicle lighting on its own.
+- **Non-destructive:** setup actions create missing folders and starter files only. They never delete or overwrite existing files.
+
+## Architecture
+
+```text
+Electron main process ─► local JSON settings (Windows user profile)
+        │                     │
+        │                     └─► import / export backup
+        ▼
+React renderer (touch UI)
+  ├─ Launcher catalog ─► checks each target: Ready · Missing · Link · System
+  ├─ Mission Ops ─► mission packs · PACE matrix · hardware staging · operator log
+  ├─ Field checklists ─► local progress
+  └─ System status ─► COM / USB serial ports · battery · network · clock
+```
+
+The launcher catalog is grouped so field communications sit at the top and maintenance and recovery tools sit lower. Modules include ARES / Field Communications, Packet / APRS, Mesh / LoRa / AREDN, GPS / GNSS, Weather / Hazards, ICS Forms, TAK, Radio Programming, SDR / Monitoring, Network diagnostics, System Health, Storage Cleanup, Media / Recovery, and Vehicle Systems.
+
+New default launchers merge into existing settings by a stable ID, so an update never wipes the operator's custom paths.
+
+## Parts list
+
+<PartsTable
+	parts={[
+		{ name: 'Panasonic Toughbook CF-33', specs: 'Windows 11, touchscreen', status: 'Installed' },
+		{ name: 'Radio and digital-mode software (Winlink, VarAC, APRS, mesh tools)', specs: 'Launched by the dashboard, not bundled' },
+	]}
+/>
+
+## Configuration
+
+- **Launcher types:** program, folder, document, template folder, URL, Windows system command or settings URI, and explicit local command.
+- **Settings editor:** every launcher path, folder, link and command can be changed in the app and is saved locally.
+- **Field kit folders:** a one-click action builds the standard field kit folder tree (radio programming, Winlink, ICS forms, maps, manuals, mission packs, PACE plans, inventory, offline binder, logs, recovery and more) and adds CSV starters for the PACE matrix, hardware inventory, operator log and tactical call sign roster, only when they do not already exist.
+- **Helper scripts (PowerShell):** a dashboard health audit, an offline software manual library builder, and a controlled installer for the field kit software.
+
+## Build steps
+
+1. `npm install`
+2. `npm run dev` for development, or double-click `Launch Dashboard.cmd` to run it like a field app.
+3. `npm run build` for a production build.
+4. `npm run build:win` to produce the Windows installer.
+
+## Testing and verification
+
+| Area | Status |
+| --- | --- |
+| Dashboard health audit (2026-05-20, on the CF-33) | 109 launchers, 52 folders, 8 checklists, 3 mission packs, 6 PACE rows and 11 hardware assets in the catalog. No duplicate launchers, no missing launchers, no path mismatches and no mission reference issues. 207 offline PDFs in the kit, none invalid. |
+| Type check (`npm run typecheck`) | Not yet reported here |
+| Windows installer build | Script exists; a tested installer has not been published |
+| Automated UI tests | None yet |
+
+<Callout type="unverified">
+The audit numbers above come from the dashboard's own health report on the field laptop. They were not re-run for this page.
+</Callout>
+
+## Safety notes
+
+- The dashboard is a planning, launching and logging surface only. All radio traffic stays a direct operator action in the radio software itself.
+- Vehicle lighting is reachable only through an explicit launcher that opens the [Vehicle Light Controller](/projects/vehicle-light-controller/), which keeps its own visible ALL OFF control.
+- Any future action that writes to hardware should require confirmation and a local log entry.
+
+## Lessons learned
+
+- Showing Ready or Missing next to every launcher turns the dashboard into a readiness check. A missing tool is found at home, not at the incident.
+- Merging new defaults by stable ID is what makes it safe to keep improving the catalog on a laptop that is already configured.
+
+## Open items
+
+- Publish screenshots with no personal paths or call sign rosters visible.
+- Run and publish a type check and installer build result for the next release.
+- Decide whether the repository will be public.
+
+## Changelog
+
+<Changelog
+	entries={[{ date: '2026-10-26', change: 'Project page published.', rollback: 'Revert the commit that added this page.' }]}
+/>

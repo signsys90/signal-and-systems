@@ -1,0 +1,142 @@
+---
+title: ARES Vehicle Light Controller
+description: A local-only Windows dashboard that sends low-current trigger commands to a USB serial relay board for amber warning and scene lighting on an ARES support vehicle.
+summary: Touch dashboard on the field laptop that drives a USB relay board for amber warning and scene-light triggers, with simulation mode, a watchdog and fail-safe ALL OFF.
+status: In progress
+category: Software and Automation
+started: TBD
+updated: 2026-10-26
+project: true
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import PartsTable from '../../../../components/PartsTable.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+
+<ProjectHeader />
+
+## Release
+
+<SpecBox
+	title="Release details"
+	specs={[
+		['Version', '0.1.0'],
+		['Platform', 'Windows 11, Python 3.12+'],
+		['Stack', 'FastAPI, Uvicorn, Jinja2, Pydantic, pySerial'],
+		['UI', 'Touch-friendly dark console, WebSocket status updates'],
+		['Binding', 'Local only by default (127.0.0.1:8765)'],
+		['Tests', 'pytest, 14 tests'],
+		['Built with', 'OpenAI Codex'],
+	]}
+	source={{ label: 'Project README, pyproject.toml and default config (repository not public)' }}
+/>
+
+<Callout type="safety">
+This is a control interface only. The USB relay board switches low-current trigger inputs and never powers lights directly. Every lighting load stays on a fused, relay-controlled, manually overrideable circuit with a physical kill switch. Use vehicle warning lights only as state law and the served agency allow. This page is not legal guidance.
+</Callout>
+
+## Goal
+
+Let the operator control amber warning and scene lighting triggers from the same laptop that runs the [ARES CF-33 Field Dashboard](/projects/ares-field-dashboard/), with large touch buttons, one-tap profiles, and an ALL OFF that is always visible and always tried first when anything goes wrong.
+
+## Constraints
+
+- **Low current only:** the software controls a relay board that triggers an external automotive relay and fuse box or a professional lighting controller.
+- **No law-enforcement features:** no siren tones, no red and blue patterns, and no police-specific modes, by design.
+- **Offline:** no cloud, no external database and no internet-hosted assets.
+- **Fail-safe:** channels default to off, and the app attempts ALL OFF on startup, shutdown, disconnect, watchdog timeout and command faults.
+
+## Architecture
+
+```text
+Laptop dashboard (FastAPI + WebSocket)
+   │  pySerial, configurable byte templates
+   ▼
+USB serial relay board (8 channels, low-current triggers)
+   ▼
+Automotive relay / fuse box or professional controller (fused)
+   ▼
+Lights
+```
+
+The relay driver layer has a simulation (mock) driver, a generic serial driver and a KMTronic-style driver. Command templates are set in config, so another board can be supported by changing the byte format rather than the code.
+
+## Parts list
+
+<PartsTable
+	parts={[
+		{ name: 'Field laptop (Windows 11)', status: 'Installed' },
+		{ name: 'USB serial relay board, 8 channels (KMTronic or Devantech style)', specs: 'Model and byte format to confirm from the board manual', status: 'Planned' },
+		{ name: 'Automotive relay and fuse box', specs: 'Load-rated, fused near the battery', status: 'Planned' },
+		{ name: 'Physical kill switch and backup switch panel', status: 'Planned' },
+	]}
+/>
+
+## Configuration
+
+Default relay channels (labels are editable in config):
+
+| Channel | Label | Default |
+| --- | --- | --- |
+| 1 | Rear Warning (amber) | Off |
+| 2 | Side Warning (amber) | Off |
+| 3 | Front Warning (amber or white) | Off |
+| 4 | Scene Left | Off |
+| 5 | Scene Right | Off |
+| 6 | Rear Scene / Work Light | Off |
+| 7 | Brake Override / Brake Pop Hold (only through a compliant controller) | Off |
+| 8 | Spare | Off |
+
+Profiles: Parked Incident, Roadside Warning, Scene Lighting, Low Power, Night (dims the dashboard only) and All Off. A profile changes only the channels it lists.
+
+Laptop-specific settings, such as the COM port, go in a local config file that is never committed.
+
+<Callout type="unverified">
+The default relay byte templates are starting examples. The exact command format must be confirmed in the relay board's manual before any hardware is connected.
+</Callout>
+
+## Build steps
+
+1. Install Python 3.12 or newer.
+2. Run `install_windows.bat`, then `run_windows.bat`. The dashboard opens at `http://127.0.0.1:8765`.
+3. Leave simulation mode on until the relay board's command format is confirmed on the bench.
+4. Copy the example local config, set the board's COM port, and verify ALL OFF with no lighting loads connected.
+5. Only then connect low-current trigger wiring to the fused, relay-controlled lighting system.
+
+## Testing and verification
+
+| Area | Status |
+| --- | --- |
+| pytest suite (config, mock driver, controller safety, profiles, API) | **14 passed** on 2026-10-26, run in simulation mode on Linux with Python 3.13 for this page |
+| Windows install and run scripts | Not re-run for this page |
+| Relay board on the bench | Not yet tested |
+| In-vehicle installation | Not installed |
+
+## Safety notes
+
+- Fuse every lighting circuit near the battery, use load-rated relays and wire, and route wiring through grommets and loom.
+- Keep a physical kill switch and a backup switch panel so the lights can be controlled if the laptop, relay board or software fails.
+- Keep the server bound to the local machine. The LAN test runner is for bench testing on a trusted network only.
+
+## How this relates to the F-150 build
+
+My [F-150 upfit](/projects/f150-upfit/) is built around a Whelen CanTrol WC Gen 3 as the lighting controller and siren amplifier. This controller is a separate software project. It is not part of the CanTrol output plan and does not change the truck's install configuration.
+
+## Lessons learned
+
+- Writing the safety rules into the project's instructions for the coding agent (low current only, ALL OFF always visible, no siren features) kept every later change inside those limits.
+
+## Open items
+
+- Choose and document the relay board model, and confirm its byte format from the manual.
+- Bench test ALL OFF and the watchdog on the real board with no loads connected.
+- Run the test suite on Windows with Python 3.12 and record the result.
+- Decide whether the repository will be public.
+
+## Changelog
+
+<Changelog
+	entries={[{ date: '2026-10-26', change: 'Project page published.', rollback: 'Revert the commit that added this page.' }]}
+/>

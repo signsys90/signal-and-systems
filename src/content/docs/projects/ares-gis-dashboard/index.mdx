@@ -1,0 +1,133 @@
+---
+title: ARES Duval GIS Command Dashboard
+description: A web-based GIS command dashboard for Duval County ARES that fuses APRS, Meshtastic, DMR and manual check-ins onto one map with incident, task and dispatch workflows.
+summary: Node/Express and Leaflet command map for Duval County ARES with multi-source operator tracking, incidents, tasks, dispatch and system diagnostics.
+status: In progress
+category: Radio and Emergency Comms
+started: TBD
+updated: 2026-10-26
+project: true
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import PartsTable from '../../../../components/PartsTable.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+
+<ProjectHeader />
+
+## Release
+
+<SpecBox
+	title="Release details"
+	specs={[
+		['Version', '7.1.5'],
+		['Server', 'Node.js 20, Express'],
+		['Map', 'Leaflet with marker clustering, local GeoJSON layers'],
+		['Realtime', 'MQTT (Meshtastic), APRS polling, browser serial GPS'],
+		['Storage', 'Local JSON files on a persistent disk'],
+		['Hosting', 'Render Blueprint (render.yaml), or local on the field laptop'],
+		['Tests', 'Playwright UI suite, API smoke test, GeoJSON validation'],
+		['Built with', 'OpenAI Codex'],
+	]}
+	source={{ label: 'Project README, package.json and release notes (repository not public)' }}
+/>
+
+## Goal
+
+Give a net control or command post one map that shows where ARES operators are, what incidents and tasks are open, and who is assigned to what, no matter which radio system each operator is reporting through. "Done" means a dashboard that keeps working when some feeds are down, tells you honestly which feeds are healthy, and lets a dispatcher assign an operator to a task in a few clicks.
+
+## Constraints
+
+- **Mixed sources:** operators report by APRS, Meshtastic mesh, DMR or a manual check-in, and one person may show up on more than one.
+- **Degraded networks:** upstream feeds (FEMA, NWS, state traffic, ArcGIS) may be unreachable during an incident, so every feed reports its own status instead of failing silently.
+- **Security:** protected routes always require authentication, and all credentials live in the host's secret settings, never in the repository.
+- **Privacy:** sharing your own GPS position is opt-in, off by default, and expires automatically when your browser stops sending updates.
+
+## Architecture
+
+```text
+APRS (aprs.fi API) ─┐
+Meshtastic (MQTT) ──┤                     ┌─► Operators drawer (filter by source)
+DMR (optional) ─────┼─► Fusion engine ────┼─► Map markers (styled by best source)
+Manual check-ins ───┤   (merge by call    └─► Dispatch and assignment
+Browser / serial GPS┘    sign or alias)
+
+Incidents · Tasks · Assignments ─► local JSON store ─► Express API ─► Leaflet UI
+NOAA · FEMA · FL511 · ArcGIS feeds ─► feed status ─► System diagnostics drawer
+```
+
+- **Fusion engine:** merges APRS, Meshtastic, DMR and manual records for the same operator, including Meshtastic nodes whose names contain a call sign, and shows a source count and badge on each merged marker.
+- **Command layers:** searchable layer drawer with category accordions, show and hide toggles, and browsable layer records.
+- **Workflows:** operators, incidents, tasks, check-ins and dispatch assignments, with a status board for manual check-ins.
+- **Night operations:** a grayscale night base map, a detailed day base map, and a fallback when a base map provider is unavailable.
+- **Diagnostics:** persistence, feed state, tracking provider health, live layer sync and laptop GPS status in one drawer.
+
+## Parts list
+
+<PartsTable
+	parts={[
+		{ name: 'Field laptop with u-blox GNSS receiver', specs: 'NMEA over USB serial at 9600 baud' },
+		{ name: 'Render web service and persistent disk', specs: 'Starter plan, 10 GB disk (from render.yaml)', status: 'Planned' },
+	]}
+/>
+
+## Configuration
+
+Configuration is environment-driven. The repository ships an example file with placeholder values only.
+
+- **Security:** basic authentication on, a non-default username and password set in the host dashboard, and a generated admin API token.
+- **Tracking:** tracking on, with refresh and stale-position timers.
+- **Providers:** APRS, Meshtastic and DMR are each off by default and are turned on only after their credentials and endpoints are configured.
+- **GPS:** server-side serial GPS for local Windows use only. Cloud deployments leave it off and use the browser's "Connect GPS" button instead.
+
+<Callout type="safety">
+Operational settings such as tracked call sign lists, mesh channel settings and access credentials are deliberately left off this page.
+</Callout>
+
+## Build steps
+
+1. `npm ci`
+2. `npm run build:client`
+3. `npm start`, then open the dashboard locally.
+4. Optional: `npm run seed:data` for sample data.
+5. For hosting, create a Render Blueprint from the repository, set the secret values Render asks for, and deploy. The health check path is `/healthz`.
+
+## Testing and verification
+
+| Area | Status |
+| --- | --- |
+| GitHub Actions verify workflow | Present in the repository; latest result not recorded here |
+| Playwright UI suite (desktop and mobile Chromium) | **Failing.** The last local run on file (May 2026) recorded 32 failed tests. |
+| API smoke test and GeoJSON validation | Scripts exist; results not recorded here |
+| Live APRS, Meshtastic and DMR feeds | Depend on runtime credentials and upstream availability; not verified for this page |
+
+<Callout type="unverified">
+At least one fire station location on the map uses an approximate coordinate that still needs to be replaced with an authoritative county GIS coordinate.
+</Callout>
+
+## Safety notes
+
+- This is a situational awareness tool, not a dispatch system of record. Follow the served agency's procedures.
+- Position data is only as current as each source. Stale positions are marked, and a position should never be treated as confirmed without a radio check.
+- Keep the dashboard behind authentication. Operator positions are sensitive during an incident.
+
+## Lessons learned
+
+- Fused tracking has to recalculate from the current raw operator records. Returning a cached operator view caused dispatch assignments to look like they had not saved.
+- An auth layer that quietly leaves routes open when settings are missing is worse than no auth layer. The middleware now rejects unauthenticated requests even when the auth settings were omitted.
+- Showing each feed's health on screen matters more than adding another feed.
+
+## Open items
+
+- Fix the failing Playwright tests and record a green run.
+- Replace approximate station coordinates with authoritative county GIS data.
+- Publish screenshots that use synthetic sample operators only.
+- Decide whether the repository will be public.
+
+## Changelog
+
+<Changelog
+	entries={[{ date: '2026-10-26', change: 'Project page published.', rollback: 'Revert the commit that added this page.' }]}
+/>

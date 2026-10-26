@@ -38,6 +38,7 @@ export default defineConfig({
 								{ label: 'Responder ID Scanner', link: '/projects/responder-id-scanner/' },
 								{ label: 'AI Outbound Sales Platform', link: '/projects/ai-outbound-platform/' },
 								{ label: 'Signal & Systems Website', link: '/projects/signal-and-systems-site/' },
+								{ label: 'Vehicle Light Controller', link: '/projects/vehicle-light-controller/' },
 							],
 						},
 						{
@@ -46,7 +47,11 @@ export default defineConfig({
 						},
 						{
 							label: 'Radio and Emergency Comms',
-							items: [{ label: 'Mobile Ham Radio Install', link: '/projects/mobile-ham-radio/' }],
+							items: [
+								{ label: 'Mobile Ham Radio Install', link: '/projects/mobile-ham-radio/' },
+								{ label: 'ARES CF-33 Field Dashboard', link: '/projects/ares-field-dashboard/' },
+								{ label: 'ARES GIS Command Dashboard', link: '/projects/ares-gis-dashboard/' },
+							],
 						},
 						{
 							label: 'Business Systems',
