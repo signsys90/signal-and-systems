@@ -7,9 +7,9 @@ export default defineConfig({
 	site: 'https://signal-and-systems.pages.dev',
 	integrations: [
 		starlight({
-			title: 'Signal & Systems Engineering, LLC',
+			title: 'Signal & Systems Engineering, LLC.',
 			description: 'Systems built in the field and in the business. Build logs and project documentation by William A. Atkins, KR4JSQ.',
-			logo: { src: './src/assets/mark.svg', alt: 'Signal & Systems Engineering, LLC' },
+			logo: { src: './src/assets/mark.svg', alt: 'Signal & Systems Engineering, LLC.' },
 			favicon: '/favicon.svg',
 			customCss: [
 				'@fontsource/inter/400.css',
