@@ -1,6 +1,7 @@
 # Signal & Systems Engineering, LLC.
 
-Systems built in the field and in the business. Project documentation by William A. Atkins, KR4JSQ.
+BUILT IN THE FIELD. ENGINEERED FOR BUSINESS.  
+System documentation & technical architecture by William A. Atkins | KR4JSQ
 
 Built with [Astro](https://astro.build) and [Starlight](https://starlight.astro.build), hosted free on Cloudflare Pages.
 
