@@ -14,8 +14,26 @@ import SpecBox from '../../../../components/SpecBox.astro';
 import PartsTable from '../../../../components/PartsTable.astro';
 import Callout from '../../../../components/Callout.astro';
 import Changelog from '../../../../components/Changelog.astro';
+import Gallery from '../../../../components/Gallery.astro';
+import home from '../../../../assets/ares-field/01-home.jpg';
+import dash from '../../../../assets/ares-field/02-dashboard.jpg';
+import checks from '../../../../assets/ares-field/03-checklists.jpg';
+import com from '../../../../assets/ares-field/04-com-usb.jpg';
 
-<ProjectHeader />
+<ProjectHeader hero={home} heroAlt="Mission Readiness screen of the CF-33 Field Dashboard: tiles for 20 of 20 pack paths ready, 6 of 6 PACE rows, 0 of 7 critical assets staged and 5 serial devices, then the active Duval ARES Field Activation pack and two standby packs." />
+
+## Screenshots
+
+These are from the built Electron app, run on 26 Oct 2026 with an empty settings profile in a 1400 by 900 window. Nothing was configured beyond the defaults; the only identifier on screen is my public callsign.
+
+<Gallery
+	photos={[
+		{ src: home, alt: 'Mission Readiness screen of the CF-33 Field Dashboard: tiles for 20 of 20 pack paths ready, 6 of 6 PACE rows, 0 of 7 critical assets staged and 5 serial devices, then the active Duval ARES Field Activation pack and two standby packs.', caption: 'Mission Ops: Mission Readiness, with the active mission pack, the two standby packs (Degraded / Offline Communications and Weather / Hurricane Watch) and the mission gaps panel. Default settings on a fresh profile.' },
+		{ src: dash, alt: 'Mission Modules launcher grid with Mission, Setup, Maintenance and All tabs, tag filters, and cards for Winlink Express, VARA FM, VARA HF, VarAC, CHIRP, OpenGD77 CPS, PinPoint APRS, GridTracker and APRS.fi.', caption: 'Dashboard: the Mission Modules launcher grid, with category tabs, search, tag filters and a Ready or Link status on each tool.' },
+		{ src: checks, alt: 'Field Activation Checklists screen with four cards: Initial Laptop Setup, Pre-Activation Check, Mission Pack Readiness and PACE Communications Check, all at 0 of 4.', caption: 'Field Activation Checklists, all unchecked: laptop setup, pre-activation, mission pack readiness and the PACE communications check.' },
+		{ src: com, alt: 'COM Ports and USB Devices screen listing five detected serial devices: Intel AMT SOL, two Sierra Wireless LTE ports, a Silicon Labs CP210x USB to UART bridge and a u-blox virtual COM port, each with a note field.', caption: 'COM Ports / USB Devices: the serial devices the app found on the capture laptop, each with a local note field for labelling cables and radio interfaces.' },
+	]}
+/>
 
 ## Release
 

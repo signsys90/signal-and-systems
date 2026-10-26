@@ -14,8 +14,22 @@ import SpecBox from '../../../../components/SpecBox.astro';
 import PartsTable from '../../../../components/PartsTable.astro';
 import Callout from '../../../../components/Callout.astro';
 import Changelog from '../../../../components/Changelog.astro';
+import Gallery from '../../../../components/Gallery.astro';
+import ready from '../../../../assets/id-scanner/01-ready-empty.jpg';
+import sample from '../../../../assets/id-scanner/02-sample-record-masked.jpg';
 
-<ProjectHeader />
+<ProjectHeader hero={ready} heroAlt="Responder ID Scanner window showing SCANNER READY - PRESS DEVICE TRIGGER, with empty name and date of birth fields and the copy, save and reveal buttons greyed out." />
+
+## Screenshots
+
+These were captured on 26 Oct 2026 from a local run. The decoded record is a synthetic sample marked TEST DATA; no real ID was scanned for these screenshots.
+
+<Gallery
+	photos={[
+		{ src: ready, alt: 'Responder ID Scanner window showing SCANNER READY - PRESS DEVICE TRIGGER, with empty name and date of birth fields and the copy, save and reveal buttons greyed out.', caption: 'Idle main window: SCANNER READY, empty result fields, and the copy, save and reveal actions disabled until a scan decodes.' },
+		{ src: sample, alt: 'Responder ID Scanner after decoding a synthetic test barcode: the banner reads OK DECODED with a TEST DATA label, the name fields show MICHAEL JOHN SAMPLE JR, and date of birth shows as asterisks.', caption: 'A synthetic test record (MICHAEL JOHN SAMPLE JR, not a real person) decoded and flagged TEST DATA. Date of birth stays masked until Reveal Sensitive Fields is pressed.' },
+	]}
+/>
 
 ## Release
 
