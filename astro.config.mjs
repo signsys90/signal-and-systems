@@ -19,8 +19,7 @@ export default defineConfig({
 				'./src/styles/custom.css',
 			],
 			social: [
-				// TODO: replace with William's LinkedIn profile URL before launch.
-				{ icon: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/' },
+				{ icon: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/in/william-atkins-8a8786226' },
 			],
 			lastUpdated: true,
 			head: [
@@ -44,7 +43,10 @@ export default defineConfig({
 							label: 'Vehicle Upfit and 12V',
 							items: [{ label: 'F-150 Upfit', items: [{ autogenerate: { directory: 'projects/f150-upfit' } }] }],
 						},
-						{ label: 'Radio and Emergency Comms', items: [], collapsed: true },
+						{
+							label: 'Radio and Emergency Comms',
+							items: [{ label: 'Mobile Ham Radio Install', link: '/projects/mobile-ham-radio/' }],
+						},
 						{ label: 'Business Systems', items: [], collapsed: true },
 						{ label: 'Fabrication and 3D Printing', items: [], collapsed: true },
 					],

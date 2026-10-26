@@ -4,7 +4,7 @@
 interface Props {
 	title?: string;
 	specs: [label: string, value: string][];
-	source?: { label: string; href: string };
+	source?: { label: string; href?: string };
 }
 
 const { title = 'Key specs', specs, source } = Astro.props;
@@ -21,7 +21,7 @@ const { title = 'Key specs', specs, source } = Astro.props;
 		))}
 	</dl>
 	{source ? (
-		<p class="ss-spec__source">Source: <a href={source.href}>{source.label}</a></p>
+		<p class="ss-spec__source">Source: {source.href ? <a href={source.href}>{source.label}</a> : source.label}</p>
 	) : (
 		<p class="ss-spec__source ss-spec__source--missing">Source: not yet linked (unverified)</p>
 	)}
