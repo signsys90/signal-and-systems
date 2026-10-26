@@ -95,6 +95,7 @@ The full output assignment is on the [CanTrol output plan](/projects/f150-upfit/
 | [All-lights five modes plan](/projects/f150-upfit/five-modes-plan/) | Proposal for five one-press modes across every light | Planned |
 | [Steelcraft HD grille guard and front package](/projects/f150-upfit/grille-guard/) | Guard install, front layout, mounting hardware | In progress |
 | [Control head mount](/projects/f150-upfit/control-head-mount/) | Locations considered and the overhead console mount | In progress |
+| [UBL Color Flood 2.0 grille light bar](/projects/f150-upfit/ubl-color-flood-light-bar/) | Wire-by-wire plan for all eight leads, CanTrol programming, bench results | Bench-tested |
 | [Mobile Ham Radio Install](/projects/mobile-ham-radio/) | The radio in the same truck, kept on its own power and ground | Installed |
 
 ## Controller
@@ -157,7 +158,7 @@ The CanTrol module model has not been read off its label yet. Brake pop through 
 - **Fuse blocks:** two ATC blade blocks near the battery, one for the CanTrol group and one for accessories.
 - **Pass-throughs:** an existing factory firewall grommet or a new rubber grommet, never bare sheet metal. Drip loops, heat shrink and dielectric grease on exposed joints.
 
-Every output, with its trigger wire and button, is on the [CanTrol output plan](/projects/f150-upfit/cantrol-output-plan/). Wire-by-wire tables for each device will be published on their own component pages.
+Every output, with its trigger wire and button, is on the [CanTrol output plan](/projects/f150-upfit/cantrol-output-plan/). Wire-by-wire tables for each device go on their own component pages. The first is the [UBL Color Flood 2.0 grille light bar](/projects/f150-upfit/ubl-color-flood-light-bar/).
 
 ## Build steps
 
@@ -178,6 +179,20 @@ Every output, with its trigger wire and button, is on the [CanTrol output plan](
 | F150LEDs bulbs flashing on the EFM 3.0 | n/a | Yes (2026-10-08): clean flashing, no hyperflash |
 | Visor bar, BooYu traffic advisor, EFM 3.0 | Not documented | Installed. CanTrol control not yet tested |
 | CanTrol WC, speakers, grille lights, Putco, Z-6 heads, rocker bars | Not yet | Not yet |
+
+### Video
+
+<div class="ss-video not-content">
+	<iframe
+		src="https://drive.google.com/file/d/163kUO3AjrZsNPSvW07t4Mu5GqDOwx3ha/preview"
+		title="F-150 upfit build video"
+		loading="lazy"
+		allow="autoplay; fullscreen"
+		allowfullscreen
+	></iframe>
+</div>
+
+If the player doesn't load, [watch the video on Google Drive](https://drive.google.com/file/d/163kUO3AjrZsNPSvW07t4Mu5GqDOwx3ha/view).
 
 ## Safety notes
 
@@ -208,6 +223,8 @@ Every output, with its trigger wire and button, is on the [CanTrol output plan](
 
 <Changelog
 	entries={[
+		{ date: '2026-10-26', change: 'Added the build video under Testing and verification.', rollback: 'Revert the commit that added the video.' },
+		{ date: '2026-10-26', change: 'Linked the first component page, the UBL Color Flood 2.0 grille light bar.', rollback: 'Revert the commit that added the link.', log: '/log/2026-10-26-color-flood-wiring/' },
 		{ date: '2026-10-26', change: 'Overview rebuilt from the project document (revision 10): real parts list, prices, statuses, output plan and test results.', rollback: 'Revert the commit that changed this page.' },
 		{ date: '2026-10-26', change: 'Overview page published with the component list from the site plan.', rollback: 'Revert the commit that added this page.' },
 	]}
