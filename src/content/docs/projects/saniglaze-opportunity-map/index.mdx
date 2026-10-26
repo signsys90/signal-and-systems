@@ -1,0 +1,177 @@
+---
+title: SaniGLAZE National Opportunity Map
+description: A browser-based prospecting map that scores 140,000+ North American facilities for restroom restoration potential, by franchise territory.
+summary: A territory-aware prospecting map that scores 140,000+ facilities so franchise owners know which buildings to call on first.
+status: Installed
+category: Business Systems
+started: TBD
+updated: 2026-10-26
+project: true
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import PartsTable from '../../../../components/PartsTable.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+
+<ProjectHeader />
+
+<Callout type="open" title="Private tool, public write-up">
+The dashboard itself sits behind a shared login for SaniGLAZE franchise members, so there is no public link. This page documents how it works. It leaves out every franchise name, contact, territory code and prospect record.
+</Callout>
+
+## Goal
+
+SaniGLAZE is a North American commercial restroom and surface restoration franchise. Its franchise owners kept asking the same question: which buildings in my territory are worth calling on first?
+
+The Opportunity Map answers that question. A franchise owner picks their territory and gets a map of every high-value facility in it, ranked by an opportunity score, with an estimated size, an estimated restroom count, the job title to ask for, and a suggested outreach angle. "Done" means an owner can go from "I have a territory" to "here are my top 25 calls this month, and here is the route" in a few minutes, with no CRM login and no paid data subscription.
+
+<SpecBox
+	title="At a glance"
+	specs={[
+		['Coverage', '140,000+ facilities (US + Ontario, Canada)'],
+		['Base dataset', '94,490 pre-built records, plus live-loaded K-12 and expansion data'],
+		['Territories', '71 franchise territories in 34 states, DC and Ontario'],
+		['ZIP mapping', '~38,900 ZIP codes assigned to a territory'],
+		['Facility types', '13 core types plus Education (K-12)'],
+		['Score', '1 to 10, grouped into Tier 1 / 2 / 3'],
+		['Runs on', 'Any modern browser, no install'],
+		['Current release', 'V14 (user-facing), app build v5'],
+	]}
+	source={{ label: 'Dashboard build and V14 user manual, reviewed 2026-10-26' }}
+/>
+
+## Constraints
+
+- **Zero recurring data cost.** Every facility comes from public and open-source records: US DHS GIS spatial datasets, the National Center for Education Statistics (NCES) public and private school files, and OpenStreetMap. No paid lead database.
+- **Fast on a franchise owner's laptop.** The full dataset is about 170 MB, so nothing loads until a state or territory is picked.
+- **No server to maintain.** Static HTML, CSS and JavaScript on the corporate web host, behind a shared login.
+- **Honest about accuracy.** Many locations are geocoded to the ZIP code, and square footage and restroom counts are estimates. The tool says so on screen and in the manual.
+- **Fits the existing sales process.** Exports to CSV and prints a territory report, so it works next to HubSpot rather than replacing it.
+
+## Architecture
+
+The map is a single-page app with three layers.
+
+**1. Data layer**
+
+- A pre-built base file of 94,490 scored facilities (hospitals, universities, airports, government complexes, convention centers, stadiums and similar). It was built by merging a geocoded facility file with the original master sales workbook, so each record carries the sales fields as well as the location: suggested outreach angle, decision-maker title and relevance note.
+- **Live expansion loaders** that run only for the state or territory being viewed:
+  - K-12 public and private schools, pulled live from the NCES open-data CSVs.
+  - Extra facility types (hotels and resorts, shopping malls, transit terminals and others) pulled live from OpenStreetMap through the Overpass API, using a per-state query.
+- Each new record is de-duplicated against the base file on name, city, state and ZIP before it is added.
+
+**2. Territory engine**
+
+Every facility is assigned to exactly one franchise territory, in this order:
+
+1. The official ZIP-to-territory table (about 38,900 ZIP codes).
+2. The official county-to-territory table, if the ZIP isn't listed.
+3. If the state has only one territory, that territory.
+4. Otherwise the nearest territory headquarters, by great-circle (haversine) distance.
+
+**3. Presentation layer**
+
+- A Plotly map with markers sized by score and colored by tier, plus a convex-hull outline of the territory footprint.
+- KPI tiles: filtered prospects, Tier 1 count, average score, and the count within the search radius.
+- A summary bar: top facility type, largest facility, median restrooms, top state, Top 25 count and average distance.
+- Top 10 account cards, a ranked prospect table and a detail panel for the selected facility.
+- Charts for facility-type mix, top states in view and the score distribution.
+- A printable territory report, CSV export, and a Google Maps link on every facility.
+
+### How a facility is scored
+
+The score runs from 1 to 10 and is driven by building size, restroom volume, foot traffic, industry type and how hard the building is on its restrooms. Facility types start from a template. For example, a public high school starts higher than a private elementary school because it has far more restrooms and locker rooms. Live-loaded records are then adjusted with what the source data says about the building: urban schools get a small boost, and hotels are scored up by room count, star rating and floor count, with small properties filtered out.
+
+| Tier | Score | Typical facilities |
+|---|---|---|
+| Tier 1 | 8.8 and up | Hospitals, airports, large universities, stadiums, convention centers, public high schools |
+| Tier 2 | 7.2 to 8.7 | Public middle schools, full-service hotels and resorts, combined-grade schools |
+| Tier 3 | Below 7.2 | Elementary schools and smaller private schools |
+
+Results are sorted by score, then effective square footage, then restroom count, then distance from the search center.
+
+## Parts list
+
+<PartsTable
+	parts={[
+		{ name: 'Plotly.js 2.35.2 (map and charts)', price: '$0 (open source)', specs: 'scattermapbox markers on a CARTO Positron basemap; bar and histogram charts', source: 'https://plotly.com/javascript/' },
+		{ name: 'US DHS GIS spatial datasets', price: '$0 (public data)', specs: 'Base facility locations by type' },
+		{ name: 'NCES public and private school locations', price: '$0 (public data)', specs: 'K-12 schools, loaded live by state', source: 'https://data-nces.opendata.arcgis.com/' },
+		{ name: 'OpenStreetMap via the Overpass API', price: '$0 (open data)', specs: 'Hotels, malls, transit and other expansion types, loaded live by state', source: 'https://overpass-api.de/' },
+		{ name: 'Official territory tables', price: 'Internal', specs: 'ZIP-to-territory and county-to-territory assignments (not published)' },
+		{ name: 'Vanilla JavaScript, HTML and CSS', price: '$0', specs: 'No framework and no build step; static files on the corporate web host' },
+	]}
+/>
+
+## Configuration
+
+What a franchise owner sets in the sidebar:
+
+- **Scope (required):** Franchise ID code or State. Nothing loads until one is picked.
+- **Filters:** facility type, priority tier, minimum score, minimum facility square footage, and a text search across facility, city and county.
+- **Radius search:** pick a major-city preset or type a center latitude and longitude, choose a radius in miles, and turn on "Apply radius filter."
+- **View toggles:** Top 25 only, label the Top 25, Top 10 only, priority color overlay, territory footprint outline.
+- **Actions:** Apply, Reset, Print Report, Export CSV, Focus Selection.
+
+Each facility record shows: facility name, type, city, state, ZIP, decision-maker title (for example Director of Facilities or Environmental Services Director), suggested outreach angle, opportunity score, priority tier, estimated and effective square footage, estimated and effective restroom count, distance from the search center, and a Google Maps link.
+
+## Build steps
+
+1. Built the master sales workbook of target facility types, decision-maker titles and outreach angles.
+2. Geocoded the facility list from public GIS datasets and merged it with the workbook, so every point on the map carries its sales fields.
+3. Mapped every franchise territory to its official ZIP codes and counties, including the Canadian (Ontario) territory.
+4. Built the static map app: filters, KPIs, charts, ranked table, detail panel, printable report and CSV export.
+5. Added scope gating, so data loads only after a state or territory is chosen. This made the map usable on ordinary laptops.
+6. Added the live NCES and OpenStreetMap loaders, with de-duplication against the base file.
+7. Ran a data-quality pass for V14: corrected more than 800 misplaced coordinates, de-duplicated records, improved scoring and aligned facilities to the correct territory ZIP codes.
+8. Added a text-normalization pass so facility names display cleanly (St., Ft., Mc/Mac names, acronyms such as VA, NCAA and YMCA).
+9. Wrote a Quick Start Guide, a web user manual and a PDF manual for franchise members.
+
+## Testing and verification
+
+- **Checked on 2026-10-26:** the production dashboard loads, the scope gate shows, and picking a state loaded the base dataset (94,490 records), with all 71 territories in the territory list and 20 in the facility-type list. No script errors.
+- **Not tested on 2026-10-26:** the live K-12 and OpenStreetMap loaders. The test environment blocked those outside hosts, so their requests failed there. That says nothing about how they behave for real users.
+- **Data accuracy:** V14 corrected more than 800 coordinates. Locations can still be approximate to the ZIP code, and size and restroom figures are modeled estimates, not surveyed values.
+
+<Callout type="unverified">
+Square footage, restroom counts and decision-maker titles are estimates built from facility-type templates and open data. Franchise members are told to confirm ownership, size, renovation plans and contacts before outreach.
+</Callout>
+
+## Safety notes
+
+- Nothing on this site comes from the dashboard's records: no franchise names, contacts or territory codes, and no prospect lists.
+- All facility data is public record. The tool stores nothing about the people using it.
+- The dashboard is for prospecting, not a contact list. Outreach stays human, targeted and opt-out friendly.
+
+## Lessons learned
+
+<Callout type="unverified" title="Draft lessons for William to confirm">
+These come from the V14 release notes and how the tool is built, not from usage data.
+</Callout>
+
+<Callout type="lesson" title="Load less, not faster">
+V14 stopped loading anything until a state or territory is picked. That made the map faster, and it also puts each owner straight into their own market.
+</Callout>
+
+<Callout type="lesson" title="Location quality is a sales problem">
+A pin in the wrong place means a wasted drive, and owners stop trusting the tool. That is why V14 spent its effort on correcting 800+ coordinates and de-duplicating records.
+</Callout>
+
+<Callout type="lesson" title="Ship the manual with the map">
+A data tool needs instructions. The map links to a Quick Start Guide, a web manual and a PDF manual right from its sidebar.
+</Callout>
+
+## Open items
+
+- Add sanitized screenshots once SaniGLAZE approves them. They must not show franchise names, contacts or prospect records.
+- Record the original start date and the version history from V1 to V14.
+- Fix the version labels so they match: the app shows "v8.0" in places while the manual says V14.
+- Measure usage and pipeline outcomes, if SaniGLAZE agrees to share aggregate numbers.
+
+## Changelog
+
+<Changelog
+	entries={[{ date: '2026-10-26', change: 'Project page published from a review of the live V14 dashboard and its user manuals.', rollback: 'Revert the commit that added this page.' }]}
+/>
