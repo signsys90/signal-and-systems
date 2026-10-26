@@ -53,6 +53,7 @@ export default defineConfig({
 							items: [
 								{ label: 'SaniGLAZE Opportunity Map', link: '/projects/saniglaze-opportunity-map/' },
 								{ label: 'SaniGLAZE Trade Show Map', link: '/projects/saniglaze-trade-show-map/' },
+								{ label: 'AI-Assisted Executive Search', link: '/projects/ai-assisted-executive-search/' },
 							],
 						},
 						{ label: 'Fabrication and 3D Printing', items: [], collapsed: true },

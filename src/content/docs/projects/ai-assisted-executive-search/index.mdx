@@ -1,0 +1,88 @@
+---
+title: AI-Assisted Executive Search
+description: How I run an executive job search as a system, using Claude for positioning, role research and tailored materials, with firm honesty rules.
+summary: An executive job search run as a system, with Claude used for positioning, role research and tailored materials under strict honesty rules.
+status: In progress
+category: Business Systems
+started: TBD
+updated: 2026-10-26
+project: true
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+
+<ProjectHeader />
+
+<Callout type="open" title="What this page leaves out">
+This page documents the method, not the pipeline. It does not name target companies, applications, recruiters, contacts or compensation.
+</Callout>
+
+## Goal
+
+Run an executive job search the way I would run a revenue operation: a clear position, a defined target market, consistent materials, and a repeatable process. Done means each opportunity I pursue gets materials that are accurate, specific to the role, and quick to produce.
+
+## Constraints
+
+- **Honesty:** my resume is genuine. AI helps with structure and wording, but it never adds experience, titles or metrics that are not on the record.
+- **Outreach:** every message is legitimate, written to sound like me, and aimed at one specific person and role. No mass sends and no tactics meant to slip past spam or AI filters.
+- **Privacy:** no phone number or email address on public materials. Contact goes through LinkedIn.
+- **Positioning:** I present myself as a business-transformation executive, not only as a former VP of Marketing.
+
+## Architecture
+
+```text
+Positioning ─► Target role profile ─► Role research ─► Tailored materials ─► Targeted outreach ─► Review and adjust
+     ▲                                                                                              │
+     └──────────────────────────────────── lessons feed back ──────────────────────────────────────┘
+```
+
+## How it works
+
+1. **Positioning.** One core story that connects growth, revenue operations, AI automation, digital transformation and public-safety technology. Every other material is built from it.
+2. **Target role profile.** VP, SVP and C-level roles in growth, RevOps, digital transformation, AI automation and public-safety technology. The profile is written down, so each opening is checked against it before any time is spent on it.
+3. **Role research.** Claude helps me read a posting and the company's public information, and then map what the role needs to my verified experience. Gaps are named, not papered over.
+4. **Tailored materials.** The resume stays the same record. The emphasis, summary and cover letter change for each role. When a full package is needed, it includes a portfolio, and this site is part of that portfolio.
+5. **Targeted outreach.** Short, personal messages to the right person, written for that person. Drafts are reviewed by me before anything is sent.
+6. **Review.** What worked and what didn't feeds back into the positioning and the target profile.
+
+## Parts list
+
+- Claude, for research, structure and drafting.
+- Resume (genuine record), maintained by me.
+- LinkedIn profile.
+- This site, as the public portfolio.
+
+## Configuration
+
+The standing rules in the Constraints section are given to Claude at the start of every session, so every draft follows them.
+
+## Build steps
+
+1. Write the positioning statement and the target role profile.
+2. Lock the resume as the source of truth.
+3. Set up the research and drafting workflow with Claude.
+4. Publish the portfolio (this site).
+
+## Testing and verification
+
+No results are published here. This page does not claim interview, offer or response rates.
+
+## Safety notes
+
+- Check every AI-drafted line against the resume before it goes out.
+- Never put another company's confidential data in an application or a portfolio sample.
+
+## Lessons learned
+
+- A written target profile makes it much faster to say no to roles that don't fit.
+
+## Open items
+
+- Add the start date.
+- Add a sanitized example of a role-research brief, with no company named.
+
+## Changelog
+
+<Changelog entries={[{ date: '2026-10-26', change: 'Project page published.', rollback: 'Revert the commit that added this page.' }]} />
