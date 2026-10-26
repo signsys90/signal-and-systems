@@ -1,0 +1,35 @@
+---
+title: Project page template
+description: The 12 sections every Signal & Systems project and component page uses, in order.
+sidebar:
+  order: 1
+---
+
+Every project and component page uses the same 12 sections in the same order, so readers always know where to look and entries merge cleanly into one larger project file. A copy-ready starter lives at `src/content/docs/projects/_template.mdx`.
+
+1. **Header card:** title, summary, status, category, started, last updated.
+2. **Goal:** the problem and what "done" looks like.
+3. **Constraints:** vehicle fitment (2017 F-150 Lariat SuperCrew, panoramic roof), hardware, privacy, budget.
+4. **Architecture:** one diagram of how the parts connect.
+5. **Parts list:** name, SKU, price paid, key specs, manufacturer source link, status.
+6. **Wiring or configuration:** wire, color, function, source output, current draw, fuse, gauge, relay pinout, termination, ground location. For software: config, dependencies, build settings.
+7. **Build steps:** numbered, with photos.
+8. **Testing and verification:** what was bench-tested, what was verified, and what was not tested, stated plainly.
+9. **Safety notes.**
+10. **Lessons learned.**
+11. **Open items:** one line each.
+12. **Changelog:** date, change, rollback note, link to the build-log post.
+
+**Software pages also include:** release version, test results summary, packaging notes (PyInstaller), privacy statement, and a link to the repository or release notes.
+
+**Unverified data:** every spec that did not come from a manufacturer page or manual gets the amber Unverified callout.
+
+## Frontmatter
+
+| Field | Values |
+| --- | --- |
+| `status` | Planned, In progress, Installed, Bench-tested, Verified, Retired |
+| `category` | Software and Automation, Vehicle Upfit and 12V, Radio and Emergency Comms, Business Systems, Fabrication and 3D Printing |
+| `started`, `updated` | `YYYY-MM-DD` |
+| `summary` | One line for the header card and project grid |
+| `project` | `true` on top-level project pages only |

@@ -1,0 +1,43 @@
+---
+// Header card shown at the top of every project and component page.
+// Reads title, summary, status, category, started and updated from the page frontmatter.
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import StatusBadge from './StatusBadge.astro';
+
+interface Props {
+	hero?: ImageMetadata;
+	heroAlt?: string;
+}
+
+const { hero, heroAlt = '' } = Astro.props;
+const data = Astro.locals.starlightRoute.entry.data;
+---
+
+<div class="ss-surface ss-header not-content">
+	{hero && <Image src={hero} alt={heroAlt} class="ss-header__hero" />}
+	{data.summary && <p class="ss-header__summary">{data.summary}</p>}
+	<dl class="ss-header__meta">
+		{data.status && (
+			<div><dt>Status</dt><dd><StatusBadge status={data.status} /></dd></div>
+		)}
+		{data.category && (
+			<div><dt>Category</dt><dd>{data.category}</dd></div>
+		)}
+		{data.started && (
+			<div><dt>Started</dt><dd class="ss-mono">{data.started}</dd></div>
+		)}
+		{data.updated && (
+			<div><dt>Last updated</dt><dd class="ss-mono">{data.updated}</dd></div>
+		)}
+	</dl>
+</div>
+
+<style>
+	.ss-header { margin-block: 1rem 1.5rem; }
+	.ss-header__hero { width: 100%; height: auto; border-radius: 0.375rem; margin-bottom: 1rem; }
+	.ss-header__summary { margin: 0 0 0.75rem; font-size: var(--sl-text-lg); color: var(--ss-text); }
+	.ss-header__meta { display: flex; flex-wrap: wrap; gap: 0.75rem 1.75rem; margin: 0; }
+	.ss-header__meta dt { font-size: var(--sl-text-xs); color: var(--ss-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+	.ss-header__meta dd { margin: 0.2rem 0 0; color: var(--ss-text); }
+</style>

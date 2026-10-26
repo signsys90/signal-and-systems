@@ -1,0 +1,118 @@
+---
+title: Responder ID Scanner
+description: An offline, privacy-first Windows app for the Panasonic Toughbook CF-33 that decodes PDF417/AAMVA driver license and ID barcodes.
+summary: Offline Windows app for the Toughbook CF-33 that decodes PDF417/AAMVA IDs, with no automatic PII storage, no telemetry and no network services.
+status: In progress
+category: Software and Automation
+started: TBD
+updated: 2026-10-26
+project: true
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import PartsTable from '../../../../components/PartsTable.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+
+<ProjectHeader />
+
+## Release
+
+<SpecBox
+	title="Release details"
+	specs={[
+		['Version', 'TBD'],
+		['Platform', 'Windows on Panasonic Toughbook CF-33'],
+		['Language', 'Python'],
+		['UI', 'Tkinter'],
+		['Tests', 'pytest'],
+		['Packaging', 'PyInstaller'],
+		['Network', 'None'],
+	]}
+	source={{ label: 'Project repository (link TBD)', href: '#open-items' }}
+/>
+
+## Goal
+
+Give responders a fast, offline way to read the PDF417 barcode on a driver license or state ID and see the AAMVA fields on screen, without the data ever leaving the device unless the operator chooses to export it.
+
+## Constraints
+
+- **Hardware:** Panasonic Toughbook CF-33 running Windows.
+- **Offline only:** no network services and no telemetry.
+- **Privacy:** no automatic persistence of personal information. Exports are explicit and operator-initiated.
+- **Stability:** changes are small and isolated, with regression tests and release candidates, so the stable core is never broken.
+
+## Privacy statement
+
+The Responder ID Scanner does not store scanned personal information automatically, does not send telemetry, and does not open network connections. Data leaves the app only when the operator explicitly exports it. All screenshots and examples on this site use synthetic sample IDs, never a real license or a real person.
+
+## Architecture
+
+The diagram for this section will show the data flow below.
+
+```text
+Scanner hardware ─► Input capture ─► PDF417 payload ─► AAMVA parser ─► Tkinter display
+                                                                         │
+                                                       Explicit export (operator action only)
+```
+
+<Callout type="open">
+The scanner hardware interface and how input is captured on the CF-33 will be documented from the codebase. Nothing about hardware APIs is assumed here.
+</Callout>
+
+## Parts list
+
+<PartsTable
+	parts={[
+		{ name: 'Panasonic Toughbook CF-33' },
+		{ name: 'Barcode scanner hardware (model TBD)' },
+	]}
+/>
+
+## Configuration
+
+- **Dependencies:** to be listed from the project's requirements file.
+- **Build settings:** PyInstaller spec settings to be documented from the repository.
+- **Runtime settings:** to be documented.
+
+## Build steps
+
+1. Set up the Python environment and install dependencies.
+2. Run the pytest suite.
+3. Build the Windows executable with PyInstaller.
+4. Install the release candidate on the CF-33 and test with synthetic IDs.
+
+## Testing and verification
+
+| Area | Status |
+| --- | --- |
+| Automated tests (pytest) | Results not yet published |
+| Packaged build (PyInstaller) | Not yet documented |
+| Physical scanner on the CF-33 | Not yet documented |
+
+Each release will report test results, packaging status, privacy checks, physical-scanner status and the rollback path.
+
+## Safety notes
+
+- Use synthetic sample IDs for every test, screenshot and demo.
+- Treat any real scan as sensitive data. Do not export unless there is an operational need.
+
+## Lessons learned
+
+None recorded yet.
+
+## Open items
+
+- Decide whether the repository will be public, and add the link.
+- Add the current release version and test summary.
+- Document the scanner hardware model and input method.
+- Produce synthetic sample IDs for screenshots.
+- Add the start date.
+
+## Changelog
+
+<Changelog
+	entries={[{ date: '2026-10-26', change: 'Project page published.', rollback: 'Revert the commit that added this page.' }]}
+/>

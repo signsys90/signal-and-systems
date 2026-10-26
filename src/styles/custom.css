@@ -1,0 +1,128 @@
+/*
+ * Signal & Systems design tokens.
+ * "Command console meets engineering notebook": dark slate surfaces, signal-amber accents,
+ * monospaced spec data. Tokens come from the site plan; Starlight variables are mapped onto them.
+ */
+
+:root {
+	/* Dark mode (Starlight default) */
+	--ss-bg: #0b1220;
+	--ss-surface: #111a2e;
+	--ss-text: #e5e7eb;
+	--ss-muted: #94a3b8;
+	--ss-accent: #f59e0b;
+	--ss-info: #60a5fa;
+	--ss-success: #4ade80;
+	--ss-warning: #f87171;
+	--ss-border: #1f2a44;
+	--ss-on-accent: #0b1220;
+
+	--sl-color-white: #f8fafc;
+	--sl-color-gray-1: #e5e7eb;
+	--sl-color-gray-2: #e5e7eb;
+	--sl-color-gray-3: #94a3b8;
+	--sl-color-gray-4: #64748b;
+	--sl-color-gray-5: #1f2a44;
+	--sl-color-gray-6: #111a2e;
+	--sl-color-black: #0b1220;
+
+	--sl-color-accent-low: #3a2706;
+	--sl-color-accent: #f59e0b;
+	--sl-color-accent-high: #fcd34d;
+	--sl-color-text-accent: #f59e0b;
+	--sl-color-bg-accent: #f59e0b;
+	--sl-color-text-invert: #0b1220;
+
+	--sl-color-hairline: #1f2a44;
+	--sl-color-hairline-light: #1f2a44;
+
+	--sl-font: 'Inter', system-ui, sans-serif;
+	--sl-font-mono: 'JetBrains Mono', ui-monospace, monospace;
+	--ss-font-heading: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+
+	/* Body 17px, line height 1.6, about 72 characters per line */
+	--sl-text-body: 1.0625rem;
+	--sl-line-height: 1.6;
+	--sl-content-width: 46rem;
+}
+
+:root[data-theme='light'] {
+	--ss-bg: #f8fafc;
+	--ss-surface: #ffffff;
+	--ss-text: #0f172a;
+	--ss-muted: #475569;
+	--ss-accent: #b45309;
+	--ss-info: #1d4ed8;
+	--ss-success: #15803d;
+	--ss-warning: #b91c1c;
+	--ss-border: #e2e8f0;
+	--ss-on-accent: #ffffff;
+
+	--sl-color-white: #0f172a;
+	--sl-color-gray-1: #0f172a;
+	--sl-color-gray-2: #0f172a;
+	--sl-color-gray-3: #475569;
+	--sl-color-gray-4: #94a3b8;
+	--sl-color-gray-5: #e2e8f0;
+	--sl-color-gray-6: #f1f5f9;
+	--sl-color-gray-7: #ffffff;
+	--sl-color-black: #f8fafc;
+
+	--sl-color-accent-low: #fef3c7;
+	--sl-color-accent: #b45309;
+	--sl-color-accent-high: #78350f;
+	--sl-color-text-accent: #b45309;
+	--sl-color-bg-accent: #b45309;
+	--sl-color-text-invert: #ffffff;
+
+	--sl-color-hairline: #e2e8f0;
+	--sl-color-hairline-light: #e2e8f0;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+.site-title,
+.hero h1 {
+	font-family: var(--ss-font-heading);
+	font-weight: 600;
+	letter-spacing: -0.01em;
+}
+
+.sl-markdown-content :is(p, li) {
+	max-width: 72ch;
+}
+
+/* Tables (parts lists, wiring tables) */
+.sl-markdown-content table {
+	border-color: var(--ss-border);
+}
+.sl-markdown-content :is(th, td) {
+	border-color: var(--ss-border);
+}
+
+/* Shared surface used by the custom components */
+.ss-surface {
+	background: var(--ss-surface);
+	border: 1px solid var(--ss-border);
+	border-radius: 0.5rem;
+	padding: 1rem 1.25rem;
+}
+
+.ss-mono {
+	font-family: var(--sl-font-mono);
+	font-size: 0.9em;
+}
+
+/* Wide tables scroll inside their box instead of the page */
+.ss-table-wrap {
+	overflow-x: auto;
+}
+.ss-table-wrap table {
+	display: table;
+	width: 100%;
+	min-width: 40rem;
+	font-size: var(--sl-text-sm);
+}

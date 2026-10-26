@@ -1,0 +1,47 @@
+---
+// Safety, Unverified, Lesson learned and Open item callouts.
+interface Props {
+	type: 'safety' | 'unverified' | 'lesson' | 'open';
+	title?: string;
+}
+
+const labels = {
+	safety: 'Safety',
+	unverified: 'Unverified',
+	lesson: 'Lesson learned',
+	open: 'Open item',
+};
+
+const { type, title } = Astro.props;
+---
+
+<aside class:list={['ss-callout', `ss-callout--${type}`]} aria-label={title ?? labels[type]}>
+	<p class="ss-callout__title">{title ?? labels[type]}</p>
+	<div class="ss-callout__body"><slot /></div>
+</aside>
+
+<style>
+	.ss-callout {
+		--tone: var(--ss-info);
+		border: 1px solid var(--ss-border);
+		border-left: 4px solid var(--tone);
+		background: var(--ss-surface);
+		border-radius: 0.375rem;
+		padding: 0.75rem 1rem;
+		margin-block: 1rem;
+	}
+	.ss-callout--safety { --tone: var(--ss-warning); }
+	.ss-callout--unverified { --tone: var(--ss-accent); }
+	.ss-callout--lesson { --tone: var(--ss-success); }
+	.ss-callout--open { --tone: var(--ss-info); }
+	.ss-callout__title {
+		margin: 0 0 0.25rem;
+		font-family: var(--sl-font-mono);
+		font-size: var(--sl-text-xs);
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--tone);
+	}
+	.ss-callout__body :global(> :first-child) { margin-top: 0; }
+	.ss-callout__body :global(> :last-child) { margin-bottom: 0; }
+</style>

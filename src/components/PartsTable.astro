@@ -1,0 +1,48 @@
+---
+// Bill of materials. Unknown values stay as "TBD" until confirmed; never fill them with guesses.
+import type { STATUSES } from '../content.config';
+import StatusBadge from './StatusBadge.astro';
+
+interface Part {
+	name: string;
+	sku?: string;
+	price?: string;
+	specs?: string;
+	source?: string;
+	status?: (typeof STATUSES)[number];
+}
+
+interface Props {
+	parts: Part[];
+}
+
+const { parts } = Astro.props;
+const tbd = 'TBD';
+---
+
+<div class="ss-table-wrap not-content">
+	<table class="ss-table">
+		<thead>
+			<tr><th>Part</th><th>SKU</th><th>Price paid</th><th>Key specs</th><th>Source</th><th>Status</th></tr>
+		</thead>
+		<tbody>
+			{parts.map((p) => (
+				<tr>
+					<td>{p.name}</td>
+					<td class="ss-mono">{p.sku ?? tbd}</td>
+					<td class="ss-mono">{p.price ?? tbd}</td>
+					<td>{p.specs ?? tbd}</td>
+					<td>{p.source ? <a href={p.source}>Manufacturer</a> : tbd}</td>
+					<td>{p.status ? <StatusBadge status={p.status} /> : tbd}</td>
+				</tr>
+			))}
+		</tbody>
+	</table>
+</div>
+
+<style>
+	.ss-table { border-collapse: collapse; margin-block: 1rem; }
+	.ss-table :is(th, td) { border: 1px solid var(--ss-border); padding: 0.45rem 0.6rem; text-align: left; vertical-align: top; }
+	.ss-table th { background: var(--ss-surface); color: var(--ss-muted); font-weight: 600; font-size: var(--sl-text-xs); text-transform: uppercase; letter-spacing: 0.05em; }
+	.ss-table td { color: var(--ss-text); }
+</style>

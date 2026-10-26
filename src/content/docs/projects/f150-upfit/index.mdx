@@ -1,0 +1,134 @@
+---
+title: F-150 Emergency Lighting and 12V Upfit
+description: Whelen CanTrol Gen 3 controlled emergency lighting, siren and 12V electrical build on a 2017 Ford F-150 Lariat SuperCrew with a panoramic roof.
+summary: A complete emergency lighting, siren and 12V build on a 2017 F-150 Lariat SuperCrew, centered on a Whelen CanTrol Gen 3 controller.
+status: In progress
+category: Vehicle Upfit and 12V
+started: TBD
+updated: 2026-10-26
+project: true
+sidebar:
+  label: Overview
+  order: 0
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import PartsTable from '../../../../components/PartsTable.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+
+<ProjectHeader />
+
+<Callout type="safety" title="Legal notice">
+Emergency lighting and siren use is regulated by state law and permits. This page documents a personal build and is not legal guidance.
+</Callout>
+
+## Goal
+
+Build a clean, serviceable emergency lighting and siren package on a daily-driven truck, with every circuit fused, documented and controllable from one control head. Done means every component is installed, bench-tested on 12V before any drilling, verified in the vehicle, and documented on its own component page.
+
+## Constraints
+
+- **Vehicle:** 2017 Ford F-150 Lariat SuperCrew.
+- **Roof:** panoramic roof, so no overhead or roof-mounted equipment. Interior lighting mounts at the visor line.
+- **Rear glass:** power sliding rear window, which limits rear-glass mounting.
+- **Factory electrical:** the factory lamps are flashed through the BCM by the SpeedTurtle EFM 3.0. No guesswork on BCM or factory wiring.
+- **Airbags:** all mounting and wire routing stays clear of airbag deployment zones.
+- **Controller:** one Whelen CanTrol WC Gen 3 with the 21-button control head. It replaced an earlier plan for a CenCom Sapphire.
+
+## Architecture
+
+The diagram for this section will show the signal flow below. The final version will be drawn from the install config sheet.
+
+```text
+Battery (AGM) ── fuses at battery ──┬── Whelen CanTrol WC Gen 3 (controller + siren amp)
+                                    │      ├── 21-button control head (headliner cradle)
+                                    │      ├── STL Raptor visor bar ── Grand Control Box
+                                    │      ├── BooYu rear traffic advisor
+                                    │      ├── Relay ── UBL rocker panel bars
+                                    │      ├── SpeedTurtle EFM 3.0 ── BCM ── factory lamps
+                                    │      └── Siren amp ── 2 x UBL 100W speakers
+                                    └── Other 12V loads (spotlight override, scanner, accessories)
+```
+
+<Callout type="open">
+The CanTrol output assignment for each device has not been published yet. It will be added from the latest install config sheet.
+</Callout>
+
+## Parts list
+
+Prices, SKUs and specs are filled in only from receipts and manufacturer pages. Anything still unconfirmed shows as TBD.
+
+<PartsTable
+	parts={[
+		{ name: 'Whelen CanTrol WC Gen 3 with 21-button control head', status: 'In progress' },
+		{ name: 'STL Raptor visor bar with Grand Control Box (Q-RVF15 bracket)' },
+		{ name: 'BooYu rear traffic advisor (planned TA bar replacement)' },
+		{ name: 'UBL rocker panel bars (relay switched)' },
+		{ name: 'UBL U-Lites' },
+		{ name: 'UBL Color Flood 2.0' },
+		{ name: 'SpeedTurtle EFM 3.0 (factory lamp flasher via BCM)' },
+		{ name: 'UBL 100W siren speakers (x2)' },
+		{ name: 'SpeedTech Z-6 surface mounts' },
+		{ name: 'UBL tailgate bar', status: 'Planned' },
+		{ name: 'Custom headliner control-head cradle' },
+		{ name: 'AGM battery upgrade' },
+		{ name: 'LED bulb and amber/white fog upgrades' },
+		{ name: 'Mirror spotlight override harness' },
+		{ name: 'Uniden SDS200 scanner (console)' },
+	]}
+/>
+
+## Wiring and configuration
+
+Wiring is documented wire by wire on each component page using the standard wiring table (wire, color, function, CanTrol output, current draw, fuse, gauge, relay pinout, termination, ground). This overview will link to each one as it is published.
+
+<Callout type="open">
+Waiting on the latest install config sheet before any wiring is published.
+</Callout>
+
+## Build steps
+
+1. Bench test every device on 12V before drilling or routing wire.
+2. Install the AGM battery and the main fused feeds near the battery.
+3. Mount the control head and controller, then route the harness through grommets and loom.
+4. Install and wire each lighting device, one component page per device.
+5. Install the siren speakers and configure the siren amp.
+6. Program the CanTrol button layout and patterns.
+7. Verify every function in the vehicle and update each component's status.
+
+Photo placeholders will be added as each step is completed. Photos are published only after EXIF/GPS data is stripped and plates are blurred.
+
+## Testing and verification
+
+| Item | Bench-tested | Verified in vehicle |
+| --- | --- | --- |
+| All components | Not yet documented | Not yet documented |
+
+Nothing on this page is marked tested or verified until it has actually been tested and logged.
+
+## Safety notes
+
+- Fuse every feed as close to the battery as practical.
+- Use grommets at every panel or firewall pass-through, and loom on every run.
+- Keep mounts and wiring clear of airbag zones, including the A-pillars, headliner curtain airbags and visor area.
+- Do not tap or modify BCM or factory wiring based on guesses. Use the device manufacturer's documented method only.
+- Bench test on 12V before drilling.
+
+## Lessons learned
+
+None recorded yet. Lessons will be added from build-log entries.
+
+## Open items
+
+- Confirm this component list matches the latest install config sheet.
+- Add the CanTrol output assignment for each device.
+- Add SKU, price paid and manufacturer source link for each part.
+- Publish the first component page.
+- Choose the start date to show on this page.
+
+## Changelog
+
+<Changelog
+	entries={[{ date: '2026-10-26', change: 'Overview page published with the component list from the site plan.', rollback: 'Revert the commit that added this page.' }]}
+/>

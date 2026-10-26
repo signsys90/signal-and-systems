@@ -1,0 +1,73 @@
+---
+title: Components
+description: The reusable documentation components, with live examples.
+sidebar:
+  order: 2
+---
+
+import StatusBadge from '../../../components/StatusBadge.astro';
+import SpecBox from '../../../components/SpecBox.astro';
+import PartsTable from '../../../components/PartsTable.astro';
+import WiringTable from '../../../components/WiringTable.astro';
+import Callout from '../../../components/Callout.astro';
+import Changelog from '../../../components/Changelog.astro';
+import DownloadCard from '../../../components/DownloadCard.astro';
+
+The examples on this page use placeholder values to show layout only. They are not real specs.
+
+Import components at the top of an `.mdx` page with a relative path, for example `import Callout from '../../../../components/Callout.astro';` from a project page.
+
+## 1. Project header card
+
+`<ProjectHeader />` reads `summary`, `status`, `category`, `started` and `updated` from the page frontmatter. Pass `hero={image}` and `heroAlt="..."` for a hero photo. See any [project page](/projects/) for a live example.
+
+## 2. Status badges
+
+<StatusBadge status="Planned" /> <StatusBadge status="In progress" /> <StatusBadge status="Installed" /> <StatusBadge status="Bench-tested" /> <StatusBadge status="Verified" /> <StatusBadge status="Retired" />
+
+```mdx
+<StatusBadge status="Bench-tested" />
+```
+
+## 3. Spec box
+
+<SpecBox specs={[['Input voltage', 'EXAMPLE'], ['Current draw', 'EXAMPLE'], ['Dimensions', 'EXAMPLE']]} />
+
+```mdx
+<SpecBox specs={[['Input voltage', '12 VDC']]} source={{ label: 'Manufacturer manual', href: 'https://...' }} />
+```
+
+## 4. Parts table
+
+<PartsTable parts={[{ name: 'Example part', specs: 'EXAMPLE', status: 'Planned' }]} />
+
+## 5. Wiring table
+
+<WiringTable rows={[{ wire: 'W1', color: 'EXAMPLE', function: 'Example function', source: 'EXAMPLE' }]} />
+
+## 6. Callouts
+
+<Callout type="safety">Example safety note.</Callout>
+<Callout type="unverified">Example spec from general knowledge, not yet confirmed against the manufacturer.</Callout>
+<Callout type="lesson">Example lesson learned.</Callout>
+<Callout type="open">Example open item.</Callout>
+
+## 7. Changelog
+
+<Changelog entries={[{ date: '2026-10-26', version: '0.1.0', change: 'Example change.', rollback: 'Example rollback.' }]} />
+
+## 8. Code block
+
+Starlight's built-in code blocks include a copy button. Add a title to label the language or file:
+
+```python title="example.py"
+print("Signal & Systems")
+```
+
+## 9. Photo gallery and before/after slider
+
+`<Gallery photos={[{ src: photo, alt: '...', caption: '...' }]} />` and `<BeforeAfter before={a} after={b} alt="..." />`. Import photos from `src/assets/` so Astro optimizes them. Strip EXIF/GPS data and blur plates and house numbers first.
+
+## 10. Download card
+
+<DownloadCard title="Example download" description="Config sheets, PDFs and release notes go in public/downloads/." href="#" meta="PDF · example" />
