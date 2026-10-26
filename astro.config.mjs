@@ -58,6 +58,7 @@ export default defineConfig({
 							items: [
 								{ label: 'SaniGLAZE Opportunity Map', link: '/projects/saniglaze-opportunity-map/' },
 								{ label: 'SaniGLAZE Trade Show Map', link: '/projects/saniglaze-trade-show-map/' },
+								{ label: 'SaniGLAZE Video End-Slide Generator', link: '/projects/saniglaze-video-end-slide-tool/' },
 								{ label: 'AI-Assisted Executive Search', link: '/projects/ai-assisted-executive-search/' },
 							],
 						},
