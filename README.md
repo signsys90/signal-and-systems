@@ -1,4 +1,4 @@
-# Signal & Systems
+# Signal & Systems Engineering, LLC
 
 Systems built in the field and in the business. Project documentation by William A. Atkins, KR4JSQ.
 
