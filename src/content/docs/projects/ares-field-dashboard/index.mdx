@@ -58,9 +58,43 @@ React renderer (touch UI)
   └─ System status ─► COM / USB serial ports · battery · network · clock
 ```
 
-The launcher catalog is grouped so field communications sit at the top and maintenance and recovery tools sit lower. Modules include ARES / Field Communications, Packet / APRS, Mesh / LoRa / AREDN, GPS / GNSS, Weather / Hazards, ICS Forms, TAK, Radio Programming, SDR / Monitoring, Network diagnostics, System Health, Storage Cleanup, Media / Recovery, and Vehicle Systems.
-
 New default launchers merge into existing settings by a stable ID, so an update never wipes the operator's custom paths.
+
+### Mission Ops
+
+Mission Ops is the deployment cockpit for degraded environments. It keeps the current activation context in one place:
+
+- **Mission packs:** Duval ARES activation, degraded or offline communications, and weather or hurricane watch operations.
+- **PACE communications matrix:** primary, alternate, contingency and emergency paths across voice, Winlink, APRS, mesh, weather and documentation fallbacks.
+- **Hardware staging:** critical computer, radio, power, digital, GPS, storage and paper-binder assets.
+- **Operator log:** status, decisions, issues, safety notes and field observations, stored locally.
+- **Mission gap summary:** uses the same Ready, Missing, Link and System logic as the launcher, so a missing tool shows up as a mission gap.
+
+Mission Ops is only for planning and logging. It does not transmit radio traffic, bridge services, schedule messages or control vehicle hardware.
+
+### Launcher modules
+
+The 109 launchers are grouped into 22 modules, with field communications at the top and maintenance and recovery lower down:
+
+| Field operations | Support and maintenance |
+| --- | --- |
+| ARES / Field Communications | Network / Wi-Fi Diagnostics |
+| Packet / APRS | USB Device History |
+| Mesh / LoRa / AREDN | Windows Control Panel / Maintenance |
+| GPS / GNSS Tools | System Health |
+| Weather / Hazards | PDF / Documents / Field Files |
+| ICS Forms / Field Documentation | Storage Cleanup |
+| TAK / Field Situational Awareness | Secure Credentials |
+| Radio Programming | Media / ISO / Recovery |
+| Emergency Management | Evidence / Video |
+| SDR / Monitoring | Developer / Cloud Tools |
+| Maps / Situational Awareness | Vehicle Systems |
+
+The search box filters by title, module, tags or description. Quick filters cover Ready, Missing, Link, System, ARES, Network, Mesh, GPS, Weather, Emergency, ICS and Recovery.
+
+### Local data
+
+Settings are stored as JSON in the app's data folder for the Windows account. They include the operator profile, mission packs and the active mission, PACE plan rows, hardware staging inventory, operator log entries, launcher paths and metadata, folder paths, COM port notes, checklist progress and hardware profile flags. The Backup / Recovery screen exports or imports all of it as one JSON file.
 
 ## Parts list
 
