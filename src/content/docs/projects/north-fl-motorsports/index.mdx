@@ -1,0 +1,353 @@
+---
+title: North FL Motorsports
+description: Growth plan, Florida dealer compliance checklist, lead-handling system and mobile-first website for an owner-operated used car dealer in Jacksonville.
+summary: A growth system for a one-owner Jacksonville used car lot. "Deal with the owner" positioning, a We Buy Cars program, free-channels-first marketing, one lead log with a 15-minute reply standard, a Florida compliance checklist and a new website.
+status: In progress
+category: Business Systems
+started: 2026-10-24
+updated: 2026-10-26
+project: true
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import Gallery from '../../../../components/Gallery.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+import hero from '../../../../assets/nflm/hero.jpg';
+import inventory from '../../../../assets/nflm/inventory.jpg';
+import sell from '../../../../assets/nflm/sell.jpg';
+import reviews from '../../../../assets/nflm/reviews.jpg';
+
+<ProjectHeader hero={hero} heroAlt="Top of the North FL Motorsports website draft: black background, the silver NFM shield logo, BUY SELL TRADE, and the headline Deal with the owner in white and neon yellow-green." />
+
+<Callout type="open" title="What this page leaves out">
+North FL Motorsports is a real, independent dealership. This page covers the strategy, the systems and what I built. It leaves out the owner's name, the address, phone, email and social links, every budget and illustrative dollar figure, and the price of any vehicle. In the screenshots the owner's name is replaced with "the owner", and the phone number, street address and vehicle price are hidden.
+</Callout>
+
+## Goal
+
+North FL Motorsports already has what most used car lots spend money trying to fake: a real owner who hand-picks every car and makes every deal himself. The plan turns that story into a steady, trackable flow of buyers, sellers and trade-ins from Duval County and Northeast Florida, using channels that cost little or nothing before any paid advertising starts.
+
+"Done" for this phase: a website that's live, a Google Business Profile that's fully built, every listing written to one standard with an all-in price, every lead in one log with a follow-up cadence, a public "We Buy Cars" offer, and a compliance checklist confirmed line by line.
+
+<SpecBox
+	title="At a glance"
+	specs={[
+		['Business', 'North FL Motorsports, independent used car dealer. Buy, sell, trade'],
+		['Market', 'Jacksonville, Duval County and Northeast Florida'],
+		['Positioning', '"Deal with the owner." One man, one handshake, no middleman'],
+		['Brand look', 'Black, silver shield logo, neon yellow-green, checkered-flag racing style'],
+		['Inventory sources', 'Auctions now; add public purchases ("We Buy Cars") and trade-ins'],
+		['Financing', 'Cash and pre-approval, plus 2 to 3 outside lenders. No buy-here-pay-here'],
+		['Lead standard', 'Reply within 15 minutes in business hours; 1/3/7/14/30-day follow-up'],
+		['Plan length', '90 days, Week 1 starting Monday 26 October 2026'],
+	]}
+	source={{ label: 'Growth proposal v1.0 and website draft, 24 October 2026' }}
+/>
+
+## Screenshots: the website draft
+
+A fast, mobile-first site I built with the proposal: live inventory cards, Call and WhatsApp buttons on every screen, a Sell or Trade form, an About section, reviews and hours. It also carries AutoDealer structured data so search engines read the business details correctly. Placeholders that still need the owner's input are highlighted in yellow on purpose.
+
+<Gallery
+	photos={[
+		{ src: hero, alt: 'Website hero: BUY SELL TRADE, the headline Deal with the owner, a short line about the dealership, and Call and WhatsApp buttons.', caption: 'Hero. Big call-to-action buttons, the neon flag stripes and a checkered band under every section. The phone number line is hidden here.' },
+		{ src: inventory, alt: 'Featured inventory section with three listing cards, one example and two placeholders, each with Ask on WhatsApp and Call buttons.', caption: 'Inventory cards. Each has its own WhatsApp link that pre-fills "is this car still available?". The fine print states the all-in price rule and the Buyers Guide. Price hidden.' },
+		{ src: sell, alt: 'Sell or trade section with four numbered steps on the left and a long form on the right.', caption: 'Sell or Trade: four steps and a form (year, make, model, mileage, optional VIN, title status, condition). The TCPA consent box is unchecked by default. Until a lead inbox is connected, the form builds a ready-to-send WhatsApp message.' },
+		{ src: reviews, alt: 'Reviews section with an 88 percent stat and a dashed placeholder box for real reviews.', caption: 'Reviews: the real Facebook recommendation rate, and a placeholder that says no sample or made-up reviews will be shown.' },
+	]}
+/>
+
+## Constraints
+
+- **The owner is the brand and the bottleneck.** Everything has to work around one person's time.
+- **No sales history was provided,** so the plan shows a revenue worksheet, not a forecast.
+- **Free channels before paid.** Ads multiply what's already there, so listings, reviews and lead tracking come first.
+- **Florida dealer law is strict on advertising.** Advertised prices must include every dealer fee, and financing ads have their own disclosure rules.
+- **The owner holds every login** for the domain, hosting, Google and Meta. I get manager access only.
+
+## Architecture: how a lead becomes a sale
+
+```text
+ Google Business Profile ─┐
+ Facebook Page + Marketplace ┤                     ┌─► Appointment ─► Test drive ─► Deal file
+ Website (inventory, Sell/Trade form) ┼─► ONE LEAD LOG ─┤
+ Calls, texts, WhatsApp ─┤   (Google Sheet)    └─► Follow-up: day 1, 3, 7, 14, 30
+ Walk-ins ───────────────┘        │
+                                  └─► Friday report: leads by source, appointments, sales, ad spend
+ "We Buy Cars" form ──► range same business day ──► inspect ──► written offer ──► inventory
+```
+
+## Positioning: one owner, one straight deal
+
+Most used car shoppers expect to be passed from a salesperson to a manager to a finance office. This dealer can promise the opposite and prove it the moment a buyer walks in.
+
+| Pillar | What we say | How we prove it |
+| --- | --- | --- |
+| One owner, start to finish | "You'll talk to the owner from first text to handshake." | His face and name on the site, listings and videos; he answers WhatsApp himself |
+| Hand-picked cars | "Only cars I'd sell to my own family." (wording to confirm) | A short "why I bought this one" note on each listing |
+| A straight price | "The price you see is the price, plus tax, tag and title." | Every ad follows Florida's all-fees pricing rule; no bait listings |
+| No pressure | "Take it to your mechanic. Sleep on it." | Pre-purchase inspections welcome (to confirm) |
+
+**Options considered:** owner-operator honest dealer (recommended: true, specific, hard for big lots to copy), lowest price in town (a race to the bottom that attracts buyers with no loyalty), and a buy-here-pay-here credit focus (needs licensing, capital and collections, and clashes with the "no gimmicks" story).
+
+## Target buyers and sellers
+
+These are starting hypotheses to check against real customers.
+
+| Buyer segment | What wins them |
+| --- | --- |
+| Budget and first-car buyers (including parents buying for a teen) | A clear all-in price, honest condition notes, fast replies, WhatsApp |
+| Cash and pre-approved buyers | A straight price, no add-ons, a quick close |
+| Second-car households | Reliability notes, service records where available |
+| Military households at nearby NAS Jacksonville, including families arriving on PCS orders | Speed, transparency, help with title and registration |
+| Trades and work-truck buyers (if trucks are stocked) | Photos of bed, hitch and tires; real mileage and condition |
+
+| Seller segment | What wins them |
+| --- | --- |
+| Private sellers tired of Marketplace no-shows, lowballs and scams | One fair offer, same-day payment, paperwork handled |
+| Trade-in customers | A clear written trade value |
+| Relocating households (PCS moves, job moves) | Speed and certainty |
+| Estates and unused second cars | A respectful, simple process |
+
+## Local competition
+
+A full scan is a Week 1 task. The method:
+
+1. Google Maps search for "used car dealer" within about 5 miles: star rating, review count, price range, and whether they advertise financing.
+2. Facebook Marketplace search for vehicles in the budget band within 20 miles: how many are dealers versus private sellers, and how they price.
+3. Compare three cars on the lot with similar cars nearby on price, mileage and photos.
+
+| Competitor type | Their edge | Our answer |
+| --- | --- | --- |
+| Large and franchised lots | Volume, financing depth, warranties | The owner relationship, no add-ons, faster and more personal |
+| Other small independents | Similar prices | Reviews, photos, response speed, a real website, the owner story |
+| Private sellers | Lowest price | A licensed dealer, a clean title process, a Buyers Guide, a place to come back to |
+| Online retailers | Convenience, instant offers | See and drive it today; a local, same-day offer when buying |
+
+## Inventory sourcing and pricing
+
+| Source | Pros | Cons |
+| --- | --- | --- |
+| Dealer auctions | Volume and selection | Buyer fees, transport, condition risk |
+| Public purchases ("We Buy Cars"), recommended add | No auction fee, often better margin, local cars with known history | Needs marketing and a fast, fair appraisal |
+| Trade-ins, recommended | Built into each sale | Volume follows sales |
+| Dealer-to-dealer wholesale | Fills gaps fast | Thinner margin |
+
+**Buy-box:** a written definition of what to stock: the price band that sells fastest, the makes and models buyers ask for most (tracked in the lead log from Week 2), clean transferable titles only, and a reconditioning cost cap per car.
+
+**Pricing method:**
+
+1. **Price to market:** check three to five comparable listings within about 50 miles before posting.
+2. **Price all-in:** the advertised price includes every dealer fee. Only tax, tag, title and registration are added (Florida law).
+3. **Know the floor:** record total cost (purchase, transport, recon, fees) on every car, so every negotiation starts from real margin.
+4. **Aging rule:** review at 30 days, adjust at 45, decide at 60 (wholesale or reprice). Tuned later to the real turn rate.
+
+```text
+Gross profit per vehicle = Sale price − (Purchase + Transport + Reconditioning + Auction/buyer fees)
+Days on lot              = Date sold − Date ready for sale
+```
+
+## The "We Buy Cars" program
+
+A second front door for people who aren't shopping today but have a car to sell.
+
+| Step | How it works |
+| --- | --- |
+| 1. Submit | Website form or WhatsApp: year, make, model, mileage, VIN, condition, photos |
+| 2. Range | A range within the business day, or a request to see the car |
+| 3. Inspect | A short inspection and drive at the lot |
+| 4. Offer | A firm written offer, good for a stated period |
+| 5. Pay | Title signed over; lien payoffs handled where applicable |
+
+**Rules that keep it honest:** no "we'll pay any price" or guaranteed-value claims (offers depend on inspection, and the ad says so); the same offer whether or not the seller buys from us, with the trade value shown separately; identity and title ownership verified before paying.
+
+**Promotion:** the website form, a Google post and a Facebook post every two weeks, a sign at the lot (landlord and city sign rules to confirm), then Google search ads on "sell my car" searches in Month 2 if budget allows.
+
+## Financing options
+
+| Option | How it works | Requirements and risk |
+| --- | --- | --- |
+| A. Cash and outside pre-approval | Buyer brings cash or their own credit union approval | No added licensing |
+| B. Indirect lending through partners (recommended) | The dealer submits applications to lenders he's signed up with; the lender funds the contract | Each lender has its own sign-up. Florida OFR's Motor Vehicle Retail Installment Seller license may apply if the dealer writes the contract (to confirm with OFR or a dealer attorney) |
+| C. In-house buy-here-pay-here | The dealer carries the loan and collects | OFR licensing, significant capital, collections and repossession. Not recommended |
+
+Lenders to contact include Jacksonville credit unions with indirect dealer programs and non-prime lenders that work with independents. Application tools such as RouteOne or Dealertrack and a credit-report service are often required (general knowledge).
+
+<Callout type="safety" title="Financing ads have their own rules">
+Under Regulation Z (12 CFR 1026.24), naming a payment amount, down payment, number of payments or finance charge in an ad triggers full disclosures, including APR. Until terms are set, the only safe wording is "Financing available to qualified buyers." No "everyone approved" or "no credit check" claims.
+</Callout>
+
+## Digital marketing, free first
+
+**Facebook Page and Marketplace**
+
+- List as the dealership, never as a private seller. That misleads buyers and breaks Meta's commerce rules.
+- **Listing standard for every car:** year, make, model and trim; all-in price; mileage; VIN; 20 or more photos in the same order (front three-quarter, sides, rear, interior, dash with mileage, tires, flaws); a three-line "why I picked this one" note; and "Price excludes tax, tag, title and registration."
+- Mark sold the same day. No listing stays up for a car that's gone.
+- Two posts a week: a new-arrival walkaround video, and a "just sold" or "we bought" post with permission.
+
+**Google Business Profile:** claim and verify (owner step), primary category "Used car dealer", name, address, phone and hours exactly matching the sign, site and Facebook, 20+ real photos with new ones weekly, weekly posts, and a reply to every review within two business days.
+
+**Reviews:** ask every buyer and every seller, at the handshake and by text two or three days later. Never pay for, write or filter reviews, and never ask only the happy customers. The FTC's 2024 rule bans fake reviews and review suppression.
+
+**Website:** inventory cards updated the same day a car sells, Call and WhatsApp buttons, the Sell or Trade form, About, location and hours. Hand updates first, a dealer listing tool later.
+
+**Local SEO:** consistent name, address and phone across the site, Google, Facebook, Apple Maps, Bing Places and Yelp; titles that match real searches ("used cars Jacksonville FL", "we buy cars Jacksonville"); AutoDealer schema on the site.
+
+**Paid ads, in order:** a small, capped Meta test in Week 4 (walkaround videos and We Buy Cars ads within about 20 miles), Google Search in Month 2 only if Meta pays back, and listing sites only after a 30-day review. Financing stays out of the first ads, because Meta restricts targeting on credit-related ads.
+
+## Lead handling and follow-up
+
+Most small dealers lose more sales to slow or forgotten replies than to price. One simple system fixes it.
+
+**One lead log** (a free Google Sheet): date and time, name, phone, channel, vehicle of interest or to sell, budget, financing needed, trade-in, next step, next follow-up date, outcome.
+
+| Moment | Target | What happens |
+| --- | --- | --- |
+| New lead in business hours | Within 15 minutes | A personal reply that answers the question and offers a time to see the car |
+| New lead after hours | By the next morning | A short reply that night if possible; full reply in the morning |
+| Appointment set | Same day | Text confirmation with a map link; reminder 2 hours before |
+
+| Day | Touch for buyers who haven't bought yet |
+| --- | --- |
+| 1 | "Still interested? Happy to send a walkaround video." |
+| 3 | Similar vehicles in their price range |
+| 7 | Check in; ask what would make it a fit |
+| 14 | New arrivals |
+| 30 | Last personal check-in, then a monthly list only if they agreed to it |
+
+After the sale: a thank-you text with the review link on day 2 or 3, and a "how's the car?" check-in with a referral ask on day 30.
+
+**Consent:** replying to people who reached out is fine. Marketing texts and automated messages need written consent first (TCPA and Florida telemarketing law; confirm with counsel). The website consent box is unchecked by default.
+
+## Operations
+
+**Vehicle intake checklist (every car):** VIN, title status and lien check, and a history report; an inspection and recon log with costs; the photo set to the listing standard; the FTC Buyers Guide filled in and posted before the car is shown; price set by the method above with total cost recorded; listed on the site, Facebook and Google the same day.
+
+**Deal file checklist:** buyer's order, signed Buyers Guide copy, title paperwork, odometer disclosure, registration and tag paperwork, payment records and any financing documents (exact list to confirm with FLHSMV and dealer training materials).
+
+| Day | Task | Owner |
+| --- | --- | --- |
+| Monday | Review the lead log; price check on cars over 30 days | Dealer, with me |
+| Tuesday | New arrivals: photos, listings, walkaround video | Dealer |
+| Thursday | Google post, Facebook post, review replies | I draft, the dealer approves |
+| Friday | Weekly numbers: leads by channel, appointments, sales, ad spend | Me |
+
+**Metrics:** leads by source, appointment rate, show rate, close rate, units sold, average sale price, gross per vehicle, days on lot, cost per lead and per sale for paid ads, new reviews per month.
+
+## Compliance checklist (Florida)
+
+Checked against official sources on 24 October 2026. It's a checklist to confirm the dealer's current status, not legal advice.
+
+| Requirement | What the source says | Action |
+| --- | --- | --- |
+| FLHSMV independent dealer license | Buying, selling or offering three or more vehicles in 12 months presumes you're a dealer (s. 320.27(1)(c), F.S.); application form 86056 | Confirm active; note renewal date |
+| Dealer training | Pre-licensing training and exam; 8 hours of continuing education every two years (s. 320.27(4)) | Confirm CE is current |
+| Surety bond | Bond on form 86020 or an irrevocable letter of credit (s. 320.27(10)(a)) | Confirm in force |
+| Garage liability insurance | Garage liability, or general liability plus a business auto policy, at the statutory minimums (s. 320.27(3)) | Confirm policy and limits |
+| Dealer location | Permanent sign readable from 50 yards, an office of at least 100 sq ft, posted hours at the entrance, display space under the dealer's exclusive control (Rule 15C-7.003, F.A.C.) | Check sign and posted hours match the site and Google |
+| FTC Used Car Rule | A Buyers Guide on every used car offered for sale, both sides visible, before it's shown; Spanish Guide when the sale is in Spanish; the Guide is part of the contract | Audit every car on the lot |
+| Advertised price | Must include all fees; only taxes, tag, registration and title may be left out (s. 501.976(16)) | Every ad and listing shows the all-in price |
+| Dealer (predelivery) fee | The required disclosure sentence on every document with that line item (s. 501.976(18)) | Check forms if a fee is charged |
+| Bait advertising | No advertising a car you don't intend to sell as advertised (16 CFR Part 238; FDUTPA s. 501.204) | Take sold cars down the same day |
+| Financing ads | Trigger terms require full disclosures including APR (Reg Z 1026.24) | "Financing available to qualified buyers" until terms are set |
+| Dealer financing license | OFR Motor Vehicle Retail Installment Seller license for firms that sell and finance (s. 520.03) | Confirm before writing installment contracts |
+| Reviews | FTC 2024 rule bans fake reviews, buying reviews and suppression | Ask everyone; never filter or pay |
+| Duval Local Business Tax Receipt | Runs 1 October to 30 September; late penalties from October; regulated businesses show an active state license | Confirm the 2026–27 receipt is paid |
+| Other registrations | EIN, Florida DOR sales tax number, Division of Corporations entity and fictitious name | Confirm all are current |
+
+<Callout type="lesson" title="The CARS Rule is not in effect">
+The FTC's Combating Auto Retail Scams (CARS) Rule was vacated by the Fifth Circuit in January 2025. The FTC Act's ban on deceptive practices, the Used Car Rule and Florida law all still apply in full.
+</Callout>
+
+**Ad checklist (every ad, listing and post):** year, make, model and trim; price includes all dealer fees with "plus tax, tag, title and registration"; the car is on the lot at that price; no financing terms without full Reg Z disclosures; no "guaranteed approval" or "lowest price in Jacksonville" claims; real photos of the actual car.
+
+## Growth budget and revenue model (method only)
+
+The proposal lays out one-time setup items, a Lean and a Recommended monthly budget, and a break-even table showing how many extra sales per month pay for the plan at different gross-profit levels. The revenue model is a worksheet waiting on five inputs from the owner (units today, units goal, average sale price, average gross, other income per vehicle):
+
+```text
+Monthly sales revenue   = Goal units × Average sale price
+Monthly gross profit    = Goal units × (Gross + Other income)
+Added gross from growth = (Goal units − Today's units) × (Gross + Other income)
+Net gain from the plan  = Added gross − Monthly growth spend
+Return on growth spend  = Net gain ÷ Monthly growth spend
+```
+
+The figures stay in the private proposal. The proposal is explicit that its worked example isn't a forecast, and that no projection is shown because no sales history was provided.
+
+## Risks and mitigations
+
+| Risk | Mitigation |
+| --- | --- |
+| Advertising violation (fees left out, stale listings, financing terms without disclosures) | The ad checklist; same-day removal of sold cars; I review ad copy before it runs |
+| Missing or incomplete Buyers Guides | Intake checklist and a weekly lot walk |
+| Owner bandwidth | Templates, one lead log, one weekly batch for photos and posts; I do the drafting |
+| A negative review | Reply calmly within two business days and offer to resolve it offline |
+| Paid ads don't pay back | A daily cap, a 30-day test, cost per sale tracked; stop or change if it's above gross per car |
+| Buying a problem car from the public | Inspection, title and lien check before paying; offers subject to inspection |
+| Aged inventory | The 30/45/60-day rule |
+| Seasonality | Build inventory ahead of tax-refund season (general knowledge) |
+| Accounts owned by someone else | The owner holds every owner login; I get manager access only |
+
+## The 90-day plan
+
+| When | Actions | Milestone |
+| --- | --- | --- |
+| Week 1 (26 Oct to 1 Nov) | Confirm roles and goals; confirm license, bond, insurance and tax receipt; claim the Google profile; competitor scan; set the photo standard and buy-box; audit Buyers Guides | Baseline numbers recorded |
+| Week 2 (2 to 8 Nov) | Launch the website; start the lead log; rewrite listings with all-in prices; start review requests | Website live |
+| Weeks 3 to 4 (9 to 22 Nov) | Launch We Buy Cars; contact 3 to 5 lenders; create the Meta ad account; start the ad test in Week 4 | First paid ads running |
+| Weeks 5 to 8 (23 Nov to 20 Dec) | Black Friday and holiday inventory posts; weekly ad review; 30-day review; Google ads if Meta pays back | 30-day review |
+| Weeks 9 to 13 (21 Dec to 23 Jan) | Year-end push; stock up for tax season using lead-log demand; decide on listing sites; 90-day review | Next-quarter plan |
+
+**Who does what:** the owner owns and signs everything licensed or financial, decides on buying and pricing, holds every login, talks to every customer and approves ad spend. I build and update the website, research comparable prices, draft posts, ads and review replies, maintain the lead log and templates, run campaigns inside the approved budget, and send the weekly report.
+
+## Testing and verification
+
+| Item | Status |
+| --- | --- |
+| Growth proposal with cited regulatory sources | Done, 24 October 2026 (version 1.0, draft for owner review) |
+| Website draft with inventory, Sell or Trade form, reviews and AutoDealer schema | Done; forms not connected yet |
+| Compliance items checked against official sources | Done, 24 October 2026; the dealer's own status still to confirm |
+| Owner review of the draft and the open items | Not yet |
+| Website live | Not yet (Week 2 target) |
+| Lead log in use | Not yet |
+| Any ad spend | None |
+
+## Lessons learned
+
+- **Start with what's true.** The owner-operator story is the one thing a bigger lot can't copy, so the whole plan is built on proving it.
+- **Free channels first.** A complete Google profile and fast replies are worth more than an ad budget spent on weak listings.
+- **Compliance is marketing.** An all-in price and a posted Buyers Guide are legal requirements, and they're also exactly what "a straight deal" means to a buyer.
+- **No forecast without data.** A worksheet that waits for real numbers is more honest than a projection built on guesses.
+
+## Open items
+
+- My role: consultant, partner or other.
+- Current and goal numbers: units per month, average sale price, average gross.
+- Lean or Recommended budget.
+- Business hours, any dealer fee, and whether pre-purchase inspections are welcome.
+- Who holds the domain login today.
+- Connect the website forms to the owner's inbox or the lead log.
+
+## Sources
+
+- [FLHSMV, Motor vehicle dealer licensing](https://www.flhsmv.gov/motor-vehicles-tags-titles/dealers-installers-manufacturers-distributors-importers/mv-rv-mh-dealer-broker)
+- [Florida Statutes s. 320.27, Motor vehicle dealers](https://m.flsenate.gov/statutes/320.27)
+- [Florida Administrative Code Rule 15C-7.003](https://www.law.cornell.edu/regulations/florida/Fla-Admin-Code-Ann-R-15C-7-003)
+- [Florida Statutes s. 501.976, dealer advertising and fees](https://m.flsenate.gov/statutes/501.976)
+- [Florida Statutes s. 501.204, FDUTPA](https://m.flsenate.gov/statutes/501.204)
+- [FTC, Dealer's Guide to the Used Car Rule](https://www.ftc.gov/business-guidance/resources/dealers-guide-used-car-rule)
+- [FTC, Used Car Rule (16 CFR Part 455)](https://www.ftc.gov/enforcement/rules/rulemaking-regulatory-reform-proceedings/used-car-rule)
+- [FTC Guides Against Bait Advertising (16 CFR Part 238)](https://www.law.cornell.edu/cfr/text/16/part-238)
+- [CFPB, Regulation Z s. 1026.24 Advertising](https://www.consumerfinance.gov/rules-policy/regulations/1026/2021-06-30/interp-24/)
+- [Florida OFR, Motor Vehicle Retail Installment Seller](https://flofr.gov/sitePages/MotorVehicleRetailInstallment.htm)
+- [Duval County Tax Collector, Local Business Tax Receipt](https://taxcollector.jacksonville.gov/Taxes/Local-Business-Tax)
+- [Holland & Knight, Fifth Circuit strikes down the FTC's CARS Rule](https://www.hklaw.com/en/insights/publications/2025/02/fifth-circuit-strikes-down-ftcs-auto-retail-scam-rule)
+- [Hogan Lovells, FTC final rule banning fake reviews](https://www.hoganlovells.com/en/publications/ftc-publishes-final-rule-banning-fake-consumer-reviews-and-testimonials)
+
+## Changelog
+
+<Changelog entries={[{ date: '2026-10-26', change: 'Project page published from the growth proposal and the website draft. Names, contacts, address, budgets and vehicle prices left out.', rollback: 'Revert the commit that added this page.' }]} />

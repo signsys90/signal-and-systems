@@ -43,7 +43,10 @@ export default defineConfig({
 						},
 						{
 							label: 'Vehicle Upfit and 12V',
-							items: [{ label: 'F-150 Upfit', items: [{ autogenerate: { directory: 'projects/f150-upfit' } }] }],
+							items: [
+								{ label: 'F-150 Upfit', items: [{ autogenerate: { directory: 'projects/f150-upfit' } }] },
+								{ label: "Quest Angler 10' Upfit", link: '/projects/quest-angler-10-upfit/' },
+							],
 						},
 						{
 							label: 'Radio and Emergency Comms',
@@ -59,6 +62,9 @@ export default defineConfig({
 								{ label: 'SaniGLAZE Opportunity Map', link: '/projects/saniglaze-opportunity-map/' },
 								{ label: 'SaniGLAZE Trade Show Map', link: '/projects/saniglaze-trade-show-map/' },
 								{ label: 'AI-Assisted Executive Search', link: '/projects/ai-assisted-executive-search/' },
+								{ label: 'Big Time Sandwich Co.', link: '/projects/big-time-sandwich-co/' },
+								{ label: 'Wicks Surplus', link: '/projects/wicks-surplus/' },
+								{ label: 'North FL Motorsports', link: '/projects/north-fl-motorsports/' },
 							],
 						},
 						{
