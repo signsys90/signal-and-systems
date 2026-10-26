@@ -12,8 +12,9 @@ project: true
 import ProjectHeader from '../../../../components/ProjectHeader.astro';
 import Callout from '../../../../components/Callout.astro';
 import Changelog from '../../../../components/Changelog.astro';
+import flow from '../../../../assets/business/outbound-intended-flow.png';
 
-<ProjectHeader />
+<ProjectHeader hero={flow} heroAlt="Intended flow of the AI outbound sales platform: targeting, research, AI draft, rules check and send, with opt-outs always honored. Labelled as intended design, not documented architecture." />
 
 <Callout type="open" title="Draft">
 This page is a skeleton. The details below are filled in only from the project itself, so most sections are still open.
@@ -32,6 +33,10 @@ Build an AI-powered outbound sales platform that runs legitimate, human-sounding
 ## Architecture
 
 To be documented: the major components, data sources and how messages move from research to send.
+
+Until then, this is the intended flow, drawn only from the goal, constraints and safety notes on this page. It is not the documented architecture and will be replaced once the repository is written up.
+
+![Intended flow diagram: five boxes, Targeting, Research, AI draft, Rules check and Send, with a dashed opt-out bar underneath and three rules: legitimate outreach only, no private data published, no employer confidential data.](../../../../assets/business/outbound-intended-flow.png)
 
 ## Parts list
 
