@@ -1,0 +1,82 @@
+---
+title: Mobile Ham Radio Install
+description: A dual-band 2 m / 70 cm mobile antenna on an NMO door mount, fed to a handheld radio in the F-150's console.
+summary: Dual-band 2 m / 70 cm antenna on an NMO door mount, feeding a handheld radio in the F-150 console.
+status: Installed
+category: Radio and Emergency Comms
+started: TBD
+updated: 2026-10-26
+project: true
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import PartsTable from '../../../../components/PartsTable.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+
+<ProjectHeader />
+
+## Goal
+
+Put a usable 2 m / 70 cm amateur radio station in the truck, with an external antenna, without sharing power or grounds with the emergency lighting system.
+
+## Constraints
+
+- 2017 F-150 Lariat SuperCrew with a panoramic roof. The antenna mounts on the rear passenger door instead of the roof.
+- The radio must stay electrically separate from the Whelen CanTrol WC system.
+- The callsign is KR4JSQ.
+
+## Architecture
+
+```text
+BaoFeng BF-F8HP (console) ── SMA jumper ── PL-259 ── Comet HD-5NMO coax ── NMO mount (rear passenger door, top rear corner) ── 7.5" dual-band antenna
+```
+
+## Parts list
+
+<PartsTable
+	parts={[
+		{ name: 'BaoFeng BF-F8HP dual-band 2 m / 70 cm handheld', specs: 'Label reads BF-F8HP PRO', source: 'https://baofengtech.com/product/bf-f8hp/', status: 'Installed' },
+		{ name: 'Compact High Performance 2M/440 Mobile Antenna, 7.5 in, NMO base', sku: 'H0-016475', status: 'Installed' },
+		{ name: 'Comet HD-5NMO NMO bracket mount with coax', sku: 'H0-019294', status: 'Installed' },
+		{ name: 'SMA to PL-259 jumper', status: 'Installed' },
+	]}
+/>
+
+## Wiring or configuration
+
+The radio runs on its own battery pack, so it shares nothing with the truck's electrical system. If it is ever powered from the truck, it gets its own fused battery feed and its own ground. It never uses the CanTrol fuse block, and it never grounds to the battery negative post.
+
+## Build steps
+
+1. Mount the Comet HD-5NMO at the top rear corner of the rear passenger-side door.
+2. Fit the antenna on the NMO base.
+3. Route the coax to the console. Keep it away from lighting and siren wiring, and cross any wiring at right angles.
+4. Connect the radio to the coax with a short SMA jumper.
+
+## Testing and verification
+
+| Test | Status |
+| --- | --- |
+| Antenna and mount installed | Done |
+| SWR measurement | Not yet documented |
+| Noise check with the lights and siren running | Not yet. This waits until the CanTrol system is installed |
+
+## Safety notes
+
+- Keep coax clear of door hinges and pinch points.
+- After the warning system is installed, key the radio with the lights and siren running and listen for interference.
+
+## Lessons learned
+
+None recorded yet.
+
+## Open items
+
+- Add prices for the radio, antenna and mount.
+- Measure and record SWR.
+- Add the install date.
+
+## Changelog
+
+<Changelog entries={[{ date: '2026-10-26', change: 'Project page published.', rollback: 'Revert the commit that added this page.' }]} />

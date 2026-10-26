@@ -1,0 +1,177 @@
+---
+title: F-150 Emergency Lighting and 12V Upfit
+description: Whelen CanTrol WC controlled emergency lighting, siren and 12V build on a 2017 Ford F-150 Lariat SuperCrew, with a grille guard package and factory lamp flashing.
+summary: Emergency lighting, siren and 12V build on a 2017 F-150 Lariat SuperCrew, run from one Whelen CanTrol WC controller with a 21-button head.
+status: In progress
+category: Vehicle Upfit and 12V
+started: TBD
+updated: 2026-10-26
+project: true
+sidebar:
+  label: Overview
+  order: 0
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import PartsTable from '../../../../components/PartsTable.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+
+<ProjectHeader />
+
+<Callout type="safety" title="Legal notice">
+Emergency lighting and siren use is regulated by state law and permits. This page documents a personal build and is not legal guidance.
+</Callout>
+
+## Goal
+
+Build a clean, serviceable warning light and siren package on a daily-driven truck. Every circuit is fused and documented, and everything is controlled from one control head. Done means every component is mounted, bench-tested on 12V first, verified in the truck, and documented on its own page.
+
+## Constraints
+
+- **Vehicle:** 2017 Ford F-150 Lariat SuperCrew with bucket seats, the factory flow-through center console and a floor shifter. There is no equipment console.
+- **Roof:** panoramic roof, so nothing mounts on the roof. The control head goes in the factory overhead console, in place of the sunglasses holder.
+- **Front:** a Steelcraft HD Grille Guard (50-1420C) carries the whole front package. The bumper and factory grille are not modified.
+- **Factory electrical:** the factory lamps are flashed by a Speed Turtle Engineering EFM 3.0 installed inline at the BCM. There are no taps on factory lamp or BCM circuits beyond that.
+- **Grounds:** nothing is ever grounded to the battery negative post, because the Ford battery monitoring sensor on that post must see all current. Grounds go to a Ford factory ground point or a steel frame rail.
+- **Radio:** amateur radio gets its own battery feed and ground, never shared with the CanTrol or its fuse block.
+- **Airbags:** all mounting and wire routing stays clear of airbag zones, including the curtain airbags along the roof rails.
+
+## Architecture
+
+Everything is switched by the Whelen CanTrol WC. Each light makes its own flash patterns, so every CanTrol output is set to steady on/off. Loads go on the 10A J1 outputs, and trigger wires go on the 2.5A LED outputs.
+
+```text
+Battery (Optima Yellow Top) ── 2 x 40A fuses at battery ── Whelen CanTrol WC module (under driver-side rear seat)
+                                                              │
+  21-button WeCan control head (overhead console) ── RJ-45 ──┤
+                                                              ├── Siren amp ── 2 x UBL 100W speakers (parallel, 5.5 Ω)
+                                                              ├── J1-1/J1-6 + LED outputs ── UBL Color Flood 2.0 20" bar
+                                                              ├── J1-2 ── SpeedTech Grand Control Box ── Raptor visor bar
+                                                              ├── J1-3 ── BooYu rear traffic advisor controller
+                                                              ├── J1-4 ── 2 x UBL U-Lite grille lights
+                                                              ├── J1-5 ── Putco 60" Work Blade (tailgate)
+                                                              ├── LED out 3 ── 30A relay ── 2 x UBL rocker panel bars
+                                                              ├── LED out 4/5 ── Speed Turtle EFM 3.0 ── BCM ── factory lamps
+                                                              ├── LED out 12/13 ── 2 x SpeedTech Z-6 heads (rear plate)
+                                                              └── OBDII CANport (CC5K1) ── brake signal for brake pop
+```
+
+The full output assignment is on the [CanTrol output plan](/projects/f150-upfit/cantrol-output-plan/) page.
+
+## Controller
+
+<SpecBox
+	title="Whelen CanTrol WC"
+	specs={[
+		['Power', '12V DC ±20%, negative ground'],
+		['Main input', '80A max, 2 red leads each fused 40A at battery'],
+		['High-current outputs', 'J1: 8 x 10A'],
+		['LED outputs', 'J2 + J4: 32 x 2.5A, 20A group fuses'],
+		['Total output limit', '40A combined'],
+		['Traffic advisor', 'J10: TA 1–8, 20A fuse'],
+		['Siren load', '5.5 Ω minimum'],
+		['Programming', 'USB to Windows PC, Whelen Command'],
+	]}
+	source={{ label: 'Whelen CanTrol WC Installation/Operating Guide, form 14580G' }}
+/>
+
+## Parts list
+
+Prices are what I paid, before tax and shipping unless noted.
+
+<PartsTable
+	parts={[
+		{ name: 'Whelen CanTrol WC, complete used set (module, 21-button WeCan head, mic, cables)', price: '$425.00 shipped', specs: 'See spec box above', status: 'In progress' },
+		{ name: 'Ben3DBuild Ford Overhead Mount for Whelen CCTL 6/7 (F-150 2015–2020)', price: '$120.00 shipped', specs: '3D printed, fits sunglasses holder opening', status: 'In progress' },
+		{ name: 'Whelen Carbide CanTrol OBDII CANport Kit (CC5K1 - Ford)', sku: 'CC5K1', price: '$52.98', specs: 'Reads brake over OBDII for brake pop', status: 'In progress' },
+		{ name: 'SpeedTech Lights Super Takedown Raptor Elite Striker-TIR Split LED Visor Light Bar (Dual Memory), amber/amber', sku: 'B-RTXE8', price: '$150.00', specs: 'Draws under 2.4A', status: 'Installed' },
+		{ name: 'SpeedTech Lights Raptor visor brackets', sku: 'Q-RVF15', price: '$49.99', status: 'Installed' },
+		{ name: 'SpeedTech Lights Grand Control Box', price: '$39.99', specs: 'Required for visor bar patterns', status: 'Installed' },
+		{ name: 'BooYu Rear LED TIR Amber Warning Light & Traffic Advisor', price: '$39.99', specs: '8 heads, all amber; manual power button', status: 'Installed' },
+		{ name: 'SpeedTech Lights headrest rear mounting brackets (2-pack)', price: '$19.99', status: 'Installed' },
+		{ name: 'Speed Turtle Engineering Easy Flash Module 3.0 (EFM 3.0), Ford', price: '$200.00', specs: 'Inline at BCM; firmware v3.36', source: 'https://www.speedturtleengineering.com/', status: 'Installed' },
+		{ name: 'Speed Turtle Engineering EFM 2.0 / 3.0 Voltage Input Harness', price: '$15.00', specs: '5–17V trigger inputs, no load', source: 'https://www.speedturtleengineering.com/', status: 'Planned' },
+		{ name: 'Steelcraft HD Grille Guard', sku: '50-1420C', price: '$450.00 (used)', specs: '2015–2017 F-150 fitment', status: 'In progress' },
+		{ name: 'UBL 100W Large Siren Speaker (x2)', price: '$171.00 pair', specs: '100W, 11 Ω each', status: 'In progress' },
+		{ name: 'UBL Color Flood 2.0 20" Amber/White LED Light Bar', price: '$152.00', specs: '3.3A max (108W), 10–30V', status: 'Bench-tested' },
+		{ name: 'UBL U-Lite Surface Mount LED Grille Light, Amber/White (x2)', sku: 'UBL-UL2-SM', price: '$85.50 pair', specs: '350 mA max each, 12V', status: 'In progress' },
+		{ name: 'UBL LED Running Board Rocker Panel Lights (x2)', sku: 'UBL-TGB-AW2', specs: '60", 12–24V DC, SAE J595 Class 1; draw not listed', status: 'Planned' },
+		{ name: 'Putco Amber & White Work Blade LED Lights, 60", with Putco Wireless Remote Kit V3', price: '$253.37 shipped', specs: 'Tailgate, 3M tape mount', status: 'In progress' },
+		{ name: 'SpeedTech Lights License Plate Bracket', sku: 'Q-LPB', price: '$19.99', status: 'In progress' },
+		{ name: 'SpeedTech Lights Brake Light (Secondary Red) Z-6 TIR Surface Mount Heads, Amber Clear (x2)', price: '$119.98 pair', specs: 'Red brake wire for brake pop', status: 'In progress' },
+		{ name: 'F150LEDs CREE LED headlight bulbs, low and high beam', price: '$296.10', status: 'Installed' },
+		{ name: 'F150LEDs CREE front running and turn LED bulbs', price: '$89.10', specs: 'No hyperflash', status: 'Installed' },
+		{ name: 'F150LEDs front marker LED bulbs', price: '$35.10', status: 'Installed' },
+		{ name: 'Optima Yellow Top battery, H7', sku: 'DH7', price: '$379.99', specs: '880 CCA, AGM deep cycle', status: 'In progress' },
+	]}
+/>
+
+<Callout type="unverified">
+The CanTrol module model has not been read off its label yet. Brake pop through the CANport needs the CANport-capable module, which will be confirmed when the unit is on the bench.
+</Callout>
+
+## Wiring and configuration
+
+- **Main power:** two red leads, each fused 40A within 2 ft of the battery, on 8 AWG. That size comes from the guide's gauge chart for runs up to 15.5 ft, and the planned runs are about 12 ft. Two black leads of the same gauge go to a factory ground point or the frame. The fuses go in last.
+- **Ignition sense:** J17-7 (red/white) through a fuse tap to an ignition-switched source.
+- **Siren:** orange (speaker high) to speaker white and brown (speaker low) to speaker black. Both speakers are wired in parallel with matched polarity.
+- **Fuse blocks:** two ATC blade blocks near the battery, one for the CanTrol group and one for accessories.
+- **Pass-throughs:** an existing factory firewall grommet or a new rubber grommet, never bare sheet metal. Drip loops, heat shrink and dielectric grease on exposed joints.
+
+Every output, with its trigger wire and button, is on the [CanTrol output plan](/projects/f150-upfit/cantrol-output-plan/). Wire-by-wire tables for each device will be published on their own component pages.
+
+## Build steps
+
+1. Bench test every product on its own on a 12V supply, including the light bar's modes and arrow wires, the Putco bar and remote, and the Z-6 heads.
+2. Mock up the grille guard package hand-tight, with no threadlocker.
+3. Mount the UBL products on the guard permanently, then have a shop bolt the guard to the truck.
+4. Store the guard wiring in loom until wiring day.
+5. Install the control head in the overhead console on the Ben3DBuild mount.
+6. Wiring day: mount the CanTrol module under the driver-side rear seat, then run power, fuses and every circuit.
+7. Program the CanTrol in Whelen Command, save the program file and keep a backup.
+8. Verify every function in the truck and update each component's status.
+
+## Testing and verification
+
+| Item | Bench-tested | Verified in truck |
+| --- | --- | --- |
+| UBL Color Flood 2.0 light bar: modes, arrows, pattern wire | Yes (2026-10-11) | Not yet |
+| F150LEDs bulbs flashing on the EFM 3.0 | n/a | Yes (2026-10-08): clean flashing, no hyperflash |
+| Visor bar, BooYu traffic advisor, EFM 3.0 | Not documented | Installed. CanTrol control not yet tested |
+| CanTrol WC, speakers, grille lights, Putco, Z-6 heads, rocker bars | Not yet | Not yet |
+
+## Safety notes
+
+- Fuse every feed within 2 ft of its source.
+- Never ground to the battery negative post on this truck.
+- Grommet every pass-through and loom every run.
+- Route the control head cable above or behind the curtain airbags and their clips, never across the deployment path. Reinstall pillar trim airbag clips the way Ford designed them.
+- Keep coax away from CanTrol power, speaker and light wiring. Cross at right angles where needed. After install, key the radio with lights and siren running and listen for noise.
+
+## Lessons learned
+
+- The UBL Color Flood 2.0 bar needs its red power lead on its own output. Red alone does nothing, and it must never be joined to a mode wire.
+- The UBL manual says three taps on the yellow wire switch the color, but a quick double tap is what worked on the bench.
+- The BooYu traffic advisor does not power on by itself when it gets 12V. Its power button has to be pressed every time.
+- The CanTrol guide lists different colors for LED Outputs 11 and 12 on different pages. Identify those leads by pin and with a meter, not by color.
+
+## Open items
+
+- Confirm the CanTrol module model on its label and that Whelen Command lists the 2017 F-150 brake signal.
+- Confirm a 1/4"-28 nut fits the siren speaker bolt with two threads showing.
+- Measure the control head cable run from the overhead console to the module.
+- Measure each UBL rocker panel bar's draw before choosing its fuse.
+- Confirm the Optima DH7 fit and terminal orientation in the battery tray.
+- Decide the all-lights five-modes layout and its four open choices.
+- Add the project start date.
+
+## Changelog
+
+<Changelog
+	entries={[
+		{ date: '2026-10-26', change: 'Overview rebuilt from the project document (revision 10): real parts list, prices, statuses, output plan and test results.', rollback: 'Revert the commit that changed this page.' },
+		{ date: '2026-10-26', change: 'Overview page published with the component list from the site plan.', rollback: 'Revert the commit that added this page.' },
+	]}
+/>

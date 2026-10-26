@@ -1,0 +1,38 @@
+---
+// Key specs in a two-column monospaced grid, with the source they came from.
+// Leave `source` out only when the specs are flagged as unverified on the page.
+interface Props {
+	title?: string;
+	specs: [label: string, value: string][];
+	source?: { label: string; href?: string };
+}
+
+const { title = 'Key specs', specs, source } = Astro.props;
+---
+
+<div class="ss-surface ss-spec not-content">
+	<p class="ss-spec__title">{title}</p>
+	<dl class="ss-spec__grid">
+		{specs.map(([label, value]) => (
+			<>
+				<dt>{label}</dt>
+				<dd>{value}</dd>
+			</>
+		))}
+	</dl>
+	{source ? (
+		<p class="ss-spec__source">Source: {source.href ? <a href={source.href}>{source.label}</a> : source.label}</p>
+	) : (
+		<p class="ss-spec__source ss-spec__source--missing">Source: not yet linked (unverified)</p>
+	)}
+</div>
+
+<style>
+	.ss-spec { margin-block: 1rem; }
+	.ss-spec__title { margin: 0 0 0.5rem; font-family: var(--ss-font-heading); font-weight: 600; color: var(--ss-text); }
+	.ss-spec__grid { display: grid; grid-template-columns: minmax(8rem, max-content) 1fr; gap: 0.35rem 1.25rem; margin: 0; font-family: var(--sl-font-mono); font-size: var(--sl-text-sm); }
+	.ss-spec__grid dt { color: var(--ss-muted); }
+	.ss-spec__grid dd { margin: 0; color: var(--ss-text); }
+	.ss-spec__source { margin: 0.75rem 0 0; font-size: var(--sl-text-xs); color: var(--ss-muted); }
+	.ss-spec__source--missing { color: var(--ss-accent); }
+</style>

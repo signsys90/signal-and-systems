@@ -1,0 +1,45 @@
+---
+title: Signal & Systems
+description: Systems built in the field and in the business. Build logs and project documentation by William A. Atkins, KR4JSQ.
+template: splash
+hero:
+  title: Signal & Systems
+  tagline: Systems built in the field and in the business. Project documentation by William A. Atkins, KR4JSQ.
+  actions:
+    - text: Browse projects
+      link: /projects/
+      icon: right-arrow
+    - text: About William
+      link: /about/
+      variant: minimal
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+I build scalable systems that help organizations grow. This site documents the systems I build outside the boardroom too: field software, vehicle upfits, radio and emergency communications, and the business frameworks behind growth and revenue operations. Every project is written up in enough detail that you can learn from it or reuse it.
+
+## Featured projects
+
+<CardGrid>
+	<LinkCard
+		title="F-150 Emergency Lighting and 12V Upfit"
+		description="Whelen CanTrol Gen 3 controlled lighting, siren and 12V build on a 2017 F-150 Lariat SuperCrew."
+		href="/projects/f150-upfit/"
+	/>
+	<LinkCard
+		title="Responder ID Scanner"
+		description="Offline, privacy-first Windows app for the Panasonic Toughbook CF-33 that decodes PDF417/AAMVA IDs."
+		href="/projects/responder-id-scanner/"
+	/>
+	<LinkCard
+		title="AI Outbound Sales Platform"
+		description="An AI-powered outbound sales platform built with Codex, documented as a public portfolio project."
+		href="/projects/ai-outbound-platform/"
+	/>
+</CardGrid>
+
+## Latest build logs
+
+<CardGrid>
+	<LinkCard title="2026-10-26: Site launch" description="Why this site exists and how it is built." href="/log/2026-10-26-site-launch/" />
+</CardGrid>

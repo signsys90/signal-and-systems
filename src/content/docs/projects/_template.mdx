@@ -1,0 +1,63 @@
+---
+# Copy this file to src/content/docs/projects/<project>/index.mdx (or a child page) and fill it in.
+# Files starting with an underscore are not published.
+title: Project title
+description: One sentence for search results (under 155 characters).
+summary: One-line summary shown in the header card and project grid.
+status: Planned # Planned | In progress | Installed | Bench-tested | Verified | Retired
+category: Vehicle Upfit and 12V # Software and Automation | Vehicle Upfit and 12V | Radio and Emergency Comms | Business Systems | Fabrication and 3D Printing
+started: YYYY-MM-DD
+updated: YYYY-MM-DD
+project: true # top-level project pages only; remove on component pages
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import PartsTable from '../../../../components/PartsTable.astro';
+import WiringTable from '../../../../components/WiringTable.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+
+<ProjectHeader />
+
+## Goal
+
+The problem, and what "done" looks like.
+
+## Constraints
+
+Vehicle fitment, hardware, privacy, budget.
+
+## Architecture
+
+Describe the diagram: system diagram, wiring overview or app data flow.
+
+## Parts list
+
+<PartsTable parts={[{ name: 'Part name', sku: 'SKU', price: '$0.00', specs: 'Key specs', source: 'https://manufacturer.example/page', status: 'Planned' }]} />
+
+## Wiring or configuration
+
+<WiringTable rows={[{ wire: 'W1', color: 'Red', function: 'Power', source: 'CanTrol output #', draw: '0.0 A', fuse: '0 A', gauge: '00 AWG', relay: '87', termination: 'Butt splice', ground: 'Location' }]} />
+
+## Build steps
+
+1. Step, with a photo placeholder.
+
+## Testing and verification
+
+What was bench-tested, what was verified in the vehicle or on hardware, and what was NOT tested.
+
+## Safety notes
+
+Fusing near the battery, grommets and loom, airbag zones, no BCM guesswork.
+
+## Lessons learned
+
+## Open items
+
+- One line each.
+
+## Changelog
+
+<Changelog entries={[{ date: 'YYYY-MM-DD', change: 'What changed.', rollback: 'How to undo it.', log: '/log/yyyy-mm-dd-slug/' }]} />

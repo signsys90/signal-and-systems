@@ -1,0 +1,29 @@
+---
+// Download link for a config sheet, PDF or release notes. Put the file in /public/downloads/.
+interface Props {
+	title: string;
+	href: string;
+	description?: string;
+	meta?: string;
+}
+
+const { title, href, description, meta } = Astro.props;
+---
+
+<a class="ss-surface ss-download not-content" href={href} download>
+	<span class="ss-download__icon" aria-hidden="true">↓</span>
+	<span>
+		<span class="ss-download__title">{title}</span>
+		{description && <span class="ss-download__desc">{description}</span>}
+		{meta && <span class="ss-download__meta ss-mono">{meta}</span>}
+	</span>
+</a>
+
+<style>
+	.ss-download { display: flex; gap: 0.9rem; align-items: flex-start; text-decoration: none; margin-block: 1rem; }
+	.ss-download:hover { border-color: var(--ss-accent); }
+	.ss-download__icon { font-size: 1.25rem; color: var(--ss-accent); line-height: 1.4; }
+	.ss-download__title { display: block; font-weight: 600; color: var(--ss-text); }
+	.ss-download__desc { display: block; color: var(--ss-muted); font-size: var(--sl-text-sm); }
+	.ss-download__meta { display: block; color: var(--ss-muted); font-size: var(--sl-text-xs); margin-top: 0.2rem; }
+</style>

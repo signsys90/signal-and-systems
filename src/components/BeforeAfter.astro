@@ -1,0 +1,41 @@
+---
+// Before/after slider for upfit photos. Both images should share the same framing and size.
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+	before: ImageMetadata;
+	after: ImageMetadata;
+	alt: string;
+	caption?: string;
+}
+
+const { before, after, alt, caption } = Astro.props;
+const b = await getImage({ src: before, width: 1200 });
+const a = await getImage({ src: after, width: 1200 });
+---
+
+<figure class="ss-ba not-content">
+	<div class="ss-ba__frame" style="--pos: 50%">
+		<img src={b.src} alt={`Before: ${alt}`} />
+		<img src={a.src} alt={`After: ${alt}`} class="ss-ba__after" />
+		<input type="range" min="0" max="100" value="50" aria-label="Compare before and after" />
+	</div>
+	{caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<script>
+	document.querySelectorAll<HTMLElement>('.ss-ba__frame').forEach((frame) => {
+		const range = frame.querySelector('input');
+		range?.addEventListener('input', () => frame.style.setProperty('--pos', `${range.value}%`));
+	});
+</script>
+
+<style>
+	.ss-ba { margin-block: 1rem; }
+	.ss-ba__frame { position: relative; overflow: hidden; border-radius: 0.375rem; border: 1px solid var(--ss-border); }
+	.ss-ba__frame img { display: block; width: 100%; height: auto; }
+	.ss-ba__after { position: absolute; inset: 0; height: 100%; object-fit: cover; clip-path: inset(0 0 0 var(--pos)); }
+	.ss-ba__frame input { position: absolute; inset: auto 0 0.5rem; width: calc(100% - 1rem); margin: 0 0.5rem; accent-color: var(--ss-accent); }
+	.ss-ba figcaption { margin-top: 0.35rem; font-size: var(--sl-text-xs); color: var(--ss-muted); }
+</style>

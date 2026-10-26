@@ -1,0 +1,37 @@
+---
+// One of the six project statuses from the design system.
+import type { STATUSES } from '../content.config';
+
+interface Props {
+	status: (typeof STATUSES)[number];
+}
+
+const { status } = Astro.props;
+const tone: Record<string, string> = {
+	Planned: 'muted',
+	'In progress': 'accent',
+	Installed: 'info',
+	'Bench-tested': 'info',
+	Verified: 'success',
+	Retired: 'muted',
+};
+---
+
+<span class:list={['ss-badge', `ss-badge--${tone[status] ?? 'muted'}`]}>{status}</span>
+
+<style>
+	.ss-badge {
+		display: inline-block;
+		font-family: var(--sl-font-mono);
+		font-size: var(--sl-text-xs);
+		line-height: 1;
+		padding: 0.3rem 0.55rem;
+		border-radius: 999px;
+		border: 1px solid currentColor;
+		white-space: nowrap;
+	}
+	.ss-badge--muted { color: var(--ss-muted); }
+	.ss-badge--accent { color: var(--ss-accent); }
+	.ss-badge--info { color: var(--ss-info); }
+	.ss-badge--success { color: var(--ss-success); }
+</style>

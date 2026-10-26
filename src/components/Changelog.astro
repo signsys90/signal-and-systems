@@ -1,0 +1,41 @@
+---
+// Dated change history for a page. Newest entry first.
+interface Entry {
+	date: string;
+	version?: string;
+	change: string;
+	rollback?: string;
+	log?: string;
+}
+
+interface Props {
+	entries: Entry[];
+}
+
+const { entries } = Astro.props;
+---
+
+<ol class="ss-changelog not-content">
+	{entries.map((e) => (
+		<li class="ss-changelog__item">
+			<p class="ss-changelog__meta ss-mono">
+				{e.date}{e.version && ` · v${e.version}`}
+			</p>
+			<p class="ss-changelog__change">
+				{e.change}
+				{e.log && <> (<a href={e.log}>build log</a>)</>}
+			</p>
+			{e.rollback && <p class="ss-changelog__rollback">Rollback: {e.rollback}</p>}
+		</li>
+	))}
+</ol>
+
+<style>
+	.ss-changelog { list-style: none; padding: 0; margin-block: 1rem; border-left: 2px solid var(--ss-border); }
+	.ss-changelog__item { position: relative; padding: 0 0 1rem 1.25rem; }
+	.ss-changelog__item::before { content: ''; position: absolute; left: -6px; top: 0.4rem; width: 10px; height: 10px; border-radius: 50%; background: var(--ss-accent); }
+	.ss-changelog__item p { margin: 0; }
+	.ss-changelog__meta { color: var(--ss-muted); font-size: var(--sl-text-xs); }
+	.ss-changelog__change { color: var(--ss-text); }
+	.ss-changelog__rollback { color: var(--ss-muted); font-size: var(--sl-text-sm); }
+</style>
