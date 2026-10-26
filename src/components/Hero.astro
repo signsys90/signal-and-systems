@@ -1,0 +1,66 @@
+---
+/*
+ * Home page hero: the Signal & Systems cover banner full width, then Starlight's default hero
+ * (title, three-line tagline, actions) centered underneath so the text stays readable on phones.
+ */
+import { Picture } from 'astro:assets';
+import Default from '@astrojs/starlight/components/Hero.astro';
+import banner from '../assets/brand/cover-banner.png';
+---
+
+<div class="ss-home-hero">
+	<Picture
+		src={banner}
+		formats={['avif', 'webp']}
+		widths={[640, 960, 1280, 1702]}
+		sizes="(min-width: 72rem) 68rem, 100vw"
+		alt="Signal & Systems Engineering, LLC. banner: Built in the field. Engineered for business. AI automation, RevOps, public-safety tech, 12V upfit, EmComm."
+		loading="eager"
+		fetchpriority="high"
+		class="ss-banner"
+	/>
+	<Default {...Astro.props} />
+</div>
+
+<style>
+	.ss-home-hero {
+		padding-top: 1.5rem;
+	}
+	.ss-home-hero :global(picture),
+	.ss-banner {
+		display: block;
+		width: 100%;
+	}
+	.ss-banner {
+		height: auto;
+		aspect-ratio: 1702 / 630;
+		border: 1px solid var(--ss-border);
+		border-radius: 0.75rem;
+		background: #0b1220;
+	}
+	/* No side image any more, so the default two-column layout collapses to one centered column */
+	.ss-home-hero :global(.hero) {
+		grid-template-columns: 100%;
+		padding-block: 2rem 1rem;
+	}
+	.ss-home-hero :global(.hero .stack) {
+		text-align: center;
+	}
+	.ss-home-hero :global(.hero .copy) {
+		align-items: center;
+	}
+	.ss-home-hero :global(.hero .copy > *) {
+		max-width: 60ch;
+	}
+	.ss-home-hero :global(.hero .actions) {
+		justify-content: center;
+	}
+	@media (max-width: 50rem) {
+		.ss-home-hero {
+			padding-top: 0.5rem;
+		}
+		.ss-banner {
+			border-radius: 0.5rem;
+		}
+	}
+</style>

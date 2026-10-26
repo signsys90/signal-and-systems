@@ -9,8 +9,12 @@ export default defineConfig({
 		starlight({
 			title: 'Signal & Systems Engineering, LLC.',
 			description: 'BUILT IN THE FIELD. ENGINEERED FOR BUSINESS. System documentation & technical architecture by William A. Atkins | KR4JSQ',
-			logo: { src: './src/assets/mark.svg', alt: 'Signal & Systems Engineering, LLC.' },
-			favicon: '/favicon.svg',
+			logo: { src: './src/assets/brand/logo-circle.png', alt: 'S&S Engineering logo' },
+			favicon: '/favicon.ico',
+			components: {
+				// Home page hero: cover banner above the title and tagline
+				Hero: './src/components/Hero.astro',
+			},
 			customCss: [
 				'@fontsource/inter/400.css',
 				'@fontsource/inter/600.css',
@@ -23,6 +27,17 @@ export default defineConfig({
 			],
 			lastUpdated: true,
 			head: [
+				{ tag: 'link', attrs: { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/favicon-96.png' } },
+				{ tag: 'link', attrs: { rel: 'icon', type: 'image/png', sizes: '192x192', href: '/icon-192.png' } },
+				{ tag: 'link', attrs: { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' } },
+				{ tag: 'meta', attrs: { name: 'theme-color', content: '#0b1220' } },
+				// Social share preview (1200x630 center crop of the cover banner)
+				{ tag: 'meta', attrs: { property: 'og:image', content: 'https://signal-and-systems.pages.dev/og-image.png' } },
+				{ tag: 'meta', attrs: { property: 'og:image:width', content: '1200' } },
+				{ tag: 'meta', attrs: { property: 'og:image:height', content: '630' } },
+				{ tag: 'meta', attrs: { property: 'og:image:alt', content: 'Signal & Systems Engineering, LLC. Built in the field. Engineered for business.' } },
+				{ tag: 'meta', attrs: { name: 'twitter:card', content: 'summary_large_image' } },
+				{ tag: 'meta', attrs: { name: 'twitter:image', content: 'https://signal-and-systems.pages.dev/og-image.png' } },
 				// Cloudflare Web Analytics: enable it in the Cloudflare Pages dashboard (one click, no script needed),
 				// or paste the beacon snippet here with your token.
 			],
