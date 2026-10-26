@@ -1,0 +1,192 @@
+---
+title: UBL Color Flood 2.0 grille light bar
+description: Wire-by-wire plan for the UBL Color Flood 2.0 20-inch amber/white light bar on the F-150 grille guard, driven by seven Whelen CanTrol WC outputs.
+summary: 20" amber/white warning and white flood bar under the grille guard's lower tube, with seven CanTrol outputs for power, three modes, two arrows and pattern.
+status: Bench-tested
+category: Vehicle Upfit and 12V
+updated: 2026-10-26
+sidebar:
+  label: UBL Color Flood 2.0 light bar
+  order: 2
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import PartsTable from '../../../../components/PartsTable.astro';
+import WiringTable from '../../../../components/WiringTable.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+
+<ProjectHeader />
+
+<Callout type="safety" title="Legal notice">
+Emergency lighting and siren use is regulated by state law and permits. This page documents a personal build and is not legal guidance.
+</Callout>
+
+## Goal
+
+One light bar on the front of the truck that does three jobs: an amber/white warning pattern, a steady white flood for scene and work lighting, and directional arrows. Every function is run from the Whelen CanTrol WC control head, with no separate switch box. Done means every wire is landed on its planned CanTrol output, each function works from its button in the truck, and the measured draw is recorded here.
+
+## Constraints
+
+- **Location:** under the lower horizontal tube of the Steelcraft HD Grille Guard (50-1420C), above the license plate. No drilling, welding or bending of the guard.
+- **Controller:** every function comes from the CanTrol WC. The bar makes its own patterns, so each CanTrol output feeding it is set to steady on/off.
+- **Grounds:** never to the battery negative post on this truck. The 2015+ F-150 measures charge with a sensor on the negative lead, and Ford says all negative current must pass through it. The body is aluminum, so no grounds on sheet metal either.
+- **Airbags:** UBL warns against mounting or routing in an airbag deployment area. This bar and its wiring are entirely outside the cab, forward of the grille.
+
+## Architecture
+
+The bar has eight leads. Red is its power and needs its own feed. Brown, orange and white select one of three modes, blue and green run the arrows, and yellow steps the pattern and color. Each mode remembers its own pattern and color.
+
+Priority, confirmed on the bench: Mode 3 overrides Mode 2, Mode 2 overrides Mode 1, and the arrows override all three modes.
+
+```text
+Whelen CanTrol WC (under driver-side rear seat)
+  J1-6  (10A, BLU lead) ── bar in-line fuse ── RED     power            slide 2/3, SCENE, ←, →, ↔ FLASH
+  J4-14 (LED 10, BLU)   ─────────────────────── BROWN   Mode 1 warning   slide 2/3
+  J1-1  (10A, BRN lead) ─────────────────────── ORANGE  Mode 2 warning   slide 3
+  J4-3  (LED 1, BRN)    ─────────────────────── WHITE   Mode 3 flood     SCENE (latched)
+  J4-4  (LED 2, RED)    ─────────────────────── BLUE    right arrow      → and ↔ FLASH (latched)
+  J4-15 (LED 11, check) ─────────────────────── GREEN   left arrow       ← and ↔ FLASH (latched)
+  J4-13 (LED 9, GRN)    ─────────────────────── YELLOW  pattern/color    blank button 2 (momentary)
+  Ground run ─────────────────────────────────── BLACK   to steel frame rail side (or Ford Q-231 point)
+```
+
+Red alone does nothing. The bar lights only with red plus a mode or arrow wire, which is why J1-6 is on in every state that uses the bar. The full output map is on the [CanTrol output plan](/projects/f150-upfit/cantrol-output-plan/).
+
+<SpecBox
+	title="UBL Color Flood 2.0, 20 in, amber/white"
+	specs={[
+		['SKU', 'UBL-CF-2120'],
+		['Wires', '8: red, brown, orange, white, blue, green, yellow, black'],
+		['Modes', '3, each with its own remembered pattern and color'],
+		['Arrows', 'Blue = right, green = left, both = center-out'],
+		['Fuse', 'Built-in removable in-line fuse on red'],
+		['Max draw', '3.3A (108W), not yet measured'],
+		['Voltage', '10–30V'],
+		['Size', '20 x 1.625 x 3 in'],
+	]}
+	source={{ label: 'UBL Color Flood 2.0 instructions, SKU UBL-CF-2120, version A.1 (wires, modes, arrows, fuse). Draw, voltage and size: my grille guard install proposal, 5 Oct 2026 (not a UBL document)' }}
+/>
+
+<Callout type="unverified">
+The instruction sheet does not list draw, voltage, size, IP rating or the in-line fuse's amp rating. Those three come from my own install proposal, not from a UBL document. The IP rating and the fuse rating are still unknown. The UBL product page could not be reached to check them, so no product link is given yet.
+</Callout>
+
+## Parts list
+
+<PartsTable
+	parts={[
+		{ name: 'UBL Color Flood 2.0 20" Amber/White LED Light Bar (amber/white with white flood)', sku: 'UBL-CF-2120', price: '$152.00', specs: '3.3A max (unverified), 8-wire, in-line fuse', status: 'Bench-tested' },
+		{ name: 'UBL adjustable L-brackets (included with the bar)', specs: 'Bolt to the bar\'s rear slide-in channel', status: 'In progress' },
+		{ name: 'Black rubber anti-vibration pads, about 2" square (x2)', specs: 'One under each bracket', status: 'In progress' },
+		{ name: 'Black epoxy-coated stainless cable ties (x4)', specs: 'Two per bracket around the 1.91" OD tube', status: 'In progress' },
+		{ name: 'Blue thread locker', specs: 'Bracket short leg to bar channel', status: 'In progress' },
+		{ name: '16 AWG wire (power) and 18 AWG wire (triggers), loom, grommets', specs: 'Run from the guard to the CanTrol module', status: 'Planned' },
+	]}
+/>
+
+## Wiring
+
+Gauges come from the project document's fuse and wire table: 16 AWG for power, 18 AWG for trigger wires. CanTrol pins and lead colors come from Whelen guide 14580G. Bar wire colors come from UBL's instructions and match the label on my bar.
+
+<WiringTable
+	rows={[
+		{ wire: 'CF1', color: 'Red', function: 'Power. Own feed only, never joined to a mode wire', source: 'J1-6 (10A, BLU lead), positive-switched', draw: '3.3A max (unverified)', fuse: 'Bar in-line fuse (rating TBD) + CanTrol internal', gauge: '16 AWG', termination: 'Bench: wire nut. Truck: TBD' },
+		{ wire: 'CF2', color: 'Brown', function: 'Mode 1, warning pattern', source: 'J4-14 (LED 10, BLU lead)', draw: 'Signal only, not measured', fuse: 'CanTrol J4 group 20A', gauge: '18 AWG', termination: 'Bench: wire nut. Truck: TBD' },
+		{ wire: 'CF3', color: 'Orange', function: 'Mode 2, warning pattern. Overrides Mode 1', source: 'J1-1 (10A, BRN lead)', draw: 'Signal only, not measured', fuse: 'CanTrol internal', gauge: '18 AWG', termination: 'Bench: wire nut. Truck: TBD' },
+		{ wire: 'CF4', color: 'White', function: 'Mode 3, set to steady white flood. Overrides Modes 1 and 2', source: 'J4-3 (LED 1, BRN lead)', draw: 'Signal only, not measured', fuse: 'CanTrol J4 group 20A', gauge: '18 AWG', termination: 'Bench: wire nut. Truck: TBD' },
+		{ wire: 'CF5', color: 'Blue', function: 'Right arrow, as seen facing the bar', source: 'J4-4 (LED 2, RED lead)', draw: 'Signal only, not measured', fuse: 'CanTrol J4 group 20A', gauge: '18 AWG', termination: 'Bench: wire nut. Truck: TBD' },
+		{ wire: 'CF6', color: 'Green', function: 'Left arrow, as seen facing the bar. Blue + green = center-out', source: 'J4-15 (LED 11, lead color CHECK)', draw: 'Signal only, not measured', fuse: 'CanTrol J4 group 20A', gauge: '18 AWG', termination: 'Bench: wire nut. Truck: TBD' },
+		{ wire: 'CF7', color: 'Yellow', function: 'Pattern: tap = next, double tap = color, 2 s hold = steady', source: 'J4-13 (LED 9, GRN lead), momentary', draw: 'Signal only, not measured', fuse: 'CanTrol J4 group 20A', gauge: '18 AWG', termination: 'Bench: wire nut. Truck: TBD' },
+		{ wire: 'CF8', color: 'Black', function: 'Ground', source: '—', draw: 'Return for CF1', fuse: '—', gauge: '16 AWG', termination: 'Ring terminal, star washer, sealed', ground: 'Side of a steel frame rail, or the Ford SVE Q-231 ground point. Never battery negative' },
+	]}
+/>
+
+No relay is used. Every bar wire lands directly on a CanTrol output.
+
+<Callout type="unverified" title="Unverified: lead color on J4-15">
+Whelen guide 14580G shows LED Output 11 (J4-15) as violet on page 7 and orange on page 10. Identify that lead by pin number and with a meter, not by color.
+</Callout>
+
+<Callout type="unverified" title="Unverified: J1-6 switching polarity">
+J1 Outputs 5 to 8 can switch positive or ground, set by which fuse slot each output's fuse sits in (guide 14580G, p.8). This is a used module, so a previous owner may have left J1-6 in the ground-switching slot. Check it before connecting the bar: the module's indicator shows green for positive switching and amber for ground switching.
+</Callout>
+
+### CanTrol programming
+
+Set in Whelen Command, per the project's wiring research. These settings are inferred from how the bar works and have not been programmed yet.
+
+| Output | Action | Switch type | Notes |
+| --- | --- | --- | --- |
+| J1-6, J1-1, LED 10 | Turn On, steady | Follows slide position | No flash pattern, Low Power disabled |
+| LED 1 (SCENE) | Turn On, steady | Press On / Press Off | Latched |
+| LED 2, LED 11 (arrows) | Turn On, steady | Press On / Press Off | ↔ FLASH turns on both |
+| LED 9 (blank button 2) | Turn On, steady | Press On / Release Off | Must be momentary. If yellow is held on, the bar reads a 2 s hold and goes to steady color |
+
+A flash pattern or Low Power on any of these outputs would switch the bar's inputs on and off, so the bar would flicker or restart its pattern.
+
+## Build steps
+
+1. Bench test the bar alone on a 12V supply with a 5A fuse in the holder. Red alone on the red clip, each other wire capped separately and touched to +12V one at a time. Done 2026-10-11.
+2. Set each mode's pattern and color with the yellow wire. Set Mode 3 to steady white for the flood.
+3. Bench test the bar on the CanTrol, wired exactly as in the table above (Gen 3 bench guide, Stage 4).
+4. Bolt the included L-brackets to the bar's rear slide-in channel, about 6" either side of center, with blue thread locker on the short leg.
+5. Hang the bar under the lower tube. The long slotted leg lies on top of the bar, curve turned inward, on a rubber pad. Two coated stainless cable ties per bracket go around the tube and through the bracket slot, buckles to the back. Touch up the cut ends.
+6. Check that the bar clears the license plate.
+7. Loom the eight leads along the guard and through the grille, with a grommet at every metal pass-through, then run them to the CanTrol module.
+8. Land the ground on the side of a steel frame rail (or the Q-231 point): bare metal, star washer, sealed afterward.
+9. Program the outputs in Whelen Command and save the program file.
+10. Re-check the cable ties after the first few drives.
+
+## Testing and verification
+
+**Bench-tested on 2026-10-11** (on a 12V supply and a Whelen 295HFSA6 test amp, not the CanTrol):
+
+- All eight wire colors match UBL's instructions and the label on the bar.
+- Red alone does nothing. The bar needs red plus a mode or arrow wire.
+- Brown, orange and white each run their own pattern. With two on, the higher mode shows.
+- Blue gives the right arrow and green the left arrow, as seen facing the bar. Both together give center-out. The arrows override all three modes.
+- Yellow: a tap steps to the next pattern, a quick double tap switches amber/white, and a 2 s hold gives steady color. Each mode keeps its own setting.
+
+**Not yet tested:**
+
+- Driving the bar from the CanTrol (Gen 3 bench guide Stage 4, tests 4.1 to 4.11).
+- Whether each mode's memory survives a power-off of at least 10 seconds.
+- Measured current on the red wire in Mode 2 and in the white flood.
+- Anything in the truck.
+
+## Safety notes
+
+- Fuse every feed. The bar's in-line fuse stays in circuit, and if it is ever removed it is replaced with the same or a similar fuse, per UBL.
+- Never join red to a mode wire.
+- UBL's sheet says to ground to the battery negative post. On this truck Ford's rule wins: ground to a steel frame rail side or the Q-231 point, never battery negative and never aluminum sheet metal.
+- Grommet every metal pass-through and loom the whole run through the grille.
+- UBL notes these are high-intensity lights. Don't look straight into the bar during bench tests, and don't operate it in hazardous driving conditions.
+- Check every function visually before the truck goes back into service.
+
+## Lessons learned
+
+- The red lead is power only. Red alone does nothing, and joining it to a mode wire defeats the mode logic, so it needs its own output.
+- On my bar, a quick double tap on yellow changes color. UBL's sheet says three taps.
+- Because the bar handles its own priority (Mode 3 over 2 over 1, arrows over all), the CanTrol only needs simple steady outputs. No CanTrol flash patterns are needed for this bar.
+
+## Open items
+
+- Measure the draw on the red wire, and record the in-line fuse's amp rating.
+- Confirm the bar's IP rating with UBL.
+- Confirm J1-6 is in the positive-switching fuse slot.
+- Identify the J4-15 lead by pin and meter.
+- Find the ground point on the frame rail side, or match the Q-231 point to Ford's bulletin photo.
+- Decide the truck terminations (crimp butt splice with adhesive heat shrink, or a sealed connector at the guard so it can come off).
+- Optional: move orange (Mode 2) from J1-1 to a spare LED output to keep a 10A output free.
+- The all-lights five-modes plan may re-store this bar's mode memories. It needs no new wires.
+- Add the manufacturer product link.
+
+## Changelog
+
+<Changelog
+	entries={[
+		{ date: '2026-10-26', change: 'Component page published with the wire-by-wire plan, bench results and open items. Ground changed from "chassis near the guard" to a steel frame rail side or the Ford Q-231 point, per the 21 Oct wiring research.', rollback: 'Revert the commit that added this page.', log: '/log/2026-10-26-color-flood-wiring/' },
+	]}
+/>
