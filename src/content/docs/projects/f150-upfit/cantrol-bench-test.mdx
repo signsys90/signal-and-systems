@@ -12,8 +12,13 @@ sidebar:
 import ProjectHeader from '../../../../components/ProjectHeader.astro';
 import Callout from '../../../../components/Callout.astro';
 import Changelog from '../../../../components/Changelog.astro';
+import Gallery from '../../../../components/Gallery.astro';
+import kit from '../../../../assets/f150/cantrol-kit.jpg';
+import top from '../../../../assets/f150/cantrol-module-top.jpg';
+import conn from '../../../../assets/f150/cantrol-module-connectors.jpg';
+import lit from '../../../../assets/f150/cantrol-head-lit.jpg';
 
-<ProjectHeader />
+<ProjectHeader hero={kit} heroAlt="The complete used Whelen CanTrol WC set on the bench: module with harness pigtails, 21-button control head, microphone and cables." />
 
 <Callout type="safety" title="Legal notice">
 Emergency lighting and siren use is regulated by state law and permits. This page documents a personal build and is not legal guidance.
@@ -67,6 +72,13 @@ The visor bar, BooYu and EFM 3.0 are already installed on the truck, and the EFM
 
 ## Bench kit
 
+<Gallery photos={[
+  { src: top, alt: 'Top of the CanTrol WC module.', caption: 'The CanTrol WC module that gets powered up in Stage 1.' },
+  { src: conn, alt: 'CanTrol WC module connector end with the J-connectors.', caption: 'Connector end. Every output is proved with the meter at these pins in Stage 3.' },
+  { src: lit, alt: 'The 21-button control head backlit on the bench.', caption: 'The control head lit on first power-up.' },
+]} />
+
+
 | Item | Have it? | Used for |
 | --- | --- | --- |
 | SUPERNIGHT 12V 30A 360W supply with VSEER 3-prong cord | Yes | All power |
@@ -96,6 +108,11 @@ One fuse holder with a 5A fuse, one end under a V+ screw and the other clipped t
 | 10 | All bench lights + siren | Sum of measured draws + siren | Both speakers only if the total stays under 27A (90% of 30A) |
 
 ## Supply terminals
+
+![Bench setup A: wiring the SUPERNIGHT 12V 30A power supply with an in-line fuse to red and black clips.](../../../../assets/f150/bench-a-power.png)
+
+*Bench setup A from the project document: set up the power supply once.*
+
 
 | Screw | What goes on it |
 | --- | --- |
@@ -170,6 +187,11 @@ Nothing is connected to the outputs yet. Each input is switched on from the head
 
 ## Stage 4: UBL Color Flood 2.0 light bar
 
+![Bench setup C: each UBL Color Flood 2.0 light bar wire mapped to its CanTrol output, with the bar fuse on red and the ground on black.](../../../../assets/f150/bench-c-floodbar.png)
+
+*Bench setup C: Color Flood 2.0 wire map, confirmed on the bench by William on 11 Oct.*
+
+
 | Bar wire | CanTrol lead | Turned on by |
 | --- | --- | --- |
 | Red (power, keeps its own in-line fuse) | J1-6 | Slide 2, 3, SCENE, arrows |
@@ -198,6 +220,11 @@ Mode 3 overrides 2 overrides 1, and arrows override every mode. Red must never b
 Blank 2 must be momentary. If the yellow wire is held on, the bar reads it as a 2 s hold and changes to steady color.
 
 ## Stage 5: two UBL U-Lite grille lights
+
+![Bench setup B: wiring one UBL U-Lite surface light on the bench.](../../../../assets/f150/bench-b-ulite.png)
+
+*Bench setup B: UBL U-Lite grille light.*
+
 
 Both reds and the left light's white join on one fuse from J1-4 (5A on the bench, 3A within 12" of the output in the truck). The two yellows join and get capped. Right white, both blues and both greens are capped separately.
 

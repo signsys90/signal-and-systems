@@ -14,8 +14,14 @@ import SpecBox from '../../../../components/SpecBox.astro';
 import PartsTable from '../../../../components/PartsTable.astro';
 import Callout from '../../../../components/Callout.astro';
 import Changelog from '../../../../components/Changelog.astro';
+import Gallery from '../../../../components/Gallery.astro';
+import home from '../../../../assets/site/home.jpg';
+import projects from '../../../../assets/site/projects.jpg';
+import f150 from '../../../../assets/site/f150.jpg';
+import wicks from '../../../../assets/site/wicks.jpg';
+import mobile from '../../../../assets/site/home-mobile.jpg';
 
-<ProjectHeader />
+<ProjectHeader hero={home} heroAlt="The Signal and Systems Engineering home page in light mode, with the site name, tagline, Browse projects button and portrait." />
 
 ## Release
 
@@ -31,6 +37,18 @@ import Changelog from '../../../../components/Changelog.astro';
 	]}
 	source={{ label: 'Source on GitHub', href: 'https://github.com/signsys90/signal-and-systems' }}
 />
+
+## Screenshots
+
+Captured from a local production build of this site on 26 Oct 2026 (the same build Cloudflare Pages deploys).
+
+<Gallery photos={[
+  { src: home, alt: 'Home page in light mode on a desktop browser.', caption: 'Home page, desktop, light mode.' },
+  { src: mobile, alt: 'Home page in dark mode at phone width.', caption: 'Home page at phone width, dark mode.' },
+  { src: projects, alt: 'Projects index with category and status filters and project cards.', caption: 'Projects index with the category and status filters.' },
+  { src: f150, alt: 'F-150 upfit overview page in dark mode with the sidebar, hero image and status block.', caption: 'A project page in dark mode: F-150 upfit overview.' },
+  { src: wicks, alt: 'Wicks Surplus project page with the demo unit photo.', caption: 'A business project page: Wicks Surplus.' },
+]} />
 
 ## Goal
 
