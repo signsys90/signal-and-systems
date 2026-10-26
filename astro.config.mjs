@@ -48,7 +48,13 @@ export default defineConfig({
 							label: 'Radio and Emergency Comms',
 							items: [{ label: 'Mobile Ham Radio Install', link: '/projects/mobile-ham-radio/' }],
 						},
-						{ label: 'Business Systems', items: [], collapsed: true },
+						{
+							label: 'Business Systems',
+							items: [
+								{ label: 'SaniGLAZE Opportunity Map', link: '/projects/saniglaze-opportunity-map/' },
+								{ label: 'SaniGLAZE Trade Show Map', link: '/projects/saniglaze-trade-show-map/' },
+							],
+						},
 						{ label: 'Fabrication and 3D Printing', items: [], collapsed: true },
 					],
 				},
