@@ -1,127 +1,524 @@
 ---
 title: SaniGLAZE Video End-Slide Generator
-description: A self-service web app that let SaniGLAZE franchise members turn corporate or local videos into co-branded marketing videos with a personalized contact end slide.
-summary: A self-service web app that turned a manual video-production request into a few clicks, so franchise members could add their own contact end slide to brand videos while branding stayed consistent across the network.
+description: A self-service web application, built with AI-assisted development in OpenAI Codex, that lets SaniGLAZE franchise members turn a corporate video into a localized marketing video with a branded contact end slide.
+summary: A self-service web application that replaces a manual, request-based video production workflow with a guided process for localized franchise marketing videos.
 category: Business Systems
 updated: 2026-10-26
 project: true
 ---
 
 import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
 import Callout from '../../../../components/Callout.astro';
 import Changelog from '../../../../components/Changelog.astro';
 
 <ProjectHeader />
 
+<SpecBox
+	title="At a glance"
+	specs={[
+		['Category', 'Business Systems · Workflow Automation · AI-Assisted Development'],
+		['Project type', 'Private business application · Internal marketing operations'],
+		['Development approach', 'AI-assisted application development using OpenAI Codex'],
+		['Last updated', 'October 26, 2026'],
+	]}
+	source={{ label: 'Project description by William A. Atkins' }}
+/>
+
+## Overview
+
+The SaniGLAZE Video End-Slide Generator is a self-service web application designed to simplify the production of localized marketing videos for SaniGLAZE International franchise members.
+
+The application replaces a manual, request-based video production workflow with a guided process that allows franchise members to select a corporate video, personalize its closing slide with their contact information, and generate a finished video ready for distribution.
+
+Developed with assistance from OpenAI Codex, the application translates a recurring operational requirement into a repeatable software workflow. Its design combines a standardized brand template, configurable contact information, automated video composition, and a single downloadable output.
+
+The result is a business system designed to make localized marketing content easier to produce without requiring franchise members to operate professional video-editing software.
+
 <Callout type="open" title="Private tool, public write-up">
-The tool was built for SaniGLAZE International franchise members, so there is no public link. This page describes my own design and build work. It contains no SaniGLAZE data, franchise records or internal system details.
+This application was developed for SaniGLAZE International franchise members. The original application and its internal assets are not publicly available.
+
+This case study documents the business problem, solution design, development approach, and intended operational benefits. It does not contain franchise records, customer information, internal system details, or proprietary marketing assets.
 </Callout>
 
-## Goal
+## 1. The Business Problem
 
-Franchise owners needed marketing video they could use in their own markets, with their own contact information. Corporate video was produced centrally and carried only national branding, so getting a local version meant a manual request and a wait in a queue. The same task was repeated across the whole network.
+### A repeatable task trapped in a manual workflow
 
-The real problem wasn't video editing. It was a repeatable operational task that didn't scale with the number of franchise locations. It sat between the brand standard the franchisor needed to protect and the local flexibility franchisees needed to market well. Without a controlled process, there was also a risk that franchises would make their own versions with inconsistent branding.
+Corporate marketing videos provided franchise members with centrally produced promotional content. However, individual franchise locations needed to append their own contact information before using those videos in local marketing activities.
 
-The goal was to turn that request into a guided, self-service workflow that a franchise member could finish without design or video skills, and to build the brand standard into the output instead of checking it afterwards.
+The existing process introduced a manual dependency: franchise members needed to request a localized version rather than generate one independently.
 
-## Constraints
+Each request represented another task for the central team, even when the underlying work was essentially identical.
 
-- **No design or video skills required.** The common case had to take only a few clicks.
-- **Brand-consistent by default.** Every end slide uses the same branded template, and franchise members only control their contact details and how long the slide stays on screen.
-- **Flexible when needed.** Franchises with their own footage or contact details could upload them instead of using the defaults.
-- **One finished file.** The output had to be a single download, ready to post, with no editing afterwards.
+The problem had three dimensions:
 
-## Architecture
+- **Operational inefficiency:** A repeatable task required manual intervention.
+- **Limited scalability:** Production requests increased the workload on the central marketing function.
+- **Brand governance:** Allowing each franchise to edit videos independently could introduce inconsistencies in branding and presentation.
 
-The workflow has four steps:
+The challenge was not simply to make video editing easier. It was to redesign the process so that franchise members could complete a common marketing task independently while preserving corporate brand standards.
 
-1. **Choose a video.** Pick one from a library of approved, server-hosted corporate videos, or upload your own.
-2. **Choose contact information.** Select the stored franchise details, or enter or upload your own.
-3. **Set the end slide.** The tool builds a personalized contact slide on the branded template, and the user sets how long it stays on screen.
-4. **Merge and download.** The server joins the source video and the end slide into one finished file for the user to download.
+### The opportunity
 
-There are two paths through it on purpose. A quick-select path (a hosted corporate video plus the stored franchise information) handles the most common request in a few clicks. Full upload options stay available for everything else, so the corporate standard is the default and local customization still fits inside the same template.
+A standardized, self-service application could automate the repetitive work, reduce dependence on centralized production, and make localized video creation accessible to users without video-editing experience.
 
-### Key capabilities
+The goal was to turn a manual service request into a consistent, software-driven workflow.
 
-- **Corporate video library:** pick from approved, server-hosted brand videos.
-- **Custom upload:** use a franchise's own video instead.
-- **Stored franchise information:** select existing contact details in one click.
-- **Manual contact entry or upload:** replace or supply the contact information directly.
-- **Generated end slide:** a personalized contact slide on a consistent branded template.
-- **Adjustable slide duration:** the user decides how long the end slide shows.
-- **Quick-select path:** the fastest route for the most common choices.
-- **Server-side merge:** the source video and end slide become one finished file.
-- **Single download:** one ready-to-use file per request.
+## 2. Solution Design
 
-### Technical details
+The application was designed around a simple principle:
 
-<Callout type="unverified" title="Details still to confirm">
-These details haven't been recorded yet, so this page leaves them out rather than guessing:
+**Make the approved process the easiest process to follow.**
 
-- front-end and back-end stack
-- what performed the video merge (for example FFmpeg)
-- how the end slide was rendered
-- where the app and video library were hosted
-- how users signed in
-- output format and resolution
-- the range of slide durations users could pick
+Rather than providing users with an unrestricted video editor, the application guides them through a small number of defined choices.
 
+The common workflow uses approved corporate video assets, stored franchise information, and a predefined branded end-slide template. Additional upload options accommodate exceptions without requiring users to leave the standardized process.
+
+### The user experience
+
+**Step 1 — Select a video**
+
+Users choose an approved corporate video from a centrally managed library or upload their own video when customization requires different footage.
+
+**Step 2 — Select contact information**
+
+Users choose available franchise contact information or provide their own details through manual entry or an upload workflow.
+
+**Step 3 — Generate the end slide**
+
+The application places the selected contact information into a standardized branded layout. Users specify how long the closing slide should remain visible.
+
+**Step 4 — Process and download**
+
+The application combines the source video with the generated closing segment and produces one finished video file for download.
+
+The intended experience minimizes technical decisions and keeps the user focused on selecting the correct content rather than learning video-production tools.
+
+### Two paths, one standardized output
+
+The workflow supports two primary usage patterns.
+
+| Capability | Quick-select workflow | Custom workflow |
+| --- | --- | --- |
+| Video source | Approved corporate video library | User-uploaded video |
+| Contact information | Select available franchise details | Enter or upload contact details |
+| Branding | Standardized branded template | Same standardized branded template |
+| Closing duration | User configurable | User configurable |
+| Processing | Automated video composition | Automated video composition |
+| Deliverable | Single finished video | Single finished video |
+
+The quick-select workflow is optimized for routine requests. The custom workflow provides additional flexibility for franchise members with different content or contact-information requirements.
+
+Both paths are designed to produce a consistent, ready-to-use deliverable.
+
+## 3. Application Architecture
+
+The application can be understood as four cooperating components: the user interface, application logic, media-processing pipeline, and file-delivery mechanism.
+
+<Callout type="unverified" title="Illustrative architecture">
+The architecture below represents a plausible implementation for this type of application, rather than a verified reconstruction of the original source code.
 </Callout>
 
-## Build steps
+### Frontend application
 
-1. Identified the manual, request-based video localization step as a bottleneck for franchise marketing.
-2. Defined the requirements: self-service, brand-consistent by default, flexible uploads, and one finished file.
-3. Built the selection flow with a quick-select path and full upload options.
-4. Built the end-slide generator on a fixed branded template, with a duration the user can set.
-5. Built the server-side merge that joins the source video and end slide into one downloadable file.
+The frontend provides the interface through which franchise members select videos, supply contact information, configure the closing slide, and retrieve their finished files.
 
-## Testing and verification
+A conventional implementation could use React with a framework such as Next.js.
 
-No test records or usage figures are documented for this tool. This page describes how it was designed to work and doesn't claim measured results.
+Responsibilities would include:
 
-## Impact
+- Presenting the approved video library.
+- Providing video-upload controls.
+- Displaying stored contact-information options when available.
+- Accepting manually entered contact details.
+- Providing end-slide duration controls.
+- Displaying validation errors and processing status.
+- Presenting the completed video for download.
 
-- Replaced a manual, request-based video production step with self-service.
-- Took repeated localization work off the central production queue.
-- Kept branding consistent across franchise locations by building the brand standard into the template instead of reviewing videos afterwards.
-- Gave franchise members a faster path to local marketing content they could use right away.
+The interface would prioritize a straightforward, guided workflow over advanced editing controls.
 
-<Callout type="unverified" title="Results not yet recorded">
-Figures such as how many locations had access, how many videos were produced, turnaround time before and after, and cost or hours saved aren't documented. They will be added only if they can be confirmed.
+### Backend application
+
+The backend coordinates the workflow and manages communication between the user interface and media-processing components.
+
+A conventional implementation could use Next.js server routes or a separate Node.js backend.
+
+Responsibilities would include:
+
+- Validating user selections and submitted information.
+- Resolving approved video assets.
+- Handling uploaded files.
+- Preparing the end-slide content.
+- Initiating video-processing jobs.
+- Tracking processing status.
+- Returning the completed output to the user.
+
+Keeping processing coordination on the server avoids requiring franchise members to run video-processing software locally.
+
+### End-slide rendering
+
+The end slide is generated from a fixed branded template rather than an unrestricted design canvas.
+
+A plausible implementation would render an HTML/CSS template or generate a graphic using a server-side image-rendering library.
+
+The template would define the placement of branding, contact information, typography, spacing, and other visual elements.
+
+User-provided information would populate designated fields while the underlying layout remained standardized.
+
+This approach separates variable content from the fixed design system. It allows contact details to change without requiring users to redesign the closing slide.
+
+### Video composition engine
+
+The source video and rendered end slide must be combined into a single playable file.
+
+A conventional implementation would use FFmpeg, a widely used multimedia processing framework, to perform this operation.
+
+The processing sequence could include:
+
+1. Inspecting the source video's media properties.
+2. Rendering the closing slide into a video-compatible segment.
+3. Matching the segment's dimensions, frame rate, and encoding characteristics to the output profile.
+4. Concatenating the source footage and closing segment.
+5. Encoding or remuxing the final video as required.
+6. Returning the completed file to the application.
+
+The exact processing method depends on the source assets and supported output requirements. For example, videos with different dimensions or frame rates may require normalization before they can be combined reliably.
+
+<Callout type="unverified">
+FFmpeg is a technically appropriate choice for this architecture, but its use in the original application cannot be confirmed without the source code.
 </Callout>
 
-## Safety notes
+### File delivery
 
-- Nothing on this page comes from SaniGLAZE systems: no franchise names, contact details, territories, video files or internal links.
-- Screenshots will only be added once they are sanitized, with no franchise contact information visible.
+Once processing finishes, the application makes the completed video available as a single download.
 
-## Lessons learned
+A basic implementation could temporarily store uploaded files, intermediate assets, and output videos on the application server. A more scalable implementation could use object storage and a background job queue.
 
-<Callout type="unverified" title="Draft lessons for William to confirm">
-These come from how the tool was designed, not from usage data.
+Temporary files should be removed when no longer required, subject to any necessary retention policy.
+
+The original application's storage mechanism and cleanup behavior are not documented.
+
+## 4. Key Capabilities
+
+### Approved corporate video library
+
+Provides a central selection point for approved marketing videos, reducing the need for franchise members to locate and prepare source footage independently.
+
+### Custom video uploads
+
+Allows users to supply their own video footage when the standard library does not meet their needs.
+
+### Stored franchise information
+
+Supports a quick-select experience when franchise contact information is available within the application.
+
+### Manual contact entry and upload
+
+Provides an alternative for supplying contact details without relying exclusively on stored information.
+
+### Template-based end-slide generation
+
+Places local contact information into a consistent branded layout, separating content personalization from visual design.
+
+### Configurable closing duration
+
+Allows users to determine how long the end slide remains visible at the end of the video.
+
+### Automated video composition
+
+Combines the source video and generated closing segment into one finished asset.
+
+### Single-file delivery
+
+Eliminates the need for users to download separate assets and manually combine them in a video editor.
+
+### Guided self-service workflow
+
+Reduces the number of decisions users must make and makes a repeatable production task accessible to nontechnical users.
+
+## 5. Technical Implementation
+
+<Callout type="unverified" title="Plausible reconstruction">
+The following technology stack is a plausible reconstruction of how the application could have been built using Codex. It is not a verified inventory of the original implementation.
 </Callout>
 
-<Callout type="lesson" title="Make the standard the easy path">
-When the branded default is also the fastest option, consistency doesn't depend on policing. The quick-select path makes the on-brand choice the one most people take.
+| Layer | Plausible technology | Purpose |
+| --- | --- | --- |
+| AI-assisted development | OpenAI Codex | Code generation, implementation assistance, debugging, and iterative development |
+| Frontend | React and Next.js | User interface and application navigation |
+| Programming language | TypeScript | Application logic and type checking |
+| Backend | Next.js server routes or Node.js | Workflow coordination and request handling |
+| Styling | CSS or a component-based styling framework | Layout, form controls, and responsive presentation |
+| End-slide rendering | HTML/CSS rendering or image-generation library | Producing the branded closing graphic |
+| Video processing | FFmpeg | Video encoding, normalization, and composition |
+| File handling | Server-side file processing | Receiving uploads and preparing output assets |
+| Storage | Local temporary storage or object storage | Holding source files, intermediate assets, and finished videos |
+| Deployment | Node.js-compatible hosting or a server environment | Running the application and processing workflow |
+
+### Processing workflow
+
+The application's underlying processing workflow can be represented as:
+
+**User input → Validation → Source asset selection → End-slide rendering → Video composition → Output validation → Download**
+
+Each stage has a distinct responsibility.
+
+Validation checks that the required inputs are available. Rendering produces the closing segment. Video composition combines that segment with the source footage. Output validation checks whether processing produced a usable file before the application makes it available.
+
+A production implementation should also handle failed uploads, unsupported media, interrupted processing, and insufficient storage.
+
+These are appropriate engineering considerations for this type of application; the original implementation's specific error-handling behavior is unknown.
+
+### Output specifications
+
+The original supported formats, resolutions, and encoding settings are not documented.
+
+A reasonable implementation would select an output profile compatible with the approved corporate video library and commonly used distribution platforms.
+
+For example, an MP4 file using H.264 video and AAC audio would be a practical compatibility-oriented target, provided the input media and intended distribution requirements support that profile.
+
+The exact resolution, frame rate, audio handling, and encoding settings would need to be established from the actual application or its original requirements.
+
+### Authentication and access control
+
+The original authentication model cannot be established from the available description.
+
+A deployment intended for restricted franchise use should limit access to authorized users or an appropriately controlled network, depending on the business requirements.
+
+If stored franchise information is associated with individual locations, the application should also ensure that users can access only the information they are authorized to use.
+
+No particular sign-in mechanism or access-control implementation is claimed here.
+
+## 6. Development with ChatGPT Codex
+
+ChatGPT Codex served as the AI-assisted development environment for building the application.
+
+The project illustrates how a business problem can be translated into an application workflow and implemented with AI-assisted coding rather than treated as a conventional manual production task.
+
+The development process can be described in five stages.
+
+### Stage 1 — Translate the business problem into requirements
+
+The first step was identifying the repeated work involved in localizing corporate marketing videos.
+
+The requirements centered on four priorities:
+
+- Self-service for franchise members.
+- Standardized corporate branding.
+- Flexibility for custom videos and contact information.
+- One completed, downloadable video.
+
+These requirements defined what the application needed to accomplish before implementation details were selected.
+
+### Stage 2 — Define the user workflow
+
+The application was organized around a small sequence of choices rather than a full video-editing interface.
+
+The quick-select path addressed routine requests, while upload options accommodated less common situations.
+
+This workflow design kept the user experience aligned with the operational objective: produce a localized marketing asset with minimal manual intervention.
+
+### Stage 3 — Implement the application
+
+Codex assisted with application development, translating requirements into software components and implementation changes.
+
+A system of this type requires coordination between interface controls, contact-information handling, template rendering, media processing, and output delivery.
+
+The precise sequence of coding tasks, prompts, iterations, and debugging activities is not available, so no specific implementation history is asserted.
+
+### Stage 4 — Integrate the workflow
+
+The application's components needed to work together as a single process.
+
+The essential integration point was the transition from user selections to a finished video: the application had to use the selected footage, generate the personalized closing segment, combine the media, and make the result available to the user.
+
+### Stage 5 — Deliver a self-service business system
+
+The resulting application was designed to package the underlying workflow into an interface that franchise members could operate independently.
+
+The value of the approach lies in connecting AI-assisted software development to a practical operational requirement rather than building technology without a defined business use case.
+
+## 7. Testing and Verification
+
+No original test reports, automated test results, or production usage statistics are available for this case study.
+
+The following verification areas are relevant to an application with this design.
+
+| Test area | What should be verified |
+| --- | --- |
+| Video selection | Approved library assets can be selected and processed |
+| File uploads | Supported files are accepted and invalid files are rejected |
+| Contact information | Valid details appear correctly on the closing slide |
+| Brand consistency | User-supplied information cannot inadvertently alter fixed template elements |
+| Duration controls | The closing segment uses the selected duration |
+| Video composition | The source footage and closing segment form one playable file |
+| Media compatibility | The output works in the intended playback and distribution environments |
+| Failure handling | Processing errors produce understandable messages and do not expose incomplete files as successful outputs |
+| File delivery | The finished file can be retrieved successfully |
+| Cleanup | Temporary files are handled according to the intended retention policy |
+
+<Callout type="unverified">
+These items are a recommended verification checklist, not a claim that every test was performed.
 </Callout>
 
-<Callout type="lesson" title="Keep an exit for real exceptions">
-Full upload options mean franchises with their own footage or details don't fall back to making videos outside the tool, which is where inconsistent branding would come from.
+The application should be described as having the capabilities supported by the available project description, without inventing test coverage or performance benchmarks.
+
+## 8. Business Impact
+
+### Operational impact
+
+The application was designed to move a recurring marketing-production task from a centralized request queue into a self-service workflow.
+
+Its intended benefits include:
+
+**Reduced manual coordination**
+
+Franchise members can initiate the localization workflow themselves instead of relying on a separate request to the central production team.
+
+**More scalable marketing operations**
+
+A standardized workflow can accommodate repeat requests without requiring the same level of manual coordination for each video.
+
+**Consistent brand presentation**
+
+A fixed template makes the approved visual structure part of the production process rather than relying exclusively on users to reproduce it correctly.
+
+**Greater franchise autonomy**
+
+Local users gain a practical way to prepare marketing videos with their own contact information.
+
+**Reduced dependence on video-editing skills**
+
+The application abstracts the technical work of generating and combining the video assets.
+
+### Results and measurement
+
+No verified figures are available for adoption, production volume, turnaround time, or cost savings.
+
+The application's potential impact could be evaluated using the following measures:
+
+| Metric | What it measures |
+| --- | --- |
+| Videos generated | Total number of completed video outputs |
+| Active franchise locations | Number of locations using the application |
+| Time to produce a video | Elapsed time from starting a request to downloading the output |
+| Manual requests avoided | Number of requests handled without central production intervention |
+| Production hours saved | Estimated reduction in manual processing time |
+| Cost per completed video | Direct operational cost associated with producing each localized asset |
+| Processing success rate | Percentage of generation attempts that produce a usable output |
+| Repeat usage | Whether franchise members return to use the workflow |
+
+A defensible time-savings estimate would compare the documented manual effort per request with the actual time required for self-service, accounting for exceptions and failed processing attempts.
+
+No numerical savings or adoption claims are made without supporting evidence.
+
+## 9. Security, Privacy, and Brand Governance
+
+The application processes video files and contact information, so a responsible implementation should consider data handling and brand integrity alongside usability.
+
+### Brand governance
+
+The branded template separates fixed corporate design elements from the fields users can personalize.
+
+This design helps constrain variation while preserving the flexibility needed for local marketing.
+
+### File handling
+
+Uploaded files should be validated for permitted formats and reasonable size limits. Processing should occur in controlled locations, and temporary assets should be removed according to an established retention policy.
+
+### Input validation
+
+Contact information and filenames should be handled safely. User-supplied content should not be treated as trusted application instructions or executable content.
+
+### Access control
+
+Where the application contains stored franchise information or restricted corporate assets, access should be limited to authorized users.
+
+### Public documentation
+
+This case study deliberately excludes internal application URLs, franchise contact details, source video files, proprietary assets, credentials, and internal infrastructure details.
+
+<Callout type="safety">
+The security measures described above are recommended considerations for this class of application. They should not be interpreted as confirmation that specific controls were present in the original code.
 </Callout>
 
-## Open items
+## 10. Lessons Learned
 
-- Record the technical details listed above.
-- Record the timeframe, version history and current status (in use, retired or handed off).
-- Add any confirmed results.
-- Add sanitized screenshots of the workflow.
-- Record known limits, such as upload size, processing time and supported file types.
+<Callout type="lesson" title="Make the standard the easiest path">
+When the approved workflow is also the fastest workflow, users have less reason to seek alternative processes.
+
+The quick-select path makes routine video localization simpler while keeping the output aligned with the established brand template.
+</Callout>
+
+<Callout type="lesson" title="Automate the process, not just an individual task">
+The opportunity extended beyond generating a closing graphic.
+
+The application connects asset selection, contact-information handling, template rendering, media composition, and delivery into one workflow.
+
+That end-to-end design is what makes the solution useful as a business system.
+</Callout>
+
+<Callout type="lesson" title="Preserve flexibility without sacrificing consistency">
+Not every franchise member has identical content requirements.
+
+Supporting custom video uploads and alternative contact-information inputs accommodates exceptions while keeping the output anchored to a common template.
+</Callout>
+
+<Callout type="lesson" title="Build around the user's actual job">
+Franchise members needed a finished marketing video, not another professional editing tool to learn.
+
+The guided workflow focuses on the outcome the user wants to achieve and abstracts the technical steps required to produce it.
+</Callout>
+
+<Callout type="lesson" title="Apply AI-assisted development to operational problems">
+Codex provided a means of implementing an application around a defined business requirement.
+
+The project demonstrates the potential of AI-assisted development to turn workflow knowledge into a practical software solution, with the business process and user requirements guiding the implementation.
+</Callout>
+
+## 11. Project Summary
+
+The SaniGLAZE Video End-Slide Generator demonstrates a business-systems approach to marketing automation.
+
+The application addresses a recurring operational bottleneck by combining self-service interaction, standardized branding, configurable contact information, and automated video composition.
+
+Rather than adding complexity for franchise members, it packages the underlying process into a small number of guided steps.
+
+The project highlights the intersection of business process design, workflow automation, application development, and AI-assisted implementation.
+
+### Core capabilities
+
+- Self-service video localization.
+- Approved corporate video selection.
+- Custom video and contact-information inputs.
+- Template-based branded end-slide generation.
+- Configurable closing-slide duration.
+- Automated video composition.
+- Single-file output and download.
+
+### Professional competencies demonstrated
+
+- Business process analysis.
+- Requirements definition.
+- Workflow and user-experience design.
+- Business systems development.
+- Marketing operations automation.
+- AI-assisted application development.
+- Brand-governance considerations.
+- Operational efficiency and scalability design.
+
+### Project status
+
+The original source code, deployment configuration, usage metrics, and version history are unavailable for verification.
+
+The documented workflow and capabilities are based on the project description. Specific technology choices in the architecture section are illustrative and should not be represented as verified implementation details.
 
 ## Changelog
 
 <Changelog
-	entries={[{ date: '2026-10-26', change: 'Project page published from William\'s description of the tool.', rollback: 'Revert the commit that added this page.' }]}
+	entries={[
+		{ date: '2026-10-26', change: 'Prepared a public case study from the project description: business problem, solution design, illustrative architecture and technology stack (marked as unverified), Codex development approach, recommended verification checklist, impact measures, and security and brand-governance considerations.', rollback: 'Revert the commit that replaced this page.' },
+		{ date: '2026-10-26', change: 'Project page first published from William\'s description of the tool.', rollback: 'Revert the commit that added this page.' },
+	]}
 />
