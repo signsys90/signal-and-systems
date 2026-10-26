@@ -234,9 +234,17 @@ Operational settings such as tracked call sign lists, mesh channel settings, rad
 | Playwright UI suite, cloud run (2026-10-26, Linux, Chromium) | **16 passed, 14 skipped by design** (desktop-only or mobile-only tests). The **2 visual-baseline tests** could not be compared because their reference images exist for Windows only. |
 | API smoke test (2026-10-26, Linux) | **Passed** |
 | GeoJSON validation (2026-10-26, Linux) | **Passed** (all layers) |
-| Playwright UI suite on Windows after installing the browser | In progress |
+| Playwright UI suite on the CF-33 after installing the browser (2026-10-26, Windows, Node 24.15, Playwright 1.59.1, isolated temp data folder) | **16 passed, 14 skipped by design, 2 failed.** Both failures are the visual-baseline checks, and neither comes from the app's own logic (see below). The API smoke check in the same run passed. |
+| Live deployment reachability (2026-10-26) | `/healthz` returned 200. `/` returned 401 and asked for a login, as designed. |
 | GitHub Actions verify workflow | Present in the repository; latest result not recorded here |
 | Live APRS, Meshtastic and DMR feeds | Depend on runtime credentials and upstream availability; not verified for this page |
+
+The two visual failures on Windows:
+
+- **Desktop day map:** 742,589 pixels differed (54%, against a 3% limit). The Carto basemap tiles now return a normal success response with a small "API key required" placeholder image instead of map tiles. Because nothing errors, the app never switches to its OpenStreetMap fallback. The day and night Carto styles both do this, so the hosted site's basemap is likely affected too.
+- **Mobile day map:** 26,068 pixels differed (8%). On a Pixel 7-sized screen the map area is 0 pixels wide, so no map draws. The stored Windows reference image for this test turned out to be an app error screen, so it was never a valid baseline.
+
+No baselines, source files or test files were changed during this run. The screenshots below were captured with Carto tile requests blocked, so the app used its built-in OpenStreetMap fallback.
 
 The 16 UI tests cover:
 
@@ -273,9 +281,11 @@ At least one fire station on the map uses an approximate coordinate that still n
 
 ## Open items
 
-- Record a green Playwright run on Windows, including the visual baselines.
+- Record a fully green Playwright run on Windows, including the visual baselines.
 - Replace approximate station coordinates with authoritative county GIS data, and work through the 62 manual-review records.
 - Decide whether the repository will be public.
+- Make OpenStreetMap the primary basemap (or add a Carto API key), and treat a placeholder tile as a failure so the fallback triggers. Then refresh the visual baselines.
+- Fix the 0-width map in the mobile layout and capture a valid mobile baseline.
 - Reconcile the hosted build's version label (v3.7.2 Development) with the local 7.1.x release line.
 - Walk ARES Duval leadership through the platform and collect feedback on how it fits activations and exercises.
 
