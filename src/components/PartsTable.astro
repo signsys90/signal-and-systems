@@ -20,10 +20,10 @@ const { parts } = Astro.props;
 const tbd = 'TBD';
 ---
 
-<div class="ss-table-wrap not-content">
+<div class="ss-table-wrap not-content" tabindex="0">
 	<table class="ss-table">
 		<thead>
-			<tr><th>Part</th><th>SKU</th><th>Price paid</th><th>Key specs</th><th>Source</th><th>Status</th></tr>
+			<tr><th>Part</th><th>SKU</th><th>Price</th><th>Key specs</th><th>Source</th><th>Status</th></tr>
 		</thead>
 		<tbody>
 			{parts.map((p) => (
@@ -32,7 +32,7 @@ const tbd = 'TBD';
 					<td class="ss-mono">{p.sku ?? tbd}</td>
 					<td class="ss-mono">{p.price ?? tbd}</td>
 					<td>{p.specs ?? tbd}</td>
-					<td>{p.source ? <a href={p.source}>Manufacturer</a> : tbd}</td>
+					<td>{p.source ? (/^https?:\/\//.test(p.source) ? <a href={p.source}>Source</a> : p.source) : tbd}</td>
 					<td>{p.status ? <StatusBadge status={p.status} /> : tbd}</td>
 				</tr>
 			))}

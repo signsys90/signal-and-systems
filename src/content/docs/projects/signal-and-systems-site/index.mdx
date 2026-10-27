@@ -5,7 +5,7 @@ summary: This site. A $0 documentation and portfolio site on Astro, Starlight an
 status: In progress
 category: Software and Automation
 started: 2026-10-25
-updated: 2026-10-26
+updated: 2026-10-27
 project: true
 ---
 
@@ -59,7 +59,7 @@ Give every project one public home where the parts, wiring, code and test result
 - **Budget:** $0. Free hosting, free tools, and no paid services without a decision first.
 - **Privacy:** no home address, phone number, VIN, plate, permit numbers or parking locations. Photos have location data stripped. Scanner examples use synthetic IDs only. No employer confidential data and no unpublished emergency-communications details.
 - **Honesty:** no invented metrics. Every page has a testing section that says what was not tested.
-- **Consistency:** every project page follows the same 12-section template.
+- **Consistency:** build projects follow the same 12-section template, and business case studies follow one case-study standard that keeps confirmed facts apart from anything not documented.
 
 ## Architecture
 
@@ -81,7 +81,7 @@ I wrote the site plan: the name, design tokens, menu, categories, status badges,
 		{ name: 'Starlight', specs: 'Documentation theme with built-in search', source: 'https://starlight.astro.build/', status: 'Installed' },
 		{ name: 'Fontsource: Space Grotesk, Inter, JetBrains Mono', specs: 'Self-hosted fonts', source: 'https://fontsource.org/', status: 'Installed' },
 		{ name: 'Cloudflare Pages', specs: 'Free static hosting', source: 'https://pages.cloudflare.com/', price: '$0', status: 'Installed' },
-		{ name: 'Cloudflare Web Analytics', specs: 'Cookie-free, aggregate page views', price: '$0', status: 'Planned' },
+		{ name: 'Cloudflare Web Analytics', specs: 'Cookie-free, aggregate page views', price: '$0', status: 'Installed' },
 	]}
 />
 
@@ -108,7 +108,9 @@ I wrote the site plan: the name, design tokens, menu, categories, status badges,
 | Dark mode, light mode and phone width | Checked by screenshot at launch |
 | WCAG AA color contrast | Computed for every token pairing at launch. All pass |
 | Live deploy on Cloudflare Pages | Yes (2026-10-26) |
-| Broken-link check on the live site | Not yet |
+| Internal link and image check | Yes, on 2026-10-27, against a full local build: no broken internal links or missing images, and every image has alt text |
+| Accessibility scan (axe-core, WCAG A/AA) | Run on 2026-10-27 on every page in dark and light mode. No contrast failures. Table, callout and table-header issues fixed the same day; unlabeled checklist boxes on two pages remain |
+| External link check | Not yet |
 | Page-speed check on the live site | Not yet |
 
 ## Safety notes
@@ -122,15 +124,15 @@ I wrote the site plan: the name, design tokens, menu, categories, status badges,
 
 ## Open items
 
-- Turn on Cloudflare Web Analytics.
-- Set up the contact form.
 - Decide on a custom domain.
-- Run a broken-link and page-speed check on the live site.
+- Run an external link check and a page-speed check on the live site.
+- Refresh the screenshots above, which show the site as it looked at launch.
 
 ## Changelog
 
 <Changelog
 	entries={[
+		{ date: '2026-10-27', change: 'Site-wide audit: fixed the clipped header name on phones, table and callout accessibility, the home page title and build log list, parts table source links, and stale statuses and open items. Added robots.txt.', rollback: 'Revert the audit pull request.' },
 		{ date: '2026-10-26', change: 'Project page published.', rollback: 'Revert the commit that added this page.' },
 		{ date: '2026-10-26', change: 'Site launched on Cloudflare Pages.', rollback: 'Roll back to an earlier deployment in the Cloudflare Pages dashboard.', log: '/log/2026-10-26-site-launch/' },
 	]}
