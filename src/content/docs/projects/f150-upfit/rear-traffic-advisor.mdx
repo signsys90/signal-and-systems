@@ -1,0 +1,120 @@
+---
+title: BooYu rear traffic advisor
+description: BooYu 8-head amber rear-window traffic advisor on the F-150, on SpeedTech headrest brackets, with its own controller fed from Whelen CanTrol WC output J1-3, plus a possible Whelen Dominator replacement.
+summary: Eight-head amber traffic advisor in the rear window. Its controller stays manual because it needs its power button pressed every time it gets power. J1-3 cuts its power.
+status: Installed
+category: Vehicle Upfit and 12V
+updated: 2026-10-27
+sidebar:
+  label: Rear traffic advisor
+  order: 13
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import PartsTable from '../../../../components/PartsTable.astro';
+import WiringTable from '../../../../components/WiringTable.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+import booyu from '../../../../assets/f150/booyu.jpg';
+
+<ProjectHeader hero={booyu} heroAlt="BooYu rear-window LED traffic advisor bars on suction cups with the controller and 12V plug, product photo." />
+
+<Callout type="safety" title="Legal notice">
+Emergency lighting and siren use is regulated by state law and permits. This page documents a personal build and is not legal guidance.
+</Callout>
+
+## Goal
+
+Rear-facing amber warning and directional lighting in the rear window, switched off and on with the rest of the system. Done means the controller is hardwired to J1-3 through a 10A fuse and its behavior is documented.
+
+## Constraints
+
+- **Interior only.** The bar sits in the rear window. The listing shows suction cups; on this truck it's on SpeedTech headrest rear mounting brackets.
+- **Its own controller.** The cable between the controller and the bar has a 4- or 5-pin plug (listing photo), too few wires for one per head, so the CanTrol can't run the heads one by one. The CanTrol's J10 traffic advisor port isn't used.
+- **Manual power button.** It needs its power button pressed every time it gets power, even after a power cut (confirmed 10 Oct 2026).
+
+<SpecBox
+	title="BooYu Rear LED TIR Amber Warning Light & Traffic Advisor"
+	specs={[
+		['Heads', '8, all amber LEDs (checked 10 Oct)'],
+		['Power', '12V cigarette-lighter plug with an on/off switch. Listing says it can be hardwired: red +, black −'],
+		['Controller cable', '4- or 5-pin plug (listing photo)'],
+		['Draw', 'Not listed. Measure on the bench'],
+		['Mount', 'Rear window, SpeedTech headrest rear brackets'],
+		['Paid', '$39.99, plus $19.99 for the bracket 2-pack'],
+	]}
+	source={{ label: 'BooYu listing, and my notes of 8 and 10 Oct 2026' }}
+/>
+
+## Parts
+
+<PartsTable
+	parts={[
+		{ name: 'BooYu Rear LED TIR Amber Warning Light & Traffic Advisor, with controller', price: '$39.99', specs: '8 heads, all amber', status: 'Installed' },
+		{ name: 'SpeedTech Lights headrest rear mounting brackets (2-pack)', price: '$19.99', specs: 'Used for this bar (6 Oct)', status: 'Installed' },
+		{ name: '10A blade fuse, sealed in-line ATC holder', specs: 'B1', status: 'Planned' },
+		{ name: '14 AWG red and black wire', specs: 'B1, B2', status: 'Planned' },
+	]}
+/>
+
+## Wiring
+
+<WiringTable
+	rows={[
+		{ wire: 'B1', color: 'Red (controller +, after cutting off the plug)', function: 'Power to the controller', source: 'J1-3 (10A, orange lead), slide 2/3', draw: 'Not measured', fuse: '10A in-line ATC, plus CanTrol internal', gauge: '14 AWG', relay: '—', termination: 'Butt splice with heat shrink' },
+		{ wire: 'B2', color: 'Black (controller −)', function: 'Ground', source: '—', draw: 'Return', fuse: '—', gauge: '14 AWG', relay: '—', termination: 'Ring terminal, star washer', ground: 'Ford factory ground point or steel frame rail. Never battery negative' },
+		{ wire: 'B3', color: 'Supplied cable', function: 'Controller to light bar', source: '—', draw: '—', fuse: '—', gauge: 'Supplied', relay: '—', termination: 'Factory plug' },
+	]}
+/>
+
+## How it's used
+
+It stays manual. I keep the controller within reach and press it on when it's needed. J1-3 still cuts its power with the slide switch, so it can never be left running with the system off. In the five-modes plan it can only do amber flash (M3, and the amber part of M5).
+
+## Possible replacement: Whelen Dominator Plus (not bought)
+
+On 11 October I found a used Whelen 8-head Dominator Plus traffic advisor, all amber (AAAAAAAA), with LIN6 optics and end flashers, at Brooks Government Surplus for $325.00 (listing price, condition A). The listing's example unit is model DPTAW8, PN 01-0688639-F80, LINZ6 Super-LED, 12VDC, made 05/20. Units vary (TADP8RB, TADP8, DPTAW8 and similar).
+
+The two end heads are dedicated alternating flashers and the middle six flash or run built-in traffic advisor patterns. It has four control wires (TA left, TA right, end flash only, TA flash), so the CanTrol only switches it.
+
+<WiringTable
+	rows={[
+		{ wire: 'K1', color: 'Power (+)', function: 'Replaces B1', source: 'J1-3', draw: '0.75A peak per head (Whelen 14D05/14D06)', fuse: '10A in-line ATC (keep the B1 holder)', gauge: '14 AWG', relay: '—', termination: 'TBD' },
+		{ wire: 'K2', color: 'Ground (−)', function: 'Replaces B2', source: '—', draw: 'Return', fuse: '—', gauge: '14 AWG', relay: '—', termination: 'Ring terminal', ground: 'Frame rail or Ford ground point' },
+		{ wire: 'K3', color: '"TA flash"', function: 'Warning flash whenever J1-3 is on', source: 'Joined to K1 power', draw: 'Signal', fuse: 'Shares K1', gauge: '18 AWG', relay: '—', termination: 'TBD' },
+		{ wire: 'K4', color: '"End flash only"', function: 'End heads only', source: 'LED Output 6, button', draw: 'Signal', fuse: 'LED output 2.5A', gauge: '18 AWG', relay: '—', termination: 'TBD' },
+		{ wire: 'K5', color: '"TA left"', function: 'Left arrow', source: 'LED Output 7, button, latch', draw: 'Signal', fuse: 'LED output 2.5A', gauge: '18 AWG', relay: '—', termination: 'TBD' },
+		{ wire: 'K6', color: '"TA right"', function: 'Right arrow', source: 'LED Output 8, button, latch', draw: 'Signal', fuse: 'LED output 2.5A', gauge: '18 AWG', relay: '—', termination: 'TBD' },
+	]}
+/>
+
+<Callout type="unverified">
+The K1 to K6 plan is inferred until the seller's wire chart is in hand. Don't use the CanTrol's J10 traffic advisor port for it: J10 is for nine-wire traffic advisors. The cable should exit on the passenger side at the rear mount. A 10A fuse covers eight heads at Whelen's 0.75A peak each.
+</Callout>
+
+## Bench test
+
+Note the power-on behavior (done: it needs its button every time), and measure the draw with a meter in series on red so the 10A fuse can be confirmed.
+
+## Troubleshooting
+
+| Symptom | Likely cause and fix |
+| --- | --- |
+| Doesn't light | Controller not switched on, in-line fuse, or a poor ground |
+
+## Open items
+
+- Measure the draw.
+- Decide whether to replace it with the Dominator. Not in the budget.
+
+## Sources
+
+- BooYu listing (power, plug, hardwire colors)
+- [Whelen Dominator Plus traffic advisor install guide, form 14D06](https://www.manualslib.com/manual/2520118/Whelen-Engineering-Company-Dominator-Plus-Traffic-Advisor.html) (rear cable exit on the passenger side)
+- [Whelen Dominator Plus flasher series DP2 to DP8, form 14D05](https://www.vehiclesafetysupply.com/images/files/DP6.pdf) (10A fuse for 8 lights, 0.75A peak per head)
+- F-150 project document, revision 10, sections 8 and 9.3 (B1 to B3, K1 to K6)
+
+## Changelog
+
+<Changelog entries={[{ date: '2026-10-27', change: 'Page published from the 23 October project files.', rollback: 'Revert the commit that rebuilt the F-150 section.' }]} />

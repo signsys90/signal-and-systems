@@ -1,0 +1,135 @@
+---
+title: UBL U-Lite grille lights
+description: Two UBL U-Lite amber/white surface mount lights in the upper corners of the F-150 grille guard punch plate, on one Whelen CanTrol WC output through a 3A fuse, synced and alternating.
+summary: Two amber/white U-Lites in the upper punch plate corners, fed from J1-4 through a 3A fuse, yellows joined for sync and one white lead used so they alternate.
+status: Bench-tested
+category: Vehicle Upfit and 12V
+updated: 2026-10-27
+sidebar:
+  label: UBL U-Lite grille lights
+  order: 11
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import PartsTable from '../../../../components/PartsTable.astro';
+import WiringTable from '../../../../components/WiringTable.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+import ulite from '../../../../assets/f150/ubl-ulite.jpg';
+
+<ProjectHeader hero={ulite} heroAlt="UBL U-Lite surface mount light shown twice, lit amber on top and white below, product photo." />
+
+<Callout type="safety" title="Legal notice">
+Emergency lighting and siren use is regulated by state law and permits. This page documents a personal build and is not legal guidance.
+</Callout>
+
+## Goal
+
+Two small amber/white warning lights high on the grille guard, flashing in sync and alternating left and right, run from one CanTrol output. Done means both are mounted on the punch plate with machine screws, wired through a 3A fuse within 12 in of the output, and working from the slide switch in the truck.
+
+## Constraints
+
+- **Location:** upper left and upper right corners of the punch plate (decided 6 Oct; the first proposal had them in the lower corners).
+- **No drilling.** Each light is centered over an existing punch plate hole, so its leads run straight back through it.
+- **Fuse:** UBL calls for a 3A fuse within 12 in of the power source.
+- **Ground:** frame rail side or the Ford Q-231 point, never the battery negative post.
+
+<SpecBox
+	title="UBL U-Lite Surface Mount LED Grille Light, amber/white"
+	specs={[
+		['SKU', 'UBL-UL2-SM'],
+		['Size', '4.40 x 1.25 x 0.40 in, mounting tab at each end'],
+		['LEDs', '6'],
+		['Voltage', '12V'],
+		['Draw', '350 mA max each, 0.70A for the pair'],
+		['Leads', 'About 6 in, 18 AWG'],
+		['Patterns', '40, including Steady 1/2 and Brake 1/2'],
+		['Fuse (UBL)', '3A within 12 in of the source'],
+		['Paid', '$85.50 for two (listing $44.99 single color, $54.99 dual)'],
+	]}
+	source={{ label: 'UBL U-Lite manual, SKU UBL-UL2-SM, version C.1. Size and draw: my 5 Oct install proposal' }}
+/>
+
+## Wire functions
+
+| Lead | Function (UBL manual) | Plan |
+| --- | --- | --- |
+| Red | Mode 1: powers the light in Mode 1 | Both reds to J1-4 through the 3A fuse |
+| Blue | Mode 2 | Capped, each separately |
+| Green | Mode 3 | Capped, each separately |
+| Yellow | Pattern / Sync | The two yellows joined for sync. A brief +12V steps the pattern |
+| White | Alternate | Left light's white on J1-4 after the fuse, so the pair alternates. Right light's white capped |
+| Black | Ground | Both to a frame rail ground |
+
+**Patterns:** +12V on yellow for 1 second steps to the next of 40 patterns. 3 to 5 seconds steps back.
+
+## Wiring
+
+<WiringTable
+	rows={[
+		{ wire: 'U1', color: 'Red (both lights)', function: 'Mode 1 power, spliced', source: 'J1-4 (10A, yellow lead), slide 2/3', draw: '0.70A max total (UBL 350 mA each)', fuse: '3A in-line within 12 in of J1-4, plus CanTrol internal', gauge: '16 AWG run, 18 AWG leads', relay: '—', termination: 'Solder-seal splice, Deutsch DT at the guard' },
+		{ wire: 'U2', color: 'White (left light)', function: 'Alternate, makes the pair alternate', source: 'J1-4 after the 3A fuse', draw: 'Signal', fuse: 'Shares U1 fuse', gauge: '18 AWG', relay: '—', termination: 'Solder-seal splice' },
+		{ wire: 'U3', color: 'Yellow to yellow', function: 'Pattern / sync between the lights', source: '—', draw: '—', fuse: '—', gauge: '18 AWG', relay: '—', termination: 'Sealed splice' },
+		{ wire: 'U4', color: 'Black (both)', function: 'Ground', source: '—', draw: 'Return', fuse: '—', gauge: '16–18 AWG', relay: '—', termination: 'Ring terminal, star washer, sealed', ground: 'Side of a steel frame rail or Ford Q-231. Never battery negative' },
+		{ wire: 'U5', color: 'Blue, green, right white', function: 'Not used', source: '—', draw: '—', fuse: '—', gauge: '—', relay: '—', termination: 'Capped or taped off, each separately' },
+	]}
+/>
+
+## Mount (final, 7 Oct)
+
+- Two #6-32 x 3/4 in black stainless machine screws per light, through the light's tabs and the punch plate. UBL said #6-32 fits the holes best. If one is loose at the mock-up, use #8-32.
+- Black stainless #8 fender washers, 1-1/4 in across, behind the plate. The washer must span the punch hole, so measure one hole first and go to 1-1/2 in if the hole is over 1 in.
+- Stainless #6-32 nylon-insert lock nuts behind the washers.
+- The supplied screws are pan-head self-tappers, about 1/2 in long, meant for 1/16 in pilot holes. They fit the housing snugly (checked 10 Oct) but take no nut, so they're not used.
+- Until wiring day, the 6 in leads stay tucked behind the plate with taped ends.
+
+Full hardware and prices are on the [grille guard](/projects/f150-upfit/grille-guard/) page.
+
+## Bench test
+
+![Bench wiring for one U-Lite: the SUPERNIGHT 12V supply through a 5A fuse to the red lead, black to ground, the other leads wire-nutted.](../../../../assets/f150/bench-b-ulite.png)
+
+*Bench setup B from the project document.*
+
+1. Fuse 5A (the smallest in the bench kit; the truck gets 3A). Red clip to the light's red (Mode 1), black clip to black.
+2. Wire-nut blue, green, white and yellow separately.
+3. Plug in. The light should flash. Touch yellow to +12V for 1 s to step patterns; 3 to 5 s steps back.
+4. Optional: move the red clip to blue, then green, to check Modes 2 and 3.
+5. Both lights together: both reds on +, both blacks on −, the yellows joined so they sync. Put one light's white on + and they alternate.
+6. Repeat for the second light.
+
+| Result | Date |
+| --- | --- |
+| The lights alternate white and amber on their own | Confirmed 10 Oct 2026 |
+| Supplied screws fit the housing snugly | Confirmed 10 Oct 2026 |
+| Draw measured | Not yet |
+| On the CanTrol, J1-4 | Not yet |
+
+## Parts
+
+<PartsTable
+	parts={[
+		{ name: 'UBL U-Lite Surface Mount LED Grille Light, amber/white (x2)', sku: 'UBL-UL2-SM', price: '$85.50 for two', specs: '350 mA max each, 12V, 6 LEDs', status: 'Bench-tested' },
+		{ name: 'Black stainless machine screws #6-32 x 3/4"', specs: 'Use 4', price: 'About $9.00 (estimate)', status: 'Planned' },
+		{ name: 'Black stainless #8 fender washers, 1-1/4" across', specs: 'Use 4', price: 'About $8.00 (estimate)', status: 'Planned' },
+		{ name: 'Stainless #6-32 nylon-insert lock nuts', specs: 'Use 4', price: 'About $7.00 (estimate)', status: 'Planned' },
+		{ name: '3A blade fuse and sealed in-line ATC holder', specs: 'Within 12" of J1-4', status: 'Planned' },
+	]}
+/>
+
+## Open items
+
+- Confirm each light sits centered over a punch plate hole.
+- Measure a punch hole and size the fender washer.
+- Measure the draw of the pair on the bench.
+
+## Sources
+
+- UBL U-Lite installation manual, SKU UBL-UL2-SM, version C.1
+- Tyler at UBL support, 7 October 2026 (#6-32 screws)
+- F-150 project document, revision 10, sections 6.4, 6.5, 9.3 (U1 to U5) and 10
+
+## Changelog
+
+<Changelog entries={[{ date: '2026-10-27', change: 'Page published from the 23 October project files.', rollback: 'Revert the commit that rebuilt the F-150 section.' }]} />

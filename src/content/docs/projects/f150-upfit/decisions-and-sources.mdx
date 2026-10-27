@@ -1,0 +1,123 @@
+---
+title: Decisions, revisions and sources
+description: Where the F-150 upfit sources disagreed and what was decided, everything that was superseded, the project document's revision history, and every source document and reference link.
+summary: The decision record for the F-150 build. Conflicts between sources, superseded plans, the ten document revisions and the full source list.
+status: In progress
+category: Vehicle Upfit and 12V
+updated: 2026-10-27
+sidebar:
+  label: Decisions, revisions and sources
+  order: 20
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import Changelog from '../../../../components/Changelog.astro';
+
+<ProjectHeader />
+
+## Source rule
+
+My own documents are treated as most accurate. Where they disagree with an imported chat, the document wins. Where I gave a later instruction (6 Oct: U-Lites in the upper punch plate, light bar under the lower tube; 7 Oct: light bar on its own L-brackets with stainless ties), that instruction wins. Every remaining disagreement is listed below.
+
+Status labels used across these pages:
+
+| Label | Meaning |
+| --- | --- |
+| Confirmed | Stated in my documents, a manufacturer data sheet, or checked against a product page |
+| Estimate | Typical price, a figure read off a photo or drawing, or an estimate awaiting a tape measure |
+| Unconfirmed / inferred | An assumption or inference that still needs checking |
+| Superseded | Replaced by a later or more authoritative source. Kept for the record only |
+
+## Conflicts between sources
+
+| Topic | Source A | Source B | Resolution |
+| --- | --- | --- | --- |
+| Head location | Design brief: overhead ranked 1 and 2 | Config sheet: no overhead mount (sunroof) | Resolved 21 Oct: overhead console on the Ben3DBuild mount, in the sunglasses holder opening |
+| Center console | Parts log and config sheet: "no console" | Design brief: flow-through console with armrest bin | Both true: the truck has the factory console, but no equipment console |
+| Ground point | Project document: bare chassis near the guard; UBL manuals: battery negative | Ford SVE Bulletin Q-231 and Ford body builder guidance | Ford wins: Q-231 point or the side of a steel frame rail, never battery negative or aluminum body |
+| Roof | Project document: "sunroof" | My standing notes: panoramic roof | Either way, nothing mounts on the roof |
+| U-Lite rear washer | Diagram: #6 stainless fender washer | Hardware table: black stainless #8, 1-1/4 in across | Table used; it must span the punch hole |
+
+## Superseded
+
+| Topic | Earlier | Later |
+| --- | --- | --- |
+| Lower tube size | Photo estimate about 1-3/4 in, then about 1-3/4 in with about 1/8 in gap (6 Oct) | Tape, 7 Oct: 1.91 in OD, under 1/16 in gap |
+| Color Flood control and color | Proposal: one 10A output; light bar chat: 3 modes + 2 arrows; earlier note "amber" | 6 Oct: amber/white with white flood. Now seven CanTrol outputs with modes and arrows (bench-tested 11 Oct) |
+| Front warning light | Alibaba LTDG9111 traffic advisor ($35 sample) | UBL Color Flood 2.0 20" amber/white |
+| Light position | Tube clamps on the top crossbar, then above the lower tube | Under the lower tube, above the license plate |
+| Light clamps | Nilight 91074B / STEDI 60–65 mm, sized to 2 in | None: the light's own L-brackets with stainless ties (7 Oct) |
+| U-Lite position | Lower corners of the punch plate | Upper left and right corners |
+| Controller for the truck | Whelen 295HFSA6 | Whelen CanTrol WC (11 Oct). The 295HFSA6 stays a bench-test unit, never installed |
+| Control head | Whelen CenCom Sapphire CCSRNT3A (3-position slide, 18 buttons), custom 3D-printed mount | CanTrol WC 21-button WeCan head on the Ben3DBuild overhead mount |
+| U-Lite color | Single color, $44.99 each (proposal) | Amber/white, bought $85.50 for two |
+| Speaker mount | L-bracket bolted through the plate with 1/4"-20 hardware and aluminum backing plates | Speaker's own 1/4"-28 center bolt straight through the plate, no L-bracket (6 and 7 Oct) |
+| Hardware total | $39.20, then $46.17 (corner braces added), then $46.54 (6 Oct) | Final list (8 Oct): corner braces, clamps, aluminum flat bar, neoprene sheet and the separate flat black can dropped; ties, washers and nuts added |
+| Front-light fuse | 10A, 16 AWG for a 72W bar | 5A for the Color Flood feed, on a 10A J1 output |
+| Touch-up budget | $60–90, then $194.73 | About $45 estimate; $37.52 actually spent (22 Oct) |
+| Amplifier location | Console bin | Under the driver-side rear seat (8 Oct) |
+
+## Revision history of the project document
+
+| Rev. | Date | Changes |
+| --- | --- | --- |
+| 1 | 6 Oct 2026 | First compilation from the five imported chats and the project threads |
+| 2 | 6 Oct 2026 | My five documents and Tech Sheet 2 adopted as primary sources. Placement decided: U-Lites in the upper punch plate, Color Flood under the lower tube |
+| 3 | 6 Oct 2026 | Actual spend list added, including the Optima battery |
+| 4 | 6 Oct 2026 | Answers to the open questions. Speaker mount decided (no L-bracket), lower tube measured from photos, Color Flood wiring plan |
+| 5 | 6 Oct 2026 | Guard part number confirmed. Final mounting hardware list. $375 installation labor added. Every image and diagram collected. Product names standardized |
+| 6 | 8 Oct 2026 | UBL support sizes (#6-32, 1/4"-28) and Color Flood wire colors from UBL's instructions. Amplifier under the rear seat. One master shopping list and spreadsheet. Reference sections moved to a separate appendix |
+| 7 | 11 Oct 2026 | Appendix issued at revision 7. The main document's history skips from 6 to 8 |
+| 8 | 16 Oct 2026 | CanTrol WC set with the 21-button head ($425.00 shipped): photos, unit details and the button plan. Budget links and an install tools group. Putco Work Blade bought with the Wireless Remote Kit V3. Plate bracket and two Z-6 brake-pop heads bought 18 Oct, with the CC5K1 kit bought 21 Oct |
+| 9 | 21 Oct 2026 | Proposed all-lights five modes plan. CC5K1 bought ($52.98). No grounds on the battery negative post; J17-1, -2 and -5 left unconnected; ham radio rule. Ham radio, antenna and NMO mount installed. Control head on the Ben3DBuild overhead mount ($120.00) |
+| 10 | 22–23 Oct 2026 | Guard confirmed as the Steelcraft HD 50-1420C. ZOOSUNX tie tool bought ($18.01). Touch-up supplies bought ($37.52) and the touch-up finished 23 Oct |
+
+## Owner documents
+
+| Document | Content |
+| --- | --- |
+| Grille Guard Siren/Lighting Install Proposal, 10.5.26 (5 pp) | Layout photos and diagram, components, electrical summary, hardware list, scope, pricing |
+| F150 Config Sheet and Install Guide, rev 5 (6 pp) | Output plan, EFM config, fuses and wire, parts list, install phases, rocker bars, troubleshooting, open questions |
+| Control Head Mount Design Brief (2 Oct) and Tech Sheets 2, 3 and 5 | Mount locations, vehicle details, bracket renderings |
+| Siren mounting parts spreadsheet (6 Oct) | Parts brought up to the final choices; dropped L-bracket parts on a second tab |
+| Whelen CanTrol WC Installation/Operating Guide, form 14580G (14 pp) | Specs, power, outputs, speaker, inputs, connection map, pinouts |
+| CanTrol WC photos, 11 and 16 Oct | Module, head, connectors, mic, cables |
+| CanTrol Gen 3 bench test guide (23 Oct) | Ten-stage bench test |
+| F-150 project document, revisions 1 to 10, and its appendix | Everything on these pages |
+
+## Manufacturer documents
+
+- UBL Color Flood 2.0 instructions, SKU UBL-CF-2120, version A.1
+- UBL U-Lite manual, SKU UBL-UL2-SM, version C.1
+- UBL Tailgate Bar Instructions, version A.4 (SKU UBL-TGB)
+- Putco Blade LED Light Bar Installation Instructions, form 93009I; Four-Button Wireless Remote, P/N 93020 Rev B; color combination chart
+- SpeedTech Lights Z-6 TIR Brake manual G-TZTBL6 and standard Z-6 manual G-TZTSTD6
+- [SpeedTech Raptor STD Elite TIR manual](https://speedtechlights.com/cdn/shop/files/71630STL_20Raptor_20STD_20Elite_20TIR.pdf?v=9997490532677141036) and [Grand Control Elite manual](https://speedtechlights.com/cdn/shop/files/97465STL_20Grand_20Control_20Elite.pdf?v=4788095219780941684)
+- Whelen CC5K1 install guide 14C81C; Whelen price list PL18.1CT; [Whelen Command release notes](https://releasenotes.command.whelen.com/)
+- Whelen CanTrol light and siren system brochure, code 12373N (2016)
+- Whelen police catalog, sirens, switches and speakers (CanTrol WC page)
+- Whelen 295HFSA6 installation manual excerpts (ManualsLib, pp. 4, 5, 7)
+- [Whelen Dominator Plus TA guide, form 14D06](https://www.manualslib.com/manual/2520118/Whelen-Engineering-Company-Dominator-Plus-Traffic-Advisor.html) and [form 14D05](https://www.vehiclesafetysupply.com/images/files/DP6.pdf)
+- [Steelcraft HD grille guard install sheet](https://steelcraftautomotive.com/pdf/185365)
+- Ford SVE Bulletin Q-231
+- [Speed Turtle Engineering](https://www.speedturtleengineering.com/) (EFM 3.0, STE Configuration Utility)
+
+## Support contacts used
+
+- UBL support (Tyler), 7 October 2026: speaker bolt 1/4"-28 about 1-1/2 in; U-Lite holes take #6-32
+- SpeedTech Lights Support, 8 October 2026: plate bracket is 12.5 x 5.75 in. SpeedTech phone 800-757-2581
+
+## Reference links
+
+- [Bearded3D control head mounts](https://bearded3d.com/products/control-head-mounts)
+- Precision Mounts headliner mount for Whelen CenCom (precisionmounts.com)
+- Rugged Radios center console radio mount (ruggedradios.com)
+- K7MFC mobile shack in a 2013 F-150 Lariat (mfcallahan.com, 1 July 2018)
+- Etsy Whelen head mount for 2021+ F-150 (listing 1568430400) and surface-mount box (listing 1736387197)
+- [UBL 100W siren speaker (Amazon B0DJVHWCCD)](https://www.amazon.com/dp/B0DJVHWCCD)
+- [SpeedTech plate bracket (Amazon B01KZ1WD80)](https://www.amazon.com/dp/B01KZ1WD80)
+- [AmericanTrucks grille guard install video](https://www.youtube.com/watch?v=_qu9wyKAgcc)
+
+## Changelog
+
+<Changelog entries={[{ date: '2026-10-27', change: 'Page published from the 23 October project files and appendix.', rollback: 'Revert the commit that rebuilt the F-150 section.' }]} />

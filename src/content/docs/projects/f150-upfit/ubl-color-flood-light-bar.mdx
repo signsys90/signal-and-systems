@@ -4,10 +4,10 @@ description: Wire-by-wire plan for the UBL Color Flood 2.0 20-inch amber/white l
 summary: 20" amber/white warning and white flood bar under the grille guard's lower tube, with seven CanTrol outputs for power, three modes, two arrows and pattern.
 status: Bench-tested
 category: Vehicle Upfit and 12V
-updated: 2026-10-26
+updated: 2026-10-27
 sidebar:
   label: UBL Color Flood 2.0 light bar
-  order: 2
+  order: 10
 ---
 
 import ProjectHeader from '../../../../components/ProjectHeader.astro';
@@ -16,6 +16,8 @@ import PartsTable from '../../../../components/PartsTable.astro';
 import WiringTable from '../../../../components/WiringTable.astro';
 import Callout from '../../../../components/Callout.astro';
 import Changelog from '../../../../components/Changelog.astro';
+import Gallery from '../../../../components/Gallery.astro';
+import all295 from '../../../../assets/f150/bench-colorflood-295.png';
 
 <ProjectHeader />
 
@@ -70,7 +72,7 @@ Red alone does nothing. The bar lights only with red plus a mode or arrow wire, 
 />
 
 <Callout type="unverified">
-The instruction sheet does not list draw, voltage, size, IP rating or the in-line fuse's amp rating. Those three come from my own install proposal, not from a UBL document. The IP rating and the fuse rating are still unknown. The UBL product page could not be reached to check them, so no product link is given yet.
+The instruction sheet does not list draw, voltage, size, IP rating or the in-line fuse's amp rating. Those three come from my own install proposal, not from a UBL document. The IP rating and the in-line fuse's rating are still unknown. The project parts list allots a 5A blade fuse for this feed (wire C1), matching the 5A fuse used on the bench, and replaces an early plan of 10A on 16 AWG for a 72W bar. The UBL product page could not be reached to check them, so no product link is given yet.
 </Callout>
 
 ## Parts list
@@ -92,7 +94,7 @@ Gauges come from the project document's fuse and wire table: 16 AWG for power, 1
 
 <WiringTable
 	rows={[
-		{ wire: 'CF1', color: 'Red', function: 'Power. Own feed only, never joined to a mode wire', source: 'J1-6 (10A, BLU lead), positive-switched', draw: '3.3A max (unverified)', fuse: 'Bar in-line fuse (rating TBD) + CanTrol internal', gauge: '16 AWG', termination: 'Bench: wire nut. Truck: TBD' },
+		{ wire: 'CF1', color: 'Red', function: 'Power. Own feed only, never joined to a mode wire', source: 'J1-6 (10A, BLU lead), positive-switched', draw: '3.3A max (unverified)', fuse: 'Bar in-line fuse (rating not read yet; the parts list allots a 5A blade for this feed) + CanTrol internal', gauge: '16 AWG', termination: 'Bench: wire nut. Truck: TBD' },
 		{ wire: 'CF2', color: 'Brown', function: 'Mode 1, warning pattern', source: 'J4-14 (LED 10, BLU lead)', draw: 'Signal only, not measured', fuse: 'CanTrol J4 group 20A', gauge: '18 AWG', termination: 'Bench: wire nut. Truck: TBD' },
 		{ wire: 'CF3', color: 'Orange', function: 'Mode 2, warning pattern. Overrides Mode 1', source: 'J1-1 (10A, BRN lead)', draw: 'Signal only, not measured', fuse: 'CanTrol internal', gauge: '18 AWG', termination: 'Bench: wire nut. Truck: TBD' },
 		{ wire: 'CF4', color: 'White', function: 'Mode 3, set to steady white flood. Overrides Modes 1 and 2', source: 'J4-3 (LED 1, BRN lead)', draw: 'Signal only, not measured', fuse: 'CanTrol J4 group 20A', gauge: '18 AWG', termination: 'Bench: wire nut. Truck: TBD' },
@@ -141,6 +143,8 @@ A flash pattern or Low Power on any of these outputs would switch the bar's inpu
 
 ## Testing and verification
 
+<Gallery photos={[{ src: all295, alt: 'Wiring diagram of the Color Flood bar on the Whelen 295HFSA6 bench unit: red on T11, brown T1, orange T2, white T3, blue T6, green T7, yellow T15, black to the supply negative, with a control table.', caption: 'Every feature at once on the 295HFSA6 bench unit, tested 11 Oct 2026. Count screws from the far right as you face the back. Don\'t press the 5th button: it turns T11 off and cuts the bar\'s power.' }]} />
+
 **Bench-tested on 2026-10-11** (on a 12V supply and a Whelen 295HFSA6 test amp, not the CanTrol):
 
 - All eight wire colors match UBL's instructions and the label on the bar.
@@ -173,7 +177,7 @@ A flash pattern or Low Power on any of these outputs would switch the bar's inpu
 
 ## Open items
 
-- Measure the draw on the red wire, and record the in-line fuse's amp rating.
+- Measure the draw on the red wire, and record the in-line fuse's amp rating (5A planned for C1).
 - Confirm the bar's IP rating with UBL.
 - Confirm J1-6 is in the positive-switching fuse slot.
 - Identify the J4-15 lead by pin and meter.
@@ -187,6 +191,7 @@ A flash pattern or Low Power on any of these outputs would switch the bar's inpu
 
 <Changelog
 	entries={[
+		{ date: '2026-10-27', change: 'Added the 5A fuse allotted for the power feed in the project parts list, and the 295HFSA6 all-features bench diagram. Moved in the sidebar to sit with the other grille guard products.', rollback: 'Revert the commit that rebuilt the F-150 section.' },
 		{ date: '2026-10-26', change: 'Component page published with the wire-by-wire plan, bench results and open items. Ground changed from "chassis near the guard" to a steel frame rail side or the Ford Q-231 point, per the 21 Oct wiring research.', rollback: 'Revert the commit that added this page.', log: '/log/2026-10-26-color-flood-wiring/' },
 	]}
 />

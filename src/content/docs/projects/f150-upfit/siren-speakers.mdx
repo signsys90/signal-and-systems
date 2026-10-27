@@ -1,0 +1,178 @@
+---
+title: UBL 100W siren speakers
+description: Two UBL 100W large siren speakers on the F-150 grille guard punch plate, wired in parallel to the Whelen CanTrol WC siren output at 5.5 ohms, with the final center-bolt mount and every fastener.
+summary: Two UBL 100W speakers bolted straight to the grille guard punch plate on their own center bolts, wired in parallel for a 5.5 Ω load on the CanTrol siren amp.
+status: In progress
+category: Vehicle Upfit and 12V
+updated: 2026-10-27
+sidebar:
+  label: Siren speakers
+  order: 9
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import PartsTable from '../../../../components/PartsTable.astro';
+import WiringTable from '../../../../components/WiringTable.astro';
+import Gallery from '../../../../components/Gallery.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+import product from '../../../../assets/f150/ubl-speaker.jpg';
+import s0741 from '../../../../assets/f150/spk-0741.jpg';
+import s0742 from '../../../../assets/f150/spk-0742.jpg';
+import s0743 from '../../../../assets/f150/spk-0743.jpg';
+
+<ProjectHeader hero={s0743} heroAlt="Back of a UBL 100W siren speaker with its mounting bolt in a raised boss at the center." />
+
+<Callout type="safety" title="Legal notice">
+Emergency lighting and siren use is regulated by state law and permits. This page documents a personal build and is not legal guidance.
+</Callout>
+
+## Goal
+
+Two siren speakers on the front of the truck, driven by the Whelen CanTrol WC's built-in siren amplifier, mounted without drilling and aimed straight ahead. Done means both are bolted to the punch plate, wired in parallel with matched polarity, every tone is tested at low volume, and the impedance is read off the labels.
+
+## Constraints
+
+- **Load:** the CanTrol accepts one or two 100W speakers with a 5.5 Ω minimum total load (guide 14580G). Two 11 Ω speakers in parallel make exactly 5.5 Ω, so the label impedance must be confirmed before wiring. An 8 Ω rating would put two speakers below Whelen's minimum.
+- **Mount:** no drilling on the guard. Each speaker uses its own center bolt through an existing punch plate hole.
+- **Speakers only connect to an amplifier's speaker output.** Never to 12V.
+- **Certification:** Whelen certifies SAE, California Title 13 and NFPA compliance with Whelen speakers. Third-party speakers work but may not carry that certification.
+
+<SpecBox
+	title="UBL 100W Large Siren Speaker"
+	specs={[
+		['Power', '100W each'],
+		['Impedance', '11 Ω each (listing). Two in parallel = 5.5 Ω'],
+		['Output', '120 to 124 dB (listing)'],
+		['Size', '7.5 H x 6.5 W x 3.5 D in with bracket'],
+		['Center bolt', '1/4"-28 (SAE fine), about 1-1/2 in long, heads stamped 8.8'],
+		['Leads', 'White (+), black (−)'],
+		['Listing', 'Amazon B0DJVHWCCD, $89.99 each (5 Oct 2026)'],
+	]}
+	source={{ label: 'UBL listing on Amazon (B0DJVHWCCD). Bolt size: Tyler at UBL support, 7 Oct 2026', href: 'https://www.amazon.com/dp/B0DJVHWCCD' }}
+/>
+
+<Callout type="unverified">
+The 11 Ω and dB figures come from the listing, not a UBL document I could open. The impedance gets read off each speaker's label before wiring. A meter reads DC resistance, so 7 to 9 Ω on an 11 Ω speaker is normal (general knowledge).
+</Callout>
+
+## Photos
+
+<Gallery
+	photos={[
+		{ src: product, alt: 'UBL 100W siren speaker on its L-bracket, product photo.', caption: 'Product photo. The L-bracket shown is not used on this truck.' },
+		{ src: s0741, alt: 'UBL 100W siren speaker in its bag with the L-bracket face and its bolts.', caption: 'IMG_0741: speaker in its bag, L-bracket face with its bolts.' },
+		{ src: s0742, alt: 'The L-bracket flange of the speaker with its drilled holes.', caption: 'IMG_0742: L-bracket flange with its drilled holes (not used).' },
+		{ src: s0743, alt: 'Back of the speaker with the mounting bolt in a raised boss at the center.', caption: 'IMG_0743: back of the speaker, with the mounting bolt in a raised boss at the center.' },
+	]}
+/>
+
+## Parts
+
+<PartsTable
+	parts={[
+		{ name: 'UBL 100W Large Siren Speaker (x2)', price: '$171.00 for two', specs: '100W, 11 Ω each, 120–124 dB', source: 'https://www.amazon.com/dp/B0DJVHWCCD', status: 'In progress' },
+		{ name: 'Stainless nylon-insert lock nuts, 1/4"-28', specs: 'Use 2, behind the plate', price: 'About $9.00 (estimate)', status: 'Planned' },
+		{ name: 'Stainless fender washers, 1/4" x 1-1/4" OD', specs: 'Use 2, behind the plate', status: 'Planned' },
+		{ name: 'Stainless flat washers, 1/4"', specs: 'Use 2, in front of the plate', price: 'About $7.00 (estimate)', status: 'Planned' },
+		{ name: 'Rubber or neoprene washers, 1/4", ready-made', specs: 'Use 2, in front of the plate', price: 'About $8.00 (estimate)', status: 'Planned' },
+		{ name: 'Loctite 242 blue thread locker', specs: 'Speaker nuts', price: 'About $6.00 (estimate)', status: 'Planned' },
+		{ name: 'Custom printed 2.5" round stickers, 10-pack', sku: 'Amazon B07WSKX5CR', price: '$13.95', specs: 'Covers the round center label on each speaker', status: 'Planned' },
+	]}
+/>
+
+## Mount (final, 7 Oct)
+
+No L-bracket. With its flange bolted flat to the plate, the speaker would aim up or down. Instead, the speaker's own center bolt goes straight through the punch plate.
+
+```text
+SIDE SECTION, one speaker (front of truck to the left)
+
+  Speaker ── rubber/neoprene washer ── stainless flat washer ── PUNCH PLATE ── fender washer 1/4 x 1-1/4 OD ── 1/4"-28 nyloc + blue Loctite
+             (existing hole, no drilling)                                     at least 2 threads past the nut
+```
+
+1. Spin a 1/4"-28 nut onto one speaker bolt at the store before buying the set. The heads are stamped 8.8, a metric-style marking, so the thread needs checking even though UBL says 1/4"-28.
+2. Offer the speaker to its bay, above the lower horizontal tube against the outside of each center vertical tube, and confirm it fits.
+3. Stack in front of the plate: rubber washer against the speaker, then the flat washer.
+4. Behind the plate: fender washer, then the nyloc with blue thread locker. At least two threads must show past the nut; if not, use a longer 1/4"-28 bolt.
+5. Re-check after the first drives. One center bolt can let a speaker twist on a vibrating guard. If it turns, add a second fastener or a tab that bears on a mesh hole (suggestion, not yet tried).
+
+## Wiring
+
+The CanTrol's siren amp has two speaker leads: orange (high) and brown (low). Both speakers are wired in parallel with matched polarity.
+
+<WiringTable
+	rows={[
+		{ wire: 'S1', color: 'Orange (CanTrol) to white (both speakers)', function: 'Speaker high (+)', source: 'CanTrol siren amp, orange lead', draw: 'Not published by Whelen. 295HFSA6 label: 8A at 100W, 16A at 200W (reference only)', fuse: 'None at the speaker (main feed is fused 2 x 40A)', gauge: '16 AWG', relay: '—', termination: 'Deutsch DT 2-way at the guard, sealed splice to both whites', ground: '—' },
+		{ wire: 'S2', color: 'Brown (CanTrol) to black (both speakers)', function: 'Speaker low (−)', source: 'CanTrol siren amp, brown lead', draw: 'Return for S1', fuse: 'None', gauge: '16 AWG', relay: '—', termination: 'Same DT connector, sealed splice to both blacks', ground: 'Not a chassis ground. Speaker return to the amp only' },
+	]}
+/>
+
+The 16 AWG runs go through the grille in split loom, through a firewall grommet, and back to the module under the driver-side rear seat. Extend the module's own orange and brown leads with 16 AWG only if they're short.
+
+<Callout type="safety" title="Never on 12V">
+Never connect a siren speaker straight to 12V, and never run a siren tone with no speaker connected. Speakers connect only to an amplifier's speaker output.
+</Callout>
+
+## Speaker label covers
+
+Each speaker has a round label at the center of its face. A custom printed 2.5 in round sticker goes over it (10-pack, Amazon B07WSKX5CR, $13.95). I made 13 design options, cropped to 2.5 in circles, with a two-page print sheet. One will be picked:
+
+1. Thin blue line
+2. Thin orange line
+3. Subdued
+4. Bobcat
+5. Panther
+6. C.A.T. Unit panther
+7. C.A.T. Unit bobcat
+8. C.A.T. Unit tribal cat
+9. C.A.T. Unit geometric cat
+10. Emergency Management Radio Communications seal
+11. Emergency Management Radio Communications seal with C.A.T. Unit
+12. Communications Unit coin
+13. Communications Unit coin with C.A.T. Unit
+
+The design images aren't published here because several include official seals and emblems.
+
+## Testing and verification
+
+| Step | Status |
+| --- | --- |
+| Read each speaker's label impedance | Not done |
+| Bench: one speaker on the 295HFSA6 test amp, 20A fuse, short low-volume bursts | Planned ([bench test plan](/projects/f150-upfit/cantrol-bench-test/)) |
+| Bench: one speaker at a time on the CanTrol, connected before power | Planned |
+| Mounted on the guard | Not done |
+| All tones in the truck, low volume, people at least 5 ft back | Not done |
+
+## Troubleshooting
+
+| Symptom | Likely cause and fix |
+| --- | --- |
+| Siren low or distorted | Impedance below 5.5 Ω total, a weak feed, out-of-phase wiring, or a speaker facing a blocked surface |
+| Slide position 3 also makes a wail | A tone is assigned to position 3 in Whelen Command. Remove it and re-save |
+
+## Safety notes
+
+- Test at low volume with people at least 5 ft from the speaker.
+- Hearing protection for anyone close during tests (general knowledge).
+- Grommet every metal pass-through.
+
+## Open items
+
+- Confirm the 1/4"-28 thread and that two threads show past the nut.
+- Confirm each speaker fits its punch plate bay.
+- Read the label impedance on both speakers.
+- Pick the sticker design.
+
+## Sources
+
+- UBL 100W siren speaker listing: [amazon.com/dp/B0DJVHWCCD](https://www.amazon.com/dp/B0DJVHWCCD)
+- Whelen CanTrol WC Installation/Operating Guide, form 14580G (5.5 Ω minimum, speaker leads)
+- Tyler at UBL support, 7 October 2026 (bolt thread and length)
+- F-150 project document, revision 10, sections 6.3, 6.9 and 7
+
+## Changelog
+
+<Changelog entries={[{ date: '2026-10-27', change: 'Page published from the 23 October project files.', rollback: 'Revert the commit that rebuilt the F-150 section.' }]} />

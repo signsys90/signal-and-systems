@@ -5,7 +5,7 @@ summary: Emergency lighting, siren and 12V build on a 2017 F-150 Lariat SuperCre
 status: In progress
 category: Vehicle Upfit and 12V
 started: TBD
-updated: 2026-10-26
+updated: 2026-10-27
 project: true
 sidebar:
   label: Overview
@@ -49,6 +49,31 @@ Build a clean, serviceable warning light and siren package on a daily-driven tru
 - **Radio:** amateur radio gets its own battery feed and ground, never shared with the CanTrol or its fuse block.
 - **Airbags:** all mounting and wire routing stays clear of airbag zones, including the curtain airbags along the roof rails.
 
+## Vehicle baseline
+
+| Item | Detail | Status |
+| --- | --- | --- |
+| Vehicle | 2017 Ford F-150 Lariat SuperCrew | Confirmed |
+| Roof | Panoramic roof (the project document says sunroof). The control head goes in the overhead console's sunglasses holder opening | Confirmed |
+| Seating and console | Bucket seats, factory flow-through center console (armrest bin), floor shifter, front media tray with USB ports ahead of the shifter | Confirmed |
+| Equipment console | None. The "no console" in my config sheet means no equipment console or console base. A Gamber-Johnson faceplate is on hand but not used | Confirmed |
+| Factory lamps (for the EFM 3.0) | Low/high beam, front turn, fog, front LED accent (only with LED signature headlamps, so not this truck), rear turn, stop, center brake, reverse, bed lamp | Confirmed |
+| Grille guard | Steelcraft HD 50-1420C, 2015–2017 fitment. Center punch plate between two center vertical tubes, top tube, lower horizontal tube, headlight guards | Confirmed 22 Oct |
+| Lower tube | 1.91 in OD (6 in around), under 1/16 in gap to the punch plate, center verticals 13.5 in apart | Measured 7 Oct |
+| Battery | Optima Yellow Top DH7, H7, 880 CCA AGM | Bought. Tray fit to confirm |
+
+## Workstreams
+
+| Workstream | Plan | State |
+| --- | --- | --- |
+| Whelen CanTrol WC | Complete used set programmed over USB | Bought 16 Oct ($425.00 shipped). Bench test next. Main power 2 x 40A at the battery |
+| Control head mount | Ben3DBuild overhead mount in the sunglasses holder opening | Bought 21 Oct ($120.00), 2–3 week lead time |
+| Grille guard package | 2 speakers, Color Flood bar, 2 U-Lites | Parts bought, mounts decided 7 Oct. Touch-up done 23 Oct. Shop install to book |
+| Other warning lights | Visor bar, BooYu, rocker bars via relay, Putco Work Blade, rear plate Z-6 heads | Visor and BooYu installed. Putco and Z-6 bought. Rocker bars to buy |
+| Factory lamps | EFM 3.0 and F150LEDs CREE bulbs | Installed and flashing clean 8 Oct. Voltage input harness to buy |
+| Power and wiring | Full wire schedule, two fuse blocks, amp under the rear seat | Planned. Parts to buy |
+| Laptop | Toughbook CF-33 programs both modules; passenger-seat mount planned | Laptop on hand. Mount waiting on a used RAM setup |
+
 ## Photos and diagrams
 
 <Gallery photos={[
@@ -91,11 +116,24 @@ The full output assignment is on the [CanTrol output plan](/projects/f150-upfit/
 | --- | --- | --- |
 | [CanTrol output plan](/projects/f150-upfit/cantrol-output-plan/) | Every output, what it feeds and which control turns it on | In progress |
 | [Whelen CanTrol WC controller](/projects/f150-upfit/cantrol-controller/) | The used set, full pinout, power and grounding on an aluminum-body F-150, programming rules, CANport brake pop | In progress |
+| [Power, grounds and wire schedule](/projects/f150-upfit/power-and-wiring/) | Every wire end to end, main power, fuse table, load budget, amp mount under the rear seat | Planned |
 | [CanTrol bench test plan](/projects/f150-upfit/cantrol-bench-test/) | Ten-stage bench test with every product, and the results sheet | Planned |
+| [Install order and test plan](/projects/f150-upfit/install-plan/) | Phases 0 to 4, bench kit and bench wiring for each product | In progress |
+| [Install parts and shopping list](/projects/f150-upfit/install-parts-list/) | Everything bought and still to buy, install quantities, tools | In progress |
 | [All-lights five modes plan](/projects/f150-upfit/five-modes-plan/) | Proposal for five one-press modes across every light | Planned |
-| [Steelcraft HD grille guard and front package](/projects/f150-upfit/grille-guard/) | Guard install, front layout, mounting hardware | In progress |
+| [Steelcraft HD grille guard and front package](/projects/f150-upfit/grille-guard/) | Final mounts, measured tube, hardware, wire storage, touch-up, shop install | In progress |
+| [Siren speakers](/projects/f150-upfit/siren-speakers/) | Two UBL 100W speakers on their own center bolts, parallel 5.5 Ω wiring | In progress |
+| [UBL Color Flood 2.0 light bar](/projects/f150-upfit/ubl-color-flood-light-bar/) | Wire-by-wire plan for all eight leads, CanTrol programming, bench results | Bench-tested |
+| [UBL U-Lite grille lights](/projects/f150-upfit/ubl-u-lite-grille-lights/) | Two amber/white lights on J1-4, synced and alternating | Bench-tested |
+| [Visor light bar](/projects/f150-upfit/visor-light-bar/) | SpeedTech Raptor split bar and Grand Control Box on J1-2 | Installed |
+| [Rear traffic advisor](/projects/f150-upfit/rear-traffic-advisor/) | BooYu 8-head amber bar on J1-3, and the Dominator option | Installed |
+| [Rocker panel lights](/projects/f150-upfit/rocker-panel-lights/) | Two UBL 60" bars on a 30A relay, sync steps | Planned |
+| [Putco Work Blade (tailgate)](/projects/f150-upfit/putco-work-blade/) | 60" amber/white bar on J1-5 with the Putco remote | In progress |
+| [Rear plate Z-6 and brake pop](/projects/f150-upfit/rear-plate-z6-brake-pop/) | Plate bracket, two Z-6 heads, brake over OBD-II, front plate option | In progress |
+| [Factory lamps (EFM 3.0)](/projects/f150-upfit/factory-lamps-efm/) | Speed Turtle EFM 3.0 config and the F150LEDs bulbs | Installed |
 | [Control head mount](/projects/f150-upfit/control-head-mount/) | Locations considered and the overhead console mount | In progress |
-| [UBL Color Flood 2.0 grille light bar](/projects/f150-upfit/ubl-color-flood-light-bar/) | Wire-by-wire plan for all eight leads, CanTrol programming, bench results | Bench-tested |
+| [CF-33 laptop mount](/projects/f150-upfit/cf33-laptop-mount/) | The programming laptop and the planned passenger-seat mount | Planned |
+| [Decisions, revisions and sources](/projects/f150-upfit/decisions-and-sources/) | Source conflicts, superseded plans, revision history, every source | In progress |
 | [Mobile Ham Radio Install](/projects/mobile-ham-radio/) | The radio in the same truck, kept on its own power and ground | Installed |
 
 ## Controller
@@ -158,7 +196,7 @@ The CanTrol module model has not been read off its label yet. Brake pop through 
 - **Fuse blocks:** two ATC blade blocks near the battery, one for the CanTrol group and one for accessories.
 - **Pass-throughs:** an existing factory firewall grommet or a new rubber grommet, never bare sheet metal. Drip loops, heat shrink and dielectric grease on exposed joints.
 
-Every output, with its trigger wire and button, is on the [CanTrol output plan](/projects/f150-upfit/cantrol-output-plan/). Wire-by-wire tables for each device go on their own component pages. The first is the [UBL Color Flood 2.0 grille light bar](/projects/f150-upfit/ubl-color-flood-light-bar/).
+Every output, with its trigger wire and button, is on the [CanTrol output plan](/projects/f150-upfit/cantrol-output-plan/). Every wire in the build, end to end, is on the [power, grounds and wire schedule](/projects/f150-upfit/power-and-wiring/) page, and each device has its own wire-by-wire table on its component page.
 
 ## Build steps
 
@@ -177,8 +215,10 @@ Every output, with its trigger wire and button, is on the [CanTrol output plan](
 | --- | --- | --- |
 | UBL Color Flood 2.0 light bar: modes, arrows, pattern wire | Yes (2026-10-11) | Not yet |
 | F150LEDs bulbs flashing on the EFM 3.0 | n/a | Yes (2026-10-08): clean flashing, no hyperflash |
-| Visor bar, BooYu traffic advisor, EFM 3.0 | Not documented | Installed. CanTrol control not yet tested |
-| CanTrol WC, speakers, grille lights, Putco, Z-6 heads, rocker bars | Not yet | Not yet |
+| UBL U-Lites alternate white and amber on their own | Yes (2026-10-10) | Not yet |
+| BooYu power-on behavior | Yes (2026-10-10): needs its button every time | Installed |
+| Visor bar, EFM 3.0 | Visor not documented; EFM can't be benched | Installed. CanTrol control not yet tested |
+| CanTrol WC, speakers, Putco, Z-6 heads, rocker bars | Not yet | Not yet |
 
 ### Video
 
@@ -201,6 +241,12 @@ If the player doesn't load, [watch the video on Google Drive](https://drive.goog
 - Grommet every pass-through and loom every run.
 - Route the control head cable above or behind the curtain airbags and their clips, never across the deployment path. Reinstall pillar trim airbag clips the way Ford designed them.
 - Keep coax away from CanTrol power, speaker and light wiring. Cross at right angles where needed. After install, key the radio with lights and siren running and listen for noise.
+- Lights and sirens while driving are regulated by state. Confirm what is authorized for this vehicle before enabling any pattern or tone on the road. Forward-facing amber and white flashing lights are restricted in many states, so check each state on a route and consider leaving warning modes off outside an authorized area.
+- Whelen certifies SAE, California Title 13 and NFPA compliance with Whelen speakers. Third-party speakers may not carry it.
+- Don't mount or route wires in airbag deployment areas (rocker bars, head mount, visor items). Keep the head clear of the driver's knee.
+- Siren testing: low volume, people at least 5 ft from the speaker.
+- Drilling: check under the floor and seats for harnesses, airbag wiring and fuel and brake lines first.
+- Painting: spray outdoors and upwind. N95 for sanding dust (it doesn't filter paint fumes), nitrile gloves, safety glasses.
 
 ## Lessons learned
 
@@ -211,18 +257,56 @@ If the player doesn't load, [watch the video on Google Drive](https://drive.goog
 
 ## Open items
 
-- Confirm the CanTrol module model on its label and that Whelen Command lists the 2017 F-150 brake signal.
-- Confirm a 1/4"-28 nut fits the siren speaker bolt with two threads showing.
-- Measure the control head cable run from the overhead console to the module.
-- Measure each UBL rocker panel bar's draw before choosing its fuse.
-- Confirm the Optima DH7 fit and terminal orientation in the battery tray.
-- Decide the all-lights five-modes layout and its four open choices.
+**Measurements**
+
+- Siren speaker bolt: confirm a 1/4"-28 nut spins on and two threads show past it; confirm each speaker fits its punch plate bay.
+- U-Lites: confirm #6-32 screws, exact spots in the upper corners, each centered over a plate hole.
+- Head cable length from the overhead console to the module under the driver-side rear seat.
+- Wire runs: battery to under the rear seat, battery to the grille, rear seat to the visor.
+
+**Decisions**
+
+- All-lights five modes: A. head layout option 1, 2 or 3; B. visor bar direct or kept on its Grand Control Box; C. rocker bars on J1-7/J1-8 or kept on the relay; D. Putco white on the CanTrol only, or with remote button A through diodes.
+- Toughbook CF-33 mount and hardwired power: base, arm, dock and power supply models, fuse and wire from their manuals.
+- When programming: whether blank button 1 stays latched after a restart, and how long the system stays on after the key is off.
+
+**Confirmations**
+
+- The CanTrol set's parts against the photos.
+- The module label reads CANWCT3 (needed for brake pop), and Whelen Command lists Brake for the 2017 F-150.
+- Each rocker bar's draw, and the momentary switch for their yellow wires.
+- The Color Flood bar's IP rating and in-line fuse rating.
+- Optima DH7 tray fit and terminal orientation.
+
+**Purchases and records**
+
+- Order the rocker bars, the EFM Voltage Input Harness ($15), the relay, fuse blocks and wire.
+- Ben3DBuild mount: arriving 2 to 3 weeks after 21 October.
+- Book the shop install of the grille guard.
 - Add the project start date.
+
+## Troubleshooting
+
+| Symptom | Likely cause and fix |
+| --- | --- |
+| Slide position 3 also makes a wail | A tone is assigned to position 3. Remove it and re-save |
+| Position 3 lights fewer outputs than expected | Assignments incomplete, or an output fuse blown (check its LED) |
+| Blank button 1 releases the lights when let go | Still momentary. Set it to latch |
+| EFM shows all-lights with only position 3 | Input 2 also getting voltage. Check LED Output 5, and that LED Output 4 isn't tied to green |
+| EFM does nothing | White/green not seeing 5–17V, module not seated at J3/J7, a fuse, or not configured |
+| Factory lights flash oddly or fail | Headlamp, brake or turn overrides not on. Re-seat J3/J7 |
+| BooYu doesn't light | Controller not switched on, in-line fuse, or a poor ground |
+| Rocker bars off in position 3 | Relay coil not getting LED Output 3, pin 85 open, or a bar's black not grounded |
+| Rocker bars won't sync | Not both on steady burn before joining the yellows, yellows not joined, or not advanced twice for P1/P2 |
+| Visor bar flashes but patterns won't change | The Grand Control Box isn't in the chain |
+| Siren low or distorted | Impedance below 5.5 Ω total, a weak feed, or a speaker facing a blocked surface |
+| CanTrol won't connect to the laptop | Another USB cable or port, reinstall the software, power the module first |
 
 ## Changelog
 
 <Changelog
 	entries={[
+		{ date: '2026-10-27', change: 'F-150 section rebuilt from the 23 October project files: thirteen new pages (power and wire schedule, install plan, parts list, siren speakers, U-Lites, visor bar, rear traffic advisor, rocker bars, Putco, rear plate Z-6 and brake pop, factory lamps, CF-33 mount, decisions and sources), the grille guard page rewritten to the final mounts, and the overview given the vehicle baseline, workstreams, full open items and troubleshooting.', rollback: 'Revert the commit that rebuilt the F-150 section.', log: '/log/2026-10-27-f150-rebuild/' },
 		{ date: '2026-10-26', change: 'Replaced the header image with the front grille guard setup photo.', rollback: 'Revert the commit that changed the header image.' },
 		{ date: '2026-10-26', change: 'Added the build video under Testing and verification.', rollback: 'Revert the commit that added the video.' },
 		{ date: '2026-10-26', change: 'Linked the first component page, the UBL Color Flood 2.0 grille light bar.', rollback: 'Revert the commit that added the link.', log: '/log/2026-10-26-color-flood-wiring/' },

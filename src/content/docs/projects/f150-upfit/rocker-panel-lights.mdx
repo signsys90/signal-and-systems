@@ -1,0 +1,148 @@
+---
+title: UBL rocker panel lights
+description: Two UBL 60-inch amber/white LED running board rocker panel lights for the F-150, switched by a 30A relay whose coil runs from a Whelen CanTrol WC LED output, with sync steps and a wire-by-wire plan.
+summary: Two 60" amber/white UBL bars low on the rocker panels, on one 30A relay with its coil on LED Output 3 (slide 3). Not bought yet; draw to be measured before fuses are chosen.
+status: Planned
+category: Vehicle Upfit and 12V
+updated: 2026-10-27
+sidebar:
+  label: Rocker panel lights
+  order: 14
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import PartsTable from '../../../../components/PartsTable.astro';
+import WiringTable from '../../../../components/WiringTable.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+import rocker from '../../../../assets/f150/ubl-rocker.png';
+
+<ProjectHeader hero={rocker} heroAlt="UBL LED running board rocker panel light bar shown lit amber on top and white below, product photo." />
+
+<Callout type="safety" title="Legal notice">
+Emergency lighting and siren use is regulated by state law and permits. This page documents a personal build and is not legal guidance.
+</Callout>
+
+## Goal
+
+Side warning lighting low on both sides of the truck, synced to each other, coming on in slide position 3. Done means both bars are mounted on the sills, fused by measured draw, switched through the relay, and synced.
+
+## Constraints
+
+- **Draw not listed.** UBL's manual gives no fuse size or current draw. Each bar is measured on the bench before its fuse and wire are chosen.
+- **Airbags:** UBL warns against mounting or routing in airbag deployment areas. These stay low on the sills, clear of them.
+- **LED outputs are 2.5A**, so the bars can't run straight from LED Output 3. A relay carries the load; LED Output 3 only drives the coil.
+- **Ground:** steel frame rail or Ford ground point. Never the battery negative post.
+
+<SpecBox
+	title="UBL LED Running Board Rocker Panel Light"
+	specs={[
+		['SKU', 'UBL-TGB-AW2'],
+		['Length', '60 in'],
+		['LEDs', '60 x 3W'],
+		['Housing', 'Polycarbonate/composite'],
+		['Colors', 'Three color modes, amber/white'],
+		['Patterns', '120 with directional: 40 Color 1, 40 Color 2, 40 dual color'],
+		['Leads', '6 ft'],
+		['Voltage', '12 to 24V DC'],
+		['Standard', 'SAE J595 Class 1'],
+		['Mounting', 'Rocker panel O-bracket kit included. 3M tape, clips or O-brackets'],
+		['Draw', 'Not listed. Measure'],
+		['Price', '$219.99 each (to buy)'],
+	]}
+	source={{ label: 'UBL listing, and UBL Tailgate Bar Instructions version A.4 (SKU UBL-TGB)' }}
+/>
+
+## Parts
+
+<PartsTable
+	parts={[
+		{ name: 'UBL LED Running Board Rocker Panel Lights (x2)', sku: 'UBL-TGB-AW2', price: '$219.99 each', specs: '60", 12–24V, SAE J595 Class 1', status: 'Planned' },
+		{ name: 'EHDIS 30A 12V SPDT relay with harness, 2-pack', price: 'About $10.00 (estimate)', specs: 'One used, one spare', status: 'Planned' },
+		{ name: 'Yellow momentary push button, 16 mm, 6-pack', price: 'About $7.00 (estimate)', specs: 'Use 1, pattern and sync (R8)', status: 'Planned' },
+		{ name: '12 AWG primary wire, red and black', price: 'About $15.00 (estimate)', specs: '~30 ft red, ~10 ft black (R3, R4, R5)', status: 'Planned' },
+		{ name: '30A blade fuse', specs: 'R3, from the Nilight kit', status: 'Planned' },
+		{ name: 'In-line ATC fuse holders and fuses, one per bar', specs: 'R4, sized after measuring', status: 'Planned' },
+		{ name: '2A or 3A blade fuse', specs: 'Button feed (R8)', status: 'Planned' },
+		{ name: 'Deutsch DT connectors', specs: 'Unplug point at each bar', status: 'Planned' },
+	]}
+/>
+
+## Wire functions
+
+| Wire | Function | Plan |
+| --- | --- | --- |
+| Red | Mode 1 | Relay pin 87 (fused feed). Fuse each bar |
+| Black | Ground | Frame rail ground |
+| White | Mode 2, overrides Mode 1 | Capped |
+| Blue + green | Arrows | Tied together for a center-out arrow, or both capped |
+| Yellow | Color/pattern select | Momentary +12V: under 1 s = color, 2 s = pattern |
+
+## Relay
+
+| Pin | Connects to |
+| --- | --- |
+| 30 | Fused battery feed from the accessory fuse block (30A) |
+| 87 | Both bars' red wires, each through its own fuse |
+| 86 | LED Output 3 (slide 3) |
+| 85 | Ground |
+
+The coil draws about 0.15A, well inside the LED output's 2.5A (general knowledge). A relay with a built-in suppression diode is good practice on an electronic output (general knowledge).
+
+## Wiring
+
+<WiringTable
+	rows={[
+		{ wire: 'R1', color: 'Coil feed', function: 'Relay coil +', source: 'LED Output 3 (J4-5), slide 3', draw: 'About 0.15A (coil, general knowledge)', fuse: 'LED output 2.5A, 20A group', gauge: '18 AWG', relay: '86', termination: 'Relay socket' },
+		{ wire: 'R2', color: 'Coil ground', function: 'Relay coil −', source: '—', draw: 'Return', fuse: '—', gauge: '18 AWG', relay: '85', termination: 'Ring terminal', ground: 'Frame rail or Ford ground point' },
+		{ wire: 'R3', color: 'Red', function: 'Relay load feed (tag A on the diagrams)', source: 'Accessory fuse block', draw: 'Both bars (not measured)', fuse: '30A', gauge: '12 AWG', relay: '30', termination: 'Relay socket' },
+		{ wire: 'R4', color: 'Red (each bar)', function: 'Mode 1 power', source: 'Relay output', draw: 'Not listed; measure on bench', fuse: 'One fuse per bar, sized to measured draw', gauge: '12–14 AWG', relay: '87', termination: 'Deutsch DT at each bar' },
+		{ wire: 'R5', color: 'Black (each bar)', function: 'Ground', source: '—', draw: 'Return', fuse: '—', gauge: '12–14 AWG', relay: '—', termination: 'Ring terminal, star washer', ground: 'Side of a steel frame rail. Never battery negative' },
+		{ wire: 'R6', color: 'White (each bar)', function: 'Mode 2, not used', source: '—', draw: '—', fuse: '—', gauge: '—', relay: '—', termination: 'Capped' },
+		{ wire: 'R7', color: 'Blue + green (each bar)', function: 'Arrows', source: '—', draw: '—', fuse: '—', gauge: '—', relay: '—', termination: 'Capped, or tied for center-out' },
+		{ wire: 'R8', color: 'Yellow to yellow', function: 'Pattern/color select and sync, through a momentary button to fused +12V', source: 'Fused +12V', draw: 'Signal', fuse: '2A or 3A on the button feed', gauge: '18 AWG', relay: '—', termination: 'Yellow 16 mm button in the cab' },
+	]}
+/>
+
+## Sync steps (UBL manual)
+
+1. Set both bars to steady burn.
+2. Advance only one bar one pattern with its yellow wire.
+3. Turn both off and connect the two yellow wires together.
+4. Turn both on. To change patterns, advance twice so one bar is on P1 and the other on P2.
+5. Dual color: +12V to yellow for 2 s, release, repeat until dual color (one bar P1, the other P2).
+
+These match the UBL Tailgate Bar Instructions, version A.4 (SKU UBL-TGB), which I checked on 8 October.
+
+## Option: drop the relay
+
+If both bars together draw under about 8A, they can run straight from J1-7 (a spare 10A output) with no relay. The [five-modes plan](/projects/f150-upfit/five-modes-plan/) takes this further (decision C): red on J1-7 and white on J1-8, so the CanTrol can flash them. A mechanical relay can't switch at flash rate for long, so flashing modes need the relay removed. All of this depends on the measured draw.
+
+## Bench test
+
+Measure the draw steady and flashing, size the fuse and wire, and practice the sync steps, all before mounting.
+
+## Troubleshooting
+
+| Symptom | Likely cause and fix |
+| --- | --- |
+| Off in slide position 3 | Relay coil not getting LED Output 3, pin 85 open, or a bar's black not grounded |
+| Won't sync | Not both on steady burn before joining the yellows, yellows not joined, or not advanced twice for P1/P2 |
+
+## Open items
+
+- Buy both bars, the relay and the button.
+- Measure each bar's draw, then pick fuses and wire.
+- Decide the five-modes option C: J1-7/J1-8 direct, or keep the relay.
+- Pick the mounting method (O-brackets, tape or clips) on the truck.
+
+## Sources
+
+- UBL Tailgate Bar Instructions, version A.4 (SKU UBL-TGB)
+- UBL listing for UBL-TGB-AW2
+- F-150 project document, revision 10, sections 8, 8.2, 9.3 (R1 to R8) and 9.5
+
+## Changelog
+
+<Changelog entries={[{ date: '2026-10-27', change: 'Page published from the 23 October project files.', rollback: 'Revert the commit that rebuilt the F-150 section.' }]} />
