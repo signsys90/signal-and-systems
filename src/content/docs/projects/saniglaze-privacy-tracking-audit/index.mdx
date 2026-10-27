@@ -84,6 +84,10 @@ Rather than checking a single website or looking for a single vendor's code, the
 
 The output of an audit was visibility: a picture of which tracking technologies and configurations were present across the properties examined, and which of them might be problematic. Those findings gave the organization a starting point for investigation and corrective action. The application was a detection and risk-identification tool. Decisions about what a finding meant, and what to change, stayed with people.
 
+![Functional flow diagram: six boxes, Designated properties, Scan, Identify trackers, Consent review, a highlighted Findings for review box, and Corrective action, with a dashed bar underneath stating that detection is not a legal determination, and three rules: no site addresses or tag IDs, no audit findings published, and coverage has limits.](../../../../assets/business/privacy-audit-functional-flow.png)
+
+*Functional view drawn only from my description of the application. It shows what the application did, not how it was built; the original architecture, detection methods, and stack are not documented.*
+
 ## Key Capabilities
 
 ### Multi-property auditing
@@ -111,7 +115,7 @@ The output of an audit was visibility: a picture of which tracking technologies 
 ### Risk identification and corrective-action support
 
 - Surfaced website technologies and configurations that could raise privacy concerns, for review by the appropriate business, privacy, compliance, or legal personnel.
-- Supported the identification and correction of potential issues across the corporate web ecosystem. The application identified findings for investigation and correction. It did not change website settings or remove code on its own.
+- Supported the identification and correction of potential issues across the corporate web ecosystem. The application identified findings for investigation and correction. Automatic changes to website settings or code are not part of the confirmed design and are not claimed.
 
 ## Audit Questions the Platform Was Designed to Help Answer
 
@@ -214,6 +218,7 @@ Developed through an AI-assisted software development workflow using OpenAI Code
 
 ## Related SaniGLAZE Work
 
+- [SaniGLAZE Franchise Media Asset Library](/projects/saniglaze-media-asset-library/): a Codex-built internal application for the same organization, giving franchise members self-service access to corporate marketing assets.
 - [SaniGLAZE Video End-Slide Generator](/projects/saniglaze-video-end-slide-tool/): a Codex-built self-service tool for the same franchise network, focused on localized marketing video.
 - [SaniGLAZE Opportunity Map](/projects/saniglaze-opportunity-map/) and [SaniGLAZE Trade Show Map](/projects/saniglaze-trade-show-map/): business-systems dashboards for the same organization.
 
@@ -221,6 +226,7 @@ Developed through an AI-assisted software development workflow using OpenAI Code
 
 <Changelog
 	entries={[
+		{ date: '2026-10-27', change: 'Added a functional flow diagram (what the application did, not how it was built), cross-linked the Media Asset Library page, and softened one line so it no longer asserts what the tool did not do.', rollback: 'Revert the commit that added the diagram.' },
 		{ date: '2026-10-27', change: 'Case study first published from William\'s description of the application, following the Signal & Systems documentation standard: confirmed capabilities only, no implementation stack, metrics, website addresses, identifiers, or findings.', rollback: 'Revert the commit that added this page.' },
 	]}
 />
