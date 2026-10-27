@@ -1,0 +1,84 @@
+---
+title: Toughbook CF-33 laptop and mount
+description: The Panasonic Toughbook CF-33 used to program the Whelen CanTrol WC and Speed Turtle EFM 3.0 on the F-150, and the planned passenger-seat vehicle mount with hardwired, ignition-switched power.
+summary: The CF-33 programs both modules over USB. A passenger-seat mount with a locking keyboard dock and hardwired power is planned; I'm looking for a used RAM Mounts setup.
+status: Planned
+category: Vehicle Upfit and 12V
+updated: 2026-10-27
+sidebar:
+  label: CF-33 laptop mount
+  order: 19
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import WiringTable from '../../../../components/WiringTable.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+
+<ProjectHeader />
+
+## Goal
+
+Make the Toughbook part of the truck: the programming laptop for the CanTrol and the EFM, and the in-cab computer once mounted. Done means it rides on a passenger-seat mount clear of the airbag, on a locking dock, with power that turns off with the key.
+
+## Constraints
+
+- **Airbags:** the screen and arm stay out of the passenger airbag deployment zone, and clear of the shifter and the control head.
+- **Seat sensor:** the base must not interfere with the passenger seat's occupant sensor or seat wiring.
+- **Fitment:** the base must fit the 2017 bucket seats and flow-through console, and bolt to the seat or floor bolts with no drilling.
+- **Dock:** it must list the first-generation CF-33.
+- **Power:** fused at the accessory block, ignition-switched, with a low-voltage cutoff to protect the battery.
+
+<SpecBox
+	title="Panasonic Toughbook CF-33"
+	specs={[
+		['Form', 'Detachable backlit keyboard and touchscreen tablet combo'],
+		['CPU', 'Intel Core i5-7300U @ 2.60 GHz (7th gen, the first-generation CF-33)'],
+		['Memory', '16 GB RAM'],
+		['Graphics', 'Intel HD Graphics 620'],
+		['Storage', '477 GB'],
+		['OS', 'Windows 11 Pro 25H2, build 26200.9457, 64-bit'],
+		['Input', 'Pen and touch, 10 touch points'],
+		['Software', 'Whelen Command (CanTrol), STE Configuration Utility (EFM 3.0)'],
+	]}
+	source={{ label: 'Windows "About" screen on my laptop, 6 Oct 2026' }}
+/>
+
+## Mount parts needed
+
+1. Vehicle-specific passenger-side base for the 2015 to 2020 F-150 that bolts to the seat or floor bolts (no drilling).
+2. Pole and motion attachment (swivel/tilt arm) so the screen sits within the driver's reach.
+3. CF-33 keyboard dock with locking, holding the tablet with its backlit keyboard attached. It must list the first-generation CF-33.
+4. Hardwired vehicle power supply for the dock, with an ignition-sense wire so it turns off with the key.
+
+Havis, Gamber-Johnson, Jotto Desk and RAM Mounts all sell F-150 bases and CF-33 docks. As of 8 October there's no vehicle power supply yet, only the household charger. I'm looking on Facebook Marketplace for a complete used vehicle-specific RAM Mounts setup; none found yet.
+
+## Power wiring (planned)
+
+<WiringTable
+	rows={[
+		{ wire: 'L1', color: 'Red', function: '+12V to the vehicle power supply', source: 'Accessory ATC fuse block', draw: 'Per the supply maker', fuse: 'Per the dock maker', gauge: '14 AWG or per maker', relay: '—', termination: 'Under the passenger seat' },
+		{ wire: 'L2', color: 'Black', function: 'Ground', source: '—', draw: 'Return', fuse: '—', gauge: 'Same as L1', relay: '—', termination: 'Ring terminal', ground: 'Ford ground point or frame. Never battery negative' },
+		{ wire: 'L3', color: 'Ignition sense', function: 'Turns the supply off with the key', source: 'Ignition-switched source (fuse tap)', draw: 'Signal', fuse: 'Fuse tap', gauge: '18 AWG', relay: '—', termination: 'TBD' },
+		{ wire: 'L4', color: 'Supplied cable', function: 'Supply output to the keyboard dock', source: 'Power supply', draw: '—', fuse: '—', gauge: 'Supplied', relay: '—', termination: 'Dock plug' },
+	]}
+/>
+
+## Programming connection
+
+H3 in the wire schedule: the CanTrol module's USB port to the CF-33, USB 2.0, programming only. Save the existing program before changing anything, and keep a backup of every saved program.
+
+## Open items
+
+- Pick the base, pole and arm maker.
+- Pick the keyboard dock and vehicle power supply models. The fuse size and wire gauge come from their manuals.
+- Plan the power cable route under the passenger seat.
+
+## Sources
+
+- F-150 project document, revision 10, sections 9.3 (L1 to L4, H3), 9.5 group I and 12.4
+
+## Changelog
+
+<Changelog entries={[{ date: '2026-10-27', change: 'Page published from the 23 October project files.', rollback: 'Revert the commit that rebuilt the F-150 section.' }]} />

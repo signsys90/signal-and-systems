@@ -1,0 +1,127 @@
+---
+title: SpeedTech Raptor visor light bar
+description: SpeedTech Lights Super Takedown Raptor Elite Striker-TIR split visor light bar (amber/amber, dual memory) on Q-RVF15 brackets in the F-150 windshield, run through the Grand Control Box from Whelen CanTrol WC output J1-2.
+summary: Amber/amber split visor bar installed 18 Oct on SpeedTech's F-150 brackets. Runs today from a 12V plug; on wiring day it moves to J1-2 through its Grand Control Box.
+status: Installed
+category: Vehicle Upfit and 12V
+updated: 2026-10-27
+sidebar:
+  label: Visor light bar
+  order: 12
+---
+
+import SpecBox from '../../../../components/SpecBox.astro';
+import PartsTable from '../../../../components/PartsTable.astro';
+import WiringTable from '../../../../components/WiringTable.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+
+<ProjectHeader />
+
+<Callout type="safety" title="Legal notice">
+Emergency lighting and siren use is regulated by state law and permits. This page documents a personal build and is not legal guidance.
+</Callout>
+
+## Goal
+
+A forward-facing amber warning bar inside the windshield that comes on in every slide position, with no roof mount (the truck has a panoramic roof). Done means the bar is hardwired to J1-2 through the Grand Control Box, its patterns work from the control head, and the cable is hidden along the headliner and A-pillar.
+
+## Constraints
+
+- **No roof mounts.** The bar sits inside the windshield on SpeedTech's vehicle-specific visor brackets.
+- **Patterns need the Grand Control Box.** SpeedTech's manual says patterns are "only functional when using in conjunction with STL Grand Control Box."
+- **Fuse:** keep SpeedTech's own fuse, no larger.
+- **Airbags:** the cable runs along the headliner and A-pillar. Keep it behind the curtain airbag, never across its deployment path, and refit the pillar trim clips the way Ford designed them.
+- **Steady burn:** SpeedTech says not to run steady burn more than an hour.
+
+<SpecBox
+	title="SpeedTech Raptor Elite Striker-TIR split visor bar"
+	specs={[
+		['Full name', 'SpeedTech Lights Super Takedown Raptor Elite Striker-TIR Split LED Visor Light Bar (Dual Memory)'],
+		['Colors', 'Amber/amber (config code B-RTXE8)'],
+		['Draw', 'Under 2.4A full, 0.8A dimmed'],
+		['Patterns', '34, dual memory'],
+		['White', 'Only as steady Take Down and Super Take Down'],
+		['Brackets', 'SpeedTech vehicle-specific visor brackets, Q-RVF15'],
+		['Controller', 'SpeedTech Grand Control Box'],
+		['Support', 'SpeedTech Lights, 800-757-2581'],
+	]}
+	source={{ label: 'SpeedTech Raptor STD Elite TIR manual', href: 'https://speedtechlights.com/cdn/shop/files/71630STL_20Raptor_20STD_20Elite_20TIR.pdf?v=9997490532677141036' }}
+/>
+
+## Parts
+
+<PartsTable
+	parts={[
+		{ name: 'SpeedTech Lights Super Takedown Raptor Elite Striker-TIR Split LED Visor Light Bar (Dual Memory), amber/amber', sku: 'B-RTXE8', price: '$150.00', specs: 'Under 2.4A', status: 'Installed' },
+		{ name: 'SpeedTech Lights visor brackets for the F-150', sku: 'Q-RVF15', price: '$49.99', status: 'Installed' },
+		{ name: 'SpeedTech Lights Grand Control Box', price: '$39.99', specs: 'Required for patterns', source: 'https://speedtechlights.com/cdn/shop/files/97465STL_20Grand_20Control_20Elite.pdf?v=4788095219780941684', status: 'Installed' },
+		{ name: 'Nilight in-line fuse holder (from the bench kit)', specs: 'Same rating as the fuse in the 12V plug', status: 'Planned' },
+		{ name: '14 AWG red and black wire', specs: 'V1 and V2', status: 'Planned' },
+	]}
+/>
+
+## Wire functions (SpeedTech manual)
+
+| Wire | Function |
+| --- | --- |
+| Red | +12V |
+| Black | Ground |
+| White | Flash Mode 1 |
+| Brown | Flash Mode 2 (only while Mode 1 is on) |
+| Yellow | Pattern |
+| Green | Take Down, steady |
+| Yellow/black | Super Take Down, steady |
+| Blue | Dim |
+
+Today those wires all go into the Grand Control Box, and the box's own buttons pick the function.
+
+## Wiring
+
+Installed 18 October 2026, with the cable along the headliner and A-pillar. For now it runs from a 12V socket plug with a built-in fuse.
+
+<WiringTable
+	rows={[
+		{ wire: 'V1', color: 'Red (Grand Control Box)', function: '+12V to the box', source: 'J1-2 (10A, red lead), slide 1/2/3', draw: 'Under 2.4A (SpeedTech)', fuse: 'SpeedTech fuse kept, in a Nilight in-line holder, same rating as the plug fuse. Plus CanTrol internal', gauge: '14 AWG', relay: '—', termination: 'Crimped and heat-shrunk after cutting off the 12V plug' },
+		{ wire: 'V2', color: 'Black (Grand Control Box)', function: 'Ground', source: '—', draw: 'Return', fuse: '—', gauge: '14 AWG', relay: '—', termination: 'Ring terminal, star washer', ground: 'Ford factory ground point or steel frame rail. Never battery negative' },
+		{ wire: 'V3', color: 'SpeedTech harness', function: 'Grand Control Box to the visor bar', source: '—', draw: '—', fuse: '—', gauge: 'Supplied', relay: '—', termination: 'Factory plugs, along the headliner and A-pillar' },
+	]}
+/>
+
+**Hardwire steps for wiring day:** cut off the 12V socket plug, read the fuse rating that was in it, put a Nilight in-line fuse holder with that same rating on the red wire, join red to the J1-2 wire (V1) and black to ground (V2).
+
+**No-cut alternative:** wire a 12V female socket (about $8, not on the shopping list) to J1-2 and plug the bar's existing plug into it.
+
+## Five-modes decision
+
+The proposed [all-lights five modes plan](/projects/f150-upfit/five-modes-plan/) has an open choice (decision B) for this bar:
+
+- **Direct from the CanTrol:** the Grand Control Box comes out and the CanTrol drives white, brown, green, yellow/black, blue and yellow on LED Outputs 18 to 23, with J1-2 still the +12V. All five modes work with one press. This only happens if a bench test shows the bar runs useful patterns without the box.
+- **Keep the Grand Control Box:** simpler. The visor stays on the box's own buttons, outside the one-press modes.
+
+## Bench test
+
+Through the Grand Control Box: dim, steady, pattern (bench test plan, setup for the visor). For the five-modes option: red and white only, then add the rest, and test whether yellow steps patterns with no box.
+
+## Troubleshooting
+
+| Symptom | Likely cause and fix |
+| --- | --- |
+| Flashes but patterns won't change | The Grand Control Box is not in the chain |
+| Dead after hardwiring | Fuse in the new holder, J1-2 not programmed for that slide position, or a poor ground |
+
+## Open items
+
+- Read the fuse rating inside the 12V plug before cutting it off.
+- Decide five-modes option B: direct from the CanTrol, or keep the Grand Control Box.
+
+## Sources
+
+- [SpeedTech Raptor STD Elite TIR manual](https://speedtechlights.com/cdn/shop/files/71630STL_20Raptor_20STD_20Elite_20TIR.pdf?v=9997490532677141036)
+- [SpeedTech Grand Control Elite manual](https://speedtechlights.com/cdn/shop/files/97465STL_20Grand_20Control_20Elite.pdf?v=4788095219780941684), and the Grand Control Box data sheet "68464STL Grand Control"
+- F-150 project document, revision 10, sections 8, 9.3 (V1 to V3) and 9.5 group E
+
+## Changelog
+
+<Changelog entries={[{ date: '2026-10-27', change: 'Page published from the 23 October project files.', rollback: 'Revert the commit that rebuilt the F-150 section.' }]} />

@@ -1,0 +1,208 @@
+---
+title: Rear plate Z-6 heads and brake pop
+description: SpeedTech Lights license plate bracket with two Z-6 TIR amber/clear heads with secondary red brake on the F-150 rear plate, warning on a Whelen CanTrol WC LED output and brake pop from the truck's OBD-II bus through the CC5K1 CANport kit. Includes the future front vanity plate option.
+summary: Two SpeedTech Z-6 heads on a plate bracket at the rear. Amber/clear warning on slide 2/3, and steady red while braking, read over OBD-II with the Whelen CC5K1 kit. A front Super Takedown version is planned for later.
+status: In progress
+category: Vehicle Upfit and 12V
+updated: 2026-10-27
+sidebar:
+  label: Rear plate Z-6 and brake pop
+  order: 16
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import PartsTable from '../../../../components/PartsTable.astro';
+import WiringTable from '../../../../components/WiringTable.astro';
+import Gallery from '../../../../components/Gallery.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+import bracket from '../../../../assets/f150/plate-bracket.png';
+import dims from '../../../../assets/f150/z6-dimensions.png';
+import brakeColors from '../../../../assets/f150/z6-brake-colors.png';
+import wires from '../../../../assets/f150/z6-wires.png';
+import cc5k1 from '../../../../assets/f150/cc5k1-harness.jpg';
+import tdColors from '../../../../assets/f150/z6-takedown-colors.png';
+import tdWires from '../../../../assets/f150/z6-takedown-wires.png';
+
+<ProjectHeader hero={brakeColors} heroAlt="SpeedTech Z-6 TIR head shown in amber, clear and red, SpeedTech Lights image." />
+
+<Callout type="safety" title="Legal notice">
+Emergency lighting and siren use is regulated by state law and permits. This page documents a personal build and is not legal guidance.
+</Callout>
+
+## Goal
+
+Two small warning heads at the rear plate that flash amber/clear with the rest of the system, and switch to steady red whenever the brake pedal is pressed. The brake signal comes from the truck's data bus, so no brake wire is tapped. Done means the bracket is on, both heads are wired and synced, and brake pop works in the truck.
+
+## Constraints
+
+- **No drilling.** The bracket's long piece goes on with the existing rear plate screws.
+- **No brake wire tap.** The brake is read over OBD-II with the Whelen CC5K1 CANport kit.
+- **Module model matters.** Whelen's price list (PL18.1CT) lists the CANport OBD-II interface only in the CANWCT3 module, and the OBDII Communication board is optional (guide 14C81C). Brake pop depends on reading the module's label.
+- **Plate legibility:** the bracket and heads must not cover any plate characters or the state name. Check the current state rule.
+- **Steady burn:** SpeedTech says not to run steady burn more than an hour.
+
+## Parts
+
+<PartsTable
+	parts={[
+		{ name: 'SpeedTech Lights License Plate Bracket', sku: 'Q-LPB', price: '$19.99', specs: '12.5" W x 5.75" T, 3 black powder-coated pieces', source: 'https://www.amazon.com/dp/B01KZ1WD80', status: 'In progress' },
+		{ name: 'SpeedTech Lights Brake Light (Secondary Red) Z-6 TIR LED Surface Mount Warning Light Head (Dual Memory), Amber Clear (x2)', price: '$119.98 for two', specs: '12V, under 0.5A each, 12 LEDs', status: 'In progress' },
+		{ name: 'Whelen Carbide CanTrol OBDII CANport Kit For CCSRN5 (CC5K1 - Ford)', sku: 'CC5K1', price: '$52.98', specs: 'Bought new 21 Oct. OBD-II pass-through, 8-pin plug to the CanTrol', status: 'In progress' },
+	]}
+/>
+
+The bracket and heads were one order at speedtechlights.com on 18 October: $139.97, less the SAVE20 discount of $27.99, plus $6.72 tax, free shipping, $118.70 total.
+
+## License plate bracket
+
+<SpecBox
+	title="SpeedTech Lights License Plate Bracket"
+	specs={[
+		['SKU', 'Q-LPB'],
+		['Size', '12.5 in wide x 5.75 in tall (SpeedTech Support email, 8 Oct). Amazon\'s 3 x 15 in is wrong'],
+		['Kit', 'Three black powder-coated pieces (one long, two short) plus hardware, 2 lb (Amazon)'],
+		['Material', 'Unconfirmed. Amazon specs say aluminum; its photos suggest steel'],
+		['Warranty', '5 years'],
+		['Fits on the sides', 'Z-3, Z-4 and Z-6 TIR; Multicolor Z-6, Z-8 and Z-12 Linear'],
+		['Top only', 'Z-12 TIR and Multicolor Z-24 Linear (10 in, too long for the sides)'],
+	]}
+	source={{ label: 'SpeedTech Lights listing and SpeedTech Support (email, 8 Oct 2026)', href: 'https://www.amazon.com/dp/B01KZ1WD80' }}
+/>
+
+The long piece goes on with the existing plate screws. Each light bolts to a short piece with its own hardware, and the short pieces bolt to the long piece. Lights hang vertically on the two side pieces or horizontally along the long piece. The plan is one Z-6 on each side piece.
+
+**Checks on the truck before final mounting:**
+
+1. No plate characters or the state name are covered.
+2. The top piece and lights don't shadow the factory plate lamps.
+3. The trailer socket door opens, and a plug fits with a light on the left side.
+4. The spare tire release stays reachable.
+
+## Z-6 heads
+
+<SpecBox
+	title="SpeedTech Z-6 TIR Brake Light (Secondary Red), Amber Clear"
+	specs={[
+		['Size', '5.7 in long x 1.6 in tall x 0.6 in deep, two screw ears'],
+		['Power', '12V DC, under 0.5A each'],
+		['LEDs', '12 (the standard Z-6 has 6)'],
+		['Cable', '1 ft'],
+		['Patterns', '24, plus 3 alternating-sync patterns'],
+		['Memory', 'Dual memory'],
+		['Included', 'Foam pad per head; the cable passes through its center hole'],
+		['Manual', 'Z-6 TIR Brake manual G-TZTBL6 (matches the standard Z-6 manual G-TZTSTD6)'],
+	]}
+	source={{ label: 'SpeedTech Lights manual G-TZTBL6 and drawing' }}
+/>
+
+<Gallery
+	photos={[
+		{ src: bracket, alt: 'SpeedTech license plate bracket drawing, 12.5 inches wide and 5.75 inches tall.', caption: 'License plate bracket, SpeedTech image.' },
+		{ src: dims, alt: 'Z-6 head drawing: 5.7 inches long, 1.6 inches tall.', caption: 'Z-6 dimensions, SpeedTech drawing.' },
+		{ src: wires, alt: 'Z-6 cable functions chart: red positive Mode 1, brown positive Mode 2, black ground, yellow flash pattern, green red brake light, grey sync, blue alternate sync.', caption: 'Z-6 Brake cable functions, SpeedTech chart.' },
+	]}
+/>
+
+## Wiring
+
+| Wire | Function (SpeedTech chart) | Connects to |
+| --- | --- | --- |
+| Red | Positive Mode 1 (Memory 1) | LED Output 12, both heads (M1). Slide 2/3 |
+| Brown | Positive Mode 2 (Memory 2, overrides Mode 1) | Capped (M6) |
+| Black | Negative / ground | Frame rail at the rear (M4) |
+| Yellow | Flash pattern | Joined to the other head's yellow for sync, then the pair capped (M5) |
+| Green | Red brake light (overrides Modes 1 and 2) | LED Output 13, both heads (M2): brake pop |
+| Grey (white in the manual) | Sync, max 8 units | Joined left to right (M5) |
+| Blue | Alternate sync | Capped (M6) |
+
+<WiringTable
+	rows={[
+		{ wire: 'M1', color: 'Red (both heads)', function: 'Mode 1, amber/clear warning', source: 'LED Output 12, slide 2/3', draw: 'Under 0.5A each (manual). Measure', fuse: 'LED output 2.5A, 20A group', gauge: '18 AWG', relay: '—', termination: 'Spliced at the rear' },
+		{ wire: 'M2', color: 'Green (both heads)', function: 'Red brake, overrides Modes 1 and 2', source: 'LED Output 13, on while braking (CANport)', draw: 'Measure', fuse: 'LED output 2.5A', gauge: '18 AWG', relay: '—', termination: 'Spliced at the rear' },
+		{ wire: 'M3', color: 'CC5K1 harness', function: 'Brake status from the vehicle bus', source: 'Truck OBD-II port under the dash', draw: 'Data only', fuse: '—', gauge: 'Kit cable', relay: '—', termination: 'Pass-through OBD-II socket; 8-pin plug into the OBDII Communication board next to the module USB port' },
+		{ wire: 'M4', color: 'Black (both heads)', function: 'Ground', source: '—', draw: 'Return', fuse: '—', gauge: '18 AWG', relay: '—', termination: 'Ring terminal, can share the T7 point', ground: 'Steel frame rail near the rear bumper. Never battery negative' },
+		{ wire: 'M5', color: 'Grey to grey, yellow to yellow', function: 'Sync, flash together', source: '—', draw: '—', fuse: '—', gauge: '18 AWG', relay: '—', termination: 'Sealed splices' },
+		{ wire: 'M6', color: 'Brown and blue (each head)', function: 'Not used', source: '—', draw: '—', fuse: '—', gauge: '—', relay: '—', termination: 'Capped separately. Blue only for alternating-sync programming' },
+		{ wire: 'M7', color: 'M1 + M2', function: 'Run to the rear plate', source: 'Amplifier area', draw: '—', fuse: '—', gauge: 'In the T8 loom', relay: '—', termination: 'Through the bracket grommet holes' },
+	]}
+/>
+
+## Brake pop with the CanTrol
+
+<Gallery photos={[{ src: cc5k1, alt: 'Whelen CC5K1 OBD-II CANport harness coiled, with the OBD-II plug, pass-through socket and white 8-pin connector, product photo.', caption: 'Whelen Carbide CanTrol OBDII CANport Kit (CC5K1 - Ford), product photo.' }]} />
+
+1. **Brake signal in.** The CanTrol reads the brake pedal from the truck's own data bus through the CC5K1 kit. Its OBD-II plug goes into the truck's port under the dash. A pass-through OBD-II socket on short leads keeps the port free for scan tools, and the kit's male OBD-II connector mounts next to the truck's port with the supplied hardware. Its 8-position connector plugs into the OBDII Communication board inside the CanTrol module, the small 8-pin header next to the USB port (Whelen guide 14C81C p.2). Data only, no power or ground wires. Install with the truck off.
+2. **Warning.** LED Output 12 on slide 2/3 drives both red (Mode 1) wires: the amber/clear pattern saved in Memory 1.
+3. **Pop.** In Whelen Command, add the vehicle under CANport, select the brake signal and program LED Output 13 to turn on while the brake is pressed, only when the slide switch is on (the default; it can be set to work at all times). LED Output 13 drives both green wires, which override the warning modes, so the heads go steady red while braking.
+4. **Sync (manual G-TZTBL6 p.4).** Set both heads to the same pattern, join the sync wires (grey on SpeedTech's chart, white in the manual) and join the yellows, then power off and on. For left/right alternating, also program the blues: one head's blue to +12V for about 3 s (Group A), the other's for about 5 s (Group B), then power cycle. Once synced, a tap of the joined sync wires to +12V switches to alternating, and a 2 s hold switches back.
+
+<Callout type="unverified">
+Brake pop needs a CANWCT3 module, and Whelen Command has to list Brake for the 2017 F-150 (Command added 2017 to 2019 F-150 CANport support in v1.1.2.0). My copy of the Command guide doesn't name a "brake pop" setting, so the exact menu is inferred until I see it on the laptop.
+</Callout>
+
+## Bench test on 12V before mounting
+
+1. SUPERNIGHT 12V supply, 3A fuse in a Nilight in-line holder on the feed. Black to supply −. The manual's bench test is red and black only.
+2. Red to +: the warning pattern runs. Touch yellow to + to step patterns and stop on the one wanted. Holding yellow 2 s toggles steady burn (don't run steady over 1 hour) and 3 s toggles auto-cycle (manual G-TZTBL6 p.7). Power off and on to confirm Memory 1 keeps it.
+3. With red on, add green to +: the head should go red. Record the draw on red and on green (meter in series).
+4. Both heads on the same pattern, sync wires joined and yellows joined, power cycled: confirm they flash together.
+5. Write the draws and the pattern here. Two heads at under 0.5A each use well under 1A of the 2.5A LED output.
+
+## Changes to the install config
+
+| Row | Before | Now |
+| --- | --- | --- |
+| LED Output 12 (2.5A) | Spare | Both Z-6 red (Mode 1), slide 2/3 |
+| LED Output 13 (2.5A) | Spare | Both Z-6 green (red brake). Brake pop from the brake read over OBD-II |
+| CANport | Unused | CC5K1 kit to the truck OBD-II port (brake status) |
+| Rear loom | T1 + T2 | Adds M1 and M2 to the same run to the rear bumper |
+
+Red to the rear is normal for brake lights, and steady red on braking matches the truck's own lamps (general knowledge). Flashing amber/clear on a private vehicle is restricted in many states, as for the other warning lights.
+
+## Future option: front vanity plate (not bought)
+
+I plan to add this later (decided 18 Oct). The same bracket goes on the front with two Super Takedown Z-6 heads, whose green wire gives a steady white takedown instead of the red brake light.
+
+<Gallery
+	photos={[
+		{ src: tdColors, alt: 'Z-6 Super Takedown head shown in amber and clear, SpeedTech image.', caption: 'Super Takedown Z-6: amber and clear, with steady white takedown.' },
+		{ src: tdWires, alt: 'Z-6 Super Takedown cable functions chart, with green as Super Takedown overriding Modes 1 and 2.', caption: 'Super Takedown cable functions, SpeedTech chart.' },
+	]}
+/>
+
+- **Parts:** 2x SpeedTech Lights Super Takedown (Secondary Clear) Z-6 TIR LED Surface Mount Warning Light Head (Dual Memory), Amber Clear, $119.98 for two, plus one Q-LPB bracket, $19.99. Quote: $139.97 less SAVE20 $27.99, plus estimated tax $6.72, free shipping, $118.70 (my cart, 18 Oct). I also have 251 SpeedTech reward points (250 = $2.50 off).
+- **Mounting:** the bracket's long piece goes on with the front vanity plate's own screws; one head on each short side piece, cable through the foam pad and the center hole (manual G-TZTSTD6 p.6). No drilling. Check that the heads clear the grille guard and the tow hooks, and stay clear of the headlamps and the guard lights.
+- **Specs:** 12V DC, under 0.5A each, 1 ft cable, 24 patterns. Sync and pattern steps as above. Ask SpeedTech for the Super Takedown sheet when ordering.
+- **How it works:** slide 2/3 runs the amber/clear pattern on both front heads with the rear heads. The TAKE DOWN button (spare on the 21-button head) turns both to steady white for lighting what's ahead when stopped. Steady white to the front is generally allowed only within headlamp and auxiliary lamp rules, so use takedown only when stopped (general knowledge).
+
+<WiringTable
+	rows={[
+		{ wire: 'N1', color: 'Red (both front heads)', function: 'Mode 1, amber/clear warning', source: 'LED Output 14, slide 2/3', draw: 'Under 0.5A each', fuse: 'LED output 2.5A', gauge: '18 AWG', relay: '—', termination: 'Spliced at the front' },
+		{ wire: 'N2', color: 'Green (both front heads)', function: 'Super Takedown, steady white, overrides Modes 1 and 2', source: 'LED Output 15, TAKE DOWN button, latch', draw: 'Measure', fuse: 'LED output 2.5A', gauge: '18 AWG', relay: '—', termination: 'Spliced at the front' },
+		{ wire: 'N3', color: 'Black (both)', function: 'Ground', source: '—', draw: 'Return', fuse: '—', gauge: '18 AWG', relay: '—', termination: 'Ring terminal', ground: 'Steel frame rail near the front bumper' },
+		{ wire: 'N4', color: 'Grey and yellow', function: 'Sync, flash together (G-TZTSTD6 p.4)', source: '—', draw: '—', fuse: '—', gauge: '18 AWG', relay: '—', termination: 'Sealed splices' },
+		{ wire: 'N5', color: 'N1 + N2', function: 'Run to the front plate', source: 'Amplifier area', draw: '—', fuse: '—', gauge: 'Loom', relay: '—', termination: 'Firewall grommet with the guard wires' },
+		{ wire: 'N6', color: 'Brown and blue (each)', function: 'Not used', source: '—', draw: '—', fuse: '—', gauge: '—', relay: '—', termination: 'Capped separately' },
+	]}
+/>
+
+## Open items
+
+- Read the CanTrol module label (CANWCT3 needed) and confirm Whelen Command lists Brake for the 2017 F-150.
+- Confirm the bracket material.
+- Run the four on-truck mounting checks.
+- Measure the head draws on the bench.
+
+## Sources
+
+- SpeedTech Lights Z-6 TIR Brake manual G-TZTBL6 and standard Z-6 manual G-TZTSTD6
+- SpeedTech Lights Support email, 8 October 2026 (bracket size)
+- [SpeedTech license plate bracket on Amazon (B01KZ1WD80)](https://www.amazon.com/dp/B01KZ1WD80)
+- Whelen CC5K1 install guide 14C81C, Whelen price list PL18.1CT, [Whelen Command release notes](https://releasenotes.command.whelen.com/)
+- F-150 project document, revision 10, sections 8.4, 8.5 and 9.3 (M1 to M7, N1 to N6)
+
+## Changelog
+
+<Changelog entries={[{ date: '2026-10-27', change: 'Page published from the 23 October project files.', rollback: 'Revert the commit that rebuilt the F-150 section.' }]} />

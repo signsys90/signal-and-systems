@@ -1,0 +1,151 @@
+---
+title: Factory lamp flashing and LED bulbs
+description: Speed Turtle Engineering EFM 3.0 inline at the F-150 BCM to flash the factory lamps from Whelen CanTrol WC LED outputs, its STE utility configuration, the voltage input harness, and the F150LEDs CREE bulb upgrade.
+summary: The Speed Turtle EFM 3.0 flashes the factory lamps. Installed at BCM J3 and J7 on 8 Oct with firmware v3.36; F150LEDs CREE bulbs fitted and flashing clean. Voltage input harness still to buy.
+status: Installed
+category: Vehicle Upfit and 12V
+updated: 2026-10-27
+sidebar:
+  label: Factory lamps (EFM 3.0)
+  order: 17
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import PartsTable from '../../../../components/PartsTable.astro';
+import WiringTable from '../../../../components/WiringTable.astro';
+import Gallery from '../../../../components/Gallery.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+import efm from '../../../../assets/f150/efm3.jpg';
+import harness from '../../../../assets/f150/efm-voltage-harness.jpg';
+
+<ProjectHeader hero={efm} heroAlt="Speed Turtle Engineering Easy Flash Module 3.0, a small black module, product photo." />
+
+<Callout type="safety" title="Legal notice">
+Emergency lighting and siren use is regulated by state law and permits. This page documents a personal build and is not legal guidance.
+</Callout>
+
+## Goal
+
+Flash the truck's own headlamps, fogs, turn signals, brake and reverse lamps from the control head, without splicing into factory lamp wiring. Done means the EFM is on voltage input, both trigger wires come from the CanTrol, every tab is configured and tested, and brake, turn and reverse still work normally.
+
+## Constraints
+
+- **No splices into factory lamp or BCM wiring.** The EFM plugs inline at the BCM connectors.
+- **Can't be bench-tested.** It only works plugged into the truck's BCM, so it's tested on the truck.
+- **Battery off** before unplugging BCM connectors.
+- **Don't guess at BCM wiring.** Only the EFM's own plug-in harness and its documented trigger inputs are used.
+- **It flashes but can't hold lamps steady.** The factory high beams are the steady white from the factory lamps.
+
+<SpecBox
+	title="Speed Turtle Engineering Easy Flash Module 3.0 (Ford)"
+	specs={[
+		['Installed', '8 Oct 2026, inline at BCM J3 and J7, front passenger footwell'],
+		['Firmware', 'Updated v3.32 to v3.36 (file STE_EFM3_V3_36.ste)'],
+		['Software', 'STE Configuration Utility v3.36, on the Toughbook CF-33'],
+		['Trigger', 'Voltage input with the EFM 2.0/3.0 Voltage Input Harness: 5–17V signal, no load'],
+		['Paid', '$200.00'],
+	]}
+	source={{ label: 'Speed Turtle Engineering', href: 'https://www.speedturtleengineering.com/' }}
+/>
+
+## Parts
+
+<PartsTable
+	parts={[
+		{ name: 'Speed Turtle Engineering Easy Flash Module 3.0 (EFM 3.0), Ford', price: '$200.00', specs: 'Inline at BCM J3/J7', source: 'https://www.speedturtleengineering.com/', status: 'Installed' },
+		{ name: 'Speed Turtle Engineering EFM 2.0 / 3.0 Voltage Input Harness (sold separately)', price: '$15.00', specs: 'White = Input 1, green = Input 2. Used instead of the toggle harness, which has Input 1 only', source: 'https://www.speedturtleengineering.com/', status: 'Planned' },
+		{ name: 'F150LEDs 2015–2020 F-150 CREE LED headlight bulbs, OEM factory low and high beam combo', price: '$296.10', specs: 'Halogen housings', status: 'Installed' },
+		{ name: 'F150LEDs 2015–2020 F-150 CREE front running and blinker LED bulbs ("Mark II 2015–2018" listed with this item)', price: '$89.10', specs: 'No hyperflash', status: 'Installed' },
+		{ name: 'F150LEDs 2015–2020 F-150 front marker LED bulbs', price: '$35.10', status: 'Installed' },
+		{ name: 'Bulb installation labor', price: '$375.00', status: 'Installed' },
+	]}
+/>
+
+<Gallery photos={[{ src: harness, alt: 'Speed Turtle EFM voltage input harness: module plug with white and green trigger wires, product photo.', caption: 'EFM 2.0/3.0 Voltage Input Harness, product photo. To buy, $15.00.' }]} />
+
+## Factory lamps on this truck
+
+Low and high beam, front turn, fog (present on the Lariat), front LED accent (only with LED signature headlamps), rear turn, stop, center brake, reverse and bed lamp. The truck has halogen headlamp housings, so the EFM's "Front LED Accent" box does nothing (confirmed 8 Oct).
+
+## Wiring
+
+<WiringTable
+	rows={[
+		{ wire: 'E1', color: 'White (harness)', function: 'EFM Input 1, Switch 1 (front lamps)', source: 'LED Output 4 (J4-6), slide 3', draw: 'Signal only, no load', fuse: 'LED output 2.5A, 20A group', gauge: '18 AWG', relay: '—', termination: 'Butt splice with heat shrink' },
+		{ wire: 'E2', color: 'Green (harness)', function: 'EFM Input 2, Switch 2 (rear lamps)', source: 'LED Output 5 (J4-7), blank button 1, latched', draw: 'Signal only, no load', fuse: 'LED output 2.5A', gauge: '18 AWG', relay: '—', termination: 'Butt splice with heat shrink' },
+		{ wire: 'E3', color: 'EFM plug-in harness', function: 'EFM inline at the BCM', source: 'BCM J3 and J7', draw: '—', fuse: '—', gauge: 'Plug-in', relay: '—', termination: 'Factory connectors. Battery off first. Done 8 Oct' },
+	]}
+/>
+
+**Leak check:** the EFM inputs accept any 5 to 17V signal, so a leaking LED output could look "on" to it. With everything off, read LED Outputs 4 and 5 and expect under 1V, then check again in the truck with the EFM connected. The steps are in the [bench test plan](/projects/f150-upfit/cantrol-bench-test/).
+
+## STE configuration (utility v3.36)
+
+| Tab | Trigger | Lamps checked (left and right) | Pattern |
+| --- | --- | --- | --- |
+| Switch 1 | White wire, slide 3 (LED Output 4) | Low beam, high beam, fog, front turn, front LED accent | TBD |
+| Switch 2 | Green wire, blank button 1 latched (LED Output 5) | Rear turn, brake, center brake, reverse, truck bed | TBD |
+| Switch 3 (enable) | Virtual: Switch 1 and 2 both active | All ten lamps | TBD |
+| Integrated switch | Double-pull high beams | High beam, fog | TBD |
+| Park | Leave disabled unless wanted | — | — |
+
+**Settings notes:**
+
+- Use the same pattern number on every tab.
+- Unlisted lamps (rear accent, mirror, trailer, trailer reverse, park, low beam #2, brake #2) likely do nothing on this truck. Leave them checked, test, and uncheck anything unwanted.
+- "Disable low beam flashing when low beams active" is checked on Switch 1, 2, 3 and Integrated; the high-beam equivalent is unchecked.
+- Dash Indicator and Module Status Lights are checked.
+- "Disable Reverse Lamp Flashing When Braking": check it, then test.
+- Switch 3 is off by default: tick Enable Switch 3.
+- Save Configuration to Module, then re-open each tab to confirm.
+
+## What each control does
+
+| Control | Result |
+| --- | --- |
+| Slide 3 | Front factory lamps flash (Input 1) |
+| Blank button 1 | Rear factory lamps flash (Input 2) |
+| Slide 3 + blank button 1 | All factory lamps flash (Switch 3) |
+| Double-pull high beams, everything else off | High beams and fogs flash (integrated switch) |
+
+## Install steps (phase 3)
+
+1. Done 8 Oct: the module is installed inline at BCM J3 and J7.
+2. Switch it to voltage input: fit the Voltage Input Harness.
+3. White to the LED Output 4 wire, green to the LED Output 5 wire.
+4. Battery on; program with the STE utility; test white, green, both, and double-pull; confirm brake, turn and reverse still work.
+
+## Testing and verification
+
+| Item | Result |
+| --- | --- |
+| LED bulbs flash cleanly on every EFM tab (no flicker, lag or bulb-out warnings) | Tested 8 Oct 2026, everything looked good (test video) |
+| Turn signals blink at the correct rate with the LED bulbs (no hyperflash) | Confirmed 8 Oct 2026 |
+| Voltage input from the CanTrol | Not yet (harness not bought) |
+
+## Troubleshooting
+
+| Symptom | Likely cause and fix |
+| --- | --- |
+| Shows all-lights with only slide 3 | Input 2 also getting voltage. Check LED Output 5, and that LED Output 4 isn't tied to green |
+| Does nothing | White/green not seeing 5–17V, module not seated at J3/J7, a fuse, or not configured |
+| Factory lights flash oddly or fail | Headlamp, brake or turn overrides not on. Re-seat J3/J7 |
+| Blank button 1 releases the lamps when let go | The button is still momentary. Set it to latch |
+
+## Open items
+
+- Buy the Voltage Input Harness ($15).
+- Set the pattern numbers on every tab.
+- When programming the CanTrol, check whether blank button 1 is still latched after a restart.
+
+## Sources
+
+- [Speed Turtle Engineering](https://www.speedturtleengineering.com/) (EFM 3.0, harness, STE Configuration Utility)
+- F150LEDs order (bulbs)
+- F-150 project document, revision 10, sections 2, 8, 8.0, 8.1, 9.3 (E1 to E3), 10 and 15
+
+## Changelog
+
+<Changelog entries={[{ date: '2026-10-27', change: 'Page published from the 23 October project files.', rollback: 'Revert the commit that rebuilt the F-150 section.' }]} />

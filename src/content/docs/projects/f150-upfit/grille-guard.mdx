@@ -1,12 +1,12 @@
 ---
 title: Steelcraft HD grille guard and front package
-description: How the Steelcraft HD grille guard (50-1420C) goes on a 2017 F-150, and how two siren speakers, a 20-inch light bar and two surface lights mount to it without touching the bumper or factory grille.
-summary: The grille guard carries the whole front package. Install steps, hardware, torque notes, component layout and the mounting hardware list.
+description: How the Steelcraft HD grille guard (50-1420C) goes on a 2017 F-150, how two siren speakers, a 20-inch light bar and two surface lights mount to it without drilling, how the used guard was refinished, and how the leads are stored until wiring day.
+summary: The grille guard carries the whole front package. Final mounting decisions, measured tube data, every fastener, the touch-up record, the shop install steps and torque notes.
 status: In progress
 category: Vehicle Upfit and 12V
-updated: 2026-10-26
+updated: 2026-10-27
 sidebar:
-  order: 5
+  order: 8
 ---
 
 import ProjectHeader from '../../../../components/ProjectHeader.astro';
@@ -16,6 +16,13 @@ import Callout from '../../../../components/Callout.astro';
 import Changelog from '../../../../components/Changelog.astro';
 import setup from '../../../../assets/f150/grille-guard-front-setup.jpg';
 import diagram from '../../../../assets/f150/grille-guard-diagram.png';
+import t0764 from '../../../../assets/f150/tube-0764.jpg';
+import t0766 from '../../../../assets/f150/tube-0766.jpg';
+import t0762 from '../../../../assets/f150/tube-0762.jpg';
+import t0768 from '../../../../assets/f150/tube-0768.jpg';
+import g0723 from '../../../../assets/f150/guard-0723.jpg';
+import g0724 from '../../../../assets/f150/guard-0724.jpg';
+import g0725 from '../../../../assets/f150/guard-0725.jpg';
 
 <ProjectHeader hero={setup} heroAlt="Front of the white F-150 with the black Steelcraft HD grille guard, two UBL siren speakers beside the center tubes, amber and white U-Lite surface lights in the upper corners and the amber and white Color Flood light bar under the lower tube." />
 
@@ -25,14 +32,15 @@ Emergency lighting and siren use is regulated by state law and permits. This pag
 
 ## Goal
 
-Mount the whole front warning package on the grille guard, so the bumper and factory grille are never cut or drilled, and so the package can come off with the guard.
+Mount the whole front warning package on the grille guard, so the bumper and factory grille are never cut or drilled, and so the package can come off with the guard. Done means the guard is refinished, every product is mounted with the final hardware below, a shop has bolted the guard to the truck, and every lead is stored or wired.
 
 ## Constraints
 
-- 2017 F-150 Lariat SuperCrew. The guard is Steelcraft's 2015 to 2017 fitment.
+- 2017 F-150 Lariat SuperCrew. The guard is Steelcraft's 2015 to 2017 fitment (confirmed 22 October 2026).
 - The bumper stays on. No changes to the bumper or factory grille.
-- Every ground goes to the side of a steel frame rail or the Ford Q-231 ground point, because the body is aluminum. Never "chassis near the guard." Whether the guard's brackets make a good ground path is unknown, so they aren't relied on.
-- Everything is mounted to the guard and bench-tested first, then a shop bolts the guard on.
+- No drilling, welding or bending of the guard. Every mount uses existing punch plate holes, the products' own brackets, or ties around the tube.
+- Every ground goes to the side of a steel frame rail or the Ford Q-231 ground point, because the body is aluminum. Never the battery negative post and never "chassis near the guard." Whether the guard's brackets make a good ground path is unknown, so they aren't relied on.
+- Everything is mounted to the guard and checked on the ground first. Then a shop bolts the guard on, because the plastic splash shield has to be trimmed at the tow hook brackets.
 
 <SpecBox
 	title="Steelcraft HD Grille Guard"
@@ -40,10 +48,14 @@ Mount the whole front warning package on the grille guard, so the bumper and fac
 		['Part', '50-1420C'],
 		['Fitment', '2015 to 2017 F-150 (Short top brackets)'],
 		['Bought', 'Used, $450.00'],
+		['Layout', 'Center punch plate between two center vertical tubes, top tube, lower horizontal tube, headlight guards'],
+		['Lower tube', '1.91 in OD (6 in around), measured 7 Oct'],
+		['Tube to plate gap', 'Under 1/16 in everywhere, measured 7 Oct'],
+		['Center verticals', '13.5 in apart, inside, at the bottom, measured 7 Oct'],
 		['Mounting', 'Frame rails at the tow hook location, plus two top brackets behind the bumper'],
 		['Finish care', 'Mild soap only, no abrasive polish or wax (Steelcraft)'],
 	]}
-	source={{ label: 'Steelcraft install sheet, 2015 to 2024 F-150', href: 'https://steelcraftautomotive.com/pdf/185365' }}
+	source={{ label: 'Steelcraft install sheet, 2015 to 2024 F-150. Measurements: my tape, 7 Oct 2026', href: 'https://steelcraftautomotive.com/pdf/185365' }}
 />
 
 ## Front package layout
@@ -51,50 +63,178 @@ Mount the whole front warning package on the grille guard, so the bumper and fac
 <Gallery
 	photos={[
 		{ src: setup, alt: 'Front of the truck with the grille guard, both UBL siren speakers, both U-Lite surface lights and the Color Flood light bar lit amber and white.', caption: 'The front setup: UBL 100W siren speakers beside the center tubes, UBL U-Lite surface lights in the upper punch plate corners, and the UBL Color Flood 2.0 light bar under the lower tube.' },
-		{ src: diagram, alt: 'Front-view schematic of the guard showing surface lights at the top corners, siren speakers beside the center tubes and the light bar under the lower tube.', caption: 'Front-view schematic. Not to scale; positions get confirmed by measurement at install.' },
+		{ src: diagram, alt: 'Front-view schematic of the guard showing surface lights at the top corners, siren speakers beside the center tubes and the light bar under the lower tube.', caption: 'Front-view schematic from the 5 October proposal. Not to scale. Positions get confirmed by measurement at install.' },
 	]}
 />
 
 <div class="ss-table-wrap">
 
-| # | Component | Qty | Size and draw | Location | Mounting |
+| # | Component | Qty | Size and draw | Location | Final mounting (7 Oct) |
 | --- | --- | --- | --- | --- | --- |
-| 1 | UBL 100W Large Siren Speaker | 2 | 7.5 H x 6.5 W x 3.5 D in with bracket. 11 Ω, 120 to 124 dB (listing) | Above the lower horizontal tube, against the outside of each center vertical tube | Included L-bracket bolted through the punch plate with stainless hardware and aluminum backing plates |
-| 2 | UBL Color Flood 2.0 20" light bar | 1 | 20 x 1.625 x 3 in. 3.3A max (108W), 10 to 30V | Under the lower horizontal tube, above the plate | Thin stainless band clamps strap a bracket to the lower tube at each end, and the end-cap brackets bolt to those |
-| 3 | UBL U-Lite surface mount light, amber/white | 2 | 4.40 x 1.25 x 0.40 in. 350 mA max each, 12V | Upper left and right corners of the punch plate | Screwed through the plate with backing strips |
+| 1 | [UBL 100W Large Siren Speaker](/projects/f150-upfit/siren-speakers/) | 2 | 7.5 H x 6.5 W x 3.5 D in with bracket. 11 Ω, 120 to 124 dB (listing) | Above the lower horizontal tube, against the outside of each center vertical tube | The speaker's own center bolt straight through the punch plate, with washers and a nyloc nut. No L-bracket |
+| 2 | [UBL Color Flood 2.0 20" light bar](/projects/f150-upfit/ubl-color-flood-light-bar/) | 1 | 20 x 1.625 x 3 in. 3.3A max (108W), 10 to 30V (proposal figures) | Under the lower horizontal tube, above the license plate | Its own included L-brackets, tied to the tube with black-coated stainless ties |
+| 3 | [UBL U-Lite surface lights, amber/white](/projects/f150-upfit/ubl-u-lite-grille-lights/) | 2 | 4.40 x 1.25 x 0.40 in. 350 mA max each, 12V | Upper left and upper right corners of the punch plate | #6-32 black machine screws through the plate, fender washers and nyloc nuts, each light centered over a plate hole |
 
 </div>
 
-Electrically, the speakers run in parallel on the siren output (two 11 Ω = 5.5 Ω, Whelen's minimum). The light bar and the pair of U-Lites each take one 10A switched output. Each U-Lite draws more than a 250 mA low-current output can supply, so they can't go on those. The full assignment is on the [output plan](/projects/f150-upfit/cantrol-output-plan/), and the light bar's wire-by-wire table is on its own component page.
+Electrically, the speakers run in parallel on the siren output (two 11 Ω = 5.5 Ω, Whelen's minimum). The light bar takes seven CanTrol outputs, with its red power lead on J1-6 alone. The pair of U-Lites takes J1-4 through a 3A fuse. The full assignment is on the [output plan](/projects/f150-upfit/cantrol-output-plan/), and each product has its own wire-by-wire page linked in the table.
 
-<Callout type="lesson">
-The lower tube measures about 1-3/4" OD with only a 1/16" to 1/8" gap to the plate (read from photos, to be confirmed). That's too tight for standard tube clamps, which is why the light bar hangs on thin band clamps and corner braces instead.
-</Callout>
+## Measuring the lower tube
 
-## Mounting hardware
+The first plan, read from photos, put the lower tube at about 1-3/4 in with a 1/16 to 1/8 in gap. On 7 October I measured it with a tape: 1.91 in OD (6 in around) and under 1/16 in between the tube and the punch plate everywhere. That gap is far too tight for any tube clamp, which is what drove the final light bar mount below.
 
-All stainless where it's exposed. Rubber goes between brackets, plate and tubes to stop rattles and galvanic contact.
+<Gallery
+	photos={[
+		{ src: t0764, alt: 'Tape measure on the punch plate where it meets the lower tube.', caption: 'IMG_0764: tape on the punch plate at the lower tube.' },
+		{ src: t0766, alt: 'Close-up of the narrow gap between the lower tube and the punch plate with a tape measure.', caption: 'IMG_0766: the gap between the tube and the plate. Under 1/16 in.' },
+		{ src: t0762, alt: 'Tape measure held across the face of the lower tube.', caption: 'IMG_0762: tape across the tube face.' },
+		{ src: t0768, alt: 'The used grille guard lying face up with the lower tube along the bottom.', caption: 'IMG_0768: the guard face up, lower tube along the bottom.' },
+	]}
+/>
 
-| Part | Qty | Use |
-| --- | --- | --- |
-| Stainless hex bolts, 1/4"-20 x 1" | 1 five-pack | Two per speaker |
-| Stainless nylon-insert lock nuts, 1/4"-20 | 1 pack | One per bolt |
-| Stainless flat washers, 1/4" | 4 | Under bolt heads |
-| Aluminum flat bar, 1" x 3 ft x 1/8" | 1 | Cut into two speaker backing plates and two surface-light backing strips |
-| Neoprene sheet, 1/16" | 1 | Isolation between brackets, plate and tubes (old inner tube works too) |
-| Stainless band clamps, No. 28 (1-1/4" to 2-1/4") | 1 ten-pack | Two per light bar bracket; the thin band passes behind the tube |
-| Stainless corner braces, 1-1/2" | 1 four-pack | One per end, strapped under the tube, carries the end-cap bracket |
-| Stainless bolts and nyloc nuts | 2 sets | End-cap bracket to corner brace |
-| Stainless machine screws, #8-32 x 3/4", with nyloc nuts and washers | 4 each | Two per surface light, through the plate slots |
-| Flat black rust-preventive spray | 1 | Touch-up on drilled or enlarged holes |
+## Light bar mount (final, 7 Oct)
+
+The light hangs under the lower tube on its own included adjustable L-brackets, bolted to the light's rear slide-in channel about 6 in either side of center.
+
+1. **Short leg** bolts to the light's rear slot, with blue thread locker (Loctite 242) on the bolts.
+2. **Long slotted leg** lies on top of the light, between the light and the tube, with the curve turned inward so the tips stay hidden.
+3. **Pad:** a black rubber anti-vibration pad, about 2 in square, sits under each bracket leg against the tube.
+4. **Ties:** two JOUGU black epoxy-coated 304 stainless ties per bracket (four total) wrap the tube and pass through the bracket slot, buckles turned to the back.
+5. **Tension and trim:** the ZOOSUNX tie tool snugs each tie without crushing the pad and cuts the tail flush at the buckle. Pliers and diagonal cutters work too. Touch up the cut ends with the satin black from the touch-up.
+6. **Checks:** the light clears the license plate, and the ties are re-checked after the first few drives.
+
+From the front, only the light and four thin black ties show. The brackets and pads sit hidden between the light and the tube. Mock up first with tape in place of the ties, because steel ties can't be reused. On 10 October a JOUGU tie passed through the gap behind the lower tube with plenty of room.
+
+## Speaker mount (final, 7 Oct)
+
+On 6 October I decided to skip the UBL L-bracket: with its flange bolted flat to the plate, the speaker would aim up or down. Each speaker bolts straight to the punch plate on its own center bolt.
+
+- **Bolt:** the speaker's own center bolt, 1/4"-28 (SAE fine), about 1-1/2 in long, per Tyler at UBL on 7 October. The heads are stamped 8.8, a metric-style marking, so spin a nut onto one speaker bolt at the store before buying the set.
+- **In front of the plate:** a stainless 1/4 in flat washer and a ready-made 1/4 in rubber or neoprene washer.
+- **Behind the plate:** a stainless fender washer, 1/4 in x 1-1/4 in OD, and a stainless 1/4"-28 nylon-insert lock nut, with blue thread locker.
+- **Length check:** at least two threads must show past the nut. If not, use a longer 1/4"-28 bolt.
+- **No cutting or drilling.** The bolt goes through an existing punch plate hole. Confirm the speaker fits its punch plate bay before tightening.
+- **Anti-rotation (suggestion, not yet tested):** one center bolt can let a speaker twist on a vibrating guard. The rubber washer and thread locker resist it. Re-check after the first drives, and if it still turns, add a second fastener or a tab that bears on a mesh hole.
+
+Speaker photos, wiring and the sticker covers are on the [siren speakers](/projects/f150-upfit/siren-speakers/) page.
+
+## Surface light mount (final, 7 Oct)
+
+- **Screws:** #6-32 x 3/4 in black stainless machine screws, two per light. Tyler at UBL said on 7 October that #6-32 fits the light's holes best. If one is loose at the mock-up, step up to #8-32.
+- **Why not the box screws:** the screws supplied with the lights are pan-head self-tappers about 1/2 in long (estimated from my photo, 10 Oct), meant for 1/16 in pilot holes. They fit the housing snugly but need solid metal to bite into and take no nut, so they can't hold through the punch plate holes.
+- **Washers:** black stainless #8 fender washers, 1-1/4 in across, behind the plate. The punch holes are much bigger than the screw, so the washer must be about 1/4 in wider than the hole all round to span it. Measure one hole first, and go to 1-1/2 in washers if the hole is over 1 in. No adhesive tape.
+- **Nuts:** stainless #6-32 nylon-insert lock nuts behind the washers.
+- **Position:** the leads exit the center of the light's back, so each light sits centered over a punch plate hole and its leads run straight back through it.
 
 <Callout type="open">
-The 1/4" speaker bolt size is an assumption. Check the speaker bracket holes and the full stack thickness (bracket, rubber, plate, backing plate) before buying. If it's thick, use 1-1/4" bolts.
+The project document's diagram labels the U-Lite washer "#6 stainless fender washer", while the hardware table says black stainless #8 fender washers 1-1/4 in across. The table is the later, more detailed entry, so it's used here. Either works as long as the washer spans the punch hole.
 </Callout>
+
+## Mounting hardware (final list)
+
+Prices are estimates from the master shopping list, October 2026, unless marked bought. Buy at Home Depot, a local hardware store or Amazon.
+
+<div class="ss-table-wrap">
+
+| Part | Qty | Use | Status and price |
+| --- | --- | --- | --- |
+| Stainless nylon-insert lock nuts, 1/4"-28 (MonsterBolts 50-pack) | Use 2 | Speakers, behind the plate. Test one on a speaker bolt first | To buy, about $9.00 |
+| Stainless fender washers, 1/4 in x 1-1/4 in OD | Use 2 | Speakers, behind the plate | Same pack as the #8 fender washers |
+| Stainless flat washers, 1/4 in | Use 2 | Speakers, in front of the plate | To buy, about $7.00 |
+| Rubber or neoprene washers, 1/4 in, ready-made (BokWin) | Use 2 | Speakers, in front of the plate. Stops buzzing | To buy, about $8.00 |
+| Longer 1/4"-28 bolts | 0 to 2 | Only if fewer than two threads show past the nut | If needed |
+| Loctite 242 blue thread locker | 1 | Speaker nuts and light bar rear slot bolts. Not for the mock-up | To buy, about $6.00 |
+| JOUGU black epoxy-coated 304 stainless ties, 11.8 x 0.18 in (300 x 4.6 mm), 220 lb, 100-pack (Amazon B09MQMH56S) | Use 4 | Two per light bar bracket | Bought 8 Oct, $8.47 |
+| ZOOSUNX metal zip tie tool, stainless, for ties up to 12 mm, built-in cutter, tie remover included | 1 | Tension and flush-cut the light bar ties | Bought 22 Oct, $18.01 |
+| Black rubber anti-vibration pads, about 2 in square (RAParts 4-pack) | Use 2 | One under each light bar bracket | To buy, about $8.00 |
+| Black stainless machine screws, #6-32 x 3/4 in | Use 4 | U-Lites, through the plate | To buy, about $9.00 |
+| Black stainless #8 fender washers, 1-1/4 in across (40-pack, also covers the speaker fender washers) | Use 4 | U-Lites, behind the plate | To buy, about $8.00 |
+| Stainless #6-32 nylon-insert lock nuts | Use 4 | U-Lites, behind the plate | To buy, about $7.00 |
+| Rust-Oleum Stops Rust satin black (from the touch-up) | — | Tie cut ends and any marks | Bought |
+
+</div>
+
+### Dropped from the 5 October proposal
+
+The first proposal used parts that are no longer in the plan. They are listed so nobody buys them by mistake: 1/4"-20 bolts and nuts for the speaker L-brackets, an aluminum flat bar for speaker and surface light backing plates, a 1/16 in neoprene sheet, No. 28 stainless band clamps and 1-1/2 in corner braces for the light bar, #8-32 screws with backing strips for the U-Lites, and a separate flat black spray can. Earlier still, the light was going on the top crossbar with Nilight 91074B or STEDI 60 to 65 mm tube clamps sized for a 2 in tube, and the U-Lites were going in the lower corners. All of these were superseded by the 7 October decisions above.
+
+## Storing the guard wires until wiring day (7 Oct)
+
+The products go on the guard before anything is wired to the truck. Until wiring day, every lead is secured and hidden like this.
+
+1. **Along the guard:** run the speaker and light bar leads along the back of the guard tubes and the punch plate inside 3/8 in black split loom, held with black UV-rated 8 in zip ties, buckles to the back, so nothing shows from the front.
+2. **Into the engine bay:** pass the loom through the grille near the guard's center mount, with a drip loop just before it goes in so water runs off instead of following the wire.
+3. **Extra length:** coil it and tie it to the radiator support, clear of the fan, belts, hood latch and anything hot.
+4. **Lead ends:** a dab of dielectric grease, then black electrical tape or a heat-shrink end cap.
+5. **Labels:** label each lead with what it is.
+6. **U-Lites:** the 6 in leads stay tucked behind the punch plate with taped ends until they're extended.
+
+| Part | Qty | Use | Price |
+| --- | --- | --- | --- |
+| Black split loom, 3/8 in, 10 ft (3/8 and 1/2 in bundle, also covers wiring day) | 1 | Leads along the back of the guard | About $12.00 |
+| Black UV-rated zip ties, 8 in | 1 pack | Loom to the guard, coil to the radiator support | About $7.00 |
+| Black electrical tape (3M Super 33+) | 1 roll | Lead ends and labels | About $6.00 |
+| Dielectric grease (Permatex 81150, 0.33 oz) | 1 | Lead ends and connectors | Optional, about $3.00 |
+| Heat-shrink end caps (MECCANIXITY 8 mm, 15-pack) | 1 pack | Instead of tape on lead ends | Optional, about $7.00 |
+
+## Touch-up (done 23 Oct)
+
+I refinished the used guard myself on 23 October 2026, with the guard off the truck so the back sides and bracket faces could be reached. The paint needed a 48 hour cure, so the guard was ready to mount from about 25 October.
+
+Damage in my photos fell into three groups: surface scuffs on the tubes, chips to bare metal around screw holes, and real rust on the lower bracket tab and the plate edge.
+
+<Gallery
+	photos={[
+		{ src: g0723, alt: 'Rust on the lower bracket tab of the grille guard and chips on the tube beside it.', caption: 'IMG_0723: rust on the lower bracket tab, and chips on the tube beside it.' },
+		{ src: g0724, alt: 'Scuffs and chips to bare metal along a grille guard tube around a screw hole.', caption: 'IMG_0724: scuffs and chips to bare metal along the tube, around a screw hole.' },
+		{ src: g0725, alt: 'Scratches along the end of a grille guard tube and rust on the end tab.', caption: 'IMG_0725: scratches along the end of the tube and rust on the end tab.' },
+	]}
+/>
+
+### Method used
+
+Spray outdoors, upwind, on a dry day between 50 and 90°F, with the next two days dry as well.
+
+1. **Day 1, prep (about 2 hours):** mask; sand the rust down to bare metal with the 80-grit sponge; feather the chip edges with the 120-grit sponge; scuff the whole lower tube and both tabs with the 220-grit sponge; wipe down with 90% isopropyl alcohol.
+2. **Day 1, paint (about 1.5 hours plus waiting):** two or three light coats of self-etching primer on the bare metal spots only. Then paint the flat end tab with the satin black as a sheen test, wait an hour and compare it with the original finish in daylight. If it matches, three light coats on the rest. Follow the recoat times on both cans.
+3. **48 hours later:** mount the guard, once the paint has hardened.
+
+The self-etching primer is dark green, so the repair looks patchy until the satin black goes on. Self-etching primer bonds to bare steel but doesn't fill, so the chip edges get feathered smooth before priming.
+
+### Supplies (all bought at Home Depot, 22 Oct)
+
+| Item | Home Depot SKU | Use | Price |
+| --- | --- | --- | --- |
+| 3M Pro Grade Precision 2-1/2 x 4-1/2 x 1 in 80 grit coarse block sanding sponge | 1000541530 | Rust down to bright metal | $5.98 |
+| 3M Pro Grade Precision 2-1/2 x 4-1/2 x 1 in 120 grit medium block sanding sponge | 1000541538 | Feather the chip edges | $5.98 |
+| 3M Pro Grade Precision 2.5 x 4.5 x 1 in 220 grit fine block sanding sponge | 1007740316 | Scuff the whole area before paint | $5.98 |
+| Rust-Oleum Automotive 12 oz self etching dark green primer spray | 500563 | Bare metal spots, 2 to 3 light coats | $10.48 |
+| Rust-Oleum Stops Rust 12 oz protective enamel satin black spray | 801447 | Topcoat after the sheen test, and the tie cut ends | $6.98 |
+
+**Already on hand:** Norton DrillSand 5 in 150-grit drill discs, Norton 3X sanding sponges, a Norton rubber sanding block, Carborundum Red-I-Cut flint paper, Rhodes American #000 steel wool, brown kraft paper for masking, a drill, 90% isopropyl alcohol (used instead of acetone or wax-and-grease remover), tape, nitrile gloves, safety glasses and N95 masks. No respirator is needed when spraying outdoors. None of my five existing spray cans suited the repair.
+
+<Callout type="lesson">
+Don't use steel wool on bare steel or primer. Leftover fibers rust under the paint.
+</Callout>
+
+## Mock-up on the ground
+
+Fit everything to the guard before the permanent mounting, hand-tight only, no thread locker, and tape in place of the steel ties. Protect the new paint.
+
+| Check | Result |
+| --- | --- |
+| U-Lite box screws fit the housing | Done 10 Oct: snug, but they can't hold through the plate, so machine screws are used |
+| Each U-Lite centered over a punch plate hole | Not checked yet |
+| Speaker bolt shows at least two threads past the nut | Not checked yet |
+| A JOUGU tie passes behind the lower tube | Done 10 Oct: plenty of room |
+| Light bar bracket tips stay hidden, tie fits the bracket slot | Not checked yet |
+| Photograph each spot before the permanent mount | Not done yet |
 
 ## Grille guard install
 
-This follows the [AmericanTrucks install video](https://www.youtube.com/watch?v=_qu9wyKAgcc) for order, tools and tightening sequence. Hardware sizes and the parts list come from Steelcraft's own install sheet. Where the two differ, both are noted.
+A shop mounts the guard, because the plastic splash shield needs trimming to reach the tow hook bracket area (decided 13 Oct). The one quote so far is 2 hours at $150 an hour, $300, adjusted down if it takes less. The wiring stays my own job.
+
+The steps below follow the [AmericanTrucks install video](https://www.youtube.com/watch?v=_qu9wyKAgcc) for order, tools and tightening sequence. Hardware sizes and the parts list come from Steelcraft's own install sheet. Where the two differ, both are noted.
 
 ### Before starting
 
@@ -138,6 +278,7 @@ The three top bracket designs look alike. Sort them first and set the Short pair
 4. **Top mounts.** Bolt each top bracket to the guard with M8 x 30 mm, outside in, washer and nylon lock nut. Snug only.
 5. **Center, set the angle, tighten in this order:** center the guard side to side; tilt it to the angle wanted and tighten the lower guard bolts (16/17 mm); then the top bracket bolts (13 mm); then the frame bolts last (18 mm).
 6. **Finish.** Reinstall the tow hooks over the brackets with their factory bolts. Re-check all hardware after the first 100 to 200 miles, then periodically (Steelcraft).
+7. **Touch up** any marks from the install with the satin black.
 
 ### Torque
 
@@ -154,34 +295,56 @@ Neither Steelcraft's sheet nor the video gives torque specs. These are general s
 
 ## Wiring to the cab
 
-- 16 AWG speaker wire and the light wiring in split loom through the grille to the module under the rear seat.
-- Rubber grommets at every metal pass-through, using a factory firewall grommet where possible.
+- 16 AWG speaker wire and the light wiring in split loom through the grille to the module under the driver-side rear seat.
+- Rubber grommets at every metal pass-through, using a factory firewall grommet where possible: passenger side behind the glove box, or likely driver side behind the pedals.
 - Both speakers in parallel with matched polarity: CanTrol orange to each speaker's white, brown to each speaker's black.
+- Deutsch DT unplug points at the guard for the speakers, light bar and grille lights, so the guard can come off.
 - Dedicated ground wires to a frame rail side, not the guard.
 - The guard wiring stays coiled in loom on the guard until wiring day.
+
+The full circuit list is on the [power and wiring](/projects/f150-upfit/power-and-wiring/) page.
+
+## Scope of work
+
+From the proposal, updated to the final decisions:
+
+1. Mount two siren speakers to the punch plate on their own center bolts with washers, rubber washers and nyloc nuts.
+2. Mount the flood light bar under the lower horizontal tube on its own L-brackets, tied to the tube with stainless ties.
+3. Mount two surface lights in the upper corners of the punch plate with #6-32 screws, fender washers and nyloc nuts.
+4. Run 16 AWG speaker wire and light wiring in split loom through the grille to the CanTrol, with grommets at every metal pass-through.
+5. Wire both speakers in parallel with matched polarity.
+6. Touch up the tie cut ends and any marks with rust-preventive paint.
+7. Program the CanTrol outputs and function-test the siren tones and all lights.
+
+The 5 October proposal priced the package at $476.12 from Ultra Bright Lightz listings (speakers $89.99 each, light bar $159.99, single-color U-Lites $44.99 each, hardware $46.17). What I actually paid: speakers $171.00 for two, light bar $152.00, and the amber/white U-Lites $85.50 for two. The proposal had client and installer signature blocks, which were never completed.
 
 ## Testing and verification
 
 | Item | Status |
 | --- | --- |
 | Light bar wire functions | Bench-tested 11 October 2026 on the test amp |
+| U-Lites alternate white and amber on their own | Bench-tested 10 October 2026 |
 | Light bar, U-Lites, speakers on the CanTrol | Planned. See the [bench test plan](/projects/f150-upfit/cantrol-bench-test/) |
+| Guard touch-up | Done 23 October 2026 |
 | Speaker fit in the punch plate bays | Not measured yet |
-| Guard mock-up, hand tight | Not done yet |
+| Guard mock-up, hand tight | Partly done (see above) |
 | Guard bolted to the truck | Not done yet |
 
 ## Safety notes
 
 - Lift the guard by its frame only.
-- Measure speaker fit and every bracket hole before drilling. Paint any drilled or enlarged hole.
+- No drilling on the guard. If a hole ever has to be enlarged, paint it.
+- Spray outdoors and upwind. An N95 handles sanding dust but doesn't filter paint fumes. Wear nitrile gloves and safety glasses.
 - Third-party speakers work with Whelen controllers but don't carry Whelen's SAE, California Title 13 or NFPA certification for the system.
 
 ## Open items
 
-- Confirm the tube OD and plate gap with calipers.
-- Confirm the speaker bracket hole size and the bolt length.
-- Confirm a 1/4"-28 nut fits the speaker's own bolt with two threads showing.
-- Mock up the full package hand tight, then permanent, then the shop install.
+- Spin a 1/4"-28 nut onto a speaker bolt and confirm two threads show past it.
+- Confirm each speaker fits its punch plate bay.
+- Measure a punch hole and confirm the 1-1/4 in fender washer spans it.
+- Confirm each U-Lite sits centered over a plate hole.
+- Confirm the light bar bracket tips stay hidden and the tie fits the bracket slot.
+- Book the shop install.
 - Confirm the torque values with Steelcraft.
 
 ## Sources
@@ -190,8 +353,13 @@ Neither Steelcraft's sheet nor the video gives torque specs. These are general s
 - [Steelcraft HD grille guard install sheet, 2015 to 2024 F-150](https://steelcraftautomotive.com/pdf/185365)
 - [Steelcraft install sheet on SEMA Data (50-1420cx)](https://sdda.semadata.org/Standard/Steelcraft%20Automotive/50-1420cx.pdf)
 - [Product page (CARiD)](https://www.carid.com/steelcraft/hd-series-black-grille-guard-mpn-50-1420c.html)
-- My grille guard siren and lighting proposal, 5 October 2026 (in the project files)
+- Fastener sizes: Tyler at UBL support, 7 October 2026 (speaker bolt 1/4"-28, U-Lite holes #6-32)
+- My grille guard siren and lighting proposal, 5 October 2026, and the F-150 project document, revision 10 (23 October 2026), sections 6 and 11
 
 ## Changelog
 
-<Changelog entries={[{ date: '2026-10-27', change: 'Replaced the annotated layout picture (header and Front package layout) with the front setup image and updated its caption.', rollback: 'Revert the commit that changed the grille guard images.' }, { date: '2026-10-26', change: 'Grille guard page published from the Steelcraft install notes and the 5 October front package proposal.', rollback: 'Revert the commit that added this page.' }]} />
+<Changelog entries={[
+	{ date: '2026-10-27', change: 'Rewrote the mounting sections to the final 7 October decisions (speaker center bolt, light bar on its own L-brackets with stainless ties, #6-32 U-Lite screws), replacing the superseded 5 October proposal hardware. Added the measured tube data and photos, the wire storage plan, the touch-up record, the mock-up checks and the shop install quote.', rollback: 'Revert the commit that rebuilt the F-150 section.' },
+	{ date: '2026-10-27', change: 'Replaced the annotated layout picture (header and Front package layout) with the front setup image and updated its caption.', rollback: 'Revert the commit that changed the grille guard images.' },
+	{ date: '2026-10-26', change: 'Grille guard page published from the Steelcraft install notes and the 5 October front package proposal.', rollback: 'Revert the commit that added this page.' },
+]} />
