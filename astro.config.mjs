@@ -79,6 +79,7 @@ export default defineConfig({
 								{ label: 'SaniGLAZE Video End-Slide Generator', link: '/projects/saniglaze-video-end-slide-tool/' },
 								{ label: 'SaniGLAZE Media Asset Library', link: '/projects/saniglaze-media-asset-library/' },
 								{ label: 'SaniGLAZE Privacy & Tracking Audit', link: '/projects/saniglaze-privacy-tracking-audit/' },
+								{ label: 'SaniCONNECT Collaboration Platform', link: '/projects/saniconnect/' },
 								{ label: 'AI-Assisted Executive Search', link: '/projects/ai-assisted-executive-search/' },
 							],
 						},
