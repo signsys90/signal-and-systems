@@ -1,5 +1,5 @@
 ---
-title: ARES Vehicle Light Controller
+title: Vehicle Light Controller
 description: A local-only Windows dashboard that sends low-current trigger commands to a USB serial relay board for amber warning and scene lighting on an ARES support vehicle.
 summary: Touch dashboard on the field laptop that drives a USB relay board for amber warning and scene-light triggers, with simulation mode, a watchdog and fail-safe ALL OFF.
 status: In progress
@@ -19,7 +19,7 @@ import off from '../../../../assets/light-controller/01-dashboard-all-off.jpg';
 import full from '../../../../assets/light-controller/02-dashboard-full.jpg';
 import parked from '../../../../assets/light-controller/03-parked-incident-active.jpg';
 
-<ProjectHeader hero={off} heroAlt="ARES Vehicle Light Controller dashboard with the red ALL OFF button, status tiles showing System OK, Relay Board Simulation, Simulation Mode On and Watchdog OK, and all relay channels off." />
+<ProjectHeader hero={off} heroAlt="Vehicle Light Controller dashboard with the red ALL OFF button, status tiles showing System OK, Relay Board Simulation, Simulation Mode On and Watchdog OK, and all relay channels off." />
 
 ## Screenshots
 
@@ -27,7 +27,7 @@ These were captured on 26 Oct 2026 with Simulation Mode on, which uses the mock 
 
 <Gallery
 	photos={[
-		{ src: off, alt: 'ARES Vehicle Light Controller dashboard with the red ALL OFF button, status tiles showing System OK, Relay Board Simulation, Simulation Mode On and Watchdog OK, and all relay channels off.', caption: 'Main dashboard with every relay channel OFF, the status tiles, the ALL OFF control and the relay board connection panel.' },
+		{ src: off, alt: 'Vehicle Light Controller dashboard with the red ALL OFF button, status tiles showing System OK, Relay Board Simulation, Simulation Mode On and Watchdog OK, and all relay channels off.', caption: 'Main dashboard with every relay channel OFF, the status tiles, the ALL OFF control and the relay board connection panel.' },
 		{ src: full, alt: 'Full controller page: eight relay channel cards from Rear Warning to Spare, five operating-mode profiles from Parked Incident Mode to Night Mode, and the recent event log.', caption: 'Full page: the eight relay channels, the five operating-mode profiles and the recent event log.' },
 		{ src: parked, alt: 'Controller after applying Parked Incident Mode: Rear Warning and Side Warning cards show ON in green, and the log shows activate_profile applied 5 channel changes.', caption: 'Parked Incident Mode applied: Rear and Side Warning come ON, and the log records the 5 channel changes.' },
 	]}
