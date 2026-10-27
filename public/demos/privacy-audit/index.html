@@ -1,0 +1,861 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Privacy &amp; Tracking Audit Dashboard (Demo)</title>
+<meta name="robots" content="noindex">
+<style>
+:root{--ink:#1f2937;--muted:#5b6472;--line:#d9dee6;--bg:#f4f6f9;--card:#fff;--navy:#0b1220;--accent:#c2410c;--accent-bg:#fff4e6;--high:#b91c1c;--high-bg:#fdecec;--med:#b45309;--med-bg:#fff4e0;--low:#1d4ed8;--low-bg:#e9f0ff;--ok:#15803d}
+*{box-sizing:border-box}body{margin:0;font:14px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+.demo{background:var(--accent-bg);color:#7c2d12;border-bottom:1px solid #f3c99b;padding:8px 24px;font-size:12.5px}.demo b{color:var(--accent)}
+header{background:var(--navy);color:#fff;padding:16px 24px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+header h1{margin:0;font-size:19px;letter-spacing:.02em}header .meta{font-size:12px;color:#aab4c3}
+main{padding:20px 24px;max-width:1280px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 14px}.tile .n{font-size:26px;font-weight:700}.tile .l{font-size:12px;color:var(--muted)}
+.tile.high .n{color:var(--high)}.tile.med .n{color:var(--med)}.tile.low .n{color:var(--low)}
+nav{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:14px;flex-wrap:wrap}
+nav button{font:600 13px system-ui;border:0;background:none;padding:9px 14px;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent}
+nav button.on{color:var(--ink);border-bottom-color:var(--accent)}
+.panel{display:none}.panel.on{display:block}
+.filters{display:flex;gap:10px;margin-bottom:10px;flex-wrap:wrap}.filters select{font:13px system-ui;padding:5px 8px;border:1px solid var(--line);border-radius:5px;background:#fff}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:12px;color:var(--muted);background:#fafbfc;font-weight:600}
+tr.f{cursor:pointer}tr.f:hover{background:#f8fafc}
+.pill{display:inline-block;font:700 11px system-ui;padding:2px 8px;border-radius:999px}.High{color:var(--high);background:var(--high-bg)}.Medium{color:var(--med);background:var(--med-bg)}.Low{color:var(--low);background:var(--low-bg)}
+.detail td{background:#fbfcfd}.detail .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.detail h4{margin:0 0 4px;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.detail button{margin-top:8px;font:600 12px system-ui;padding:6px 12px;border-radius:5px;border:1px solid var(--line);background:#eef1f5;color:#8a93a0;cursor:not-allowed}
+.detail .lock{font-size:12px;color:var(--muted);margin-top:4px}
+.cell{font-weight:700;text-align:center}.fired-bad{color:var(--high);background:var(--high-bg)}.fired-ok{color:var(--ok)}.none{color:#b3bac5}
+code{font:12px ui-monospace,Menlo,Consolas,monospace;background:#eef1f5;padding:1px 5px;border-radius:4px}
+.note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+ul.limits{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 14px 14px 32px;margin:0}
+@media (max-width:700px){.detail .grid{grid-template-columns:1fr}th:nth-child(5),td:nth-child(5){display:none}}
+</style></head><body>
+<div class="demo"><b>DEMONSTRATION REBUILD.</b> Fictional test sites and placeholder identifiers only. This is not the original SaniGLAZE application and contains no SaniGLAZE data.</div>
+<header><div><h1>Privacy &amp; Tracking Audit</h1><div class="meta" id="org"></div></div><div class="meta" id="run"></div></header>
+<main>
+<div class="tiles" id="tiles"></div>
+<nav id="tabs"><button data-t="findings" class="on">Findings</button><button data-t="matrix">Consent behavior</button><button data-t="vendors">Vendors</button><button data-t="cookies">Cookies &amp; storage</button><button data-t="coverage">Coverage &amp; limits</button></nav>
+<section class="panel on" id="findings"><div class="filters"><select id="fp"><option value="">All priorities</option><option>High</option><option>Medium</option><option>Low</option></select><select id="fprop"><option value="">All properties</option></select></div>
+<table><thead><tr><th>ID</th><th>Priority</th><th>Property</th><th>Rule</th><th>Subject</th><th>Owner</th><th>Status</th></tr></thead><tbody id="ftable"></tbody></table>
+<p class="note">Every finding is a potential issue for review. Detection is not a legal determination. Click a row for evidence and the suggested fix.</p></section>
+<section class="panel" id="matrix"><table><thead><tr><th>Property</th><th>Technology</th><th>A: No interaction</th><th>B: After reject</th><th>C: After accept</th></tr></thead><tbody id="mtable"></tbody></table>
+<p class="note">Red cells are tracking requests observed where the visitor had not consented (state A) or had refused (state B).</p></section>
+<section class="panel" id="vendors"><table><thead><tr><th>Vendor</th><th>Technology</th><th>Category</th><th>Properties</th><th>Account IDs seen</th></tr></thead><tbody id="vtable"></tbody></table></section>
+<section class="panel" id="cookies"><table><thead><tr><th>Property</th><th>State</th><th>Name</th><th>Party</th><th>Lifetime</th><th>Recognized as</th></tr></thead><tbody id="ctable"></tbody></table></section>
+<section class="panel" id="coverage"><ul class="limits" id="limits"></ul></section>
+</main>
+<script>
+const R = {
+  "organization": "Example Coatings Co. (fictional)",
+  "startedAt": "2026-10-27T09:49:47.705Z",
+  "finishedAt": "2026-10-27T09:50:27.023Z",
+  "properties": [
+    {
+      "id": "main",
+      "name": "Main corporate site",
+      "start": "https://www.example-coatings.test/"
+    },
+    {
+      "id": "locations",
+      "name": "Locations directory",
+      "start": "https://locations.example-coatings.test/"
+    },
+    {
+      "id": "promo",
+      "name": "Seasonal promotion landing page",
+      "start": "https://promo.example-coatings.test/"
+    }
+  ],
+  "states": [
+    {
+      "id": "A",
+      "label": "No interaction (before consent)"
+    },
+    {
+      "id": "B",
+      "label": "After \"Reject all\""
+    },
+    {
+      "id": "C",
+      "label": "After \"Accept all\""
+    }
+  ],
+  "approvedAccounts": [
+    "G-DEMO000001",
+    "linkedin:000000"
+  ],
+  "observations": [
+    {
+      "property": "main",
+      "page": "https://www.example-coatings.test/",
+      "state": "A",
+      "banner": true,
+      "requests": [],
+      "cookies": [],
+      "storage": []
+    },
+    {
+      "property": "main",
+      "page": "https://www.example-coatings.test/",
+      "state": "B",
+      "banner": true,
+      "requests": [],
+      "cookies": [
+        {
+          "name": "demo_consent",
+          "domain": "www.example-coatings.test",
+          "firstParty": true,
+          "expires": "365 days",
+          "secure": false,
+          "sameSite": "Lax",
+          "vendor": "Demo CMP",
+          "product": "Consent banner (first party)",
+          "category": "consent"
+        }
+      ],
+      "storage": []
+    },
+    {
+      "property": "main",
+      "page": "https://www.example-coatings.test/",
+      "state": "C",
+      "banner": true,
+      "requests": [
+        {
+          "url": "https://www.googletagmanager.com/gtag/js",
+          "query": true,
+          "host": "www.googletagmanager.com",
+          "type": "script",
+          "vendor": "Google",
+          "product": "Google tag / Google Analytics 4",
+          "category": "analytics",
+          "ids": [
+            "G-DEMO000001"
+          ]
+        },
+        {
+          "url": "https://snap.licdn.com/li.lms-analytics/insight.min.js",
+          "query": false,
+          "host": "snap.licdn.com",
+          "type": "script",
+          "vendor": "LinkedIn",
+          "product": "LinkedIn Insight Tag",
+          "category": "advertising",
+          "ids": []
+        },
+        {
+          "url": "https://region1.google-analytics.com/g/collect",
+          "query": true,
+          "host": "region1.google-analytics.com",
+          "type": "image",
+          "vendor": "Google",
+          "product": "Google tag / Google Analytics 4",
+          "category": "analytics",
+          "ids": [
+            "G-DEMO000001"
+          ]
+        },
+        {
+          "url": "https://px.ads.linkedin.com/collect",
+          "query": true,
+          "host": "px.ads.linkedin.com",
+          "type": "image",
+          "vendor": "LinkedIn",
+          "product": "LinkedIn Insight Tag",
+          "category": "advertising",
+          "ids": [
+            "linkedin:000000"
+          ]
+        }
+      ],
+      "cookies": [
+        {
+          "name": "demo_consent",
+          "domain": "www.example-coatings.test",
+          "firstParty": true,
+          "expires": "365 days",
+          "secure": false,
+          "sameSite": "Lax",
+          "vendor": "Demo CMP",
+          "product": "Consent banner (first party)",
+          "category": "consent"
+        },
+        {
+          "name": "_ga",
+          "domain": "www.example-coatings.test",
+          "firstParty": true,
+          "expires": "400 days",
+          "secure": false,
+          "sameSite": "Lax",
+          "vendor": "Google",
+          "product": "Google tag / Google Analytics 4",
+          "category": "analytics"
+        },
+        {
+          "name": "_ga_DEMO000001",
+          "domain": "www.example-coatings.test",
+          "firstParty": true,
+          "expires": "400 days",
+          "secure": false,
+          "sameSite": "Lax",
+          "vendor": "Google",
+          "product": "Google tag / Google Analytics 4",
+          "category": "analytics"
+        }
+      ],
+      "storage": []
+    },
+    {
+      "property": "locations",
+      "page": "https://locations.example-coatings.test/",
+      "state": "A",
+      "banner": true,
+      "requests": [
+        {
+          "url": "https://www.googletagmanager.com/gtag/js",
+          "query": true,
+          "host": "www.googletagmanager.com",
+          "type": "script",
+          "vendor": "Google",
+          "product": "Google tag / Google Analytics 4",
+          "category": "analytics",
+          "ids": [
+            "G-DEMO000001"
+          ]
+        },
+        {
+          "url": "https://region1.google-analytics.com/g/collect",
+          "query": true,
+          "host": "region1.google-analytics.com",
+          "type": "image",
+          "vendor": "Google",
+          "product": "Google tag / Google Analytics 4",
+          "category": "analytics",
+          "ids": [
+            "G-DEMO000001"
+          ]
+        }
+      ],
+      "cookies": [
+        {
+          "name": "_ga",
+          "domain": "locations.example-coatings.test",
+          "firstParty": true,
+          "expires": "400 days",
+          "secure": false,
+          "sameSite": "Lax",
+          "vendor": "Google",
+          "product": "Google tag / Google Analytics 4",
+          "category": "analytics"
+        },
+        {
+          "name": "_ga_DEMO000001",
+          "domain": "locations.example-coatings.test",
+          "firstParty": true,
+          "expires": "400 days",
+          "secure": false,
+          "sameSite": "Lax",
+          "vendor": "Google",
+          "product": "Google tag / Google Analytics 4",
+          "category": "analytics"
+        }
+      ],
+      "storage": []
+    },
+    {
+      "property": "locations",
+      "page": "https://locations.example-coatings.test/",
+      "state": "B",
+      "banner": true,
+      "requests": [
+        {
+          "url": "https://www.googletagmanager.com/gtag/js",
+          "query": true,
+          "host": "www.googletagmanager.com",
+          "type": "script",
+          "vendor": "Google",
+          "product": "Google tag / Google Analytics 4",
+          "category": "analytics",
+          "ids": [
+            "G-DEMO000001"
+          ]
+        },
+        {
+          "url": "https://region1.google-analytics.com/g/collect",
+          "query": true,
+          "host": "region1.google-analytics.com",
+          "type": "image",
+          "vendor": "Google",
+          "product": "Google tag / Google Analytics 4",
+          "category": "analytics",
+          "ids": [
+            "G-DEMO000001"
+          ]
+        }
+      ],
+      "cookies": [
+        {
+          "name": "_ga",
+          "domain": "locations.example-coatings.test",
+          "firstParty": true,
+          "expires": "400 days",
+          "secure": false,
+          "sameSite": "Lax",
+          "vendor": "Google",
+          "product": "Google tag / Google Analytics 4",
+          "category": "analytics"
+        },
+        {
+          "name": "_ga_DEMO000001",
+          "domain": "locations.example-coatings.test",
+          "firstParty": true,
+          "expires": "400 days",
+          "secure": false,
+          "sameSite": "Lax",
+          "vendor": "Google",
+          "product": "Google tag / Google Analytics 4",
+          "category": "analytics"
+        },
+        {
+          "name": "demo_consent",
+          "domain": "locations.example-coatings.test",
+          "firstParty": true,
+          "expires": "365 days",
+          "secure": false,
+          "sameSite": "Lax",
+          "vendor": "Demo CMP",
+          "product": "Consent banner (first party)",
+          "category": "consent"
+        }
+      ],
+      "storage": []
+    },
+    {
+      "property": "locations",
+      "page": "https://locations.example-coatings.test/",
+      "state": "C",
+      "banner": true,
+      "requests": [
+        {
+          "url": "https://www.googletagmanager.com/gtag/js",
+          "query": true,
+          "host": "www.googletagmanager.com",
+          "type": "script",
+          "vendor": "Google",
+          "product": "Google tag / Google Analytics 4",
+          "category": "analytics",
+          "ids": [
+            "G-DEMO000001"
+          ]
+        },
+        {
+          "url": "https://snap.licdn.com/li.lms-analytics/insight.min.js",
+          "query": false,
+          "host": "snap.licdn.com",
+          "type": "script",
+          "vendor": "LinkedIn",
+          "product": "LinkedIn Insight Tag",
+          "category": "advertising",
+          "ids": []
+        },
+        {
+          "url": "https://region1.google-analytics.com/g/collect",
+          "query": true,
+          "host": "region1.google-analytics.com",
+          "type": "image",
+          "vendor": "Google",
+          "product": "Google tag / Google Analytics 4",
+          "category": "analytics",
+          "ids": [
+            "G-DEMO000001"
+          ]
+        },
+        {
+          "url": "https://px.ads.linkedin.com/collect",
+          "query": true,
+          "host": "px.ads.linkedin.com",
+          "type": "image",
+          "vendor": "LinkedIn",
+          "product": "LinkedIn Insight Tag",
+          "category": "advertising",
+          "ids": [
+            "linkedin:000000"
+          ]
+        }
+      ],
+      "cookies": [
+        {
+          "name": "_ga",
+          "domain": "locations.example-coatings.test",
+          "firstParty": true,
+          "expires": "400 days",
+          "secure": false,
+          "sameSite": "Lax",
+          "vendor": "Google",
+          "product": "Google tag / Google Analytics 4",
+          "category": "analytics"
+        },
+        {
+          "name": "_ga_DEMO000001",
+          "domain": "locations.example-coatings.test",
+          "firstParty": true,
+          "expires": "400 days",
+          "secure": false,
+          "sameSite": "Lax",
+          "vendor": "Google",
+          "product": "Google tag / Google Analytics 4",
+          "category": "analytics"
+        },
+        {
+          "name": "demo_consent",
+          "domain": "locations.example-coatings.test",
+          "firstParty": true,
+          "expires": "365 days",
+          "secure": false,
+          "sameSite": "Lax",
+          "vendor": "Demo CMP",
+          "product": "Consent banner (first party)",
+          "category": "consent"
+        }
+      ],
+      "storage": []
+    },
+    {
+      "property": "promo",
+      "page": "https://promo.example-coatings.test/",
+      "state": "A",
+      "banner": true,
+      "requests": [
+        {
+          "url": "https://snap.licdn.com/li.lms-analytics/insight.min.js",
+          "query": false,
+          "host": "snap.licdn.com",
+          "type": "script",
+          "vendor": "LinkedIn",
+          "product": "LinkedIn Insight Tag",
+          "category": "advertising",
+          "ids": []
+        },
+        {
+          "url": "https://cdn.widgetcorp.test/track.js",
+          "query": false,
+          "host": "cdn.widgetcorp.test",
+          "type": "script",
+          "vendor": null,
+          "product": null,
+          "category": "unclassified",
+          "ids": []
+        },
+        {
+          "url": "https://px.ads.linkedin.com/collect",
+          "query": true,
+          "host": "px.ads.linkedin.com",
+          "type": "image",
+          "vendor": "LinkedIn",
+          "product": "LinkedIn Insight Tag",
+          "category": "advertising",
+          "ids": [
+            "linkedin:000000"
+          ]
+        },
+        {
+          "url": "https://collect.widgetcorp.test/v1/hit",
+          "query": true,
+          "host": "collect.widgetcorp.test",
+          "type": "image",
+          "vendor": null,
+          "product": null,
+          "category": "unclassified",
+          "ids": []
+        }
+      ],
+      "cookies": [],
+      "storage": [
+        {
+          "key": "wc_visitor_id",
+          "bytes": 14
+        }
+      ]
+    },
+    {
+      "property": "promo",
+      "page": "https://promo.example-coatings.test/",
+      "state": "B",
+      "banner": true,
+      "requests": [
+        {
+          "url": "https://snap.licdn.com/li.lms-analytics/insight.min.js",
+          "query": false,
+          "host": "snap.licdn.com",
+          "type": "script",
+          "vendor": "LinkedIn",
+          "product": "LinkedIn Insight Tag",
+          "category": "advertising",
+          "ids": []
+        },
+        {
+          "url": "https://cdn.widgetcorp.test/track.js",
+          "query": false,
+          "host": "cdn.widgetcorp.test",
+          "type": "script",
+          "vendor": null,
+          "product": null,
+          "category": "unclassified",
+          "ids": []
+        },
+        {
+          "url": "https://px.ads.linkedin.com/collect",
+          "query": true,
+          "host": "px.ads.linkedin.com",
+          "type": "image",
+          "vendor": "LinkedIn",
+          "product": "LinkedIn Insight Tag",
+          "category": "advertising",
+          "ids": [
+            "linkedin:000000"
+          ]
+        },
+        {
+          "url": "https://collect.widgetcorp.test/v1/hit",
+          "query": true,
+          "host": "collect.widgetcorp.test",
+          "type": "image",
+          "vendor": null,
+          "product": null,
+          "category": "unclassified",
+          "ids": []
+        }
+      ],
+      "cookies": [
+        {
+          "name": "demo_consent",
+          "domain": "promo.example-coatings.test",
+          "firstParty": true,
+          "expires": "365 days",
+          "secure": false,
+          "sameSite": "Lax",
+          "vendor": "Demo CMP",
+          "product": "Consent banner (first party)",
+          "category": "consent"
+        }
+      ],
+      "storage": [
+        {
+          "key": "wc_visitor_id",
+          "bytes": 14
+        }
+      ]
+    },
+    {
+      "property": "promo",
+      "page": "https://promo.example-coatings.test/",
+      "state": "C",
+      "banner": true,
+      "requests": [
+        {
+          "url": "https://snap.licdn.com/li.lms-analytics/insight.min.js",
+          "query": false,
+          "host": "snap.licdn.com",
+          "type": "script",
+          "vendor": "LinkedIn",
+          "product": "LinkedIn Insight Tag",
+          "category": "advertising",
+          "ids": []
+        },
+        {
+          "url": "https://cdn.widgetcorp.test/track.js",
+          "query": false,
+          "host": "cdn.widgetcorp.test",
+          "type": "script",
+          "vendor": null,
+          "product": null,
+          "category": "unclassified",
+          "ids": []
+        },
+        {
+          "url": "https://www.googletagmanager.com/gtag/js",
+          "query": true,
+          "host": "www.googletagmanager.com",
+          "type": "script",
+          "vendor": "Google",
+          "product": "Google tag / Google Analytics 4",
+          "category": "analytics",
+          "ids": [
+            "G-DEMO000001"
+          ]
+        },
+        {
+          "url": "https://www.googletagmanager.com/gtag/js",
+          "query": true,
+          "host": "www.googletagmanager.com",
+          "type": "script",
+          "vendor": "Google",
+          "product": "Google Ads conversion tag",
+          "category": "advertising",
+          "ids": [
+            "AW-DEMO999999"
+          ]
+        },
+        {
+          "url": "https://px.ads.linkedin.com/collect",
+          "query": true,
+          "host": "px.ads.linkedin.com",
+          "type": "image",
+          "vendor": "LinkedIn",
+          "product": "LinkedIn Insight Tag",
+          "category": "advertising",
+          "ids": [
+            "linkedin:000000"
+          ]
+        },
+        {
+          "url": "https://collect.widgetcorp.test/v1/hit",
+          "query": true,
+          "host": "collect.widgetcorp.test",
+          "type": "image",
+          "vendor": null,
+          "product": null,
+          "category": "unclassified",
+          "ids": []
+        },
+        {
+          "url": "https://region1.google-analytics.com/g/collect",
+          "query": true,
+          "host": "region1.google-analytics.com",
+          "type": "image",
+          "vendor": "Google",
+          "product": "Google tag / Google Analytics 4",
+          "category": "analytics",
+          "ids": [
+            "G-DEMO000001"
+          ]
+        },
+        {
+          "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/DEMO999999/",
+          "query": true,
+          "host": "googleads.g.doubleclick.net",
+          "type": "image",
+          "vendor": "Google",
+          "product": "Google Ads conversion tag",
+          "category": "advertising",
+          "ids": []
+        }
+      ],
+      "cookies": [
+        {
+          "name": "demo_consent",
+          "domain": "promo.example-coatings.test",
+          "firstParty": true,
+          "expires": "365 days",
+          "secure": false,
+          "sameSite": "Lax",
+          "vendor": "Demo CMP",
+          "product": "Consent banner (first party)",
+          "category": "consent"
+        },
+        {
+          "name": "_ga",
+          "domain": "promo.example-coatings.test",
+          "firstParty": true,
+          "expires": "400 days",
+          "secure": false,
+          "sameSite": "Lax",
+          "vendor": "Google",
+          "product": "Google tag / Google Analytics 4",
+          "category": "analytics"
+        },
+        {
+          "name": "_ga_DEMO000001",
+          "domain": "promo.example-coatings.test",
+          "firstParty": true,
+          "expires": "400 days",
+          "secure": false,
+          "sameSite": "Lax",
+          "vendor": "Google",
+          "product": "Google tag / Google Analytics 4",
+          "category": "analytics"
+        },
+        {
+          "name": "_gcl_au",
+          "domain": "promo.example-coatings.test",
+          "firstParty": true,
+          "expires": "400 days",
+          "secure": false,
+          "sameSite": "Lax",
+          "vendor": "Google",
+          "product": "Google Ads conversion tag",
+          "category": "advertising"
+        }
+      ],
+      "storage": [
+        {
+          "key": "wc_visitor_id",
+          "bytes": 14
+        }
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "status": "New",
+      "priority": "High",
+      "property": "Locations directory",
+      "rule": "Tracker fired before any consent choice",
+      "products": [
+        "Google tag / Google Analytics 4"
+      ],
+      "state": "A",
+      "explanation": "Google tag / Google Analytics 4 sent requests while the consent banner was still showing and no choice had been made.",
+      "owner": "Marketing technology",
+      "fix": "Move the tag behind the consent trigger (for example, fire only on an \"accepted\" consent event)."
+    },
+    {
+      "id": "F02",
+      "status": "New",
+      "priority": "High",
+      "property": "Locations directory",
+      "rule": "Tracker fired after \"Reject all\"",
+      "products": [
+        "Google tag / Google Analytics 4"
+      ],
+      "state": "B",
+      "explanation": "Google tag / Google Analytics 4 sent requests after the visitor chose \"Reject all\".",
+      "owner": "Marketing technology",
+      "fix": "Remove the hard-coded tag or route it through the consent manager so a rejection is honored."
+    },
+    {
+      "id": "F03",
+      "status": "New",
+      "priority": "High",
+      "property": "Seasonal promotion landing page",
+      "rule": "Tracker fired before any consent choice",
+      "products": [
+        "LinkedIn Insight Tag"
+      ],
+      "state": "A",
+      "explanation": "LinkedIn Insight Tag sent requests while the consent banner was still showing and no choice had been made.",
+      "owner": "Marketing technology",
+      "fix": "Move the tag behind the consent trigger (for example, fire only on an \"accepted\" consent event)."
+    },
+    {
+      "id": "F04",
+      "status": "New",
+      "priority": "High",
+      "property": "Seasonal promotion landing page",
+      "rule": "Tracker fired after \"Reject all\"",
+      "products": [
+        "LinkedIn Insight Tag"
+      ],
+      "state": "B",
+      "explanation": "LinkedIn Insight Tag sent requests after the visitor chose \"Reject all\".",
+      "owner": "Marketing technology",
+      "fix": "Remove the hard-coded tag or route it through the consent manager so a rejection is honored."
+    },
+    {
+      "id": "F05",
+      "status": "New",
+      "priority": "Medium",
+      "property": "Seasonal promotion landing page",
+      "rule": "Unclassified third-party domain",
+      "products": [
+        "widgetcorp.test"
+      ],
+      "state": "A/B/C",
+      "explanation": "Requests went to widgetcorp.test (script and data endpoints), which does not match any known vendor signature.",
+      "owner": "Web operations",
+      "fix": "Identify the owner and purpose of this script; remove it or add it to the vendor register and consent configuration."
+    },
+    {
+      "id": "F06",
+      "status": "New",
+      "priority": "Medium",
+      "property": "Seasonal promotion landing page",
+      "rule": "Identifier written to browser storage",
+      "products": [
+        "wc_visitor_id"
+      ],
+      "state": "A/B/C",
+      "explanation": "Local storage key \"wc_visitor_id\" was written, including in states where no consent was given.",
+      "owner": "Web operations",
+      "fix": "Confirm what writes this key and whether it should depend on consent."
+    },
+    {
+      "id": "F07",
+      "status": "New",
+      "priority": "Medium",
+      "property": "Seasonal promotion landing page",
+      "rule": "Tag account not on the approved list",
+      "products": [
+        "AW-DEMO999999"
+      ],
+      "state": "C",
+      "explanation": "A tag reports to account AW-DEMO999999, which is not on the organization's approved account list. It may be a leftover or agency-owned tag.",
+      "owner": "Marketing technology",
+      "fix": "Confirm who owns this account; remove the tag if it is no longer needed."
+    },
+    {
+      "id": "F08",
+      "status": "New",
+      "priority": "Low",
+      "property": "Cross-property",
+      "rule": "Inconsistent tag deployment",
+      "products": [
+        "Google Ads conversion tag"
+      ],
+      "state": "C",
+      "explanation": "Google Ads conversion tag is present on some properties but not on: Main corporate site, Locations directory.",
+      "owner": "Marketing technology",
+      "fix": "Decide whether the tag belongs on every property and align the deployment."
+    }
+  ]
+};
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pname = (id) => R.properties.find((p) => p.id === id).name;
+$('#org').textContent = R.organization + ' · ' + R.properties.length + ' properties';
+$('#run').textContent = 'Run ' + new Date(R.startedAt).toLocaleString();
+const count = (p) => R.findings.filter((f) => f.priority === p).length;
+$('#tiles').innerHTML = [
+  [R.properties.length, 'Properties scanned', ''], [R.observations.length, 'Page and consent-state checks', ''],
+  [count('High'), 'High priority', 'high'], [count('Medium'), 'Medium priority', 'med'], [count('Low'), 'Low priority', 'low']]
+  .map(([n, l, c]) => '<div class="tile ' + c + '"><div class="n">' + n + '</div><div class="l">' + l + '</div></div>').join('');
+document.querySelectorAll('#tabs button').forEach((b) => b.onclick = () => {
+  document.querySelectorAll('#tabs button,.panel').forEach((x) => x.classList.remove('on'));
+  b.classList.add('on'); $('#' + b.dataset.t).classList.add('on'); });
+[...new Set(R.findings.map((f) => f.property))].forEach((p) => $('#fprop').insertAdjacentHTML('beforeend', '<option>' + esc(p) + '</option>'));
+function findings() {
+  const fp = $('#fp').value, fprop = $('#fprop').value;
+  $('#ftable').innerHTML = R.findings.filter((f) => (!fp || f.priority === fp) && (!fprop || f.property === fprop)).map((f) =>
+    '<tr class="f" data-id="' + f.id + '"><td>' + f.id + '</td><td><span class="pill ' + f.priority + '">' + f.priority + '</span></td><td>' + esc(f.property) + '</td><td>' + esc(f.rule) +
+    '</td><td><code>' + esc(f.products.join(', ')) + '</code></td><td>' + esc(f.owner) + '</td><td>' + f.status + '</td></tr>' +
+    '<tr class="detail" id="d' + f.id + '" hidden><td colspan="7"><div class="grid"><div><h4>Evidence</h4>' + esc(f.explanation) + ' <br>Consent state: ' + f.state +
+    '</div><div><h4>Suggested fix</h4>' + esc(f.fix) + '<br><button disabled>Apply fix</button><div class="lock">Changes require an authorized user with the proper access and API credentials. Not connected in this demo.</div></div></div></td></tr>').join('');
+  document.querySelectorAll('tr.f').forEach((r) => r.onclick = () => { const d = $('#d' + r.dataset.id); d.hidden = !d.hidden; });
+}
+$('#fp').onchange = findings; $('#fprop').onchange = findings; findings();
+const tech = {};
+for (const o of R.observations) for (const r of o.requests) {
+  const key = o.property + '|' + (r.product || 'Unclassified: ' + r.host.split('.').slice(-2).join('.'));
+  (tech[key] ||= { property: o.property, product: r.product || 'Unclassified: ' + r.host.split('.').slice(-2).join('.'), states: new Set() }).states.add(o.state);
+}
+$('#mtable').innerHTML = Object.values(tech).sort((a, b) => a.property.localeCompare(b.property)).map((t) =>
+  '<tr><td>' + esc(pname(t.property)) + '</td><td>' + esc(t.product) + '</td>' + ['A', 'B', 'C'].map((s) =>
+    t.states.has(s) ? '<td class="cell ' + (s === 'C' ? 'fired-ok' : 'fired-bad') + '">fired</td>' : '<td class="cell none">—</td>').join('') + '</tr>').join('');
+const vend = {};
+for (const o of R.observations) for (const r of o.requests) if (r.product) {
+  const v = (vend[r.product] ||= { vendor: r.vendor, product: r.product, category: r.category, props: new Set(), ids: new Set() });
+  v.props.add(pname(o.property)); r.ids.forEach((i) => v.ids.add(i));
+}
+$('#vtable').innerHTML = Object.values(vend).map((v) => '<tr><td>' + esc(v.vendor) + '</td><td>' + esc(v.product) + '</td><td>' + v.category + '</td><td>' + esc([...v.props].join(', ')) +
+  '</td><td>' + [...v.ids].map((i) => '<code>' + esc(i) + '</code>' + (R.approvedAccounts.includes(i) ? '' : ' <span class="pill High">not approved</span>')).join(' ') + '</td></tr>').join('');
+$('#ctable').innerHTML = R.observations.flatMap((o) => o.cookies.map((c) => '<tr><td>' + esc(pname(o.property)) + '</td><td>' + o.state + '</td><td><code>' + esc(c.name) + '</code></td><td>' +
+  (c.firstParty ? 'First party' : 'Third party') + '</td><td>' + c.expires + '</td><td>' + esc(c.product || 'Unrecognized') + '</td></tr>')
+  .concat(o.storage.map((s) => '<tr><td>' + esc(pname(o.property)) + '</td><td>' + o.state + '</td><td><code>' + esc(s.key) + '</code></td><td>Local storage</td><td>persistent</td><td>Unrecognized</td></tr>'))).join('');
+$('#limits').innerHTML = [
+  'Pages checked: the start page of each property, in three consent states: A (no interaction), B (after "Reject all") and C (after "Accept all").',
+  'Each check used a fresh browser profile, waited for the page to load, and then observed for ' + 2.5 + ' seconds.',
+  'Not covered: other pages, logged-in areas, form submissions, other regions, mobile browsers, and tracking that fires only after scrolling or clicking.',
+  'Findings are potential issues for review by the responsible people. Detecting a tracker is not proof of a legal violation, and a clean result is not a certificate of compliance.',
+  'Demo only: fictional sites, stubbed vendor scripts, and placeholder account IDs. No request left the test machine.'].map((l) => '<li>' + l + '</li>').join('');
+</script></body></html>
