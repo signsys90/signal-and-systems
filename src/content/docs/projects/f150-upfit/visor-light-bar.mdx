@@ -16,6 +16,10 @@ import WiringTable from '../../../../components/WiringTable.astro';
 import Callout from '../../../../components/Callout.astro';
 import Changelog from '../../../../components/Changelog.astro';
 import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import Gallery from '../../../../components/Gallery.astro';
+import refProduct from '../../../../assets/f150/visor-ref-product-amber.jpg';
+import refColors from '../../../../assets/f150/visor-ref-render-colors.jpg';
+import refDemo from '../../../../assets/f150/visor-ref-shop-demo.jpg';
 
 <ProjectHeader />
 
@@ -49,6 +53,16 @@ A forward-facing amber warning bar inside the windshield that comes on in every 
 	]}
 	source={{ label: 'SpeedTech Raptor STD Elite TIR manual', href: 'https://speedtechlights.com/cdn/shop/files/71630STL_20Raptor_20STD_20Elite_20TIR.pdf?v=9997490532677141036' }}
 />
+
+## Reference photos
+
+These are manufacturer and marketing images of the Raptor-X Elite TIR visor bar, not photos of my install. Photos of the bar in my windshield will be added separately.
+
+<Gallery photos={[
+	{ src: refProduct, alt: 'Both halves of a Raptor-X Elite TIR split visor light bar lit amber, sitting on a gray felt surface, with the caption Raptor-X Elite TIR Visor Light Bar.', caption: 'Raptor-X Elite TIR visor bar lit amber (marketing image). Amber is the color of my bar, B-RTXE8 amber/amber, but this is not my unit.' },
+	{ src: refColors, alt: 'Product render of the split visor bar: the two angled black housings joined by a cable, and below them two front views, one with blue, white and red modules and one with all clear modules.', caption: 'Product render showing the split housings, the connecting cable and two example color layouts. The blue/white/red and all-clear versions shown are color options only, not my configuration. My bar is amber/amber (B-RTXE8).' },
+	{ src: refDemo, alt: 'A visor light bar lit inside the top of a pickup windshield in a shop, one half on each side of the rear-view mirror.', caption: 'Shop demonstration of a split visor bar inside a pickup windshield (not my truck). It shows how the two halves sit at the top of the glass on either side of the mirror. The light color in this demo is not my amber setup.' },
+]} />
 
 ## Parts
 
@@ -124,4 +138,4 @@ Through the Grand Control Box: dim, steady, pattern (bench test plan, setup for 
 
 ## Changelog
 
-<Changelog entries={[{ date: '2026-10-27', change: 'Page published from the 23 October project files.', rollback: 'Revert the commit that rebuilt the F-150 section.' }]} />
+<Changelog entries={[{ date: '2026-10-27', change: 'Page published from the 23 October project files.', rollback: 'Revert the commit that rebuilt the F-150 section.' }, { date: '2026-10-27', change: 'Added three reference photos (amber product shot, color-option render, shop demo), captioned as manufacturer images, not my install.', rollback: 'Revert the commit that added the visor reference photos.' }]} />
