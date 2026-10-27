@@ -10,12 +10,13 @@ project: true
 ---
 
 import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import shot from '../../../../assets/saniglaze/trade-show-map-overview.png';
 import SpecBox from '../../../../components/SpecBox.astro';
 import PartsTable from '../../../../components/PartsTable.astro';
 import Callout from '../../../../components/Callout.astro';
 import Changelog from '../../../../components/Changelog.astro';
 
-<ProjectHeader />
+<ProjectHeader hero={shot} heroAlt="SaniGLAZE 2026 Trade Show Map with no territory selected: KPI tiles show 54 filtered events and 10 recommended, the filter panel and sector legend are on the left, and clustered event markers sit on the map. The first event card is a public conference listing." />
 
 <Callout type="open" title="Private tool, public write-up">
 The dashboard sits behind a shared login for SaniGLAZE franchise members, so there is no public link. This page documents how it works. It leaves out every franchise name, address, territory code and CRM link.
@@ -147,7 +148,6 @@ An event list is only useful if owners trust the dates. Putting an audit status 
 
 ## Open items
 
-- Add sanitized screenshots once SaniGLAZE approves them, with no franchise selected.
 - Record the version history.
 - Fill the 2 events that are missing a sector, and recheck the events flagged for a venue recheck.
 - Plan the 2027 calendar refresh.
@@ -162,5 +162,5 @@ An event list is only useful if owners trust the dates. Putting an audit status 
 ## Changelog
 
 <Changelog
-	entries={[{ date: '2026-10-26', change: 'Project page published from a review of the live 2026 v1 dashboard.', rollback: 'Revert the commit that added this page.' }]}
+	entries={[{ date: '2026-10-27', change: 'Added a screenshot with no franchise or territory selected (public event data only).', rollback: 'Revert the commit that made this change.' }, { date: '2026-10-26', change: 'Project page published from a review of the live 2026 v1 dashboard.', rollback: 'Revert the commit that added this page.' }]}
 />

@@ -3,7 +3,7 @@ import { z } from 'astro/zod';
 import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
-export const STATUSES = ['Planned', 'In progress', 'Installed', 'Bench-tested', 'Verified', 'Retired'] as const;
+export const STATUSES = ['Planned', 'In progress', 'Installed', 'Bench-tested', 'Verified', 'Delivered', 'Retired'] as const;
 export const CATEGORIES = [
 	'Software and Automation',
 	'Vehicle Upfit and 12V',
