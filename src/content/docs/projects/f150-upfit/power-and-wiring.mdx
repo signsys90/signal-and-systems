@@ -129,13 +129,17 @@ Gauges are typical short-run values. Confirm them against the Whelen and SpeedTe
 | L2 | Power supply − | Ground point | Same as L1 | — | |
 | L3 | Ignition-switched source (fuse tap) | Power supply ignition sense | 18 AWG | Fuse tap | Turns off with the key |
 | L4 | Power supply output | CF-33 keyboard dock | Supplied cable | — | |
-| **Optional Whelen Dominator TA (not bought)** | | | | | |
-| K1 | J1-3 | Dominator power (+) | 14 AWG | 10A in-line (keep the B1 holder) | Replaces B1. Inferred |
-| K2 | Dominator ground | Ground point | 14 AWG | — | Replaces B2 |
-| K3 | "TA flash" | Joined to K1 | 18 AWG | Shares K1 | Flash whenever J1-3 is on |
-| K4 | LED Output 6 | "End flash only" | 18 AWG | LED output 2.5A | Button |
-| K5 | LED Output 7 | "TA left" | 18 AWG | LED output 2.5A | Button, latch |
-| K6 | LED Output 8 | "TA right" | 18 AWG | LED output 2.5A | Button, latch |
+| **Strobes N' More E68Xtreme LED Stick, R/A/W/W/W/W/A/R, on the Federal Signal SLB-FRD15ND kit (planned, not bought)** | | | | | |
+| K1 | LED Output 6 | Head 1 (red) + | 18 AWG | LED output 2.5A | Flash only, never steady. About 0.9A max. Wire color per the seller. Inferred |
+| K2 | LED Output 7 | Head 2 (amber) + | 18 AWG | LED output 2.5A | Same as K1 |
+| K3 | LED Output 8 | Head 3 (white) + | 18 AWG | LED output 2.5A | Same as K1 |
+| K4 | LED Output 27 | Head 4 (white) + | 18 AWG | LED output 2.5A | Same as K1 |
+| K5 | LED Output 28 | Head 5 (white) + | 18 AWG | LED output 2.5A | Same as K1 |
+| K6 | LED Output 29 | Head 6 (white) + | 18 AWG | LED output 2.5A | Same as K1 |
+| K7 | LED Output 30 | Head 7 (amber) + | 18 AWG | LED output 2.5A | Same as K1 |
+| K8 | LED Output 31 | Head 8 (red) + | 18 AWG | LED output 2.5A | Same as K1 |
+| K9 | Stick ground (−) | Ground point | 16 AWG | — | Common ground for all 8 heads. Inferred. Document says "chassis ground near the module"; use the Q-231 point or a frame rail |
+| K10 | Module under the rear seat | Rear headliner, center | K1–K9 in loom | — | Up the C-pillar trim to the stick's 44 in cable; clear of the curtain airbags |
 | **Putco Work Blade and remote** | | | | | |
 | T1 | J1-5 | Bar blue (+12V) | 14 AWG | J1 output fuse (10A) | Slide 2/3, amber-only pattern |
 | T2 | Accessory fuse block (tag A) | Remote box red | 18 AWG | 5A ATC | Constant +12V |
@@ -162,8 +166,7 @@ Gauges are typical short-run values. Confirm them against the Whelen and SpeedTe
 | N5 | Amplifier area | Front bumper | N1 + N2 in loom | — | Firewall grommet with the guard wires |
 | N6 | Each brown and blue | Capped separately | — | — | |
 | **Spares** | | | | | |
-| X1 | LED Output 7 | Spare | — | — | K5 if the Dominator is fitted |
-| X2 | LED Output 8 | Spare | — | — | K6 if the Dominator is fitted |
+| X1 | LED Output 32 | Spare | — | — | |
 
 </div>
 
@@ -233,4 +236,4 @@ SIDE VIEW, driver side (front of truck to the left)
 
 ## Changelog
 
-<Changelog entries={[{ date: '2026-10-27', change: 'Page published from the 23 October project files.', rollback: 'Revert the commit that rebuilt the F-150 section.' }]} />
+<Changelog entries={[{ date: '2026-10-27', change: 'Dominator K1–K6 replaced by the planned E68Xtreme stick (K1–K10) from the 27 October files; spares now X1 (LED Output 32) only.', rollback: 'Revert the commit that added the E68Xtreme.' }, { date: '2026-10-27', change: 'Page published from the 23 October project files.', rollback: 'Revert the commit that rebuilt the F-150 section.' }]} />

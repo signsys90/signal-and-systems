@@ -40,7 +40,7 @@ Guide 14580G shows two different colors for LED Outputs 11 and 12 on different p
 | Siren amp | 5.5 Ω min | 2 x UBL 100W speakers in parallel (11 Ω each) | Siren tones on the head. No tone in slide position 3 |
 | J1-1 (brown) | 10A | UBL Color Flood 2.0 orange wire, Mode 2 (signal only) | Slide 3 |
 | J1-2 (red) | 10A | SpeedTech Grand Control Box, Raptor visor bar (under 2.4A) | Slide 1, 2, 3 |
-| J1-3 (orange) | 10A | BooYu traffic advisor controller, about 10A in-line fuse | Slide 2, 3 |
+| J1-3 (orange) | 10A | BooYu traffic advisor controller, about 10A in-line fuse. Freed when the planned E68Xtreme stick replaces the BooYu (not reassigned yet) | Slide 2, 3 |
 | J1-4 (yellow) | 10A | 2 x UBL U-Lite red (Mode 1), 0.70A combined, 3A in-line fuse | Slide 2, 3 |
 | J1-5 (green) | 10A | Putco Work Blade blue (+12V), positive-switched | Slide 2, 3 |
 | J1-6 (blue) | 10A | UBL Color Flood 2.0 red (power) only, through its own fuse (3.3A max) | Slide 2, 3, SCENE, ←, →, ↔ FLASH |
@@ -55,7 +55,9 @@ Guide 14580G shows two different colors for LED Outputs 11 and 12 on different p
 | LED 11 (J4-15) | 2.5A | Color Flood 2.0 green wire, left arrow | ← and ↔ FLASH, latched |
 | LED 12 (J4-16) | 2.5A | Both Z-6 heads, red wire (Mode 1) | Slide 2, 3 |
 | LED 13 | 2.5A | Both Z-6 heads, green wire (red brake) | Brake signal over the CANport |
-| LED 6–8, 14–32 | 2.5A | Spare (some reserved for future options) | — |
+| LED 6–8 (J4-8 to J4-10) | 2.5A | Planned: Strobes N' More E68Xtreme stick heads 1–3 (red, amber, white), one output per head, flash patterns only (27 Oct, inferred) | Patterns and phase set in Command |
+| LED 27–31 (J2-11 to J2-15) | 2.5A | Planned: E68Xtreme heads 4–8 (white, white, white, amber, red), flash patterns only (27 Oct, inferred) | Patterns and phase set in Command |
+| LED 14–26, 32 | 2.5A | Spare. 14–15 are the front Z-6 option; 16–26 are proposed in the five-modes plan | — |
 | Traffic Advisor (J10) | 20A fuse | Not used. The BooYu runs its own patterns | — |
 
 </div>
@@ -95,4 +97,4 @@ Button assignments can be changed when the system is programmed. The ones above 
 
 ## Changelog
 
-<Changelog entries={[{ date: '2026-10-26', change: 'Output plan published from the project document.', rollback: 'Revert the commit that added this page.' }]} />
+<Changelog entries={[{ date: '2026-10-27', change: 'LED Outputs 6–8 and 27–31 assigned to the planned E68Xtreme rear stick (27 Oct files); spares now 14–26 and 32. J1-3 noted as freed when the BooYu comes out.', rollback: 'Revert the commit that added the E68Xtreme.' }, { date: '2026-10-26', change: 'Output plan published from the project document.', rollback: 'Revert the commit that added this page.' }]} />
