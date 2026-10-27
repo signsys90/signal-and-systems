@@ -1,77 +1,315 @@
 ---
 title: AI Outbound Sales Platform
-description: An AI-powered outbound sales platform built with Codex, documented as a public portfolio project.
+description: An AI-powered outbound sales platform built with Codex, documented as a public portfolio project in business transformation and revenue operations systems building.
 summary: An AI-powered outbound sales platform built with Codex, and a public record of how AI-assisted development works in practice.
 status: In progress
 category: Software and Automation
 started: TBD
-updated: 2026-10-26
+updated: 2026-10-27
 project: true
 ---
 
 import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import PartsTable from '../../../../components/PartsTable.astro';
 import Callout from '../../../../components/Callout.astro';
 import Changelog from '../../../../components/Changelog.astro';
 import flow from '../../../../assets/business/outbound-intended-flow.png';
 
 <ProjectHeader hero={flow} heroAlt="Intended flow of the AI outbound sales platform: targeting, research, AI draft, rules check and send, with opt-outs always honored. Labelled as intended design, not documented architecture." />
 
-<Callout type="open" title="Draft">
-This page is a skeleton. The details below are filled in only from the project itself, so most sections are still open.
+An AI-powered outbound sales platform I am building with Codex. It turns the outbound method I have used and written up for B2B growth work (a defined customer profile, careful research, personalized messages, a short follow-up sequence and fast human reply handling) into a repeatable system. It is also a public portfolio project: this page is the running record of how I apply AI automation to revenue operations, including what is not finished yet.
+
+<SpecBox
+	title="Project details"
+	specs={[
+		['Focus areas', 'Revenue Operations · AI Automation · Business Transformation'],
+		['Development tool', 'OpenAI Codex (primary)'],
+		['Status', 'In progress'],
+		['Source code', 'Not yet published or linked on this page'],
+		['Version', 'Not yet recorded'],
+		['Started', 'Date not recorded'],
+		['Last updated', '2026-10-27'],
+	]}
+/>
+
+<Callout type="unverified" title="How to read this page">
+The platform's source code has not yet been reviewed for this write-up, so nothing below describes the code itself. Each section says where its information came from. **Confirmed** means it comes from my own written project goals or from my documented outbound method. **Design standard** means it is a rule the platform has to meet, not a claim that a feature is built. **Unconfirmed** marks anything that still has to be checked against the code. No results, volumes, reply rates or meetings are claimed anywhere on this page.
 </Callout>
 
 ## Goal
 
 Build an AI-powered outbound sales platform that runs legitimate, human-sounding and highly targeted outreach, and document the build publicly as evidence of how I apply AI automation to revenue operations.
 
+### The business problem
+
+Most outbound programs fail in one of two ways. Some stay manual: a person builds lists by hand, writes every email from scratch and tracks replies in a spreadsheet, so the program never scales past what one person can type. Others scale the wrong way: they buy a large list, send the same template to everyone and burn the sending domain's reputation within weeks.
+
+Neither creates a business asset. When the person running the program leaves, the knowledge leaves with them, and the domain they used may be damaged.
+
+### The approach
+
+Treat outbound as a revenue operations system, not a campaign. The parts of outbound that are repetitive (research, segmentation, first drafts, scheduling, tracking) are good work for AI and automation. The parts that need judgment (who to contact, what is true about them, whether a message is good enough to send and how to answer a reply) stay with a person.
+
+The target outcome is an outbound engine a business owns, documents and can keep running, which is how I approach growth work in general: build infrastructure that stays with the company, not dependency on one operator.
+
+### Why it is a portfolio project
+
+I am positioning my career around business transformation: revenue operations, CRM architecture, AI automation and public-safety technology. This project shows that work end to end, from the go-to-market method to the software that runs it, built with AI-assisted development and documented in the open with its gaps visible.
+
 ## Constraints
 
-- Outreach must be legitimate, human-sounding and highly targeted. No deceptive tactics to evade spam or AI filters.
-- Built with Codex as the primary development tool.
-- No client names or confidential data from past employers.
+These are the rules the platform is held to. They come from my project goals and my standing rules for outreach. They are confirmed as requirements. Whether the code enforces each one is unconfirmed until the repository is reviewed.
+
+- **Legitimate outreach only.** Every message is sent from an identified person and business, to a real business contact, about a relevant business reason.
+- **Human-sounding because it is human-reviewed.** Messages read like a person wrote them because a person approves them. The goal is not to disguise automation.
+- **No deceptive tactics to evade spam or AI filters.** No hidden text, no misspellings or character swaps to fool filters, no misleading subject lines, no fake reply threads ("Re:" on a first email), no spoofed headers and no rotating throwaway domains to outrun a bad reputation.
+- **Every opt-out is honored.** An opt-out request stops all future email to that address, across every campaign.
+- **Highly targeted, never bulk.** Contacts are chosen against a written customer profile. Volume is a result of fit, not a goal.
+- **Built with Codex** as the primary development tool.
+- **No client or employer confidential data** in the platform's examples, in this page or in the public repository.
+- **No prospect data published.** No contact lists, names, email addresses or company records appear on this site.
+- **No API keys or credentials** in the repository or on this page.
+
+## How the platform works (method)
+
+<Callout type="unverified" title="Source of this section">
+Confirmed as my method: this section comes from the outbound proposals I wrote for a B2B services client in July 2026, with the client's name, markets, pricing and targets removed. Unconfirmed: how much of each stage the platform's code automates today.
+</Callout>
+
+The platform follows the same five-stage method I have documented for outbound programs.
+
+### Stage 1. Define the ideal customer profile
+
+Everything starts with a written profile of who the business serves well:
+
+- Industry and organization type.
+- Geographic focus.
+- Organization size.
+- The decision-maker roles that own the problem, such as facilities, operations or engineering leaders for a facilities-services offer.
+- The common challenges those roles face, written in the buyer's language.
+
+The profile also decides who is **not** contacted. A contact outside the profile is not worth sending to, however easy it is to find.
+
+### Stage 2. Build and verify the prospect list
+
+Prospects are sourced from a business contact database against the profile. Each record carries only business information:
+
+- Organization name, website and organization type.
+- Decision-maker name and job title.
+- Verified business email address.
+- Business phone and professional profile link, when available.
+- Location and employee count, when available.
+
+Email addresses are verified before any send, so the program does not damage its sender reputation with bounces. Personal email addresses are not a target.
+
+### Stage 3. Segment
+
+The list is split into segments that share a market and a problem, and each segment gets its own campaign. This is what makes personalization practical: a message for one segment can speak to that segment's real challenges instead of being written for everyone.
+
+### Stage 4. Research, draft and review
+
+For each segment, and then for each prospect, AI helps with the slow parts:
+
+- Summarizing public information about the organization.
+- Matching the organization to the challenges listed in the profile.
+- Drafting a first version of each message in the sequence.
+
+A person then checks every claim against the source, edits for tone, and approves or rejects the draft. Nothing is sent without that approval.
+
+### Stage 5. Sequence, send and handle replies
+
+Each campaign uses a short multi-touch sequence spread over about three weeks:
+
+| Touch | Purpose |
+| --- | --- |
+| 1 | Introduction: a personal observation about the organization, a brief introduction and a simple call to action. |
+| 2 | Name a common challenge for that role, and how similar organizations handle it. |
+| 3 | A relevant example or case story. Only real, approved examples are used. |
+| 4 | Educational value: a useful insight for the buyer's job, with no ask attached. |
+| 5 | Final follow-up: restate the value and invite a short conversation. |
+| 6 | A polite close that leaves the door open. Optional, for sequences of six. |
+
+Replies are reviewed every day. Interested prospects are qualified and booked for a discovery meeting. Prospects who are not ready are moved to a later follow-up, and anyone who asks to stop is suppressed immediately.
+
+### Rollout model
+
+New programs roll out in three phases over roughly 90 days:
+
+1. **Build.** Set up the profile, data, sending infrastructure, messaging and documentation.
+2. **Launch.** Start with small pilot campaigns, watch deliverability, then grow volume only while the signals stay healthy.
+3. **Optimize.** Refine messaging from real replies, document what works, and turn it into standard operating procedures the business keeps.
+
+### What the business keeps
+
+The method is built so the business owns the result: documented outbound processes, standard operating procedures, qualification frameworks, campaign playbooks, reporting standards and any custom tools built for it. The platform is the software side of that same idea.
 
 ## Architecture
 
-To be documented: the major components, data sources and how messages move from research to send.
-
-Until then, this is the intended flow, drawn only from the goal, constraints and safety notes on this page. It is not the documented architecture and will be replaced once the repository is written up.
+<Callout type="open" title="Real architecture not yet documented">
+The diagram below is the **intended** flow, drawn from the goal, constraints and method on this page. It is not the documented architecture. It will be replaced with the real component diagram once the repository has been reviewed.
+</Callout>
 
 ![Intended flow diagram: five boxes, Targeting, Research, AI draft, Rules check and Send, with a dashed opt-out bar underneath and three rules: legitimate outreach only, no private data published, no employer confidential data.](../../../../assets/business/outbound-intended-flow.png)
 
+How the intended flow lines up with the method above:
+
+| Intended stage | Method stage | Who decides |
+| --- | --- | --- |
+| Targeting | 1 and 2: customer profile, list building and verification | Person sets the profile; tools source and verify |
+| Research | 3 and 4: segmentation and organization research | AI summarizes; person checks |
+| AI draft | 4: first drafts of each touch | AI drafts |
+| Rules check | 4: claim check, tone, compliance items, suppression list | Person approves, with automated checks as a backstop |
+| Send | 5: scheduled sequence, reply handling, opt-outs | Tools send on schedule; person handles replies |
+
+The opt-out bar runs under every stage on purpose: a suppressed address must be removed from targeting, never just skipped at send time.
+
+### Components to document
+
+When the code is reviewed, this section will list, for each component, what it does, what it is built with and what data it touches:
+
+- Data intake and the prospect store.
+- Research and drafting (which AI models, and how prompts are managed).
+- The review and approval step.
+- Sending integration and scheduling.
+- Reply handling and the suppression list.
+- Reporting.
+- Where secrets are kept and how they stay out of the repository.
+
+## Deliverability approach
+
+<Callout type="unverified" title="Design standard">
+These are the deliverability practices the platform is designed around. They come from my outbound method and from the mailbox providers' published sender rules. Whether each one is set up or enforced in the platform is unconfirmed.
+</Callout>
+
+Deliverability here means earning the inbox by being a sender people want to hear from. It never means tricking a filter.
+
+- **Authenticate every sending domain.** SPF, DKIM and DMARC are set up on each domain, and the visible From domain aligns with the authenticated one.
+- **Protect the main business domain.** Outreach runs from a dedicated, clearly related domain and a small set of real, named inboxes, so a mistake cannot damage the company's main email.
+- **Warm up slowly.** New inboxes start with low volume and grow gradually.
+- **Verify before sending.** Bounced addresses hurt sender reputation, so every address is verified first.
+- **Keep volume low and relevant.** Targeting decides volume. A campaign is not scaled up while reply quality or complaint signals are poor.
+- **Plain, honest content.** Accurate subject lines, plain-text-style messages, few links and no misleading formatting.
+- **Make it easy to leave.** Every message offers a clear way to opt out, and opt-outs are processed promptly.
+- **Watch the signals.** Bounce, complaint and reply rates are tracked per domain and inbox, and sending pauses when they turn bad.
+
+Gmail's published sender guidelines set the bar for the largest mailbox provider: authenticated mail, an easy unsubscribe (one-click for bulk senders) and a reported spam rate kept below 0.3%. The platform is designed to stay well inside those limits. Source: [Google, Email sender guidelines](https://support.google.com/a/answer/81126). I could not open Google's page from my build environment on 2026-10-27, so those thresholds come from summaries of it and should be rechecked there.
+
+## Compliance stance
+
+<Callout type="safety" title="Design standard, not legal advice">
+This section lists the rules the platform is built to follow. It is not legal advice. It does not claim the platform has been reviewed by a lawyer.
+</Callout>
+
+In the United States, the CAN-SPAM Act covers commercial email, and the FTC states there is no exception for business-to-business email. The FTC's compliance guide lists these main requirements, and each one maps to a design rule for the platform:
+
+| CAN-SPAM requirement | Platform design rule |
+| --- | --- |
+| Don't use false or misleading header information | Real From name, real sending domain, accurate routing. No spoofing. |
+| Don't use deceptive subject lines | Subject lines describe the actual message. No fake "Re:" or "Fwd:". |
+| Identify the message as an ad | Messages are open about being a business introduction. |
+| Tell recipients where you're located | Every message includes the sender's valid physical postal address. |
+| Tell recipients how to opt out | Every message includes a clear opt-out. |
+| Honor opt-out requests promptly | Opt-outs go to one suppression list that applies to every campaign, and no message goes to a suppressed address. The FTC sets a deadline in business days, which I will quote from the guide when this section is checked. |
+| Monitor what others do on your behalf | The business sending the messages stays responsible, even if a tool or vendor does the sending. |
+
+Source: [FTC, CAN-SPAM Act: A Compliance Guide for Business](https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business).
+
+Other standing rules:
+
+- **Business contacts only,** chosen for a real business reason that fits the customer profile.
+- **Other countries have stricter rules.** Canada (CASL), the UK and the EU have different consent rules for commercial email. The platform is aimed at US business outreach. Sending to other countries would need its own review first. Unconfirmed: whether the platform blocks or flags non-US contacts.
+- **Least data.** Only the business fields listed in Stage 2 are stored. Nothing from this platform's data is ever published on this site.
+
 ## Parts list
 
-Software stack and services to be listed from the project.
+<Callout type="unverified" title="Proposed stack, not confirmed">
+The services below are the outbound stack I proposed in my July 2026 outbound proposals, and the AI and development tools named in my project goals. Which ones the platform's code actually connects to is unconfirmed. Prices are left off this page on purpose.
+</Callout>
+
+<PartsTable
+	parts={[
+		{ name: 'OpenAI Codex', specs: 'AI coding agent used as the primary development tool for the platform and its supporting tools', source: 'My project goals', status: 'In progress' },
+		{ name: 'Apollo.io', specs: 'Proposed: prospect research and business contact database (Stage 2)', source: 'Proposed in my July 2026 outbound proposal', status: 'Planned' },
+		{ name: 'Instantly.ai', specs: 'Proposed: cold email sequencing, scheduling, inbox rotation and campaign analytics (Stage 5)', source: 'Proposed in my July 2026 outbound proposal', status: 'Planned' },
+		{ name: 'InfraMail', specs: 'Proposed: dedicated sending infrastructure, about five inboxes per program', source: 'Proposed in my July 2026 outbound proposal', status: 'Planned' },
+		{ name: 'MillionVerifier', specs: 'Optional: email address verification before sending', source: 'Proposed in my July 2026 outbound proposal', status: 'Planned' },
+		{ name: 'Custom Codex-built tools', specs: 'Proposed: KPI reporting dashboards, automation workflows and efficiency tools for the outbound team', source: 'Proposed in my July 2026 outbound proposal', status: 'Planned' },
+		{ name: 'AI model for research and drafting' },
+		{ name: 'Hosting and database' },
+		{ name: 'CRM integration' },
+	]}
+/>
 
 ## Configuration
 
-Dependencies, configuration and build settings to be documented from the repository.
+To be documented from the repository. This section will cover:
+
+- Runtime and language versions.
+- Dependencies and their pinned versions.
+- Environment variables, listed by name only. Values and keys never appear here.
+- Sending limits and warm-up settings.
+- How the suppression list is stored and checked.
 
 ## Build steps
 
-To be documented.
+To be documented from the repository: how to install, configure, run and deploy the platform, written so the steps can be repeated exactly.
+
+### How the platform is being built
+
+What I can confirm about the build process now:
+
+- **AI-assisted development with Codex.** I describe what a part should do, Codex writes and edits the code, and I review, run and correct it. This is the same way I built my other Codex projects on this site: the [ARES CF-33 Field Dashboard](/projects/ares-field-dashboard/), the [ARES Duval GIS Command Dashboard](/projects/ares-gis-dashboard/) and the [Vehicle Light Controller](/projects/vehicle-light-controller/).
+- **The method comes first.** The outbound method above was written and proposed before the software, so the code automates a process that is already defined instead of inventing one.
 
 ## Testing and verification
 
 No results published yet.
 
+Nothing on this page has been verified against the running platform. When it is, this section will record, with dates:
+
+- Automated test results, and what they cover.
+- A check that an opt-out suppresses every later send.
+- A check that every outgoing message has the postal address and opt-out.
+- Sending domain authentication checks (SPF, DKIM and DMARC).
+- A dry run on test inboxes before any real send.
+
+This page will not publish open rates, reply rates, meetings or revenue unless they are measured and I choose to share them.
+
 ## Safety notes
 
 - Follow email sending rules and honor every opt-out.
 - Never publish prospect data or real contact lists on this site.
+- Never commit API keys, inbox passwords or contact data to the repository. Keep the repository free of real prospect records, even in test files: use clearly fake sample data.
+- Use AI for drafts, never for final sends. A person approves each message.
+- Never use deceptive tactics to get past spam or AI filters. If a message only works by hiding what it is, it should not be sent.
+- Pause a campaign when bounces or complaints rise, and fix the cause before sending more.
 
 ## Lessons learned
 
-None recorded yet.
+None recorded from the platform build yet.
+
+<Callout type="lesson" title="From the method">
+The outbound proposals behind this project kept coming back to one point: a business should come out of an outbound program owning a documented system, not a pile of sent emails. That is why the platform documents its own process and why this page exists.
+</Callout>
 
 ## Open items
 
-- Add the architecture overview and stack.
+- **Locate the source code** and confirm where it lives. On 2026-10-27 it was not in this site's repository, my connected GitHub repositories, my Drive, my email or the Codex folder on my Toughbook.
+- Replace the intended-flow diagram with the real architecture diagram.
+- Confirm which services from the proposed stack the platform uses, and fill in the AI model, hosting, database and CRM rows.
 - Decide what parts of the repository are public, and add the link.
-- Add the current version and test summary.
+- Add the current version, test summary and screenshots, using fake sample data only.
 - Add the start date.
+- Quote the FTC's opt-out deadline directly from the compliance guide, and recheck Google's sender thresholds on Google's own page.
+- Confirm how the platform handles contacts outside the US.
 
 ## Changelog
 
 <Changelog
-	entries={[{ date: '2026-10-26', change: 'Skeleton page published.', rollback: 'Revert the commit that added this page.' }]}
+	entries={[
+		{ date: '2026-10-27', change: 'Expanded the page: business problem, method, deliverability approach, compliance stance, proposed stack, build approach, testing plan and open items. Every section is labeled with its source, and unconfirmed items are marked.', rollback: 'Revert the commit that expanded this page.' },
+		{ date: '2026-10-26', change: 'Added the intended-flow diagram.', rollback: 'Revert the commit that added the diagram.' },
+		{ date: '2026-10-26', change: 'Skeleton page published.', rollback: 'Revert the commit that added this page.' },
+	]}
 />
