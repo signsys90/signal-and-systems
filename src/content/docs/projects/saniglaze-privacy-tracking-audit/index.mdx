@@ -215,6 +215,130 @@ Developed through an AI-assisted software development workflow using OpenAI Code
 - The capabilities above are the ones I can confirm from memory. The application may have included additional features that are not documented here.
 - No specific audit findings, website addresses, tag identifiers, or account details are published.
 - The application's current operational status is not known.
+- The Proposed Technical Reconstruction section below is a reference design for how this kind of tool could be built. It is not a record of how the original was built.
+
+## Proposed Technical Reconstruction — Not Historically Verified
+
+<Callout type="unverified" title="Reference design, not the original code">
+Everything in this section is one coherent way the remembered capabilities could be built with an AI-assisted workflow. It is not a description of the original application. No language, library, database, host, or tool named here is a historical fact, and nothing here assumes Codex chose a particular stack. It is published to show how I would approach the problem today.
+</Callout>
+
+### Evidence ledger
+
+| Status | What falls in it |
+| --- | --- |
+| **Confirmed** (my description) | Custom application I developed for SaniGLAZE International using OpenAI Codex. Purpose: scan corporate web properties and the broader digital ecosystem for potential privacy, tracking, cookie, and consent-related concerns. Multi-property scope, not one site or one vendor. Scope included cookies and tracking behavior; advertising and marketing trackers; LinkedIn technologies including Insight Tag; Google technologies including Google tag and analytics; other third-party scripts; consent-related behavior. Goal: identify potentially problematic technologies and configurations, provide visibility into privacy risk, and support corrective action. The original program and source code are no longer available. |
+| **Inferred** (reasonable, not proven) | The application loaded pages from the target properties in some way. It held some list of target properties. It used some recognition rules for LinkedIn, Google, and other vendors. It produced some reviewable output. Corrective action was carried out by people, informed by its output. |
+| **Unverified** (kept out of factual claims) | Whether pages were rendered in a real browser or only fetched as HTML. How cookies were read. Whether browser storage or network requests were inspected. Whether consent states were tested automatically. Number of properties, pages, or domains; crawl depth; scan frequency. Any scoring model, report format, dashboard, or admin interface. Language, frameworks, database, hosting, scheduling, authentication, logging, testing. Any automatic remediation. |
+
+### Component-by-component assessment
+
+Each candidate component is rated as **Supported** (by my description), **Inference** (reasonable), **Alternative** (one of several ways to meet a confirmed need), or **New feature** (would need evidence before any claim).
+
+| # | Component | Rating | Notes |
+| --- | --- | --- | --- |
+| 1 | Website discovery and URL management | Inference | Multi-property scanning requires a target list. Manual entry, sitemaps, or crawling are all possible. |
+| 2 | Crawling or page inspection | Supported in principle | The tool scanned web properties. Depth and method are unknown. |
+| 3 | Browser automation or page rendering | Alternative | Strongly recommended, because most tags load through JavaScript, but not established. |
+| 4 | Cookie and browser-storage inspection | Cookies: Supported. Storage: Alternative | Cookie behavior was in scope. |
+| 5 | Recognition of analytics and advertising technologies | Supported | LinkedIn, Google, and other trackers were in scope. The detection method is an Alternative. |
+| 6 | Observation of third-party network requests | Alternative | A strong way to attribute data flows to vendors, not established. |
+| 7 | Consent-state testing | Partly supported | Consent behavior was in scope. Automated multi-state testing is an Alternative. |
+| 8 | Finding classification and risk prioritization | Inference / New feature | Findings were distinguished as potentially problematic. A formal scoring model is not established. |
+| 9 | Reporting interface or exportable results | Inference / New feature | Results were reviewable. Specific exports or dashboards are not established. |
+| 10 | Administrative interface | New feature | Not described. |
+
+### Reference architecture
+
+A scheduled or on-demand audit engine drives a real browser through each designated property under several controlled consent states, records everything the page does, matches the evidence against a library of vendor signatures, applies rules to produce findings, and writes a report for human review. Nothing in the pipeline changes a live website.
+
+**Plausible technologies and their roles (illustrative only):**
+
+| Role | Plausible option |
+| --- | --- |
+| Orchestration language | Python, or Node.js with TypeScript. Both are well supported by Codex and by browser-automation tools. |
+| Real-browser rendering | Playwright (or Puppeteer or Selenium) driving headless Chromium, so JavaScript, tag managers, and consent banners behave as they do for real visitors. Isolated browser contexts give each test a clean cookie jar. |
+| Evidence capture | The Chrome DevTools Protocol, through Playwright or Puppeteer, to capture every request, response, and cookie, including third-party cookies and redirects. |
+| Storage of runs and findings | SQLite or PostgreSQL, so results can be compared over time. Flat JSON or CSV would work for a first version. |
+| Vendor signature library | YAML or JSON rules kept separate from code so marketing operations staff can read and extend them. Public tracker datasets (such as DuckDuckGo Tracker Radar, the Disconnect list, or WhoTracks.me) could seed it, subject to their licenses. |
+| Reporting | HTML or PDF reports and CSV or spreadsheet exports, with an optional small web dashboard. |
+| Scheduling | Cron, a task scheduler, or a CI pipeline to rerun audits on a fixed cadence. |
+
+**Pipeline design:**
+
+1. **Target registry and scope control.** Each designated property has a name, start URL, allowed domains, crawl depth, page cap, and optional key journeys. Scope rules keep the scanner inside properties the organization owns or is authorized to test.
+2. **URL discovery.** Seed URLs, sitemap entries, and same-site links found during rendering, deduplicated and capped. A representative sample of each page template is usually more useful than crawling every page.
+3. **Rendering.** For each page and consent state: open a fresh browser context, load the page, wait for network activity to settle plus a fixed observation window (many tags fire late or on scroll), optionally scroll, then capture evidence. Use a consistent user agent and a polite request rate.
+4. **Consent-state test matrix.** Run each page as **State A, no interaction** (the before-consent baseline), **State B, reject** (choose reject or "necessary only," reload, observe), and **State C, accept** (accept all, reload, observe). Banner handling uses selectors for common consent platforms plus a text-match fallback. A missing banner is itself recorded. Where a site uses the IAB Transparency and Consent Framework or Google Consent Mode, declared consent signals can be compared with observed behavior.
+5. **Evidence collection.** Network requests (destination, type, timing relative to load and to the consent action); cookies (name, domain, expiry, Secure, HttpOnly, SameSite, first- or third-party); local and session storage keys (keys and sizes, not values); script and iframe sources; banner presence and action taken; optional screenshot.
+6. **Vendor signature matching.** Each signature names a vendor, product, and category (analytics, advertising, social, session replay, tag manager, embedded media, consent management) with script, request, cookie, and variable patterns. Unmatched third-party domains are reported as "unclassified third party" for review, never silently ignored.
+7. **Rules and finding classification.** Evidence becomes findings, each with a category, plain-language explanation, triggering evidence, and suggested owner. Every finding is labeled "potential issue for review," and no wording asserts a legal violation.
+8. **Prioritization.** A simple, transparent model rather than a precise-looking score (see below). Priority guides review order. It is not a statement of legal risk.
+9. **Reporting.** An executive summary with coverage limits on the first page; vendor and cookie inventories by property; a consent behavior matrix for States A, B, and C; a findings list with evidence, owner, and status; CSV and PDF exports.
+10. **Run history and change detection.** Each run is stored and compared with the last. The most useful recurring output is the difference: new vendors, removed vendors, new cookies, and findings that reappeared after being resolved.
+11. **Administrative interface (enhancement).** Manage targets and scope, maintain the approved-vendor list and signatures, launch scans, review findings, assign owners, and record resolutions, restricted to authorized staff.
+12. **Remediation (outside the tool).** Owners in marketing technology, web operations, or an agency remove obsolete tags, move tags behind consent triggers, correct tag-manager rules, fix consent signals, update the cookie disclosure, and escalate unclear items to privacy or legal personnel. A rescan verifies the change.
+
+### Example vendor indicators
+
+General public knowledge from vendor documentation and common practice, not the original tool's rules and not SaniGLAZE data. Cookie names and endpoints change, so they should be checked against current vendor documentation before use. Identifier formats are shown with placeholders only.
+
+| Technology | Typical indicators |
+| --- | --- |
+| Google tag (gtag.js) and Google Analytics 4 | Script from `googletagmanager.com/gtag/js` with an ID in the `G-XXXXXXX` format; collection requests to Google Analytics endpoints such as `/g/collect`; cookies such as `_ga` and `_ga_<container>`. |
+| Google Tag Manager | Script from `googletagmanager.com/gtm.js` with a `GTM-XXXXXX` ID. A container, so the tags it loads must be identified separately. |
+| Google Ads and Floodlight | `AW-` or `DC-` identifiers; requests to `googleadservices.com`, `googlesyndication.com`, or `doubleclick.net`; conversion-linker cookies such as `_gcl_au`. |
+| LinkedIn Insight Tag | A `_linkedin_partner_id` variable, script from `snap.licdn.com`, requests to `px.ads.linkedin.com`; cookies such as `li_sugr`, `bcookie`, `lidc`, `UserMatchHistory`, `AnalyticsSyncHistory`, and `li_fat_id` may appear. |
+| Other categories | Social media pixels, session-recording and heat-map tools, chat widgets, video embeds, and form or scheduling widgets, each with their own script domains and cookies. |
+
+### Example rules and priorities
+
+| Priority | Example rule (potential issue for review) |
+| --- | --- |
+| High | Advertising or analytics request observed in State A, before any consent action, on a property that shows a consent banner. |
+| High | Advertising request or cookie observed in State B, after a reject choice. |
+| Medium | Tracker present on one property but absent from comparable properties. |
+| Medium | Unclassified third-party domain receiving requests. |
+| Medium | Tag identifier that doesn't match the organization's known accounts (a possible leftover or agency-owned tag). |
+| Medium | Long-lived third-party cookie set by an advertising domain. |
+| Medium | Trackers present on a property with no consent banner. |
+| Low | Informational items such as first-party analytics cookies, consent-platform cookies, and functional embeds. |
+
+### How a Codex-assisted build could proceed
+
+This is a plausible workflow, not my actual development history.
+
+- **Specification first:** a written brief covering scope, targets, the consent test matrix, and the vendors of concern.
+- **Incremental construction:** one page and one state first, then evidence collection, signature matching, rules, and reporting, each step run against a known test page before moving on.
+- **Signature tuning:** run against a page with known tags, compare detections with what is actually installed, and correct patterns that miss or over-match.
+- **Human verification:** check findings against the browser's own developer tools before treating the tool's results as reliable.
+
+### Privacy and security of the scanner itself (recommendations)
+
+- Scan only properties the organization owns or is authorized to test, at a polite rate.
+- Use clean browser profiles with no logged-in sessions, so no real user data is collected.
+- Record cookie and storage names and attributes rather than values wherever possible.
+- Treat reports, account identifiers, and findings as internal and confidential.
+- Keep any credentials in a secrets manager, never in code or reports.
+
+### Verification checklist (for a rebuild or demonstration)
+
+- On a test page with a known Google tag and LinkedIn Insight Tag behind a consent manager, both are detected and no advertising requests appear in the reject state.
+- With the consent trigger deliberately misconfigured, the tags firing in State A or B are reported as high-priority potential issues.
+- An unknown third-party script is reported as unclassified, not ignored.
+- A tag added between two runs appears in the change report.
+- The report states which pages and states were tested and which were not.
+- No report wording asserts compliance or a legal violation.
+
+### Possible future enhancements (new features, not historical)
+
+- Region-aware scans from EU and California vantage points to see how geo-targeted banners behave.
+- Global Privacy Control signal testing.
+- Authenticated journey scripts using dedicated test accounts.
+- Form-submission tracking checks using fictional test data.
+- Comparison of detected cookies against the published cookie policy to flag undisclosed cookies.
+- Alerts when a new vendor or high-priority finding appears.
+- A sanitized demonstration against a purpose-built test website, which would allow publishable screenshots.
 
 ## Related SaniGLAZE Work
 
@@ -226,6 +350,7 @@ Developed through an AI-assisted software development workflow using OpenAI Code
 
 <Changelog
 	entries={[
+		{ date: '2026-10-27', change: 'Published the Proposed Technical Reconstruction (clearly labeled as not historically verified) after William approved it.', rollback: 'Delete the Proposed Technical Reconstruction section.' },
 		{ date: '2026-10-27', change: 'Added a functional flow diagram (what the application did, not how it was built), cross-linked the Media Asset Library page, and softened one line so it no longer asserts what the tool did not do.', rollback: 'Revert the commit that added the diagram.' },
 		{ date: '2026-10-27', change: 'Case study first published from William\'s description of the application, following the Signal & Systems documentation standard: confirmed capabilities only, no implementation stack, metrics, website addresses, identifiers, or findings.', rollback: 'Revert the commit that added this page.' },
 	]}
