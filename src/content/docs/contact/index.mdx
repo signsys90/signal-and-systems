@@ -4,10 +4,28 @@ description: How to reach William A. Atkins about Signal & Systems Engineering, 
 tableOfContents: false
 ---
 
-import { LinkButton } from '@astrojs/starlight/components';
+import ContactDirectory from '../../../components/ContactDirectory.astro';
+import Gallery from '../../../components/Gallery.astro';
+import aresTrailer from '../../../assets/contact/william-ares-comms-trailer.webp';
+import fireTruck from '../../../assets/contact/william-fire-rescue-truck.webp';
 
-The best way to reach me is a message on LinkedIn.
+Email or LinkedIn are the fastest ways to reach me about a project, a role or a collaboration.
 
-<LinkButton href="https://www.linkedin.com/in/william-atkins-8a8786226" icon="linkedin" iconPlacement="start">Message me on LinkedIn</LinkButton>
+<ContactDirectory />
 
-This site does not publish a phone number, email address or street address.
+<Gallery
+	photos={[
+		{
+			src: aresTrailer,
+			alt: 'Illustrated portrait of William A. Atkins in a plaid shirt, smiling in the doorway of a communications trailer with radio equipment racks behind him and ARES ESF-2 ID badges clipped to his pocket.',
+			caption: 'Illustration: at a communications trailer as an ARES emergency communications (ESF-2) volunteer.',
+		},
+		{
+			src: fireTruck,
+			alt: 'Illustrated portrait of William A. Atkins in a plaid shirt and cap, standing in front of a yellow Jacksonville Fire/Rescue airport crash truck inside an apparatus bay.',
+			caption: 'Illustration: in front of a Jacksonville Fire/Rescue airport crash truck.',
+		},
+	]}
+/>
+
+This site does not publish a phone number or street address.
