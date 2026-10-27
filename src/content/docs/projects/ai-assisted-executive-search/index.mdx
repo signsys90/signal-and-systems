@@ -4,7 +4,7 @@ description: An executive job search engineered as a repeatable business system,
 summary: An executive job search engineered as a repeatable business system.
 status: In progress
 category: Business Systems
-started: TBD
+started: Spring 2026
 updated: 2026-10-27
 project: true
 ---
@@ -24,7 +24,7 @@ A structured, AI-assisted workflow for executive positioning, opportunity evalua
 	specs={[
 		['Focus areas', 'Business Systems · AI Automation · Revenue Operations'],
 		['Development approach', 'AI-assisted workflow design and implementation using Claude, with OpenAI Codex used to build the supporting system'],
-		['Started', 'Date not recorded'],
+		['Started', 'Spring 2026'],
 		['Last updated', '2026-10-27'],
 	]}
 />
@@ -335,20 +335,14 @@ The workflow is governed by standing instructions that define how AI may assist 
 
 ## 7. Development with OpenAI Codex
 
-The application is positioned as an example of using AI-assisted development to structure a complex, recurring professional workflow.
+Two AI tools have distinct roles in this project:
 
-The business methodology and the application implementation are distinct parts of the project. The methodology defines what the system should accomplish. Codex can assist with translating that methodology into application components, data structures, workflow logic and user interfaces.
+- **Claude** is used for research and drafting.
+- **OpenAI Codex** was used to build the supporting system around that workflow.
 
-A plausible development process consists of the following stages.
+The business methodology and the software are separate parts of the project. The methodology above defines what the system has to do and the rules it has to follow; the software exists to carry that methodology out consistently. The operating rules in section 6 apply no matter which tool produced a draft: nothing generated is used until I have reviewed it.
 
-1. **Define the operating model.** Document the executive positioning, target role profile, honesty requirements, privacy boundaries and desired workflow. These rules establish the system's functional requirements before implementation.
-2. **Structure the information.** Define consistent formats for opportunity records, role-research briefs, experience-to-role mappings, tailored materials and outcomes. Structured information makes it easier to compare opportunities and maintain continuity across a search.
-3. **Implement the workflow.** Use Codex to assist with building the interface and logic needed to move opportunities through the defined stages. Potential features include opportunity intake, qualification checklists, research templates, document generation, status tracking and review controls.
-4. **Apply the AI assistance layer.** Integrate reusable instructions and drafting workflows that reference the verified career record and relevant opportunity information. If direct model integration is used, the implementation must also manage API credentials, data handling, failures and any applicable service costs. The original implementation method is not documented.
-5. **Enforce human review.** Ensure that generated materials remain drafts until reviewed. Application submission and outreach should remain under the candidate's control.
-6. **Refine through use.** Use observed friction, feedback and documented outcomes to improve the qualification criteria, research format and document-generation process.
-
-The available project description does not establish which of these stages were implemented in software and which were performed through a repeatable manual workflow.
+How the supporting system was built (its components, data handling and stack) is not documented on this page, and nothing about it is described here beyond the confirmed fact that Codex was used to build it.
 
 ## 8. Testing and verification
 
@@ -430,7 +424,6 @@ These are design requirements and recommended practices, not verified security f
 
 ## Open items
 
-- Add the start date.
 - Confirm which workflow stages were implemented in software and which were run manually.
 - Add a sanitized example of a role-research brief, with no company named.
 
@@ -438,6 +431,7 @@ These are design requirements and recommended practices, not verified security f
 
 <Changelog
 	entries={[
+		{ date: '2026-10-27', change: 'Section 7 cut to the confirmed facts (Claude for research and drafting, OpenAI Codex to build the supporting system); the hypothetical development process was removed. Start date set to Spring 2026.', rollback: 'Revert the commit that made this change.' },
 		{ date: '2026-10-27', change: 'Brought the technical architecture in line with the portfolio documentation standard: removed the suggested technologies (React, Next.js, TypeScript, Node.js, SQLite, PostgreSQL) so the section describes the system at the pattern level only, and corrected the tool name to OpenAI Codex.', rollback: 'Revert the commit that made this change.' },
 		{ date: '2026-10-26', change: 'Page rewritten as a full case study: business problem, objectives, architecture, workflow, technical model, operating rules, Codex development, verification criteria, measurement framework, privacy and lessons learned.', rollback: 'Revert the commit that rewrote this page.' },
 		{ date: '2026-10-26', change: 'Project page published.', rollback: 'Revert the commit that added this page.' },

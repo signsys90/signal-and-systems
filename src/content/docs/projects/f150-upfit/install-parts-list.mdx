@@ -13,8 +13,9 @@ sidebar:
 import ProjectHeader from '../../../../components/ProjectHeader.astro';
 import Callout from '../../../../components/Callout.astro';
 import Changelog from '../../../../components/Changelog.astro';
+import kit from '../../../../assets/f150/cantrol-kit.jpg';
 
-<ProjectHeader />
+<ProjectHeader hero={kit} heroAlt="The used Whelen CanTrol WC set laid out: module with harness, 21-button control head, head cable and PA microphone, the first major part bought for the build." />
 
 ## Goal
 
@@ -205,4 +206,4 @@ The first hardware list for the guard kept growing as clamps, corner braces, fla
 
 ## Changelog
 
-<Changelog entries={[{ date: '2026-10-27', change: 'Added the E68Xtreme stick and Federal Signal SLB-FRD15ND kit to the buy list; CC5K1 arrived 26 Oct (27 October files).', rollback: 'Revert the commit that added the E68Xtreme.' }, { date: '2026-10-27', change: 'Removed spend, order and group totals (privacy rule). Per-item prices stay.', rollback: 'Revert the commit that removed the totals.' }, { date: '2026-10-27', change: 'Page published from the 23 October project files. Running totals left out on purpose.', rollback: 'Revert the commit that rebuilt the F-150 section.' }]} />
+<Changelog entries={[{ date: '2026-10-27', change: 'Added the CanTrol WC set photo as the page header.', rollback: 'Revert the commit that made this change.' }, { date: '2026-10-27', change: 'Added the E68Xtreme stick and Federal Signal SLB-FRD15ND kit to the buy list; CC5K1 arrived 26 Oct (27 October files).', rollback: 'Revert the commit that added the E68Xtreme.' }, { date: '2026-10-27', change: 'Removed spend, order and group totals (privacy rule). Per-item prices stay.', rollback: 'Revert the commit that removed the totals.' }, { date: '2026-10-27', change: 'Page published from the 23 October project files. Running totals left out on purpose.', rollback: 'Revert the commit that rebuilt the F-150 section.' }]} />

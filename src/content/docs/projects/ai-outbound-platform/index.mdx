@@ -1,10 +1,10 @@
 ---
 title: AI Outbound Sales Platform
-description: An AI-powered outbound sales platform built with Codex, documented as a public portfolio project in business transformation and revenue operations systems building.
-summary: An AI-powered outbound sales platform built with Codex, and a public record of how AI-assisted development works in practice.
-status: In progress
+description: An AI-powered outbound sales platform built with Codex. The original source code is no longer available, so this case study documents the outbound method, design rules and build approach.
+summary: An AI-powered outbound sales platform built with Codex. The source code is no longer available; the method, design rules and build approach are documented here.
+status: Retired
 category: Software and Automation
-started: TBD
+started: Spring 2026
 updated: 2026-10-27
 project: true
 ---
@@ -18,23 +18,23 @@ import flow from '../../../../assets/business/outbound-intended-flow.png';
 
 <ProjectHeader hero={flow} heroAlt="Intended flow of the AI outbound sales platform: targeting, research, AI draft, rules check and send, with opt-outs always honored. Labelled as intended design, not documented architecture." />
 
-An AI-powered outbound sales platform I am building with Codex. It turns the outbound method I have used and written up for B2B growth work (a defined customer profile, careful research, personalized messages, a short follow-up sequence and fast human reply handling) into a repeatable system. It is also a public portfolio project: this page is the running record of how I apply AI automation to revenue operations, including what is not finished yet.
+An AI-powered outbound sales platform I built with Codex. It turned the outbound method I have used and written up for B2B growth work (a defined customer profile, careful research, personalized messages, a short follow-up sequence and fast human reply handling) into a repeatable system. The original source code is no longer available to me, so this page documents what can still be stated with confidence: the method the platform automated, the rules it was built to follow and how it was built. Nothing here is reconstructed from memory and presented as code.
 
 <SpecBox
 	title="Project details"
 	specs={[
 		['Focus areas', 'Revenue Operations · AI Automation · Business Transformation'],
 		['Development tool', 'OpenAI Codex (primary)'],
-		['Status', 'In progress'],
-		['Source code', 'Not available for review (see Open items)'],
-		['Version', 'Not yet recorded'],
-		['Started', 'Date not recorded'],
+		['Status', 'Retired: original build no longer available'],
+		['Source code', 'No longer available'],
+		['Version', 'Not recorded'],
+		['Started', 'Spring 2026'],
 		['Last updated', '2026-10-27'],
 	]}
 />
 
 <Callout type="unverified" title="How to read this page">
-I don't currently have access to the platform's source code, so this write-up was made without it and nothing below describes the code itself. Each section says where its information came from. **Confirmed** means it comes from my own written project goals or from my documented outbound method. **Design standard** means it is a rule the platform has to meet, not a claim that a feature is built. **Unconfirmed** marks anything that can't be checked without the code. No results, volumes, reply rates or meetings are claimed anywhere on this page.
+The platform's source code is no longer available, so this write-up was made without it and nothing below describes the code itself. Each section says where its information came from. **Confirmed** means it comes from my own written project goals or from my documented outbound method. **Design standard** means it is a rule the platform has to meet, not a claim that a feature is built. **Unconfirmed** marks anything that can't be checked without the code. No results, volumes, reply rates or meetings are claimed anywhere on this page.
 </Callout>
 
 ## Goal
@@ -59,7 +59,7 @@ I am positioning my career around business transformation: revenue operations, C
 
 ## Constraints
 
-These are the rules the platform is held to. They come from my project goals and my standing rules for outreach. They are confirmed as requirements. Whether the code enforces each one is unconfirmed until the repository is reviewed.
+These are the rules the platform is held to. They come from my project goals and my standing rules for outreach. They are confirmed as requirements. Whether the code enforced each one can't be confirmed now that the source is unavailable.
 
 - **Legitimate outreach only.** Every message is sent from an identified person and business, to a real business contact, about a relevant business reason.
 - **Human-sounding because it is human-reviewed.** Messages read like a person wrote them because a person approves them. The goal is not to disguise automation.
@@ -74,7 +74,7 @@ These are the rules the platform is held to. They come from my project goals and
 ## How the platform works (method)
 
 <Callout type="unverified" title="Source of this section">
-Confirmed as my method: this section comes from the outbound proposals I wrote for a B2B services client in July 2026, with the client's name, markets, pricing and targets removed. Unconfirmed: how much of each stage the platform's code automates today.
+Confirmed as my method: this section comes from the outbound proposals I wrote for a B2B services client in July 2026, with the client's name, markets, pricing and targets removed. Unconfirmed: how much of each stage the platform's code automated.
 </Callout>
 
 The platform follows the same five-stage method I have documented for outbound programs.
@@ -147,7 +147,7 @@ The method is built so the business owns the result: documented outbound process
 ## Architecture
 
 <Callout type="open" title="Intended design, not the built architecture">
-The diagram below is the **intended** flow, drawn from the goal, constraints and method on this page. It is not the documented architecture. The source code isn't available to review, so this diagram stays labeled as intended design. It will be replaced only if the code becomes available.
+The diagram below is the **intended** flow, drawn from the goal, constraints and method on this page. It is not the documented architecture. The source code is no longer available, so this diagram stays labeled as intended design.
 </Callout>
 
 ![Intended flow diagram: five boxes, Targeting, Research, AI draft, Rules check and Send, with a dashed opt-out bar underneath and three rules: legitimate outreach only, no private data published, no employer confidential data.](../../../../assets/business/outbound-intended-flow.png)
@@ -166,7 +166,7 @@ The opt-out bar runs under every stage on purpose: a suppressed address must be 
 
 ### Components to document
 
-If the code becomes available, this section will list, for each component, what it does, what it is built with and what data it touches:
+These are the components an outbound platform of this design needs. Because the source is no longer available, what each one was built with is not documented here:
 
 - Data intake and the prospect store.
 - Research and drafting (which AI models, and how prompts are managed).
@@ -179,7 +179,7 @@ If the code becomes available, this section will list, for each component, what 
 ## Deliverability approach
 
 <Callout type="unverified" title="Design standard">
-These are the deliverability practices the platform is designed around. They come from my outbound method and from the mailbox providers' published sender rules. Whether each one is set up or enforced in the platform is unconfirmed.
+These are the deliverability practices the platform is designed around. They come from my outbound method and from the mailbox providers' published sender rules. Whether each one was set up or enforced in the platform is unconfirmed.
 </Callout>
 
 Deliverability here means earning the inbox by being a sender people want to hear from. It never means tricking a filter.
@@ -224,12 +224,12 @@ Other standing rules:
 ## Parts list
 
 <Callout type="unverified" title="Proposed stack, not confirmed">
-The services below are the outbound stack I proposed in my July 2026 outbound proposals, and the AI and development tools named in my project goals. Which ones the platform's code actually connects to is unconfirmed. Prices are left off this page on purpose.
+The services below are the outbound stack I proposed in my July 2026 outbound proposals, and the AI and development tools named in my project goals. Which ones the platform's code actually connected to is unconfirmed. Prices are left off this page on purpose.
 </Callout>
 
 <PartsTable
 	parts={[
-		{ name: 'OpenAI Codex', specs: 'AI coding agent used as the primary development tool for the platform and its supporting tools', source: 'My project goals', status: 'In progress' },
+		{ name: 'OpenAI Codex', specs: 'AI coding agent used as the primary development tool for the platform and its supporting tools', source: 'My project goals', status: 'Retired' },
 		{ name: 'Apollo.io', specs: 'Proposed: prospect research and business contact database (Stage 2)', source: 'Proposed in my July 2026 outbound proposal', status: 'Planned' },
 		{ name: 'Instantly.ai', specs: 'Proposed: cold email sequencing, scheduling, inbox rotation and campaign analytics (Stage 5)', source: 'Proposed in my July 2026 outbound proposal', status: 'Planned' },
 		{ name: 'InfraMail', specs: 'Proposed: dedicated sending infrastructure, about five inboxes per program', source: 'Proposed in my July 2026 outbound proposal', status: 'Planned' },
@@ -243,30 +243,24 @@ The services below are the outbound stack I proposed in my July 2026 outbound pr
 
 ## Configuration
 
-To be documented from the repository. This section will cover:
-
-- Runtime and language versions.
-- Dependencies and their pinned versions.
-- Environment variables, listed by name only. Values and keys never appear here.
-- Sending limits and warm-up settings.
-- How the suppression list is stored and checked.
+Not documented. Runtime, dependencies, environment settings, sending limits and suppression-list storage all lived in the source code, which is no longer available. None of them are guessed here.
 
 ## Build steps
 
-To be documented from the repository: how to install, configure, run and deploy the platform, written so the steps can be repeated exactly.
+Install, configuration and deployment steps are not documented, because the source code is no longer available.
 
-### How the platform is being built
+### How the platform was built
 
 What I can confirm about the build process now:
 
-- **AI-assisted development with Codex.** I describe what a part should do, Codex writes and edits the code, and I review, run and correct it. This is the same way I built my other Codex projects on this site: the [ARES CF-33 Field Dashboard](/projects/ares-field-dashboard/), the [ARES Duval GIS Command Dashboard](/projects/ares-gis-dashboard/) and the [Vehicle Light Controller](/projects/vehicle-light-controller/).
-- **The method comes first.** The outbound method above was written and proposed before the software, so the code automates a process that is already defined instead of inventing one.
+- **AI-assisted development with Codex.** I described what each part should do, Codex wrote and edited the code, and I reviewed, ran and corrected it. This is the same way I built my other Codex projects on this site: the [ARES CF-33 Field Dashboard](/projects/ares-field-dashboard/), the [ARES Duval GIS Command Dashboard](/projects/ares-gis-dashboard/) and the [Vehicle Light Controller](/projects/vehicle-light-controller/).
+- **The method came first.** The outbound method above was written and proposed before the software, so the code automated a process that was already defined instead of inventing one.
 
 ## Testing and verification
 
-No results published yet.
+No results are published, and none can be verified now that the source code is no longer available.
 
-Nothing on this page has been verified against the running platform. When it is, this section will record, with dates:
+Nothing on this page has been verified against the running platform. A rebuild would need to record, with dates:
 
 - Automated test results, and what they cover.
 - A check that an opt-out suppresses every later send.
@@ -287,7 +281,7 @@ This page will not publish open rates, reply rates, meetings or revenue unless t
 
 ## Lessons learned
 
-None recorded from the platform build yet.
+No build lessons are recorded, because the build records went with the source code.
 
 <Callout type="lesson" title="From the method">
 The outbound proposals behind this project kept coming back to one point: a business should come out of an outbound program owning a documented system, not a pile of sent emails. That is why the platform documents its own process and why this page exists.
@@ -295,12 +289,8 @@ The outbound proposals behind this project kept coming back to one point: a busi
 
 ## Open items
 
-- **Source code not available.** As of 2026-10-27 I don't have access to where the code lives. It is not in this site's repository, my connected GitHub repositories, my Drive, my email or the Codex folder on my Toughbook. Until that changes, the architecture, configuration and build steps stay undocumented, and the diagram stays labeled as intended design.
-- If access comes back: replace the intended-flow diagram with the real architecture diagram.
-- Confirm which services from the proposed stack the platform uses, and fill in the AI model, hosting, database and CRM rows.
-- Decide what parts of the repository are public, and add the link.
-- Add the current version, test summary and screenshots, using fake sample data only.
-- Add the start date.
+- **Source code no longer available.** It is not in this site's repository, my connected GitHub repositories, my Drive, my email or the Codex folder on my Toughbook. The architecture, configuration and build steps stay undocumented, and the diagram stays labeled as intended design.
+- If the platform is rebuilt: document the real architecture, the services it connects to, the version, test results and screenshots (fake sample data only), and move it back to In progress.
 - Quote the FTC's opt-out deadline directly from the compliance guide, and recheck Google's sender thresholds on Google's own page.
 - Confirm how the platform handles contacts outside the US.
 
@@ -308,6 +298,7 @@ The outbound proposals behind this project kept coming back to one point: a busi
 
 <Changelog
 	entries={[
+		{ date: '2026-10-27', change: 'Status set to Retired: the original source code is no longer available. The page now documents the method, design rules and build approach in the past tense and no longer promises repository details. Start date set to Spring 2026.', rollback: 'Revert the commit that made this change.' },
 		{ date: '2026-10-27', change: 'Noted that the source code is not available, so the architecture stays documented as intended design.', rollback: 'Revert the commit that added this note.' },
 		{ date: '2026-10-27', change: 'Expanded the page: business problem, method, deliverability approach, compliance stance, proposed stack, build approach, testing plan and open items. Every section is labeled with its source, and unconfirmed items are marked.', rollback: 'Revert the commit that expanded this page.' },
 		{ date: '2026-10-26', change: 'Added the intended-flow diagram.', rollback: 'Revert the commit that added the diagram.' },

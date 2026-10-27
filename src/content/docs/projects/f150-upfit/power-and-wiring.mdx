@@ -14,8 +14,9 @@ import ProjectHeader from '../../../../components/ProjectHeader.astro';
 import SpecBox from '../../../../components/SpecBox.astro';
 import Callout from '../../../../components/Callout.astro';
 import Changelog from '../../../../components/Changelog.astro';
+import conn from '../../../../assets/f150/cantrol-module-connectors.jpg';
 
-<ProjectHeader />
+<ProjectHeader hero={conn} heroAlt="Connector end of the Whelen CanTrol WC module, where most of the switched outputs in this wire schedule start." />
 
 <Callout type="safety" title="Legal notice">
 Emergency lighting and siren use is regulated by state law and permits. This page documents a personal build and is not legal guidance.
@@ -172,6 +173,10 @@ Gauges are typical short-run values. Confirm them against the Whelen and SpeedTe
 
 The [five-modes plan](/projects/f150-upfit/five-modes-plan/) proposes 14 more trigger wires (O1 to O14). They aren't in this schedule until that plan is decided.
 
+![Whelen CC5K1 Ford CANport harness for the CanTrol: the OBD-II connector and data cable that make row M3 in the schedule.](../../../../assets/f150/cc5k1-harness.jpg)
+
+*Row M3: the Whelen CC5K1 Ford CANport harness, which arrived 26 Oct. Data only, no power.*
+
 ## Fuses and wire sizes
 
 <div class="ss-table-wrap" tabindex="0">
@@ -236,4 +241,4 @@ SIDE VIEW, driver side (front of truck to the left)
 
 ## Changelog
 
-<Changelog entries={[{ date: '2026-10-27', change: 'Dominator K1–K6 replaced by the planned E68Xtreme stick (K1–K10) from the 27 October files; spares now X1 (LED Output 32) only.', rollback: 'Revert the commit that added the E68Xtreme.' }, { date: '2026-10-27', change: 'Page published from the 23 October project files.', rollback: 'Revert the commit that rebuilt the F-150 section.' }]} />
+<Changelog entries={[{ date: '2026-10-27', change: 'Added the CanTrol connector photo as the page header and the CC5K1 harness photo at row M3.', rollback: 'Revert the commit that made this change.' }, { date: '2026-10-27', change: 'Dominator K1–K6 replaced by the planned E68Xtreme stick (K1–K10) from the 27 October files; spares now X1 (LED Output 32) only.', rollback: 'Revert the commit that added the E68Xtreme.' }, { date: '2026-10-27', change: 'Page published from the 23 October project files.', rollback: 'Revert the commit that rebuilt the F-150 section.' }]} />
