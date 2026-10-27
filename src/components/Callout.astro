@@ -15,10 +15,10 @@ const labels = {
 const { type, title } = Astro.props;
 ---
 
-<aside class:list={['ss-callout', `ss-callout--${type}`]} aria-label={title ?? labels[type]}>
+<div class:list={['ss-callout', `ss-callout--${type}`]} role="note" aria-label={title ?? labels[type]}>
 	<p class="ss-callout__title">{title ?? labels[type]}</p>
 	<div class="ss-callout__body"><slot /></div>
-</aside>
+</div>
 
 <style>
 	.ss-callout {

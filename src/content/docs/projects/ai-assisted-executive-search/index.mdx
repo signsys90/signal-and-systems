@@ -5,7 +5,7 @@ summary: An executive job search engineered as a repeatable business system.
 status: In progress
 category: Business Systems
 started: TBD
-updated: 2026-10-26
+updated: 2026-10-27
 project: true
 ---
 
@@ -23,9 +23,9 @@ A structured, AI-assisted workflow for executive positioning, opportunity evalua
 	title="Project details"
 	specs={[
 		['Focus areas', 'Business Systems · AI Automation · Revenue Operations'],
-		['Development approach', 'AI-assisted workflow design and implementation using Claude, with ChatGPT Codex used to build the supporting system'],
+		['Development approach', 'AI-assisted workflow design and implementation using Claude, with OpenAI Codex used to build the supporting system'],
 		['Started', 'Date not recorded'],
-		['Last updated', '2026-10-26'],
+		['Last updated', '2026-10-27'],
 	]}
 />
 
@@ -276,20 +276,16 @@ The objective is a disciplined feedback loop rather than repeated applications w
 ## 5. Technical architecture
 
 <Callout type="unverified">
-The original source code and development environment are no longer available, so the precise implementation cannot be reconstructed with certainty. This section describes a technically plausible architecture for a lightweight application supporting this workflow. It is a proposed implementation model, not a verified inventory of the original code.
+The original source code and development environment are no longer available, so the implementation cannot be reconstructed with certainty. This section describes the system at the pattern level only. No language, framework, database or hosting choice is claimed.
 </Callout>
 
 ### Application interface
 
-A web-based interface could provide a central workspace for managing positioning documents, target criteria, opportunities, research briefs, application materials and review status.
-
-A React-based frontend, potentially using Next.js and TypeScript, would be a reasonable implementation choice. The interface could organize work around an opportunity record, so that its research, supporting evidence, generated materials and status stay together.
+A central workspace for managing positioning documents, target criteria, opportunities, research briefs, application materials and review status. Work is organized around an opportunity record, so that its research, supporting evidence, generated materials and status stay together.
 
 ### Application logic
 
-Server-side application logic would manage the workflow between opportunity intake, research preparation, document generation, review and status tracking. Possible implementation options include Next.js server routes or a separate Node.js backend.
-
-The application would enforce the documented workflow rules, while the AI model would assist with tasks such as summarization, comparison, synthesis and drafting.
+Application logic manages the workflow between opportunity intake, research preparation, document generation, review and status tracking. The application would enforce the documented workflow rules, while the AI model would assist with tasks such as summarization, comparison, synthesis and drafting.
 
 ### AI-assisted research and drafting
 
@@ -301,13 +297,7 @@ An automated implementation could use a model API to process approved inputs and
 
 ### Data and document management
 
-A practical implementation could maintain a structured record for each opportunity, linked to its source job description, research brief, experience mapping, draft materials and status history. Depending on the application's complexity, this could use:
-
-- Structured JSON or Markdown files for a lightweight local workflow.
-- SQLite or PostgreSQL for persistent opportunity records.
-- A document repository for resumes, research briefs and application materials.
-
-These are alternative implementation choices, not confirmed technologies.
+Each opportunity is kept as a structured record, linked to its source job description, research brief, experience mapping, draft materials and status history. How those records were stored is not documented.
 
 The verified career record should remain separate from AI-generated drafts, so that a generated document never silently becomes the authoritative source of employment history or accomplishments.
 
@@ -343,7 +333,7 @@ The workflow is governed by standing instructions that define how AI may assist 
 5. **Public materials must protect private information.** Public-facing pages must not expose personal contact details, private correspondence, recruiter information, confidential company information or application records. Professional contact can be directed through LinkedIn.
 6. **AI output is a draft, not an authorization.** Generating a resume, message or research brief does not establish that it is accurate or ready for external use. Human review remains a required decision point.
 
-## 7. Development with ChatGPT Codex
+## 7. Development with OpenAI Codex
 
 The application is positioned as an example of using AI-assisted development to structure a complex, recurring professional workflow.
 
@@ -448,6 +438,7 @@ These are design requirements and recommended practices, not verified security f
 
 <Changelog
 	entries={[
+		{ date: '2026-10-27', change: 'Brought the technical architecture in line with the portfolio documentation standard: removed the suggested technologies (React, Next.js, TypeScript, Node.js, SQLite, PostgreSQL) so the section describes the system at the pattern level only, and corrected the tool name to OpenAI Codex.', rollback: 'Revert the commit that made this change.' },
 		{ date: '2026-10-26', change: 'Page rewritten as a full case study: business problem, objectives, architecture, workflow, technical model, operating rules, Codex development, verification criteria, measurement framework, privacy and lessons learned.', rollback: 'Revert the commit that rewrote this page.' },
 		{ date: '2026-10-26', change: 'Project page published.', rollback: 'Revert the commit that added this page.' },
 	]}
