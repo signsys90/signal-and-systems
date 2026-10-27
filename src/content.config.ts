@@ -9,6 +9,7 @@ export const CATEGORIES = [
 	'Vehicle Upfit and 12V',
 	'Radio and Emergency Comms',
 	'Business Systems',
+	'Business Consulting',
 	'Fabrication and 3D Printing',
 ] as const;
 
