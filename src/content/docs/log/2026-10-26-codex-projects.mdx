@@ -1,6 +1,6 @@
 ---
 title: '2026-10-26: Three Codex-built ARES tools added'
-description: 'The complete build record for the ARES CF-33 Field Dashboard, ARES Duval GIS Command Dashboard and ARES Vehicle Light Controller pages. Sources, timeline, every pull request, the GIS test failure root cause, screenshots, privacy rules, problems solved and open items.'
+description: 'The complete build record for the ARES CF-33 Field Dashboard, ARES Duval GIS Command Dashboard and Vehicle Light Controller pages. Sources, timeline, every pull request, the GIS test failure root cause, screenshots, privacy rules, problems solved and open items.'
 sidebar:
   order: -20261026.1
 ---
@@ -33,7 +33,7 @@ import gisDiag from '../../../assets/ares-gis/desktop-diagnostics-drawer.webp';
 import gisMobile from '../../../assets/ares-gis/mobile-map-day.webp';
 
 **Date:** 2026-10-26 (all times below are UTC; US Eastern is UTC minus 4 hours)\
-**Projects:** [ARES CF-33 Field Dashboard](/projects/ares-field-dashboard/), [ARES Duval GIS Command Dashboard](/projects/ares-gis-dashboard/), [ARES Vehicle Light Controller](/projects/vehicle-light-controller/)\
+**Projects:** [ARES CF-33 Field Dashboard](/projects/ares-field-dashboard/), [ARES Duval GIS Command Dashboard](/projects/ares-gis-dashboard/), [Vehicle Light Controller](/projects/vehicle-light-controller/)\
 **Pull requests:** [#6](https://github.com/signsys90/signal-and-systems/pull/6), [#16](https://github.com/signsys90/signal-and-systems/pull/16), [#23](https://github.com/signsys90/signal-and-systems/pull/23)
 
 ![The ARES Duval GIS Command Dashboard project page on this site in dark mode, with the release details spec box and the live deployment note.](../../../assets/log/codex-projects/gis-page-dark.jpg)
@@ -67,7 +67,7 @@ This entry is the full record of how three emergency communications tools I buil
 5. [Every pull request](#every-pull-request)
 6. [ARES CF-33 Field Dashboard](#ares-cf-33-field-dashboard)
 7. [ARES Duval GIS Command Dashboard](#ares-duval-gis-command-dashboard)
-8. [ARES Vehicle Light Controller](#ares-vehicle-light-controller)
+8. [Vehicle Light Controller](#vehicle-light-controller)
 9. [The GIS test failures, solved](#the-gis-test-failures-solved)
 10. [Screenshots and how they were made](#screenshots-and-how-they-were-made)
 11. [Privacy rules and what was left off](#privacy-rules-and-what-was-left-off)
@@ -86,7 +86,7 @@ I documented three emergency communications tools I built with OpenAI Codex, eac
 
 - **ARES CF-33 Field Dashboard:** an offline Electron app that turns my Toughbook into an organized field laptop, with 109 launchers in 22 modules, Mission Ops, PACE plans and an operator log.
 - **ARES Duval GIS Command Dashboard:** a Node and Leaflet command map that fuses APRS, Meshtastic, DMR, manual check-ins and opt-in browser GPS for Duval County ARES, with incidents, tasks, nearest-operator dispatch and ICS-style incident workspaces.
-- **ARES Vehicle Light Controller:** a local-only FastAPI dashboard that sends low-current trigger commands to a USB relay board, with a watchdog and a fail-safe ALL OFF.
+- **Vehicle Light Controller:** a local-only FastAPI dashboard that sends low-current trigger commands to a USB relay board, with a watchdog and a fail-safe ALL OFF.
 
 The first pages went live in PR #6 at 05:08. PR #16 rewrote all three in much more depth, found and recorded why the GIS dashboard's browser tests had been failing, re-ran them on the CF-33, and added eight demo-data GIS screenshots. PR #23 added screenshots for the field dashboard and the light controller later in the day. PR #6 also expanded the About page with my executive bio.
 
@@ -96,7 +96,7 @@ The GIS dashboard's 32 "failing" tests were never a code problem. The test brows
 
 <Gallery photos={[
 	{ src: fieldPage, alt: 'The ARES CF-33 Field Dashboard project page in dark mode, with the Mission Readiness screenshot as its header image and the In progress status.', caption: 'The Field Dashboard page today, with the Mission Readiness screen from PR #23 as its header.' },
-	{ src: lightPage, alt: 'The ARES Vehicle Light Controller project page in dark mode, with the ALL OFF dashboard screenshot as its header image.', caption: 'The Light Controller page today, with the all-channels-off dashboard (Simulation Mode) as its header.' },
+	{ src: lightPage, alt: 'The Vehicle Light Controller project page in dark mode, with the ALL OFF dashboard screenshot as its header image.', caption: 'The Light Controller page today, with the all-channels-off dashboard (Simulation Mode) as its header.' },
 	{ src: gisPage, alt: 'The ARES Duval GIS Command Dashboard project page in dark mode with its release details.', caption: 'The GIS Command Dashboard page today. Release 7.1.5, with the hosted v3.7.2 build noted separately.' },
 ]} />
 
@@ -214,7 +214,7 @@ Two related PRs touched these pages' surroundings: [#8](https://github.com/signs
 	{ src: gisMobile, alt: 'Mobile layout with the command card and dock but no map drawn.', caption: 'Mobile layout showing the 0 px map bug, published on purpose and labeled.' },
 ]} />
 
-## ARES Vehicle Light Controller
+## Vehicle Light Controller
 
 [Project page](/projects/vehicle-light-controller/). Version 0.1.0, FastAPI, Uvicorn, Jinja2, Pydantic and pySerial, bound to 127.0.0.1:8765.
 
