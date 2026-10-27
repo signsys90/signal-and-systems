@@ -1,0 +1,226 @@
+---
+title: SaniGLAZE Web Privacy & Tracking Audit Platform
+description: A custom auditing application, built with AI-assisted development in OpenAI Codex, that scanned SaniGLAZE International's designated corporate web properties for cookies, advertising and analytics trackers, other third-party tracking technologies, and consent-related concerns.
+summary: An internal auditing application that scanned designated corporate web properties for cookies, LinkedIn, Google and other third-party trackers, and consent-related concerns, surfacing potential privacy issues for review and correction.
+category: Business Systems
+updated: 2026-10-27
+project: true
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+
+<ProjectHeader />
+
+<SpecBox
+	title="At a glance"
+	specs={[
+		['Full title', 'Web Privacy Compliance & Tracking Audit Platform'],
+		['Category', 'Business Systems · Digital Governance · Risk Identification · AI-Assisted Development'],
+		['Project type', 'Internal auditing application · Not publicly accessible'],
+		['Scope', "Designated corporate web properties across SaniGLAZE International's web ecosystem"],
+		['Audit focus', 'Cookies, advertising and analytics trackers (including LinkedIn and Google), other third-party scripts, consent-related behavior'],
+		['Output', 'Potential issues surfaced for review and corrective action by the responsible personnel'],
+		['Development approach', 'AI-assisted software development using OpenAI Codex'],
+		['Last updated', 'October 27, 2026'],
+	]}
+	source={{ label: 'Project description by William A. Atkins' }}
+/>
+
+## Overview
+
+The Web Privacy Compliance & Tracking Audit Platform was a custom auditing application that scanned SaniGLAZE International's designated corporate web properties to identify cookies, advertising and analytics trackers, other third-party tracking technologies, and consent-related concerns. It gave the organization a repeatable way to see its privacy-related risk across its web presence and to act on it.
+
+<Callout type="open" title="Internal tool, public write-up">
+This application audited SaniGLAZE International's own web properties. It was never a public tool, and no public demonstration or live link exists. No website addresses, tag or account identifiers, or audit findings are published here.
+
+This case study describes my design and development contributions at a functional level. Proprietary data, credentials, and confidential implementation details are excluded.
+</Callout>
+
+<Callout type="unverified" title="Risk identification, not a legal determination">
+The application identified potential issues for review. It did not perform a legal review, certify compliance, or establish that any law was violated. Detecting a tracking technology or a consent discrepancy is not, by itself, proof of a legal violation.
+</Callout>
+
+## Role and Context
+
+I identified the need for this application and developed it for SaniGLAZE International, where I serve as Vice President of Marketing after advancing from Logistics Manager to Sales & Marketing Manager. It was an internal auditing tool for the organization's own web properties, not a product, a public service, or a tool aimed at anyone else's websites.
+
+Marketing leadership put me close to both sides of this problem. Marketing teams are often the ones who add analytics, advertising, and retargeting technologies to a website, and those same technologies are what create privacy and consent obligations. I wanted a systematic way to see what was actually running across the company's web presence, rather than relying on what we believed had been installed.
+
+I defined what the application needed to examine, the scope it needed to cover, and the kinds of findings it needed to surface. I implemented it through an AI-assisted software development workflow using OpenAI Codex, which helped write and modify the code. The problem framing, the audit scope, and the decision to look across the whole corporate web ecosystem rather than one site or one vendor were mine.
+
+## The Problem
+
+Corporate websites accumulate tracking technology over time. Analytics scripts, advertising pixels, cookies, retargeting tags, and other third-party integrations arrive through website updates, marketing campaigns, tag-management containers, content-management plugins, embedded videos and forms, and changes that outside vendors make to their own code. Each addition may be reasonable when it is made. Over months and years, across several web properties and several people, the full picture becomes hard to see.
+
+Without a consistent auditing process, an organization can struggle to answer basic questions:
+
+- Which tracking technologies are present across our websites?
+- Which third-party services may receive information about our visitors?
+- What cookies and other browser storage are our sites setting?
+- Does any tracking appear to start before, or independently of, the consent process we expect?
+- Are tracking implementations consistent from one web property to the next?
+- Are outdated, unexpected, or no-longer-needed trackers still active?
+- Which configurations should go to privacy, compliance, or legal personnel for a closer look?
+
+These questions matter because privacy expectations for websites have tightened. Frameworks such as the EU General Data Protection Regulation and ePrivacy rules, and California's Consumer Privacy Act as amended by the California Privacy Rights Act, set expectations for how organizations disclose tracking and, in some situations, obtain consent for it. Advertising platforms, browsers, and visitors have raised their expectations too. An organization cannot assess its position against any of these expectations until it knows what its websites are actually doing.
+
+This is the problem the application was built to address. The list above describes the questions it was intended to help answer. It is not a list of issues the historical audits found.
+
+## What I Built
+
+I built a custom auditing program that examined SaniGLAZE International's designated corporate web properties for tracking technologies and privacy-related concerns.
+
+Rather than checking a single website or looking for a single vendor's code, the application was designed to audit across the organization's broader web ecosystem. Its scope covered:
+
+- Website cookies and tracking behavior.
+- Advertising and marketing trackers.
+- LinkedIn tracking technologies, including Insight Tag implementations where present.
+- Google tracking and advertising technologies, including Google tag and analytics implementations where present.
+- Other third-party tracking scripts and technologies.
+- Consent-related behavior, including potential discrepancies between tracking activity and privacy expectations.
+
+The output of an audit was visibility: a picture of which tracking technologies and configurations were present across the properties examined, and which of them might be problematic. Those findings gave the organization a starting point for investigation and corrective action. The application was a detection and risk-identification tool. Decisions about what a finding meant, and what to change, stayed with people.
+
+## Key Capabilities
+
+### Multi-property auditing
+
+- Scanned designated corporate web properties across the SaniGLAZE International web ecosystem, rather than a single website.
+- Supported comparison of what was present across properties, so that inconsistencies between sites could be seen.
+
+### Cookie and tracking discovery
+
+- Examined website cookies and cookie-related behavior.
+- Examined other mechanisms associated with visitor tracking, including third-party tracking scripts.
+
+### Advertising and analytics tracker identification
+
+- Identified advertising and marketing tracking technologies across the properties scanned.
+- Included LinkedIn tracking technologies, such as LinkedIn Insight Tag implementations where present.
+- Included Google tracking and advertising technologies, such as Google tag and analytics implementations where present.
+- Included other third-party marketing and analytics trackers.
+
+### Consent-related risk identification
+
+- Included consent-related behavior in the audit scope.
+- Aimed to surface potential discrepancies between the tracking activity observed and the organization's privacy expectations.
+
+### Risk identification and corrective-action support
+
+- Surfaced website technologies and configurations that could raise privacy concerns, for review by the appropriate business, privacy, compliance, or legal personnel.
+- Supported the identification and correction of potential issues across the corporate web ecosystem. The application identified findings for investigation and correction. It did not change website settings or remove code on its own.
+
+## Audit Questions the Platform Was Designed to Help Answer
+
+These are the audit objectives that shaped the application's scope. They describe what a privacy and tracking audit of this kind should examine.
+
+- Do tracking technologies load before a visitor has made a consent decision?
+- Does observed tracking behavior appear inconsistent with the consent state a site is configured to honor?
+- Which cookies or tracking scripts warrant review against the organization's consent requirements?
+- Does tracking behavior differ from one corporate website to another?
+- Does a site's consent interface say one thing while its tracking technologies do another?
+
+<Callout type="unverified" title="Objectives, not a confirmed test list">
+These questions define the purpose of the audit. They are not a confirmed list of tests the original application ran, and they are not findings.
+</Callout>
+
+## Background: How Website Tracking Technologies Are Recognized
+
+For readers who don't work with web technology every day, this section explains the kinds of evidence any website tracking audit can rely on. It is general industry background. It is not a description of the specific detection methods the original application used.
+
+| Evidence | What it can reveal |
+| --- | --- |
+| Script sources | Most tracking technologies load code from a recognizable vendor location. A script loaded from a known analytics or advertising domain is a strong signal of which vendor is present. |
+| Tag identifiers | Vendors give each customer account an identifier that appears in page code or requests, such as a Google measurement ID or a LinkedIn partner ID. The format often reveals the product, and the value reveals which account receives the data. No real identifiers are shown on this page. |
+| Network requests | When a page loads, the browser sends requests to third-party servers. Where those requests go, and when, shows which services may receive visitor information and whether that happens before or after a consent choice. |
+| Cookies | Many vendors set cookies with documented, recognizable names. A cookie's name, the domain that sets it, and how long it lasts help distinguish first-party from third-party storage and analytics from advertising use. |
+| Other browser storage | Local storage, session storage, and similar mechanisms can hold identifiers the way cookies do, so a complete review looks beyond cookies. |
+| Embedded third-party content | Video players, maps, chat widgets, forms, and social media embeds can carry their own tracking, even when no one added a tracker deliberately. |
+| Consent signals | Consent management tools record a visitor's choice in cookies or page variables, and some vendors read those signals before deciding what to collect. Comparing the signals with observed activity is how an audit spots behavior that doesn't match the stated consent state. |
+
+No single signal is conclusive. Scripts can be renamed, loaded through tag managers, or routed through first-party domains, and the purpose of a script can't always be determined from the outside. Good auditing combines several signals and leaves the final judgment to a person.
+
+## Architecture and Technical Highlights
+
+The original source code is not available, so the architecture is described at the level that can be confirmed: what the application did and how it was organized around its purpose. The original implementation stack is not independently documented.
+
+| Design element | How it worked |
+| --- | --- |
+| Ecosystem scope, not single-site scope | The corporate web presence was treated as a whole. Auditing several properties together is what makes inconsistencies visible, such as a tracker present on one site but not another, or a consent experience that behaves differently from site to site. |
+| Vendor-inclusive coverage | The audit was not limited to one tracking provider. LinkedIn and Google technologies were named in scope alongside other third-party trackers, because a real corporate website rarely relies on only one vendor. |
+| Observation-based auditing | The application was designed to examine what web properties actually did, in terms of cookies, trackers, and consent-related behavior, rather than relying on an inventory of what was believed to be installed. |
+| Findings for people, not automatic changes | The application identified potential issues and supported corrective action by the responsible personnel. Automatic remediation, such as removing scripts, blocking requests, or changing consent settings, is not part of the confirmed design and is not claimed. |
+| Confidential details excluded | The specific websites audited, the tag and account identifiers found, individual findings, and configuration details are intentionally left out. |
+
+## Audit Limitations and Professional Judgment
+
+A credible privacy audit is as clear about what it can't show as about what it can. These distinctions governed how the application's findings should be read.
+
+- **Detection is not a legal determination.** Identifying a cookie, a script, or a network request doesn't, by itself, establish whether a website complies with any law. That depends on the jurisdiction, the visitor, the purpose of the processing, the disclosures made, the consent obtained, and other facts a scanner can't see.
+- **Observed behavior is not complete coverage.** A scan reports only on the pages, browser conditions, consent states, and user journeys it actually examines. Tracking that appears only after a login, a form submission, in a specific region, or after a particular sequence of clicks may not appear in a scan that didn't perform those steps.
+- **A potential risk is not a confirmed violation.** Findings are potential issues that require investigation. Their legal or technical status is established by review, not by detection.
+- **Automated findings need human review.** The application's role was to supply evidence and focus attention. Marketing technology owners, web operations, and privacy, compliance, or legal personnel are the ones positioned to decide what a finding means and what to do about it.
+- **Results are a point in time.** Websites and third-party scripts change constantly. A clean result today doesn't guarantee the same result next month, which is why repeatable auditing matters more than a single scan.
+- **No certification is implied.** The application was not a certified compliance product, didn't guarantee compliance with any privacy law, and was not represented as a legal review. It was not independently penetration-tested, security-certified, or validated by a legal team.
+
+## Business Impact
+
+The application was designed to deliver the operational benefits below. They describe its purpose and intended value.
+
+- **Centralized visibility** into tracking technologies across designated corporate web properties.
+- **A more systematic, repeatable approach** to website privacy auditing, in place of occasional manual checks.
+- **Identification of potentially unexpected** third-party trackers.
+- **Better visibility** into cookie behavior and consent-related behavior.
+- **A basis for prioritizing** technical issues that require further review.
+- **One method across many sites,** so multiple corporate websites could be examined the same way.
+- **Improved coordination** between marketing technology, web operations, and privacy stakeholders, because every group could work from the same findings.
+- **A more proactive posture** toward potential digital compliance concerns, by finding issues internally rather than waiting for them to surface externally.
+
+<Callout type="unverified" title="Intended benefits, not measured results">
+No audit counts, issue counts, time savings, cost savings, or risk-reduction measurements are available for this application, and none are claimed.
+</Callout>
+
+## What This Project Demonstrates
+
+- **Identifying organizational risk that sits between departments.** Tracking technology is added by marketing, hosted by web operations, and evaluated by privacy and legal stakeholders. I recognized the gap and built a way to close it.
+- **Translating regulatory concerns into technical workflows.** Privacy expectations around cookies, trackers, and consent became concrete, inspectable questions an application could help answer.
+- **Marketing technology governance.** Treating analytics and advertising tags as assets that need inventory, review, and lifecycle management, not just as campaign tools.
+- **Cross-property auditing.** Designing for an ecosystem of websites rather than a single page.
+- **AI-assisted software development.** Using OpenAI Codex as a development tool to build a practical internal application, with the problem definition and scope set by me.
+- **Sound technical judgment.** Being explicit that detection supports investigation and is neither proof of a violation nor a certificate of compliance.
+
+## My Contribution
+
+- Identified the business need: limited visibility into the tracking technologies, cookies, and consent behavior across the corporate web presence.
+- Defined the audit scope across the organization's web ecosystem, including cookies, advertising and analytics trackers, LinkedIn and Google technologies, other third-party scripts, and consent-related behavior.
+- Framed the application's output as findings for investigation and corrective action, rather than as legal conclusions.
+- Directed and carried out implementation through an AI-assisted development workflow with OpenAI Codex.
+- Positioned the results to support corrective action by the people responsible for marketing technology, the websites, and privacy review.
+
+## Technology Stack
+
+Developed through an AI-assisted software development workflow using OpenAI Codex. The original implementation stack, including programming language, browser automation approach, data storage, hosting, and reporting format, is not independently documented and is not claimed here.
+
+## Project Status and Verification Notes
+
+- Internal application built for SaniGLAZE International's own web properties. It was not publicly accessible, and no public demonstration or live link exists.
+- This case study is reconstructed from my recollection. The original source code, audit reports, and configuration are no longer available to me.
+- The capabilities above are the ones I can confirm from memory. The application may have included additional features that are not documented here.
+- No specific audit findings, website addresses, tag identifiers, or account details are published.
+- The application's current operational status is not known.
+
+## Related SaniGLAZE Work
+
+- [SaniGLAZE Video End-Slide Generator](/projects/saniglaze-video-end-slide-tool/): a Codex-built self-service tool for the same franchise network, focused on localized marketing video.
+- [SaniGLAZE Opportunity Map](/projects/saniglaze-opportunity-map/) and [SaniGLAZE Trade Show Map](/projects/saniglaze-trade-show-map/): business-systems dashboards for the same organization.
+
+## Changelog
+
+<Changelog
+	entries={[
+		{ date: '2026-10-27', change: 'Case study first published from William\'s description of the application, following the Signal & Systems documentation standard: confirmed capabilities only, no implementation stack, metrics, website addresses, identifiers, or findings.', rollback: 'Revert the commit that added this page.' },
+	]}
+/>
