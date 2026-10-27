@@ -14,10 +14,10 @@ import SpecBox from '../../../../components/SpecBox.astro';
 import Gallery from '../../../../components/Gallery.astro';
 import Callout from '../../../../components/Callout.astro';
 import Changelog from '../../../../components/Changelog.astro';
-import layout from '../../../../assets/f150/grille-guard-layout.jpg';
+import setup from '../../../../assets/f150/grille-guard-front-setup.jpg';
 import diagram from '../../../../assets/f150/grille-guard-diagram.png';
 
-<ProjectHeader hero={layout} heroAlt="Front of the white F-150 with the black Steelcraft HD grille guard, annotated with numbered positions for the siren speakers, light bar and surface lights." />
+<ProjectHeader hero={setup} heroAlt="Front of the white F-150 with the black Steelcraft HD grille guard, two UBL siren speakers beside the center tubes, amber and white U-Lite surface lights in the upper corners and the amber and white Color Flood light bar under the lower tube." />
 
 <Callout type="safety" title="Legal notice">
 Emergency lighting and siren use is regulated by state law and permits. This page documents a personal build and is not legal guidance.
@@ -50,7 +50,7 @@ Mount the whole front warning package on the grille guard, so the bumper and fac
 
 <Gallery
 	photos={[
-		{ src: layout, alt: 'Annotated photo of the guard on the truck with numbered callouts.', caption: 'Proposed positions on my truck, 5 October 2026. The speakers (1) and surface lights (3) are renderings. The light bar (2) is as photographed.' },
+		{ src: setup, alt: 'Front of the truck with the grille guard, both UBL siren speakers, both U-Lite surface lights and the Color Flood light bar lit amber and white.', caption: 'The front setup: UBL 100W siren speakers beside the center tubes, UBL U-Lite surface lights in the upper punch plate corners, and the UBL Color Flood 2.0 light bar under the lower tube.' },
 		{ src: diagram, alt: 'Front-view schematic of the guard showing surface lights at the top corners, siren speakers beside the center tubes and the light bar under the lower tube.', caption: 'Front-view schematic. Not to scale; positions get confirmed by measurement at install.' },
 	]}
 />
@@ -194,4 +194,4 @@ Neither Steelcraft's sheet nor the video gives torque specs. These are general s
 
 ## Changelog
 
-<Changelog entries={[{ date: '2026-10-26', change: 'Grille guard page published from the Steelcraft install notes and the 5 October front package proposal.', rollback: 'Revert the commit that added this page.' }]} />
+<Changelog entries={[{ date: '2026-10-27', change: 'Replaced the annotated layout picture (header and Front package layout) with the front setup image and updated its caption.', rollback: 'Revert the commit that changed the grille guard images.' }, { date: '2026-10-26', change: 'Grille guard page published from the Steelcraft install notes and the 5 October front package proposal.', rollback: 'Revert the commit that added this page.' }]} />
