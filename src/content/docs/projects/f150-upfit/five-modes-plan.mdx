@@ -55,6 +55,7 @@ Lights with two memories get steady amber and steady white, and the CanTrol make
 ## Limits that can't be programmed around
 
 - **BooYu rear traffic advisor:** amber only, its own controller, and it needs its power button pressed each time power returns. It can only do amber flash (M3, and the amber part of M5).
+- **Planned E68Xtreme rear stick (27 Oct):** replaces the BooYu. Each of its eight heads (R/A/W/W/W/W/A/R) is on its own CanTrol LED output, so it could join the amber and white modes, but only with flash patterns: the seller's warranty excludes heads run steady. Inferred until it's bought and programmed.
 - **SpeedTech Raptor visor bar:** mine is amber/amber (config code B-RTXE8). White exists only as the steady Takedown and Super Takedown functions. White flash is possible only by Method B on the takedown wire.
 - **Speed Turtle EFM 3.0:** it flashes factory lamps but can't hold them steady. The factory high beams are the steady white from the factory lamps.
 - **Z-6 brake heads:** the green wire is the red brake override, already used for brake pop. Whether any of their 24 patterns is amber-only or white-only isn't stated (bench).
@@ -162,7 +163,7 @@ One button with five press states, wrapping to off, and the slide picks how many
 *Diagram O from the project document: proposed new trigger wires for the five modes. Proposed, not yet wired or bench tested.*
 
 
-All new wires are 18 AWG signal wires from spare LED outputs (2.5A each). Today's map uses LED 1 to 5 and 9 to 13, with 6 to 8 reserved for the Dominator option and 14 to 15 for the front Z-6 option.
+All new wires are 18 AWG signal wires from spare LED outputs (2.5A each). Today's map uses LED 1 to 5 and 9 to 13. LED 6 to 8 and 27 to 31 are the planned Strobes N' More E68Xtreme rear stick heads (27 Oct, see the [rear window light page](/projects/f150-upfit/rear-traffic-advisor/)), and 14 to 15 the front Z-6 option.
 
 | Output | Feeds |
 | --- | --- |
@@ -207,4 +208,4 @@ Whelen CanTrol WC guide 14580G and Whelen Command CanTrol WC guide. Whelen price
 
 ## Changelog
 
-<Changelog entries={[{ date: '2026-10-26', change: 'Five-modes proposal published from the 21 October plan. Not adopted yet.', rollback: 'Revert the commit that added this page.' }]} />
+<Changelog entries={[{ date: '2026-10-27', change: 'Noted the planned E68Xtreme rear stick on LED Outputs 6–8 and 27–31 (27 October files).', rollback: 'Revert the commit that added the E68Xtreme.' }, { date: '2026-10-26', change: 'Five-modes proposal published from the 21 October plan. Not adopted yet.', rollback: 'Revert the commit that added this page.' }]} />
