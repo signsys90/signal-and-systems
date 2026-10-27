@@ -19,7 +19,7 @@ import Callout from '../../../../components/Callout.astro';
 import Changelog from '../../../../components/Changelog.astro';
 import Gallery from '../../../../components/Gallery.astro';
 import kit from '../../../../assets/f150/cantrol-kit.jpg';
-import layout from '../../../../assets/f150/grille-guard-layout.jpg';
+import hero from '../../../../assets/f150/grille-guard-front-setup.jpg';
 import diagram from '../../../../assets/f150/grille-guard-diagram.png';
 import ben3d from '../../../../assets/f150/ben3d-mount-1.jpg';
 import booyu from '../../../../assets/f150/booyu.jpg';
@@ -29,7 +29,7 @@ import tube from '../../../../assets/f150/tube-0764.jpg';
 import spk from '../../../../assets/f150/spk-0741.jpg';
 import head from '../../../../assets/f150/cantrol-head-lit.jpg';
 
-<ProjectHeader hero={layout} heroAlt="Proposal mock-up of the white F-150 front with the black Steelcraft HD grille guard, numbered positions for the siren speakers, flood bar and surface lights." />
+<ProjectHeader hero={hero} heroAlt="Front of the white F-150 with the black Steelcraft HD grille guard: two amber/white UBL U-Lite grille lights in the upper corners, two UBL siren speakers either side of the Ford oval, and the UBL Color Flood 2.0 light bar lit amber and white under the lower tube." />
 
 <Callout type="safety" title="Legal notice">
 Emergency lighting and siren use is regulated by state law and permits. This page documents a personal build and is not legal guidance.
@@ -223,6 +223,7 @@ If the player doesn't load, [watch the video on Google Drive](https://drive.goog
 
 <Changelog
 	entries={[
+		{ date: '2026-10-26', change: 'Replaced the header image with the front grille guard setup photo.', rollback: 'Revert the commit that changed the header image.' },
 		{ date: '2026-10-26', change: 'Added the build video under Testing and verification.', rollback: 'Revert the commit that added the video.' },
 		{ date: '2026-10-26', change: 'Linked the first component page, the UBL Color Flood 2.0 grille light bar.', rollback: 'Revert the commit that added the link.', log: '/log/2026-10-26-color-flood-wiring/' },
 		{ date: '2026-10-26', change: 'Overview rebuilt from the project document (revision 10): real parts list, prices, statuses, output plan and test results.', rollback: 'Revert the commit that changed this page.' },
