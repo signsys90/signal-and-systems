@@ -78,6 +78,11 @@ export default defineConfig({
 								{ label: 'SaniGLAZE Trade Show Map', link: '/projects/saniglaze-trade-show-map/' },
 								{ label: 'SaniGLAZE Video End-Slide Generator', link: '/projects/saniglaze-video-end-slide-tool/' },
 								{ label: 'AI-Assisted Executive Search', link: '/projects/ai-assisted-executive-search/' },
+							],
+						},
+						{
+							label: 'Business Consulting',
+							items: [
 								{ label: 'Big Time Sandwich Co.', link: '/projects/big-time-sandwich-co/' },
 								{ label: 'Wicks Surplus', link: '/projects/wicks-surplus/' },
 								{ label: 'North FL Motorsports', link: '/projects/north-fl-motorsports/' },
