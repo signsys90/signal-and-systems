@@ -1,0 +1,151 @@
+---
+title: SaniGLAZE Franchise Media Asset Library
+description: An internal, browser-based application, built with AI-assisted development in OpenAI Codex, that gave SaniGLAZE International franchise members self-service access to corporate marketing assets kept in the company's HubSpot file store.
+summary: An internal application that gave franchise members self-service search and access to corporate marketing assets in the company's HubSpot file store, with tools for before-and-after images, client-specific media packages, and library maintenance.
+category: Business Systems
+updated: 2026-10-27
+project: true
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+
+<ProjectHeader />
+
+<SpecBox
+	title="At a glance"
+	specs={[
+		['Full title', 'Franchise Media Asset Library & Distribution Platform'],
+		['Category', 'Business Systems · Marketing Operations · Platform Integration · AI-Assisted Development'],
+		['Project type', 'Internal business application · Not publicly accessible'],
+		['Users', 'Franchise members, corporate marketing personnel, authorized administrators'],
+		['Integration', 'Existing corporate HubSpot file store, through an authenticated API'],
+		['Development approach', 'AI-assisted software development using OpenAI Codex'],
+		['Last updated', 'October 27, 2026'],
+	]}
+	source={{ label: 'Project description by William A. Atkins' }}
+/>
+
+## Overview
+
+The Franchise Media Asset Library & Distribution Platform was an internal, browser-based application that gave SaniGLAZE International franchise members self-service search and access to corporate marketing assets kept in the company's HubSpot file store. It added tools for creating before-and-after images, assembling client-specific media packages, and maintaining the library itself.
+
+<Callout type="open" title="Internal tool, public write-up">
+This application was built for SaniGLAZE International's franchise network and corporate team. It was never a public website, and no public demonstration or live link exists.
+
+This case study describes my design and development contributions at a functional level. Proprietary data, credentials, and confidential implementation details are excluded.
+</Callout>
+
+## Role and Context
+
+I designed and built this application for SaniGLAZE International's franchise network. It served three groups: franchise members, corporate marketing personnel, and authorized administrators.
+
+I defined what the application needed to do, who it served, and how each workflow should work. I also set its central design constraint: the media files would stay in the company's existing HubSpot file store instead of being copied into a new repository.
+
+I implemented the application through an AI-assisted software development workflow using OpenAI Codex, which helped write and modify the code. The problem framing, feature scope, integration approach, and business rules were my decisions.
+
+## The Problem
+
+SaniGLAZE's marketing collateral lived in the corporate HubSpot file store. That collection covered videos, sales brochures, technical data sheets, safety data sheets (SDS), before-and-after photographs, and other marketing materials. Franchise members needed these materials to market and sell in their own territories, and the corporate team needed to keep the collection organized.
+
+The application was designed to address four points of friction:
+
+- **Locating assets.** Franchise members needed a simple, browser-based way to find the right brochure, data sheet, SDS, video, or photo without relying on the corporate team to locate it for them.
+- **Avoiding a second library.** The obvious alternative, copying the collateral into a separate portal, would create a duplicate repository that had to be kept in step with the corporate original.
+- **Preparing materials for a client.** Franchise members needed to present before-and-after results and assemble the right set of documents for a specific client, which is slow when every file has to be gathered by hand.
+- **Maintaining the collection.** Corporate personnel needed practical tools to find duplicate files and correct file names in the shared store.
+
+## What I Built
+
+I built a hosted web application that acted as a search and access layer in front of SaniGLAZE's existing HubSpot file store.
+
+Franchise members opened the application in a browser, searched or browsed an indexed catalog of corporate media, and opened or downloaded the assets they needed. The application retrieved each asset from HubSpot through an authenticated API integration rather than serving it from a separate copy, so HubSpot remained the single source of truth for the media files themselves.
+
+On top of that library, I built two sets of tools:
+
+- **Franchise tools** let members combine two photographs into a single before-and-after image and assemble a client-specific collection of assets for download as a package.
+- **Administrative tools** let authorized corporate personnel identify duplicate files and rename files in the HubSpot file store directly from the application.
+
+The result was one place where franchise members could find, prepare, and take away approved marketing materials, and where the corporate team could maintain the library those materials came from.
+
+## Key Capabilities
+
+### Search and self-service access
+
+- Searchable, browsable index of corporate media assets.
+- Asset categories included videos, sales brochures, technical data sheets, safety data sheets (SDS), before-and-after photographs, and other marketing collateral.
+- Browser-based access for franchise members, with no separate software to install.
+
+### Integration with the corporate content system
+
+- On-demand retrieval of assets from the existing HubSpot file store through an authenticated API integration.
+- No separate, persistent copy of the corporate media library inside the application.
+
+### Content creation and file generation
+
+- **Before-and-after image creation:** users selected two source images and generated a single combined before-and-after image.
+- **Client-specific media packages:** franchise members assembled a collection of assets for a particular client and downloaded it as a package.
+
+### Administration and library governance
+
+- **Duplicate-file identification:** corporate personnel or authorized administrators could filter and identify duplicate files for review.
+- **Remote file renaming:** authorized corporate personnel could rename files in the HubSpot file store from within the application.
+
+## Architecture and Technical Highlights
+
+| Design element | How it worked |
+| --- | --- |
+| A layer over an existing platform | A hosted web application built around SaniGLAZE's HubSpot environment. It did not replace HubSpot or create a competing content system. |
+| The source system kept the media | Media files stayed in the corporate HubSpot file store and were retrieved on demand, keeping one authoritative library and avoiding a duplicate media repository. |
+| Read and write paths | Most users read from the library through search, browsing, and downloads. Administrative renaming wrote changes back to the HubSpot file store, so a correction applied to the corporate original rather than to a local copy. |
+| Separated audiences | Franchise-facing features (search, before-and-after images, packages) were distinct from maintenance features (duplicate identification, renaming), which were intended for authorized corporate personnel and administrators. |
+| Confidential details excluded | The HubSpot integration is described by its business function only. Authentication methods, credentials, endpoints, and configuration are intentionally left out. |
+
+## Business Impact
+
+The application was designed to deliver the operational benefits below. They describe its purpose and intended value.
+
+- **Faster access to approved collateral,** through self-service search instead of requests to the corporate team.
+- **No duplicate media repository,** because files remained in the corporate HubSpot file store.
+- **Before-and-after visuals created inside the library,** from the same approved photographs.
+- **Simpler preparation of client-specific materials,** assembled and downloaded as one package.
+- **Better library maintenance,** through duplicate identification and remote renaming.
+- **Less friction** across the cycle of locating, distributing, and managing marketing collateral for a distributed franchise network.
+
+<Callout type="unverified" title="Intended benefits, not measured results">
+No usage, adoption, or time-savings measurements are available for this application, and none are claimed.
+</Callout>
+
+## My Contribution
+
+- Defined the application's purpose, users, and feature set around the needs of franchise members and the corporate team.
+- Set the core architectural constraint of leaving media in the existing HubSpot file store and retrieving it on demand.
+- Designed the user workflows for search, before-and-after image creation, client packages, and administrative maintenance.
+- Planned the HubSpot integration around its business functions: retrieving assets, identifying duplicates, and renaming files.
+- Directed and carried out implementation through an AI-assisted development workflow with OpenAI Codex.
+
+## Technology Stack
+
+Developed through an AI-assisted software development workflow using OpenAI Codex. The application was hosted on a server, accessed through a web browser, and integrated with the company's HubSpot file store through an authenticated API. The original implementation stack is not independently documented.
+
+## Project Status and Verification Notes
+
+- Internal application. It was not publicly accessible, and no public demonstration or live link exists.
+- This case study is reconstructed from my recollection. The original source code, hosting environment, and configuration are no longer available to me.
+- The capabilities above are the ones I currently recall. The application may have included additional features that are not documented here.
+- The application's current operational status is not known.
+
+## Related SaniGLAZE Work
+
+- [SaniGLAZE Video End-Slide Generator](/projects/saniglaze-video-end-slide-tool/): another Codex-built self-service tool for the same franchise network, focused on localized marketing video.
+- [SaniGLAZE Opportunity Map](/projects/saniglaze-opportunity-map/) and [SaniGLAZE Trade Show Map](/projects/saniglaze-trade-show-map/): business-systems dashboards for the same organization.
+
+## Changelog
+
+<Changelog
+	entries={[
+		{ date: '2026-10-27', change: 'Case study first published from William\'s description of the application, following the Signal & Systems documentation standard: confirmed capabilities only, no implementation stack, metrics, or integration details.', rollback: 'Revert the commit that added this page.' },
+	]}
+/>
