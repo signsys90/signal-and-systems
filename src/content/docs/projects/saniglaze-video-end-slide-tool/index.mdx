@@ -3,7 +3,7 @@ title: SaniGLAZE Video End-Slide Generator
 description: A self-service web application, built with AI-assisted development in OpenAI Codex, that lets SaniGLAZE franchise members turn a corporate video into a localized marketing video with a branded contact end slide.
 summary: A self-service web application that replaces a manual, request-based video production workflow with a guided process for localized franchise marketing videos.
 category: Business Systems
-updated: 2026-10-26
+updated: 2026-10-27
 project: true
 ---
 
@@ -20,7 +20,7 @@ import Changelog from '../../../../components/Changelog.astro';
 		['Category', 'Business Systems · Workflow Automation · AI-Assisted Development'],
 		['Project type', 'Private business application · Internal marketing operations'],
 		['Development approach', 'AI-assisted application development using OpenAI Codex'],
-		['Last updated', 'October 26, 2026'],
+		['Last updated', 'October 27, 2026'],
 	]}
 	source={{ label: 'Project description by William A. Atkins' }}
 />
@@ -112,92 +112,27 @@ The quick-select workflow is optimized for routine requests. The custom workflow
 
 Both paths are designed to produce a consistent, ready-to-use deliverable.
 
-## 3. Application Architecture
+## 3. Architecture and Technical Highlights
 
-The application can be understood as four cooperating components: the user interface, application logic, media-processing pipeline, and file-delivery mechanism.
+The application can be understood as five cooperating functions. They are described by role only; the original languages, frameworks, libraries, and hosting are not documented.
 
-<Callout type="unverified" title="Illustrative architecture">
-The architecture below represents a plausible implementation for this type of application, rather than a verified reconstruction of the original source code.
+| Function | What it does in the workflow |
+| --- | --- |
+| User interface | Lets franchise members choose a video, supply or select contact information, set the closing duration, and retrieve the finished file |
+| Workflow coordination | Checks that the required inputs are present and moves the request from selections to a finished video |
+| End-slide generation | Places the contact information into a fixed, branded template, separating variable content from the approved design |
+| Video composition | Combines the source footage and the generated closing segment into one playable video |
+| File delivery | Makes the finished video available as a single download |
+
+### Design highlights
+
+- **Template, not canvas.** Users fill designated fields in a fixed branded layout rather than designing a slide, which keeps the output on brand.
+- **Two inputs, one output.** The quick-select and custom paths differ only in where the video and contact details come from. Both end in the same standardized deliverable.
+- **Processing off the user's computer.** Users make choices; the application does the composition work, so no one needs video-editing software.
+
+<Callout type="unverified" title="Implementation not documented">
+The original implementation stack, storage and cleanup behavior, output formats, and access-control mechanism are not documented, so none are named here. A proposed technical reconstruction is kept separately and is not published.
 </Callout>
-
-### Frontend application
-
-The frontend provides the interface through which franchise members select videos, supply contact information, configure the closing slide, and retrieve their finished files.
-
-A conventional implementation could use React with a framework such as Next.js.
-
-Responsibilities would include:
-
-- Presenting the approved video library.
-- Providing video-upload controls.
-- Displaying stored contact-information options when available.
-- Accepting manually entered contact details.
-- Providing end-slide duration controls.
-- Displaying validation errors and processing status.
-- Presenting the completed video for download.
-
-The interface would prioritize a straightforward, guided workflow over advanced editing controls.
-
-### Backend application
-
-The backend coordinates the workflow and manages communication between the user interface and media-processing components.
-
-A conventional implementation could use Next.js server routes or a separate Node.js backend.
-
-Responsibilities would include:
-
-- Validating user selections and submitted information.
-- Resolving approved video assets.
-- Handling uploaded files.
-- Preparing the end-slide content.
-- Initiating video-processing jobs.
-- Tracking processing status.
-- Returning the completed output to the user.
-
-Keeping processing coordination on the server avoids requiring franchise members to run video-processing software locally.
-
-### End-slide rendering
-
-The end slide is generated from a fixed branded template rather than an unrestricted design canvas.
-
-A plausible implementation would render an HTML/CSS template or generate a graphic using a server-side image-rendering library.
-
-The template would define the placement of branding, contact information, typography, spacing, and other visual elements.
-
-User-provided information would populate designated fields while the underlying layout remained standardized.
-
-This approach separates variable content from the fixed design system. It allows contact details to change without requiring users to redesign the closing slide.
-
-### Video composition engine
-
-The source video and rendered end slide must be combined into a single playable file.
-
-A conventional implementation would use FFmpeg, a widely used multimedia processing framework, to perform this operation.
-
-The processing sequence could include:
-
-1. Inspecting the source video's media properties.
-2. Rendering the closing slide into a video-compatible segment.
-3. Matching the segment's dimensions, frame rate, and encoding characteristics to the output profile.
-4. Concatenating the source footage and closing segment.
-5. Encoding or remuxing the final video as required.
-6. Returning the completed file to the application.
-
-The exact processing method depends on the source assets and supported output requirements. For example, videos with different dimensions or frame rates may require normalization before they can be combined reliably.
-
-<Callout type="unverified">
-FFmpeg is a technically appropriate choice for this architecture, but its use in the original application cannot be confirmed without the source code.
-</Callout>
-
-### File delivery
-
-Once processing finishes, the application makes the completed video available as a single download.
-
-A basic implementation could temporarily store uploaded files, intermediate assets, and output videos on the application server. A more scalable implementation could use object storage and a background job queue.
-
-Temporary files should be removed when no longer required, subject to any necessary retention policy.
-
-The original application's storage mechanism and cleanup behavior are not documented.
 
 ## 4. Key Capabilities
 
@@ -237,66 +172,33 @@ Eliminates the need for users to download separate assets and manually combine t
 
 Reduces the number of decisions users must make and makes a repeatable production task accessible to nontechnical users.
 
-## 5. Technical Implementation
+## 5. Technology Stack
 
-<Callout type="unverified" title="Plausible reconstruction">
-The following technology stack is a plausible reconstruction of how the application could have been built using Codex. It is not a verified inventory of the original implementation.
-</Callout>
+Developed through an AI-assisted software development workflow using OpenAI Codex. The original implementation stack is not independently documented.
 
-| Layer | Plausible technology | Purpose |
-| --- | --- | --- |
-| AI-assisted development | OpenAI Codex | Code generation, implementation assistance, debugging, and iterative development |
-| Frontend | React and Next.js | User interface and application navigation |
-| Programming language | TypeScript | Application logic and type checking |
-| Backend | Next.js server routes or Node.js | Workflow coordination and request handling |
-| Styling | CSS or a component-based styling framework | Layout, form controls, and responsive presentation |
-| End-slide rendering | HTML/CSS rendering or image-generation library | Producing the branded closing graphic |
-| Video processing | FFmpeg | Video encoding, normalization, and composition |
-| File handling | Server-side file processing | Receiving uploads and preparing output assets |
-| Storage | Local temporary storage or object storage | Holding source files, intermediate assets, and finished videos |
-| Deployment | Node.js-compatible hosting or a server environment | Running the application and processing workflow |
+| Item | Status |
+| --- | --- |
+| OpenAI Codex (AI-assisted development workflow) | Confirmed |
+| Web-based, self-service application | Confirmed |
+| Programming language, frameworks, rendering and video-processing libraries | Not documented |
+| Output format, resolution, and encoding settings | Not documented |
+| Storage, hosting, deployment, and access control | Not documented |
 
-### Processing workflow
+### Processing flow
 
-The application's underlying processing workflow can be represented as:
+At the level of the workflow, each request moves through the same stages:
 
-**User input → Validation → Source asset selection → End-slide rendering → Video composition → Output validation → Download**
+**User input → Validation → Source video selection → End-slide generation → Video composition → Download**
 
-Each stage has a distinct responsibility.
+The specific error-handling, output-validation, and access-control behavior of the original application is not documented.
 
-Validation checks that the required inputs are available. Rendering produces the closing segment. Video composition combines that segment with the source footage. Output validation checks whether processing produced a usable file before the application makes it available.
+## 6. Development with OpenAI Codex
 
-A production implementation should also handle failed uploads, unsupported media, interrupted processing, and insufficient storage.
-
-These are appropriate engineering considerations for this type of application; the original implementation's specific error-handling behavior is unknown.
-
-### Output specifications
-
-The original supported formats, resolutions, and encoding settings are not documented.
-
-A reasonable implementation would select an output profile compatible with the approved corporate video library and commonly used distribution platforms.
-
-For example, an MP4 file using H.264 video and AAC audio would be a practical compatibility-oriented target, provided the input media and intended distribution requirements support that profile.
-
-The exact resolution, frame rate, audio handling, and encoding settings would need to be established from the actual application or its original requirements.
-
-### Authentication and access control
-
-The original authentication model cannot be established from the available description.
-
-A deployment intended for restricted franchise use should limit access to authorized users or an appropriately controlled network, depending on the business requirements.
-
-If stored franchise information is associated with individual locations, the application should also ensure that users can access only the information they are authorized to use.
-
-No particular sign-in mechanism or access-control implementation is claimed here.
-
-## 6. Development with ChatGPT Codex
-
-ChatGPT Codex served as the AI-assisted development environment for building the application.
+OpenAI Codex served as the AI-assisted development environment for building the application.
 
 The project illustrates how a business problem can be translated into an application workflow and implemented with AI-assisted coding rather than treated as a conventional manual production task.
 
-The development process can be described in five stages.
+The work can be grouped into five areas. They describe what the project required, not a documented timeline of development sessions.
 
 ### Stage 1 — Translate the business problem into requirements
 
@@ -512,12 +414,13 @@ The project highlights the intersection of business process design, workflow aut
 
 The original source code, deployment configuration, usage metrics, and version history are unavailable for verification.
 
-The documented workflow and capabilities are based on the project description. Specific technology choices in the architecture section are illustrative and should not be represented as verified implementation details.
+The documented workflow and capabilities are based on the project description. The original implementation stack is not documented, so no specific technologies are named on this page.
 
 ## Changelog
 
 <Changelog
 	entries={[
+		{ date: '2026-10-27', change: 'Brought in line with the portfolio documentation standard: removed the illustrative technology stack, output specifications and component-level architecture (React, Next.js, FFmpeg, MP4/H.264 and similar), replaced them with a role-level architecture and a confirmed-only Technology Stack section, and corrected the tool name to OpenAI Codex. The removed reconstruction is kept off the site.', rollback: 'Revert the commit that made this change.' },
 		{ date: '2026-10-26', change: 'Prepared a public case study from the project description: business problem, solution design, illustrative architecture and technology stack (marked as unverified), Codex development approach, recommended verification checklist, impact measures, and security and brand-governance considerations.', rollback: 'Revert the commit that replaced this page.' },
 		{ date: '2026-10-26', change: 'Project page first published from William\'s description of the tool.', rollback: 'Revert the commit that added this page.' },
 	]}
