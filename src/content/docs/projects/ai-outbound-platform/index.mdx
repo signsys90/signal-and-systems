@@ -26,7 +26,7 @@ An AI-powered outbound sales platform I am building with Codex. It turns the out
 		['Focus areas', 'Revenue Operations · AI Automation · Business Transformation'],
 		['Development tool', 'OpenAI Codex (primary)'],
 		['Status', 'In progress'],
-		['Source code', 'Not yet published or linked on this page'],
+		['Source code', 'Not available for review (see Open items)'],
 		['Version', 'Not yet recorded'],
 		['Started', 'Date not recorded'],
 		['Last updated', '2026-10-27'],
@@ -34,7 +34,7 @@ An AI-powered outbound sales platform I am building with Codex. It turns the out
 />
 
 <Callout type="unverified" title="How to read this page">
-The platform's source code has not yet been reviewed for this write-up, so nothing below describes the code itself. Each section says where its information came from. **Confirmed** means it comes from my own written project goals or from my documented outbound method. **Design standard** means it is a rule the platform has to meet, not a claim that a feature is built. **Unconfirmed** marks anything that still has to be checked against the code. No results, volumes, reply rates or meetings are claimed anywhere on this page.
+I don't currently have access to the platform's source code, so this write-up was made without it and nothing below describes the code itself. Each section says where its information came from. **Confirmed** means it comes from my own written project goals or from my documented outbound method. **Design standard** means it is a rule the platform has to meet, not a claim that a feature is built. **Unconfirmed** marks anything that can't be checked without the code. No results, volumes, reply rates or meetings are claimed anywhere on this page.
 </Callout>
 
 ## Goal
@@ -146,8 +146,8 @@ The method is built so the business owns the result: documented outbound process
 
 ## Architecture
 
-<Callout type="open" title="Real architecture not yet documented">
-The diagram below is the **intended** flow, drawn from the goal, constraints and method on this page. It is not the documented architecture. It will be replaced with the real component diagram once the repository has been reviewed.
+<Callout type="open" title="Intended design, not the built architecture">
+The diagram below is the **intended** flow, drawn from the goal, constraints and method on this page. It is not the documented architecture. The source code isn't available to review, so this diagram stays labeled as intended design. It will be replaced only if the code becomes available.
 </Callout>
 
 ![Intended flow diagram: five boxes, Targeting, Research, AI draft, Rules check and Send, with a dashed opt-out bar underneath and three rules: legitimate outreach only, no private data published, no employer confidential data.](../../../../assets/business/outbound-intended-flow.png)
@@ -166,7 +166,7 @@ The opt-out bar runs under every stage on purpose: a suppressed address must be 
 
 ### Components to document
 
-When the code is reviewed, this section will list, for each component, what it does, what it is built with and what data it touches:
+If the code becomes available, this section will list, for each component, what it does, what it is built with and what data it touches:
 
 - Data intake and the prospect store.
 - Research and drafting (which AI models, and how prompts are managed).
@@ -295,8 +295,8 @@ The outbound proposals behind this project kept coming back to one point: a busi
 
 ## Open items
 
-- **Locate the source code** and confirm where it lives. On 2026-10-27 it was not in this site's repository, my connected GitHub repositories, my Drive, my email or the Codex folder on my Toughbook.
-- Replace the intended-flow diagram with the real architecture diagram.
+- **Source code not available.** As of 2026-10-27 I don't have access to where the code lives. It is not in this site's repository, my connected GitHub repositories, my Drive, my email or the Codex folder on my Toughbook. Until that changes, the architecture, configuration and build steps stay undocumented, and the diagram stays labeled as intended design.
+- If access comes back: replace the intended-flow diagram with the real architecture diagram.
 - Confirm which services from the proposed stack the platform uses, and fill in the AI model, hosting, database and CRM rows.
 - Decide what parts of the repository are public, and add the link.
 - Add the current version, test summary and screenshots, using fake sample data only.
@@ -308,6 +308,7 @@ The outbound proposals behind this project kept coming back to one point: a busi
 
 <Changelog
 	entries={[
+		{ date: '2026-10-27', change: 'Noted that the source code is not available, so the architecture stays documented as intended design.', rollback: 'Revert the commit that added this note.' },
 		{ date: '2026-10-27', change: 'Expanded the page: business problem, method, deliverability approach, compliance stance, proposed stack, build approach, testing plan and open items. Every section is labeled with its source, and unconfirmed items are marked.', rollback: 'Revert the commit that expanded this page.' },
 		{ date: '2026-10-26', change: 'Added the intended-flow diagram.', rollback: 'Revert the commit that added the diagram.' },
 		{ date: '2026-10-26', change: 'Skeleton page published.', rollback: 'Revert the commit that added this page.' },
