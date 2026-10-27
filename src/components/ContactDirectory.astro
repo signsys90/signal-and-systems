@@ -1,0 +1,216 @@
+---
+// Terminal-style contact directory for the Contact page.
+// The email address is never written into the HTML as one string: the user and domain parts are
+// stored reversed in data attributes and a small script assembles the mailto link in the browser.
+// Without JavaScript, the address shows as "user [at] domain" so it stays readable but not scrapeable.
+
+interface Channel {
+	icon: string;
+	label: string;
+	action: string;
+	// Leave href empty until the real URL is confirmed; the row then shows "Link coming soon".
+	href?: string;
+}
+
+const emailUser = 'william.a.atkins';
+const emailDomain = 'gmail.com';
+const reverse = (s: string) => s.split('').reverse().join('');
+
+const channels: Channel[] = [
+	{
+		icon: '🌐',
+		label: 'Facebook network',
+		action: 'Access profile',
+		// TODO(William): add the Facebook page URL.
+		href: '',
+	},
+	{
+		icon: '🎬',
+		label: 'Loadout Garage // TikTok',
+		action: 'Access channel',
+		// TODO(William): add the Loadout Garage TikTok URL.
+		href: '',
+	},
+	{
+		icon: '💼',
+		label: 'LinkedIn // Professional network',
+		action: 'View professional profile',
+		href: 'https://www.linkedin.com/in/william-atkins-8a8786226',
+	},
+];
+---
+
+<section class="ss-dir not-content" aria-labelledby="ss-dir-title">
+	<p class="ss-dir__kicker">Digital identity // Contact &amp; network directory</p>
+	<h2 id="ss-dir-title" class="ss-dir__name">William A. Atkins</h2>
+
+	<dl class="ss-dir__status">
+		<div><dt>[ User profile ]</dt><dd>William A. Atkins | KR4JSQ</dd></div>
+		<div><dt>[ Network status ]</dt><dd><span class="ss-dir__dot" aria-hidden="true"></span>Online // Connected</dd></div>
+	</dl>
+
+	<ul class="ss-dir__list">
+		<li class="ss-dir__row">
+			<span class="ss-dir__label"><span aria-hidden="true">✉️</span> Email protocol</span>
+			<span class="ss-dir__value">
+				<span class="ss-dir__tag">[ Initiate contact ]</span>
+				<span
+					class="ss-dir__email"
+					data-u={reverse(emailUser)}
+					data-d={reverse(emailDomain)}
+				>{emailUser} [at] {emailDomain.replace('.', ' [dot] ')}</span>
+			</span>
+		</li>
+		{
+			channels.map((c) => (
+				<li class="ss-dir__row">
+					<span class="ss-dir__label">
+						<span aria-hidden="true">{c.icon}</span> {c.label}
+					</span>
+					<span class="ss-dir__value">
+						{c.href ? (
+							<a class="ss-dir__link" href={c.href} target="_blank" rel="noopener me">
+								{c.action} →
+							</a>
+						) : (
+							<span class="ss-dir__pending">Link coming soon</span>
+						)}
+					</span>
+				</li>
+			))
+		}
+	</ul>
+
+	<p class="ss-dir__footer">Systems online • Network established • Connection available</p>
+</section>
+
+<script>
+	const reverse = (s: string) => s.split('').reverse().join('');
+	document.querySelectorAll<HTMLElement>('.ss-dir__email').forEach((el) => {
+		const { u, d } = el.dataset;
+		if (!u || !d) return;
+		const address = `${reverse(u)}@${reverse(d)}`;
+		const link = document.createElement('a');
+		link.className = 'ss-dir__link';
+		link.href = `mailto:${address}`;
+		link.textContent = address;
+		el.replaceWith(link);
+	});
+</script>
+
+<style>
+	.ss-dir {
+		margin-top: 1.5rem;
+		padding: 1.5rem;
+		background: var(--ss-surface);
+		border: 1px solid var(--ss-border);
+		border-left: 3px solid var(--ss-accent);
+		border-radius: 0.5rem;
+	}
+	.ss-dir__kicker {
+		margin: 0;
+		font-family: var(--sl-font-mono);
+		font-size: var(--sl-text-xs);
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--ss-accent);
+	}
+	.ss-dir__name {
+		margin: 0.35rem 0 1rem;
+		font-family: var(--ss-font-heading);
+		font-size: var(--sl-text-2xl);
+		text-transform: uppercase;
+		color: var(--sl-color-white);
+	}
+	.ss-dir__status {
+		margin: 0;
+		display: grid;
+		gap: 0.4rem;
+	}
+	.ss-dir__status div {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.5rem;
+	}
+	.ss-dir__status dt,
+	.ss-dir__tag {
+		font-family: var(--sl-font-mono);
+		font-size: var(--sl-text-xs);
+		text-transform: uppercase;
+		padding: 0.2rem 0.5rem;
+		border-radius: 0.25rem;
+		background: var(--sl-color-gray-5);
+		color: var(--ss-muted);
+		white-space: nowrap;
+	}
+	.ss-dir__status dd {
+		margin: 0;
+		text-transform: uppercase;
+		color: var(--ss-text);
+	}
+	.ss-dir__dot {
+		display: inline-block;
+		width: 0.5rem;
+		height: 0.5rem;
+		margin-right: 0.4rem;
+		border-radius: 50%;
+		background: var(--ss-success);
+		box-shadow: 0 0 0.4rem var(--ss-success);
+		vertical-align: middle;
+	}
+	.ss-dir__list {
+		list-style: none;
+		margin: 1.25rem 0 0;
+		padding: 1.25rem 0 0;
+		border-top: 1px solid var(--ss-border);
+		display: grid;
+		gap: 1.1rem;
+	}
+	.ss-dir__row {
+		display: grid;
+		gap: 0.25rem;
+	}
+	.ss-dir__label {
+		font-family: var(--ss-font-heading);
+		font-weight: 600;
+		text-transform: uppercase;
+		color: var(--sl-color-white);
+	}
+	.ss-dir__value {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.5rem;
+		overflow-wrap: anywhere;
+	}
+	/* :global because the email link is created by the script and has no scope attribute */
+	.ss-dir__email,
+	.ss-dir__value :global(.ss-dir__link) {
+		color: var(--ss-text);
+		text-decoration: underline dotted;
+		text-underline-offset: 0.25em;
+	}
+	.ss-dir__value :global(.ss-dir__link:hover),
+	.ss-dir__value :global(.ss-dir__link:focus-visible) {
+		color: var(--ss-accent);
+	}
+	a.ss-dir__link {
+		text-transform: uppercase;
+	}
+	.ss-dir__pending {
+		font-family: var(--sl-font-mono);
+		font-size: var(--sl-text-sm);
+		color: var(--ss-muted);
+	}
+	.ss-dir__footer {
+		margin: 1.25rem 0 0;
+		padding-top: 1.25rem;
+		border-top: 1px solid var(--ss-border);
+		font-family: var(--sl-font-mono);
+		font-size: var(--sl-text-xs);
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		color: var(--ss-muted);
+	}
+</style>
