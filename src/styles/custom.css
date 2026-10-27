@@ -127,13 +127,31 @@ h4,
 	font-size: var(--sl-text-sm);
 }
 
-/* About page portrait */
+/*
+ * About page portrait. The photo is a transparent cutout, so the backdrop comes from the theme:
+ * a slate-to-surface gradient inside a page-colored gap and a signal-amber ring.
+ */
 .ss-headshot {
+	--ss-headshot-glow: color-mix(in srgb, var(--ss-accent) 22%, var(--ss-surface));
 	display: block;
-	width: 180px;
+	width: 200px;
 	height: auto;
+	aspect-ratio: 1;
 	border-radius: 50%;
-	margin-bottom: 1rem;
+	margin: 0.5rem 0 1.25rem 0.5rem;
+	background: radial-gradient(circle at 50% 35%, var(--ss-headshot-glow) 0%, var(--ss-surface) 55%, var(--ss-border) 100%);
+	box-shadow:
+		0 0 0 4px var(--ss-bg),
+		0 0 0 6px var(--ss-accent),
+		0 10px 28px rgb(0 0 0 / 0.28);
+}
+:root[data-theme='light'] .ss-headshot {
+	--ss-headshot-glow: color-mix(in srgb, var(--ss-accent) 12%, #ffffff);
+	background: radial-gradient(circle at 50% 35%, var(--ss-headshot-glow) 0%, #f1f5f9 60%, #cbd5e1 100%);
+	box-shadow:
+		0 0 0 4px var(--ss-bg),
+		0 0 0 6px var(--ss-accent),
+		0 10px 24px rgb(15 23 42 / 0.16);
 }
 
 /* Responsive 16:9 video embed */
