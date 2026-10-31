@@ -133,7 +133,8 @@ The plan went through ten small releases in one day because I was setting up Com
 
 Whelen Command saves the CanTrol's setup as a `.wln` file. Whelen doesn't publish that format. From two files I saved from Command 2.4.8.0 on 31 Oct, the app reads only the table of names inside (inputs, CAN signals, outputs) and the Command version, then lists the CAN signals in the file next to the plan's.
 
-- Against my programmed file "-3", all eight signal names match the plan.
+- My current Command file is "-4" (saved 31 Oct, Command 2.4.8.0). Against it, all eight signal names match the plan, the same as "-3".
+- Between "-3" and "-4" about 50 bytes changed in the undecoded programming-logic part of the file, while the names and CAN signals stayed the same. Which input, output or rule changed is **not confirmed**. Until I check it on Command's logic screens, the slot notes below still describe "-3".
 - Only the names are compared. Which output each signal drives, patterns and priorities are binary values the app does not decode, so I check those in Command by hand.
 - The app **never writes** a `.wln` file. A wrong byte could load a bad setup into the controller that runs the warning lights and siren.
 - The format notes are worked out from my own sample files and are marked UNVERIFIED in the code. A regression test checks the programmed file against the plan.
@@ -167,7 +168,8 @@ The installer packet (below) now includes Appendix A3, a CANport sheet with a ti
 ### CANport status and open items
 
 - **Programmed in my Command file "-3" (31 Oct):** CAN 2, 3, 4, 5, 7 and 8. CAN 1 has its first pass only (steady, no 2-second flash yet).
-- **Not programmed yet:** CAN 6 (shift out of Park turns the arrows off once).
+- **Command file "-4" (31 Oct, current):** same eight CAN signals; a programming-logic change from "-3" that is not yet confirmed. It may or may not include CAN 6 or the brake pop timer, so both stay marked as not programmed until I confirm them in Command.
+- **Not programmed yet (unconfirmed in "-4"):** CAN 6 (shift out of Park turns the arrows off once).
 - **Not bench-tested:** none of the CANport behavior has been run on the module and truck. To confirm at the bench: the one-time turn-off on Park and Drive (not a lockout), the brake pop timer, and that the CanTrol module reads the CC5K1 (the module's model has not been read off its label yet; see the [controller page](/projects/f150-upfit/cantrol-controller/#canport-and-brake-pop)).
 - **Safety boundary:** Studio only plans, simulates and compares. It never talks to the CANport, the truck or Command. Command transfers the setup to the CANport over USB itself. The CANport kit is a read-only input to the CanTrol, and nothing writes to the Ford BCM or CAN bus.
 
@@ -338,4 +340,4 @@ No network, no telemetry, no accounts. The app writes only when a button is pres
 
 ## Changelog
 
-<Changelog entries={[{ date: '2026-10-31', version: '0.8.10', change: 'Added the Whelen Command CANport setup (8 CAN inputs, Command file compare, simulation, programming sheet), the stand-alone controllers and the installer packet, with 9 new screenshots; version history to 0.8.10.', rollback: 'Revert the commit that added the CANport section.' }, { date: '2026-10-31', version: '0.5.2', change: 'Page published with 18 screenshots of version 0.5.2.', rollback: 'Revert the commit that added projects/upfit-studio.' }]} />
+<Changelog entries={[{ date: '2026-10-31', version: '0.8.10', change: 'Command file "-4" is now the compare file: same eight CAN signal names; its programming-logic change from "-3" is not yet confirmed.', rollback: 'Revert the commit that named Command file -4.' }, { date: '2026-10-31', version: '0.8.10', change: 'Added the Whelen Command CANport setup (8 CAN inputs, Command file compare, simulation, programming sheet), the stand-alone controllers and the installer packet, with 9 new screenshots; version history to 0.8.10.', rollback: 'Revert the commit that added the CANport section.' }, { date: '2026-10-31', version: '0.5.2', change: 'Page published with 18 screenshots of version 0.5.2.', rollback: 'Revert the commit that added projects/upfit-studio.' }]} />

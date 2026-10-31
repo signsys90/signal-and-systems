@@ -55,7 +55,7 @@ const onIn = (o: string) => entries.filter((e) => e.outputs.includes(o)).map((e)
 	<>
 		<p class="ss-gen">
 			Generated from {can.generated_by}. Vehicle in Whelen Command: <b>{can.vehicle}</b> ({can.catalog_size} CAN signals listed, up to {can.max_commands} used). Kit: {can.kit}.
-			{can.command_file && <> Compared with the Command file <span class="ss-mono">{can.command_file.file}</span> (Command {can.command_file.command_version}): {can.command_file.only_in_file.length || can.command_file.only_in_plan.length ? 'signal names differ from the plan.' : `all ${can.command_file.can_in_file.length} signal names match the plan.`} Only names are compared; which output each signal drives is checked by hand.</>}{' '}
+			{can.command_file && <> Compared with the Command file <span class="ss-mono">{can.command_file.file}</span> (Command {can.command_file.command_version}): {can.command_file.only_in_file.length || can.command_file.only_in_plan.length ? 'signal names differ from the plan.' : `all ${can.command_file.can_in_file.length} signal names match the plan.`} Only names are compared; which output each signal drives is checked by hand.{can.command_file.note && <> <b>{can.command_file.note}</b></>}</>}{' '}
 			Nothing here is bench-tested.
 		</p>
 		<div class="ss-table-wrap not-content" tabindex="0">

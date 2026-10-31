@@ -26,6 +26,7 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("app", type=Path, help="checkout of signsys90/f150-upfit-studio")
     ap.add_argument("--wln", type=Path, default=None)
+    ap.add_argument("--file-note", default=None, help="plain-language status of the Command file (shown under the table)")
     ap.add_argument("--skip-studio-json", action="store_true", help="only write canport.json")
     a = ap.parse_args()
     sys.path.insert(0, str(a.app))
@@ -56,6 +57,7 @@ def main() -> None:
         "command_file": None if not cmp else {
             "file": cmp["file"], "command_version": cmp["command_version"],
             "can_in_file": cmp["can_in_file"], "only_in_file": cmp["only_in_file"], "only_in_plan": cmp["only_in_plan"],
+            "note": a.file_note,
         },
     }
     (OUT / "canport.json").write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
