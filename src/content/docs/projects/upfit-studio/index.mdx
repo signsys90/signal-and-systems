@@ -1,7 +1,7 @@
 ---
 title: Upfit Studio
-description: Offline Windows app that holds the whole F-150 emergency-lighting build as one config file, checks the 12V design, simulates the Whelen control head and publishes a public-safe copy to this site.
-summary: Config-as-code for a vehicle upfit. One YAML file holds every part, circuit, wire and the CanTrol control plan; the app checks the electrical design, simulates the 21-button control head, runs bench tests and syncs a public-safe copy to this portfolio on every save.
+description: Offline Windows app that holds the whole F-150 emergency-lighting build as one config file, checks the 12V design, simulates the Whelen control head, plans the Whelen Command CANport (OBDII) inputs and publishes a public-safe copy to this site.
+summary: Config-as-code for a vehicle upfit. One YAML file holds every part, circuit, wire and the CanTrol control plan; the app checks the electrical design, simulates the 21-button control head, plans and checks the eight Whelen Command CANport vehicle inputs, builds an installer packet, runs bench tests and syncs a public-safe copy to this portfolio on every save.
 status: In progress
 category: Software and Automation
 started: 2026-10-30
@@ -32,6 +32,16 @@ import findings from '../../../../assets/upfit-studio/15-findings.jpg';
 import sync from '../../../../assets/upfit-studio/16-sync.jpg';
 import reports from '../../../../assets/upfit-studio/17-reports.jpg';
 import about from '../../../../assets/upfit-studio/18-about-safety.jpg';
+import canCard from '../../../../assets/upfit-studio/19-canport-card.jpg';
+import canEdit from '../../../../assets/upfit-studio/20-canport-edit.jpg';
+import canRevPreview from '../../../../assets/upfit-studio/21-canport-reverse-preview.jpg';
+import canRevOutputs from '../../../../assets/upfit-studio/22-canport-reverse-outputs.jpg';
+import canPark from '../../../../assets/upfit-studio/23-canport-park-arrows-off.jpg';
+import canBrake from '../../../../assets/upfit-studio/24-canport-parking-brake-preview.jpg';
+import packetCan from '../../../../assets/upfit-studio/25-packet-canport-sheet.jpg';
+import packetCover from '../../../../assets/upfit-studio/26-packet-cover.jpg';
+import auxHeads from '../../../../assets/upfit-studio/27-aux-controllers.jpg';
+import UpfitStudioPlan from '../../../../components/UpfitStudioPlan.astro';
 
 <ProjectHeader hero={head} heroAlt="Upfit Studio control head screen: a replica of the Whelen CCTL7 21-button slide head with the slide in position 3, and a table of the 18 CanTrol outputs that turn on, each marked Steady, Flash A or Flash B." />
 
@@ -61,15 +71,16 @@ The build lives in one file, `config/upfit.yaml`. The app reads it, checks it an
 <SpecBox
 	title="Release details"
 	specs={[
-		['Version', '0.5.2 (31 Oct 2026)'],
+		['Version', '0.8.10 (31 Oct 2026)'],
 		['Platform', 'Windows 10/11 (target: Panasonic Toughbook CF-33); Python 3.10+'],
 		['Interface', 'pywebview + Microsoft Edge WebView2, with a Tkinter fallback'],
 		['Engine', 'Python; PyYAML and ruamel.yaml (comment-preserving saves)'],
 		['Diagrams', 'WireViz + Graphviz (optional)'],
 		['Head mount', 'OpenSCAD (optional, for STL export)'],
 		['Packaging', 'PyInstaller one-folder build via build_exe.bat (runs the tests first)'],
-		['Tests', 'pytest: 135 pass, 6 skipped (re-run 31 Oct 2026 on Linux, Python 3.13; Tk, WireViz and OpenSCAD tests skip without those tools)'],
+		['Tests', 'pytest: 195 pass, 6 skipped (re-run on 0.8.10, 31 Oct 2026, Linux, Python 3.13; Tk, WireViz and OpenSCAD tests skip without those tools)'],
 		['Network', 'None. No telemetry, no accounts'],
+		['Vehicle inputs', 'Whelen Command CANport plan: 8 of 8 CAN slots used (F150 2017 signal list, CC5K1 kit)'],
 		['Source', 'Private GitHub repository'],
 		['Built with', 'AI-assisted development (Claude Code) from my requirements and build data'],
 	]}
@@ -80,9 +91,115 @@ The build lives in one file, `config/upfit.yaml`. The app reads it, checks it an
 Upfit Studio is read-only toward the truck. It never talks to the Ford BCM, the CAN bus or the Whelen CanTrol, and it has no USB, serial or CAN access. The CanTrol stays the only thing that controls warning lights and siren; the simulator shows the plan, it does not drive anything. Emergency lighting and siren use is regulated by state law and permits. This page is not legal guidance.
 </Callout>
 
+## Whelen Command CANport setup
+
+New on 31 Oct 2026 (versions 0.8.0 to 0.8.10). The Whelen CanTrol can take up to eight vehicle signals from the truck's OBD-II port through the **Whelen Carbide CanTrol OBDII CANport Kit (CC5K1 - Ford)**, which I bought on 21 Oct and which arrived on 26 Oct. In Whelen Command you pick each signal from the list Command shows for the vehicle, then decide what it does: turn on a key's lights, run the brake pop, or switch something off. I planned all eight in Upfit Studio first, keyed them into my Command file, and then used Studio to check that the two agree.
+
+Why it matters for this truck: the brake pop, the rear work light in reverse, the scene light when a door opens, and the "don't drive off with the take-downs on" rule all come from signals the truck already sends. None of them need a tap into factory wiring.
+
+### The eight CAN inputs
+
+This table is generated from the app's data, so it always matches the current plan. The same table appears on the F-150 [CanTrol output plan](/projects/f150-upfit/cantrol-output-plan/#canport-vehicle-inputs).
+
+<UpfitStudioPlan show="canport" />
+
+In plain terms:
+
+- **Brake pedal (CAN 1)** runs the Option A brake pop: three outputs flash about 2 seconds, then the rear Z-6 heads burn steady red while the pedal is held. My Command file has the first pass only (LED Output 13 steady). The 2-second flash still needs a timer in Command.
+- **Reverse (CAN 2)** turns on the Putco Work Blade's white rear flood (J1 Output 8), the same as the REAR FLOOD key.
+- **Any rear door (CAN 3) or either front door (CAN 5)** turns on SCENE: the UBL Color Flood 2.0 burns steady white for loading gear.
+- **Hazard switch (CAN 4)** turns on both arrows (FLASH) and turns them off with the hazards. The E68Xtreme sweep part of the arrows isn't set until the bench test.
+- **Shifting out of Park (CAN 6)** switches the arrows off once. I can press them on again in Drive. This is the one input not yet programmed in Command, and it must be a one-time turn-off, not a lockout.
+- **Parking brake (CAN 7)** turns TAKE DOWN on while it is set and off when it is released.
+- **Shifting into Drive (CAN 8)** switches SCENE and TAKE DOWN off once, so I don't drive away with the white lights on. They can be pressed on again.
+
+### How the setup was built (31 Oct 2026)
+
+| Version | Change |
+| --- | --- |
+| 0.8.0 | New CANport card on the Control head screen. The F150 2017 signal list (60 signals) copied exactly from my Whelen Command screenshots. Up to 8 commands, each slot used once, names must match Command's list exactly, no signal twice, the action must be a plan key or the brake pop; a refused save leaves the file unchanged. CAN 1 = Brake - Service (brake pop). Installer packet Appendix A3 added. |
+| 0.8.1 | CAN 2 = Trans - Reverse turns on REAR FLOOD. |
+| 0.8.3 | Driver door to SCENE; Key Switch - RUN proposed as ignition sense; Vehicle Speed as a white cutoff (both later replaced). |
+| 0.8.4 | Two new action types: "Arrows off when signal ends" (CAN 6, Park) and "SCENE and TAKE DOWN off when signal starts" (CAN 8, Drive). Parking brake to TAKE DOWN (CAN 7). |
+| 0.8.5 | Hazards to both arrows (CAN 4) in place of the ignition-sense idea; ignition stays on its own wire (J17-7). Speed cutoff dropped because the Drive rule covers it. |
+| 0.8.6 to 0.8.8 | Door inputs reworked to match what I had keyed into Command: CAN 5 = Door - Any Front. |
+| 0.8.7 | New read-only "Compare with Command file" button (below). |
+| 0.8.9 | CAN 3 = Door - Any Back to SCENE. All eight slots used. |
+| 0.8.10 | Each slot's note now records exactly what is keyed into my Command file "-3" of 31 Oct. Test added: every CAN slot must have a note. |
+
+The plan went through ten small releases in one day because I was setting up Command and the plan at the same time. Each change was a single slot, with the reason written into the plan, so the history shows every decision.
+
+### Compare with a Whelen Command file (read-only)
+
+Whelen Command saves the CanTrol's setup as a `.wln` file. Whelen doesn't publish that format. From two files I saved from Command 2.4.8.0 on 31 Oct, the app reads only the table of names inside (inputs, CAN signals, outputs) and the Command version, then lists the CAN signals in the file next to the plan's.
+
+- Against my programmed file "-3", all eight signal names match the plan.
+- Only the names are compared. Which output each signal drives, patterns and priorities are binary values the app does not decode, so I check those in Command by hand.
+- The app **never writes** a `.wln` file. A wrong byte could load a bad setup into the controller that runs the warning lights and siren.
+- The format notes are worked out from my own sample files and are marked UNVERIFIED in the code. A regression test checks the programmed file against the plan.
+
+### Simulating the inputs
+
+Each CAN row on the card has a "Signal on/off" button that acts like the truck sending that signal, so the control head, the outputs list and the light preview show what it would do. Value signals (speed, RPM, fuel level and similar) are flagged, because their threshold is set in Command and can't be simulated.
+
+<Gallery
+	photos={[
+		{ src: canCard, alt: 'CANport inputs card listing CAN 1 to CAN 8 with each Command signal name, what it does and a Signal off button, and a banner saying the programmed Command file (Command 2.4.8.0) has CAN signals that match the plan.', caption: 'The CANport card after "Compare with Command file": all eight CAN signal names in my programmed Command file match the plan. Read-only; only names are compared.' },
+		{ src: canEdit, alt: 'CANport card in edit mode with a drop-down list of Command signal names and a drop-down of actions for each of the 8 slots.', caption: 'Edit signals. Every signal comes from a drop-down of Command\'s own list for the F150 2017, so a typo can\'t get into the plan. Saving checks slots, duplicates and actions first and backs up the file.' },
+		{ src: canRevPreview, alt: 'Light preview with the Putco Work Blade drawn steady white on the tailgate after the reverse signal is switched on.', caption: 'Simulated reverse (CAN 2): the Putco Work Blade\'s white rear flood comes on steady. Simulation only; colors and timing are illustrative.' },
+		{ src: canRevOutputs, alt: 'Outputs on panel showing one output, J1-8, steady, feeding the Putco Work Blade, set by REAR FLOOD (Star of Life).', caption: 'The same reverse signal in the outputs list: one output on, J1-8 steady, set by REAR FLOOD.' },
+		{ src: canBrake, alt: 'Light preview with the UBL Color Flood 2.0 steady white on the grille guard and the Putco Work Blade steady white on the tailgate after the parking brake signal is switched on.', caption: 'Simulated parking brake (CAN 7): TAKE DOWN turns the Color Flood and the Putco white steady.' },
+		{ src: canPark, alt: 'Control head screen with a message reading: Trans - Park off: Both arrows (FLASH) switched off. You can press them on again.', caption: 'Simulated shift out of Park (CAN 6) with the arrows on: the arrows switch off once and can be pressed on again. In the truck this must be set in Command as a one-time turn-off (bench item).' },
+	]}
+/>
+
+### Programming sheet for Command
+
+The installer packet (below) now includes Appendix A3, a CANport sheet with a tick box per CAN slot, the exact Command signal name, what it does and the note. It is a sheet to key into Command, never a Command file.
+
+<Gallery
+	photos={[
+		{ src: packetCan, alt: 'Installer packet Appendix A3 CANport (OBDII) inputs table: CAN 1 to 8 with tick boxes, signal names, actions and notes.', caption: 'Installer packet, Appendix A3: the CANport programming sheet for Whelen Command (generated 31 Oct 2026 from version 0.8.10).' },
+	]}
+	wide
+/>
+
+### CANport status and open items
+
+- **Programmed in my Command file "-3" (31 Oct):** CAN 2, 3, 4, 5, 7 and 8. CAN 1 has its first pass only (steady, no 2-second flash yet).
+- **Not programmed yet:** CAN 6 (shift out of Park turns the arrows off once).
+- **Not bench-tested:** none of the CANport behavior has been run on the module and truck. To confirm at the bench: the one-time turn-off on Park and Drive (not a lockout), the brake pop timer, and that the CanTrol module reads the CC5K1 (the module's model has not been read off its label yet; see the [controller page](/projects/f150-upfit/cantrol-controller/#canport-and-brake-pop)).
+- **Safety boundary:** Studio only plans, simulates and compares. It never talks to the CANport, the truck or Command. Command transfers the setup to the CANport over USB itself. The CANport kit is a read-only input to the CanTrol, and nothing writes to the Ford BCM or CAN bus.
+
+## Stand-alone controllers on the Control head screen
+
+Version 0.6.0 added the two lights that have their own controllers, drawn beside the CCTL7. Each one gets 12V only when its CanTrol output is on (J1-2 and J1-3, slides 1 to 3), as in the wiring plan.
+
+- **SpeedTech Lights Super Take Down Grand Control Switch Box (C-GCBSTD)** for the Raptor visor bar: POWER, MODE1, MODE2, PATTERN (press for the next pattern, hold 3 s for steady burn, 5 s for random), TD and SUPER TD (steady burn, work without POWER) and NIGHT, from the STL manual p.4. The NIGHT key colors come from my description; the TD LED color isn't confirmed.
+- **BooYu traffic advisor controller:** POWER, NEXT, LAST, three arrow keys, the 2-digit mode display (1 to 26) and 8 blue indicator LEDs. Only mode 1 is recorded (steady burn, whole bar amber); the rest show a placeholder until I record the pattern video.
+
+<Gallery
+	photos={[
+		{ src: auxHeads, alt: 'Grand Control Box with POWER and MODE1 lit blue, and the BooYu controller showing mode 1 with eight blue indicator LEDs, both with 12V from their CanTrol outputs.', caption: 'Slide 3 on: the Grand Control Box (12V from J1-2) and the BooYu controller (12V from J1-3) power up. Simulated from the manual and my photos.' },
+	]}
+/>
+
+## Installer and EVT quote packet
+
+Version 0.7.0 added **Reports & exports > Build installer packet**: one ZIP I can email to a shop or emergency vehicle technician (EVT) for a quote. It holds `Installer_Packet.html` (print it or save as PDF) and CSV files for parts, circuits, wires, labor scope and the Whelen Command programming sheet (outputs, keys and CANport).
+
+The HTML has the cover and rules for this truck (no battery-negative ground, airbag zones, fuse and grommet, bench first, no grille guard fabrication), status, parts list, circuit schedule, system diagram, wire-by-wire tables, control plan, open and unverified items, a labor scope with an hours column, and Appendix A: all 40 outputs, all 21 head keys and the eight CAN inputs, with a tick box per row and CHECK on rows that depend on a bench result. Prices are left out unless I tick "Include prices", and anything on a redact list is always removed. The app only writes the files; I send them.
+
+<Gallery
+	photos={[
+		{ src: packetCover, alt: 'Installer packet cover: Upfit installer packet, 2017 Ford F-150 Lariat SuperCrew, a red box saying items flagged BENCH, INFERRED or TBD are not verified, vehicle, panoramic roof, controller, generated by upfit-kit 0.8.10, prices not included, and the rules for this truck.', caption: 'Installer packet cover with the rules for this truck. Generated with prices off.' },
+	]}
+	wide
+/>
+
 ## Screenshots
 
-Captured 31 Oct 2026 from version 0.5.2 running the live F-150 config in a browser harness on Linux (the same page the Windows window loads). Prices and order notes were removed from the screenshot copy of the config, and the budget card was hidden, so no spend totals appear. Folder paths shown are the app's placeholders. These show the software only: nothing on these screens has been bench-tested or programmed into the CanTrol.
+The screens below were captured 31 Oct 2026 from version 0.5.2; the CANport, controller and packet images above are from version 0.8.10, captured the same way running the live F-150 config in a browser harness on Linux (the same page the Windows window loads). Prices and order notes were removed from the screenshot copy of the config, and the budget card was hidden, so no spend totals appear. Folder paths shown are the app's placeholders. These show the software only: nothing on these screens has been bench-tested or programmed into the CanTrol.
 
 ### Design
 
@@ -142,10 +259,16 @@ Captured 31 Oct 2026 from version 0.5.2 running the live F-150 config in a brows
 - Each output is shown as steady (Turn On) or CanTrol Flash A/B.
 - Test lab runs every combination and lists wiring gaps and suggested fixes, each of which asks before it saves.
 
+**Vehicle inputs (CANport)**
+- Plans up to eight Whelen Command CAN signal commands from Command's own list for the truck, with checks on slot, name, duplicates and action.
+- Simulates each signal, including one-time turn-offs (Park ends, Drive starts).
+- Compares the plan with a Whelen Command `.wln` file, read-only.
+
 **Records and publishing**
 - Every save writes a timestamped backup; Change history compares and restores them.
 - Sync logs every save and can commit it to the private project repo, to this site and to a plain folder. Before each push it pulls with rebase so a change made elsewhere never blocks the next save; a real conflict stops before the push.
 - The site copy leaves out notes, order numbers, tracking numbers and prices.
+- Installer packet ZIP for a shop or EVT quote, with the Whelen Command programming sheet.
 
 ## How it feeds this site
 
@@ -177,11 +300,21 @@ All from the change log in the repository.
 | 0.5.0 | 31 Oct | CCTL7 head replica, steady vs flash, light preview, uniform product names, Sync |
 | 0.5.1 | 31 Oct | Code moved to a private GitHub repository; sync commits in place when run from that repo |
 | 0.5.2 | 31 Oct | Sync pulls (rebase) before each push; conflicts stop safely |
+| 0.5.3 | 31 Oct | Windows build clears OneDrive read-only flags on its two output folders before packaging |
+| 0.5.4 | 31 Oct | Head mount designer and Hardware lab moved behind "Show more tools" |
+| 0.5.5 | 31 Oct | E68Xtreme traffic-advisor sweep on the arrow keys; both rocker bars show the same arrow |
+| 0.5.6 | 31 Oct | EFM front and rear in slide 3, hold-to-press brake and momentary hotkeys |
+| 0.6.0 | 31 Oct | Grand Control Box and BooYu controllers on the Control head screen |
+| 0.7.0 | 31 Oct | Installer / EVT quote packet with the Whelen Command programming sheet |
+| 0.8.0 | 31 Oct | CANport (OBDII) inputs from Command's F150 2017 signal list |
+| 0.8.1 | 31 Oct | Fixed a file name reserved on Windows (aux.js) that stopped git pull on the Toughbook, plus a reserved-name test; reverse turns on the rear flood |
+| 0.8.2 | 31 Oct | The Windows build now ships the current plan instead of a stale copy |
+| 0.8.3 to 0.8.10 | 31 Oct | CANport slots 3 to 8, read-only Command file compare, notes matched to Command file "-3" |
 
 ## Testing and verification
 
-- **Done:** the pytest suite passes on Linux (135 pass, 6 skipped on Python 3.13 in a cloud container on 31 Oct 2026). The change log records every Studio screen being driven in Chromium with no page errors (0.4.0 and 0.5.0), and I re-checked all 18 screens with no page errors while taking the screenshots above.
-- **Not done:** not yet run on Windows, in WebView2 or on the Toughbook; no Windows .exe built and tested yet. pywebview's Windows parts are untested.
+- **Done:** the pytest suite passes on Linux (195 pass, 6 skipped on version 0.8.10, Python 3.13, cloud container, 31 Oct 2026). New tests since 0.5.2 cover the CANport rules, the Command file reader against my programmed file, the sweep, the installer packet, reserved Windows file names and the build script. The change log records every Studio screen being driven in Chromium with no page errors (0.4.0 and 0.5.0), and I re-checked all 18 screens with no page errors while taking the screenshots above.
+- **On Windows:** the change log shows the app being pulled and built on my Toughbook (0.8.1 fixed a Windows-only file name problem found there, and 0.8.2 fixed which config a rebuild ships). I have not recorded a full run of every screen in WebView2 on the Toughbook, so this page doesn't claim one.
 - **Nothing electrical is tested.** The control plan is not bench-tested or programmed into the CanTrol, and CanTrol pin numbers come from Whelen guide 14580G without being proven on the module.
 
 ## Privacy
@@ -196,6 +329,8 @@ No network, no telemetry, no accounts. The app writes only when a button is pres
 
 ## Open items
 
+- CANport: program CAN 6 (Park) and the brake pop timer in Command, then bench-test all eight inputs on the module and truck.
+
 - Run and package on Windows and the Toughbook CF-33, then record the result here.
 - Measure each circuit's draw on the bench and fill it in; most test lab scenarios stay "incomplete" until then.
 - Install WireViz and Graphviz on the PC to render harness diagrams.
@@ -203,4 +338,4 @@ No network, no telemetry, no accounts. The app writes only when a button is pres
 
 ## Changelog
 
-<Changelog entries={[{ date: '2026-10-31', version: '0.5.2', change: 'Page published with 18 screenshots of version 0.5.2.', rollback: 'Revert the commit that added projects/upfit-studio.' }]} />
+<Changelog entries={[{ date: '2026-10-31', version: '0.8.10', change: 'Added the Whelen Command CANport setup (8 CAN inputs, Command file compare, simulation, programming sheet), the stand-alone controllers and the installer packet, with 9 new screenshots; version history to 0.8.10.', rollback: 'Revert the commit that added the CANport section.' }, { date: '2026-10-31', version: '0.5.2', change: 'Page published with 18 screenshots of version 0.5.2.', rollback: 'Revert the commit that added projects/upfit-studio.' }]} />

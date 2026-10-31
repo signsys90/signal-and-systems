@@ -1,5 +1,5 @@
 {
-  "generated_by": "Upfit Studio 0.5.1",
+  "generated_by": "Upfit Studio 0.8.10",
   "updated": "2026-10-31",
   "vehicle": {
     "year": 2017,
@@ -36,7 +36,7 @@
     },
     {
       "id": "grand_control_box",
-      "name": "SpeedTech Lights Grand Control Box",
+      "name": "SpeedTech Lights Super Take Down Grand Control Switch Box (C-GCBSTD)",
       "manufacturer": "SpeedTech Lights",
       "status": "installed",
       "category": "controller",
@@ -743,7 +743,7 @@
       "role": "Input 1 (front factory lamps)",
       "title": "Speed Turtle Engineering Easy Flash Module 3.0 (EFM 3.0), Ford version: Input 1 (front factory lamps)",
       "type": "signal",
-      "controller_output": "LED Output 4 (J4-6, yellow)",
+      "controller_output": "LED Output 4 (J4-6, yellow); slide 3",
       "fuse_a": 2.5,
       "wire_awg": 18,
       "current_a": null,
@@ -765,7 +765,7 @@
       "role": "Input 2 (rear factory lamps)",
       "title": "Speed Turtle Engineering Easy Flash Module 3.0 (EFM 3.0), Ford version: Input 2 (rear factory lamps)",
       "type": "signal",
-      "controller_output": "LED Output 5 (J4-7, white/brown)",
+      "controller_output": "LED Output 5 (J4-7, white/brown); slide 3 and REAR LAMPS key (Blank 1)",
       "fuse_a": 2.5,
       "wire_awg": 18,
       "current_a": null,
@@ -883,6 +883,7 @@
           "LED-3",
           "J1-7",
           "LED-4",
+          "LED-5",
           "LED-6",
           "LED-31"
         ],
@@ -1002,10 +1003,18 @@
         "outputs": [
           "LED-2",
           "J1-6",
-          "LED-23"
+          "LED-23",
+          "LED-6",
+          "LED-7",
+          "LED-8",
+          "LED-27",
+          "LED-28",
+          "LED-29",
+          "LED-30",
+          "LED-31"
         ],
         "flash": null,
-        "note": "Color Flood right (CONFIRMED); rocker green (BENCH); E68 sweep BENCH"
+        "note": "Color Flood right (CONFIRMED); rocker green (BENCH); E68Xtreme sweep Module 1 to 8, toward the passenger side if its cable exits on the driver side (cable end and smooth sweep on LED outputs: BENCH)"
       },
       {
         "name": "Left arrow",
@@ -1013,10 +1022,18 @@
         "outputs": [
           "LED-11",
           "J1-6",
-          "LED-22"
+          "LED-22",
+          "LED-6",
+          "LED-7",
+          "LED-8",
+          "LED-27",
+          "LED-28",
+          "LED-29",
+          "LED-30",
+          "LED-31"
         ],
         "flash": null,
-        "note": "Color Flood left (CONFIRMED); rocker blue (BENCH)"
+        "note": "Color Flood left (CONFIRMED); rocker blue (BENCH); E68Xtreme sweep Module 8 to 1 (BENCH)"
       },
       {
         "name": "Both arrows (FLASH)",
@@ -1026,10 +1043,18 @@
           "LED-11",
           "J1-6",
           "LED-22",
-          "LED-23"
+          "LED-23",
+          "LED-6",
+          "LED-7",
+          "LED-8",
+          "LED-27",
+          "LED-28",
+          "LED-29",
+          "LED-30",
+          "LED-31"
         ],
         "flash": null,
-        "note": "Center out"
+        "note": "Center out; E68Xtreme sweeps from Modules 4-5 out to both ends (BENCH)"
       },
       {
         "name": "Blank 1",
@@ -1075,127 +1100,148 @@
           "sw": 1,
           "cap": "STBY",
           "label": "STBY",
-          "button": null
+          "button": null,
+          "hotkey": null
         },
         {
           "sw": 2,
           "cap": "RAD",
           "label": "RAD",
-          "button": null
+          "button": null,
+          "hotkey": null
         },
         {
           "sw": 3,
           "cap": "HF",
           "label": "HF",
-          "button": null
+          "button": null,
+          "hotkey": null
         },
         {
           "sw": 4,
           "cap": "WAIL",
           "label": "WAIL",
-          "button": null
+          "button": null,
+          "hotkey": null
         },
         {
           "sw": 5,
           "cap": "YELP",
           "label": "YELP",
-          "button": null
+          "button": null,
+          "hotkey": null
         },
         {
           "sw": 6,
           "cap": "PIER",
           "label": "PIER",
-          "button": null
+          "button": null,
+          "hotkey": null
         },
         {
           "sw": 7,
           "cap": "MAN",
           "label": "MAN",
-          "button": null
+          "button": null,
+          "hotkey": null
         },
         {
           "sw": 8,
           "cap": "HORN",
           "label": "HORN",
-          "button": null
+          "button": null,
+          "hotkey": null
         },
         {
           "sw": 9,
           "cap": "",
           "label": "REAR LAMPS",
-          "button": "Blank 1"
+          "button": "Blank 1",
+          "hotkey": null
         },
         {
           "sw": 10,
           "cap": "LEFT ALLEY",
           "label": "LEFT ALLEY",
-          "button": "LEFT ALLEY"
+          "button": "LEFT ALLEY",
+          "hotkey": "L"
         },
         {
           "sw": 11,
           "cap": "CORNER",
           "label": "CORNER",
-          "button": "PATTERN (CORNER)"
+          "button": "PATTERN (CORNER)",
+          "hotkey": "P"
         },
         {
           "sw": 12,
           "cap": "",
           "label": "FLOOD PATTERN",
-          "button": "Blank 2"
+          "button": "Blank 2",
+          "hotkey": "F"
         },
         {
           "sw": 13,
           "cap": "",
           "label": "STEADY",
-          "button": "STEADY (blank 3)"
+          "button": "STEADY (blank 3)",
+          "hotkey": null
         },
         {
           "sw": 14,
           "cap": "SCENE",
           "label": "SCENE",
-          "button": "SCENE"
+          "button": "SCENE",
+          "hotkey": null
         },
         {
           "sw": 15,
           "cap": "RIGHT ALLEY",
           "label": "RIGHT ALLEY",
-          "button": "RIGHT ALLEY"
+          "button": "RIGHT ALLEY",
+          "hotkey": "R"
         },
         {
           "sw": 16,
           "cap": "",
           "label": "WHITE",
-          "button": "WHITE (blank 4)"
+          "button": "WHITE (blank 4)",
+          "hotkey": null
         },
         {
           "sw": 17,
           "cap": "STAR OF LIFE",
           "label": "REAR FLOOD",
-          "button": "REAR FLOOD (Star of Life)"
+          "button": "REAR FLOOD (Star of Life)",
+          "hotkey": null
         },
         {
           "sw": 18,
           "cap": "TAKE DOWN",
           "label": "TAKE DOWN",
-          "button": "TAKE DOWN"
+          "button": "TAKE DOWN",
+          "hotkey": null
         },
         {
           "sw": 19,
           "cap": "LEFT ARROW",
           "label": "◄",
-          "button": "Left arrow"
+          "button": "Left arrow",
+          "hotkey": null
         },
         {
           "sw": 20,
           "cap": "RIGHT ARROW",
           "label": "►",
-          "button": "Right arrow"
+          "button": "Right arrow",
+          "hotkey": null
         },
         {
           "sw": 21,
           "cap": "FLASH",
           "label": "◄ FLASH ►",
-          "button": "Both arrows (FLASH)"
+          "button": "Both arrows (FLASH)",
+          "hotkey": null
         }
       ]
     }

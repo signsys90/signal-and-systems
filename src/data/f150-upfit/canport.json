@@ -1,0 +1,90 @@
+{
+  "generated_by": "Upfit Studio 0.8.10 (scripts/sync_upfit_studio.py)",
+  "vehicle": "F150 2017",
+  "kit": "Whelen Carbide CanTrol OBDII CANport Kit For CCSRN5 (CC5K1 - Ford)",
+  "source": "Whelen Command, Configure CANport, F150 2017 signal list (William's screenshots, 31 Oct)",
+  "max_commands": 8,
+  "catalog_size": 60,
+  "value_signals": [
+    "Engine - RPM",
+    "Fuel Level",
+    "Key Switch - Position",
+    "Throttle Position",
+    "Trans - Range",
+    "Vehicle Speed"
+  ],
+  "commands": [
+    {
+      "slot": 1,
+      "signal": "Brake - Service",
+      "action": "Brake pop",
+      "note": "Option A brake pop: LED 13, 6, 31 flash about 2 s, then Z-6 steady red while held. Command file -3 (31 Oct) has the first pass only (J4 #17, LED 13 steady); the 2 s flash needs an Event or Virtual Input timer",
+      "value_signal": false
+    },
+    {
+      "slot": 2,
+      "signal": "Trans - Reverse",
+      "action": "REAR FLOOD (Star of Life)",
+      "note": "Putco white rear flood (J1-8) on while in reverse (William, 31 Oct). Programmed in Command file -3",
+      "value_signal": false
+    },
+    {
+      "slot": 3,
+      "signal": "Door - Any Back",
+      "action": "SCENE",
+      "note": "Color Flood steady white flood when a rear door opens, for loading gear (William, 31 Oct). Programmed in Command file -3 (Open state: J4 #03, J1 #06)",
+      "value_signal": false
+    },
+    {
+      "slot": 4,
+      "signal": "Hazards - Lights",
+      "action": "Both arrows (FLASH)",
+      "note": "Hazard switch turns Both arrows (FLASH) on; hazards off turns it off (William, 31 Oct). Replaces the Key Switch - RUN ignition-sense idea; ignition stays on the J17-7 wire. Programmed in Command file -3 with head arrow display Split; E68Xtreme sweep not set until the bench",
+      "value_signal": false
+    },
+    {
+      "slot": 5,
+      "signal": "Door - Any Front",
+      "action": "SCENE",
+      "note": "Color Flood steady white flood when either front door opens; programmed in Command file -3 (31 Oct). Replaces CAN 3 Door - Any Driver",
+      "value_signal": false
+    },
+    {
+      "slot": 6,
+      "signal": "Trans - Park",
+      "action": "Arrows off when signal ends",
+      "note": "Shifting out of Park switches the arrows (Right, Left, FLASH) off once; you can press them on again in Drive (William, 31 Oct). Command must treat this as a one-time turn-off when Park ends, not a lockout while out of Park: confirm in Command (BENCH). NOT programmed in Command file -3 yet (OFF state, Inputs tab: SW11, SW12, SW13 Set To OFF)",
+      "value_signal": false
+    },
+    {
+      "slot": 7,
+      "signal": "Brake - Parking",
+      "action": "TAKE DOWN",
+      "note": "Setting the parking brake turns TAKE DOWN on; releasing it turns TAKE DOWN off (William, 31 Oct). Programmed in Command file -3, E68Xtreme outputs Turn Off",
+      "value_signal": false
+    },
+    {
+      "slot": 8,
+      "signal": "Trans - Drive",
+      "action": "SCENE and TAKE DOWN off when signal starts",
+      "note": "Shifting into Drive switches SCENE and TAKE DOWN off once so you don't drive off with them on; set as a one-time turn-off in Command (BENCH) (William, 31 Oct). Programmed in Command file -3 (ON state, Inputs tab: SW20, SW24 Set To OFF)",
+      "value_signal": false
+    }
+  ],
+  "command_file": {
+    "file": "command_cantrol_g3_f150_31oct_programmed_3.wln",
+    "command_version": "2.4.8.0",
+    "can_in_file": [
+      "Brake - Parking",
+      "Brake - Service",
+      "Door - Any Front",
+      "Hazards - Lights",
+      "Trans - Reverse",
+      "Trans - Park",
+      "Trans - Drive",
+      "Door - Any Back"
+    ],
+    "only_in_file": [],
+    "only_in_plan": []
+  }
+}

@@ -48,6 +48,12 @@ The Whelen CCTL7 21-button slide head. The slide has four positions; far left is
 
 Priority when controls overlap, top wins: brake pop, TAKE DOWN, WHITE, STEADY, then the slide. Brake pop is always on: the Z-6 heads and the E68Xtreme red modules flash for about 2 seconds, then the Z-6 heads stay steady red while the brake is held (inferred, not yet bench-tested).
 
+## CANport vehicle inputs
+
+Eight vehicle signals from the OBD-II port, through the Whelen CC5K1 CANport kit, set up in Whelen Command on 31 Oct 2026 and planned in [Upfit Studio](/projects/upfit-studio/#whelen-command-canport-setup). This table is generated from the same data as the Upfit Studio page, so the two always match.
+
+<UpfitStudioPlan show="canport" />
+
 ## Power and inputs
 
 - **Main input:** 80A max through two red leads, each fused 40A at the battery, and two black grounds. 12V DC ±20%, negative ground only.
@@ -58,9 +64,9 @@ Priority when controls overlap, top wins: brake pop, TAKE DOWN, WHITE, STEADY, t
 ## Open items
 
 - Confirm the module model on its label.
-- Confirm Whelen Command shows the brake and Park signals for the 2017 F-150 over the CANport.
+- Whelen Command shows Brake - Service, Trans - Park and the other CAN signals for the F150 2017 (confirmed from my Command screenshots, 31 Oct). Still to do: program CAN 6 (Park) and the brake pop timer in Command, then bench-test all eight CAN inputs.
 - Check whether blank button 1 stays latched after a restart, and how long the system stays on after the key is off.
 
 ## Changelog
 
-<Changelog entries={[{ date: '2026-10-31', change: 'Output and control head tables now generated from Upfit Studio 0.5.0 (31 Oct approved slide layout, rocker relays, U-Lite and Putco wiring, steady vs flash per output, CCTL7 key map).', rollback: 'Revert the commit that added UpfitStudioPlan.' }, { date: '2026-10-27', change: 'LED Outputs 6–8 and 27–31 assigned to the planned E68Xtreme rear stick (27 Oct files); spares now 14–26 and 32. J1-3 noted as freed when the BooYu comes out.', rollback: 'Revert the commit that added the E68Xtreme.' }, { date: '2026-10-26', change: 'Output plan published from the project document.', rollback: 'Revert the commit that added this page.' }]} />
+<Changelog entries={[{ date: '2026-10-31', change: 'Added the CANport vehicle inputs table (8 CAN signals, generated from Upfit Studio 0.8.10); output and key tables regenerated from 0.8.10 (E68Xtreme sweep on the arrow keys, EFM rear in slide 3).', rollback: 'Revert the commit that added the CANport section.' }, { date: '2026-10-31', change: 'Output and control head tables now generated from Upfit Studio 0.5.0 (31 Oct approved slide layout, rocker relays, U-Lite and Putco wiring, steady vs flash per output, CCTL7 key map).', rollback: 'Revert the commit that added UpfitStudioPlan.' }, { date: '2026-10-27', change: 'LED Outputs 6–8 and 27–31 assigned to the planned E68Xtreme rear stick (27 Oct files); spares now 14–26 and 32. J1-3 noted as freed when the BooYu comes out.', rollback: 'Revert the commit that added the E68Xtreme.' }, { date: '2026-10-26', change: 'Output plan published from the project document.', rollback: 'Revert the commit that added this page.' }]} />
