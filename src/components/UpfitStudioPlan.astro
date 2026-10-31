@@ -2,9 +2,11 @@
 // Tables generated from Upfit Studio's export (src/data/f150-upfit/upfit-studio.json).
 // That file is written by the app on every saved change; do not edit it or these tables by hand.
 import data from '../data/f150-upfit/upfit-studio.json';
+// CANport plan: written by scripts/sync_upfit_studio.py from the app's controls.canport. Single source for every CANport table.
+import can from '../data/f150-upfit/canport.json';
 
 interface Props {
-	show?: 'outputs' | 'head' | 'circuits';
+	show?: 'outputs' | 'head' | 'circuits' | 'canport';
 }
 const { show = 'outputs' } = Astro.props;
 
@@ -47,7 +49,38 @@ const outputs = [...new Set([...Object.keys(feeds), ...entries.flatMap((e) => e.
 const onIn = (o: string) => entries.filter((e) => e.outputs.includes(o)).map((e) => `${e.name}${e.flash[o] ? ` (flash ${e.flash[o]})` : ''}`);
 ---
 
-<p class="ss-gen">Generated from Upfit Studio ({data.generated_by}), updated {data.updated}. {data.status_note}</p>
+{show !== 'canport' && <p class="ss-gen">Generated from Upfit Studio ({data.generated_by}), updated {data.updated}. {data.status_note}</p>}
+
+{show === 'canport' && (
+	<>
+		<p class="ss-gen">
+			Generated from {can.generated_by}. Vehicle in Whelen Command: <b>{can.vehicle}</b> ({can.catalog_size} CAN signals listed, up to {can.max_commands} used). Kit: {can.kit}.
+			{can.command_file && <> Compared with the Command file <span class="ss-mono">{can.command_file.file}</span> (Command {can.command_file.command_version}): {can.command_file.only_in_file.length || can.command_file.only_in_plan.length ? 'signal names differ from the plan.' : `all ${can.command_file.can_in_file.length} signal names match the plan.`} Only names are compared; which output each signal drives is checked by hand.</>}{' '}
+			Nothing here is bench-tested.
+		</p>
+		<div class="ss-table-wrap not-content" tabindex="0">
+			<table class="ss-table ss-can">
+				<thead><tr><th>Slot</th><th>Signal (Command name)</th><th>What it does</th><th>In Command file</th><th>Notes and status</th></tr></thead>
+				<tbody>
+					{Array.from({ length: can.max_commands }, (_, i) => i + 1).map((slot) => {
+						const c = can.commands.find((x) => x.slot === slot);
+						return c ? (
+							<tr>
+								<td class="ss-mono">CAN {slot}</td>
+								<td>{c.signal}{c.value_signal && ' (value signal: threshold set in Command)'}</td>
+								<td>{c.action}</td>
+								<td>{can.command_file ? (can.command_file.can_in_file.includes(c.signal) ? 'Yes' : 'No') : '—'}</td>
+								<td>{c.note ?? ''}</td>
+							</tr>
+						) : (
+							<tr><td class="ss-mono">CAN {slot}</td><td colspan="4">Unused</td></tr>
+						);
+					})}
+				</tbody>
+			</table>
+		</div>
+	</>
+)}
 
 {show === 'outputs' && (
 	<div class="ss-table-wrap not-content" tabindex="0">
@@ -112,4 +145,7 @@ const onIn = (o: string) => entries.filter((e) => e.outputs.includes(o)).map((e)
 	.ss-table :is(th, td) { border: 1px solid var(--ss-border); padding: 0.45rem 0.6rem; text-align: left; vertical-align: top; }
 	.ss-table th { background: var(--ss-surface); color: var(--ss-muted); font-weight: 600; font-size: var(--sl-text-xs); text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; }
 	.ss-table td { color: var(--ss-text); }
+	.ss-can td:first-child { white-space: nowrap; }
+	.ss-can td:nth-child(2) { min-width: 9rem; }
+	.ss-can td:last-child { min-width: 20rem; }
 </style>

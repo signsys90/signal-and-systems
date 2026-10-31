@@ -1,0 +1,28 @@
+---
+title: '2026-10-31: Whelen Command CANport setup added'
+description: 'Eight OBD-II vehicle signals for the CanTrol, planned in Upfit Studio 0.8.0 to 0.8.10 and keyed into Whelen Command, now on the Upfit Studio page and the F-150 output plan from one shared data file.'
+sidebar:
+  order: -20261031.2
+---
+
+Parent projects: [Upfit Studio](/projects/upfit-studio/) and [F-150 Emergency Lighting and 12V Upfit](/projects/f150-upfit/).
+
+## What changed
+
+Between the morning sync and the evening of 31 Oct, Upfit Studio went from version 0.5.2 to 0.8.10. The biggest addition is the Whelen Command CANport setup: eight vehicle signals the CanTrol reads from the OBD-II port through the Whelen CC5K1 kit.
+
+| Area | Change | Page |
+| --- | --- | --- |
+| CANport | New section: the eight CAN inputs, how they were set up (0.8.0 to 0.8.10), the read-only Command file compare, simulation, the programming sheet and status | [Upfit Studio](/projects/upfit-studio/#whelen-command-canport-setup) |
+| CANport | Same table on the F-150 output plan | [Output plan](/projects/f150-upfit/cantrol-output-plan/#canport-vehicle-inputs) |
+| Controller | Brake and Park confirmed in Command's F150 2017 list; link to the CANport plan | [Controller](/projects/f150-upfit/cantrol-controller/#canport-and-brake-pop) |
+| Output plan | Regenerated from 0.8.10: E68Xtreme sweep on the arrow keys, EFM rear lamps in slide 3, full Grand Control Box name | [Output plan](/projects/f150-upfit/cantrol-output-plan/) |
+| Upfit Studio | Stand-alone controller simulators (0.6.0), installer / EVT quote packet (0.7.0), Windows build fixes, version history to 0.8.10, 9 new screenshots, tests now 195 pass | [Upfit Studio](/projects/upfit-studio/) |
+
+## One source for every CANport table
+
+The CANport tables on both pages are drawn from one file, `src/data/f150-upfit/canport.json`, written by `scripts/sync_upfit_studio.py` from the app's own plan. A change to the CANport setup is re-synced in one step and shows up on both pages.
+
+## Status
+
+Seven of the eight CAN inputs are keyed into my Command file "-3" (brake pop first pass only). Shift out of Park is not programmed yet. Nothing has been bench-tested on the module or truck.
