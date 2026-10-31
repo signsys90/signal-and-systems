@@ -43,7 +43,7 @@ import packetCover from '../../../../assets/upfit-studio/26-packet-cover.jpg';
 import auxHeads from '../../../../assets/upfit-studio/27-aux-controllers.jpg';
 import UpfitStudioPlan from '../../../../components/UpfitStudioPlan.astro';
 
-<ProjectHeader hero={head} heroAlt="Upfit Studio control head screen: a replica of the Whelen CCTL7 21-button slide head with the slide in position 3, and a table of the 18 CanTrol outputs that turn on, each marked Steady, Flash A or Flash B." />
+<ProjectHeader hero={head} heroAlt="Upfit Studio 0.8.10 control head screen: a replica of the Whelen CCTL7 21-button slide head with the slide in position 3, the Grand Control Box and BooYu controllers powered below it, and a table of the 19 CanTrol outputs that turn on, each marked Steady, Flash A or Flash B." />
 
 ## One-line summary
 
@@ -199,7 +199,7 @@ The HTML has the cover and rules for this truck (no battery-negative ground, air
 
 ## Screenshots
 
-The screens below were captured 31 Oct 2026 from version 0.5.2; the CANport, controller and packet images above are from version 0.8.10, captured the same way running the live F-150 config in a browser harness on Linux (the same page the Windows window loads). Prices and order notes were removed from the screenshot copy of the config, and the budget card was hidden, so no spend totals appear. Folder paths shown are the app's placeholders. These show the software only: nothing on these screens has been bench-tested or programmed into the CanTrol.
+The screens below were captured 31 Oct 2026 from version 0.5.2, except the control head, which was retaken on 0.8.10; the CANport, controller and packet images above are from version 0.8.10, captured the same way running the live F-150 config in a browser harness on Linux (the same page the Windows window loads). Prices and order notes were removed from the screenshot copy of the config, and the budget card was hidden, so no spend totals appear. Folder paths shown are the app's placeholders. These show the software only: nothing on these screens has been bench-tested or programmed into the CanTrol.
 
 ### Design
 
@@ -207,7 +207,7 @@ The screens below were captured 31 Oct 2026 from version 0.5.2; the CANport, con
 	photos={[
 		{ src: command, alt: 'Command center: tiles for 18 circuits (27% of electrical data filled in), 20 parts (4 installed, 11 bought, 5 to buy), 131 open items with 0 warnings and 0 errors, and 32 of 40 CanTrol outputs used; known load 1.00 A of 40 A; a list of the next open items.', caption: 'Command center. Circuits, parts, open items and CanTrol outputs used, the known 12V load against the module total, and the next things that need a measurement or a source.' },
 		{ src: map, alt: 'Wiring map: the Whelen CanTrol WC module with J1 outputs 1 to 8 (10 A) and LED outputs (2.5 A) on the left, colored wires running to device cards on the right such as the UBL Color Flood 2.0 light bar and the SpeedTech Raptor visor bar, with slide 3 simulated.', caption: 'Wiring map in slide 3. Each wire is drawn in its real color from the CanTrol output to the product and wire function. Steady and flashed outputs are drawn differently; click a wire to edit it.' },
-		{ src: head, alt: 'Control head replica with the slide in position 3 and a table of 18 outputs that are on, each marked Steady, Flash A or Flash B, and which product it feeds.', caption: 'Control head: a replica of the Whelen CCTL7 21-button slide head with my key caps. Slide 3 turns on 18 outputs; each is shown as Steady or CanTrol Flash A/B.' },
+		{ src: head, alt: 'Control head replica with the slide in position 3, the Grand Control Box and BooYu controllers powered below it, and a table of 19 outputs that are on, each marked Steady, Flash A or Flash B, and which product it feeds.', caption: 'Control head (retaken on version 0.8.10): a replica of the Whelen CCTL7 21-button slide head with my key caps. Slide 3 turns on 19 outputs, now including the EFM rear lamps (LED 5); each is shown as Steady or CanTrol Flash A/B. The Grand Control Box and BooYu controllers below power up from J1-2 and J1-3.' },
 		{ src: preview, alt: 'Light preview: each product drawn by where it sits on the truck (grille guard, visor, rocker panels, rear window, plate, tailgate) with its LED colors lit and labelled own pattern, flash A or flash B.', caption: 'Light preview. Every product drawn where it sits on the truck with its colors and drive type. Unconfirmed colors show as "color TBD". Timing is illustrative.' },
 		{ src: outputs, alt: 'Output board: all 40 CanTrol outputs as cards, J1 high-current outputs and LED outputs, each showing what it feeds, the slide positions and buttons that turn it on, and free outputs.', caption: 'Output board. All 40 CanTrol outputs at a glance: what each one feeds, which slide positions and keys use it, and which are still free.' },
 		{ src: circuits, alt: 'Circuits screen: a list of circuits on the left and an edit form on the right for the CanTrol main power feed, with current draw, fuse, wire gauge, feed run and ground fields and live checks.', caption: 'Circuits with live checks. As values are typed, voltage drop, wire protection and fuse size update. A blank box saves as blank, never as a guess.' },
