@@ -5,7 +5,7 @@ summary: An internal application that gave franchise members self-service search
 status: Delivered
 category: Business Systems
 started: Spring 2026
-updated: 2026-10-27
+updated: 2026-10-31
 project: true
 ---
 
@@ -35,7 +35,7 @@ import Changelog from '../../../../components/Changelog.astro';
 		['Development approach', 'AI-assisted software development using OpenAI Codex'],
 		['Public demo', 'None. Internal application; no live link exists'],
 		['Current status', 'Not known'],
-		['Last updated', 'October 27, 2026'],
+		['Last updated', 'October 31, 2026'],
 	]}
 	source={{ label: 'Project description by William A. Atkins' }}
 />
@@ -416,8 +416,8 @@ The HubSpot integration is described only by what it did for the business: retri
 | Logging, monitoring, testing, error handling | Not documented |
 | Numbers of users, assets, franchises, and administrative operations | Not documented |
 
-<Callout type="unverified" title="Technical reconstruction held back">
-A proposed technical reconstruction of how these capabilities could be implemented has been prepared separately. It is not published here, because it is not a record of the original application.
+<Callout type="unverified" title="Proposed reconstruction is separate">
+A proposed technical reconstruction of how these capabilities could be implemented appears near the end of this page, under [Proposed Technical Reconstruction — Not Historically Verified](#proposed-technical-reconstruction--not-historically-verified). It is a reference design, not a record of the original application.
 </Callout>
 
 ## 13. What This Project Demonstrates
@@ -462,6 +462,52 @@ The ideas below are possible future enhancements. They are not features of the o
 | Client-specific media package | A set of assets chosen for one client and downloaded together |
 | AI-assisted development workflow | Building software with an AI coding tool assisting implementation, under human direction |
 
+## Proposed Technical Reconstruction — Not Historically Verified
+
+<Callout type="unverified" title="Read this first">
+Everything in this section is a proposed reference design: one coherent way the remembered capabilities could be built. It is **not** a description of the original application's code, stack, hosting, or configuration, none of which survive. Technology names below are examples of suitable options, not claims about what was used. Nothing here should be read as a historical fact.
+</Callout>
+
+### Evidence ledger behind the reconstruction
+
+| Category | What falls in it |
+| --- | --- |
+| Confirmed | Internal application for franchise members, corporate marketing personnel, and authorized administrators; built in 2026 with OpenAI Codex; browser-based on a hosted server; media kept in the corporate HubSpot file store with no persistent copy; authenticated API integration; searchable index; the six remembered capabilities; nationwide franchise use |
+| Inferred | Some form of metadata listing or index supported search; administrative features were restricted to certain users in some way; the API credential was held by the application rather than by each user |
+| Unverified | Language, frameworks, libraries, hosting provider, deployment; authentication and authorization implementation; database, index persistence, caching; image-processing method and output format; package format; logging, monitoring, testing, error handling; user, asset, and operation counts |
+
+### Proposed reference architecture
+
+| Component | Proposed design | How it respects the confirmed constraints |
+| --- | --- | --- |
+| Browser client | One web interface with library search and browse (filters by asset type and folder), asset preview, a client-package selection tray, a before-and-after composer, and an administrator area | Keeps the experience browser-only for franchise members |
+| Application server | A small backend service (for example Node.js with TypeScript, or Python) exposing internal routes for search, retrieval, package generation, duplicate reports, and rename requests | Holds the integration credential server-side so it never reaches a browser |
+| HubSpot integration | A server-held API credential limited to file permissions, used to list and search files, obtain file access links, and update file names through HubSpot's file API, with pagination and retry with backoff for rate limits | Matches the confirmed read (retrieve) and write (rename) paths |
+| Metadata index | A lightweight index of file metadata only (ID, name, folder, type, size, last modified), refreshed on a schedule or on demand, held in memory or a small database such as SQLite; categories derived from folder and file type | Supports search without storing any media bytes |
+| Asset delivery | Short-lived access links from HubSpot, or streaming through the server without writing to permanent storage | Preserves the no-duplicate-library constraint |
+| Before-and-after composer | Browser-side compositing with the HTML canvas: two images side by side or stacked, optional "Before" and "After" labels, exported as JPEG or PNG; a server-side alternative would use an image library such as Sharp or Pillow | Builds outputs from approved library images |
+| Client package builder | The server fetches the selected files and streams them into a ZIP archive during download, optionally with an index sheet of contents; any temporary files are deleted after delivery | Delivers one package without keeping copies |
+| Duplicate identification | A report grouping likely duplicates by normalized name, matching size, and, where needed, a content hash computed on demand | Human review only; nothing is deleted automatically |
+| Remote rename | An administrator-only action that validates the new name (allowed characters, extension unchanged, no collision), calls the update operation, refreshes the index entry, and records who renamed what and when | Writes the correction to the corporate original |
+| Access control | Sign-in for every user with at least two roles, franchise member and administrator, enforced on the server rather than only hidden in the interface; single sign-on would be an option | Matches the confirmed separation of franchise and administrative tools |
+| Hosting and operations | Any host that runs the backend over HTTPS, with secrets in environment variables, logging that excludes personal data, a health check, and alerts on repeated integration failures | Keeps credentials and personal data out of logs and code |
+
+### Recommended verification checklist for a rebuild
+
+| Check | Expected result |
+| --- | --- |
+| Search | Correct results by file name and asset type |
+| Delivery | Downloads come from HubSpot, and no media is written to permanent server storage |
+| Before-and-after | Correct output for mixed portrait and landscape images |
+| Packages | Archives open and contain exactly the selected files |
+| Duplicates | Known duplicates are flagged, and nothing is deleted |
+| Rename | Succeeds for administrators, is refused for franchise users, and appears in HubSpot |
+| Credentials | No credential is ever exposed to the browser |
+
+<Callout type="unverified">
+This checklist describes how a rebuild should be verified. It is not a claim that the original application was tested this way.
+</Callout>
+
 ## Related SaniGLAZE Work
 
 - [SaniGLAZE Video End-Slide Generator](/projects/saniglaze-video-end-slide-tool/): another Codex-built self-service tool for the same franchise network, focused on localized marketing video.
@@ -473,6 +519,7 @@ The ideas below are possible future enhancements. They are not features of the o
 
 <Changelog
 	entries={[
+		{ date: '2026-10-31', change: 'Published the Proposed Technical Reconstruction — Not Historically Verified section with William\'s approval: evidence ledger, proposed reference architecture, and a verification checklist for a rebuild, all labelled as a reference design rather than the original implementation.', rollback: 'Revert the commit that added this section.' },
 		{ date: '2026-10-27', change: 'Status set to Delivered and start date to Spring 2026.', rollback: 'Revert the commit that made this change.' },
 		{ date: '2026-10-27', change: 'Added confirmed facts from William: built in 2026 while Vice President of Marketing at SaniGLAZE International, and used by the franchise network nationwide.', rollback: 'Revert the commit that added these facts.' },
 		{ date: '2026-10-27', change: 'Expanded to full detail at William\'s request: executive summary, Codex role table, user-group problem table, user workflows, per-capability detail with explicit "not claimed" notes, layer-by-layer architecture table, design principles, stakeholder value and measurement framework (no values), confidentiality list, verification ledger, proposed enhancements (labelled as proposed), glossary, and two functional diagrams.', rollback: 'Revert the commit that expanded this page.' },
