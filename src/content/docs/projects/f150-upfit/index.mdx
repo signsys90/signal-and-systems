@@ -5,7 +5,7 @@ summary: Emergency lighting, siren and 12V build on a 2017 F-150 Lariat SuperCre
 status: In progress
 category: Vehicle Upfit and 12V
 started: Spring 2026
-updated: 2026-10-27
+updated: 2026-10-31
 project: true
 sidebar:
   label: Overview
@@ -103,13 +103,13 @@ Battery (Optima Yellow Top) ── 2 x 40A fuses at battery ── Whelen CanTro
                                                               ├── LED out 6–8, 27–31 ── E68Xtreme rear stick, one output per head (planned)
                                                               ├── J1-4 ── 2 x UBL U-Lite grille lights
                                                               ├── J1-5 ── Putco 60" Work Blade (tailgate)
-                                                              ├── LED out 3 ── 30A relay ── 2 x UBL rocker panel bars
+                                                              ├── LED out 3 / J1-7 ── relays A and B ── 2 x UBL rocker panel bars (Mode 1 / Mode 2)
                                                               ├── LED out 4/5 ── Speed Turtle EFM 3.0 ── BCM ── factory lamps
                                                               ├── LED out 12/13 ── 2 x SpeedTech Z-6 heads (rear plate)
                                                               └── OBDII CANport (CC5K1) ── brake signal for brake pop
 ```
 
-The full output assignment is on the [CanTrol output plan](/projects/f150-upfit/cantrol-output-plan/) page.
+The full output assignment is on the [CanTrol output plan](/projects/f150-upfit/cantrol-output-plan/) page. Since 31 Oct 2026 that plan is generated from [Upfit Studio](/projects/upfit-studio/), the offline app that now holds every part, circuit, wire and the control plan for this build, checks the 12V design and simulates the control head.
 
 ## Component pages
 
@@ -135,6 +135,7 @@ The full output assignment is on the [CanTrol output plan](/projects/f150-upfit/
 | [Control head mount](/projects/f150-upfit/control-head-mount/) | Locations considered and the overhead console mount | In progress |
 | [CF-33 laptop mount](/projects/f150-upfit/cf33-laptop-mount/) | The programming laptop and the planned passenger-seat mount | Planned |
 | [Decisions, revisions and sources](/projects/f150-upfit/decisions-and-sources/) | Source conflicts, superseded plans, revision history, every source | In progress |
+| [Upfit Studio](/projects/upfit-studio/) | The offline Windows app that holds this build as one config file, checks it, simulates the CCTL7 head and publishes the output plan here | In progress |
 | [Mobile Ham Radio Install](/projects/mobile-ham-radio/) | The radio in the same truck, kept on its own power and ground | Installed |
 
 ## Controller
@@ -311,6 +312,7 @@ If the player doesn't load, [watch the video on Google Drive](https://drive.goog
 
 <Changelog
 	entries={[
+		{ date: '2026-10-31', change: 'Linked Upfit Studio, which now generates the output plan; rocker bars shown on relays A and B (LED Output 3 and J1 Output 7) per the 31 Oct approved wiring; rocker and U-Lite pages given the 31 Oct wiring.', rollback: 'Revert the commit that added Upfit Studio.', log: '/log/2026-10-31-upfit-studio-sync/' },
 		{ date: '2026-10-27', change: 'Build video reviewed for privacy (no VIN or location details; the plate is a vanity plate) and captioned. Start date set to Spring 2026.', rollback: 'Revert the commit that made this change.' },
 		{ date: '2026-10-27', change: 'Updated from the 27 October project files: planned Strobes N\' More E68Xtreme rear stick on a Federal Signal SLB-FRD15ND bracket replaces the BooYu and the dropped Whelen Dominator option (LED Outputs 6–8 and 27–31, wires K1–K10); CC5K1 arrived 26 Oct.', rollback: 'Revert the commit that added the E68Xtreme.', log: '/log/2026-10-27-e68xtreme-rear-stick/' },
 		{ date: '2026-10-27', change: 'F-150 section rebuilt from the 23 October project files: thirteen new pages (power and wire schedule, install plan, parts list, siren speakers, U-Lites, visor bar, rear traffic advisor, rocker bars, Putco, rear plate Z-6 and brake pop, factory lamps, CF-33 mount, decisions and sources), the grille guard page rewritten to the final mounts, and the overview given the vehicle baseline, workstreams, full open items and troubleshooting.', rollback: 'Revert the commit that rebuilt the F-150 section.', log: '/log/2026-10-27-f150-rebuild/' },

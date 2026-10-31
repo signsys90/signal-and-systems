@@ -1,10 +1,10 @@
 ---
 title: UBL rocker panel lights
 description: Two UBL 60-inch amber/white LED running board rocker panel lights for the F-150, switched by a 30A relay whose coil runs from a Whelen CanTrol WC LED output, with sync steps and a wire-by-wire plan.
-summary: Two 60" amber/white UBL bars low on the rocker panels, on one 30A relay with its coil on LED Output 3 (slide 3). Not bought yet; draw to be measured before fuses are chosen.
+summary: Two 60" amber/white UBL bars low on the rocker panels on two 30A relays, relay A (LED Output 3) for Mode 1 in slides 2-3, relay B (J1 Output 7) for Mode 2 in slide 3; arrows and pattern step on LED outputs. Not bought yet; draw to be measured before fuses are chosen.
 status: Planned
 category: Vehicle Upfit and 12V
-updated: 2026-10-27
+updated: 2026-10-31
 sidebar:
   label: Rocker panel lights
   order: 14
@@ -119,6 +119,34 @@ These match the UBL Tailgate Bar Instructions, version A.4 (SKU UBL-TGB), which 
 
 If both bars together draw under about 8A, they can run straight from J1-7 (a spare 10A output) with no relay. The [five-modes plan](/projects/f150-upfit/five-modes-plan/) takes this further (decision C): red on J1-7 and white on J1-8, so the CanTrol can flash them. A mechanical relay can't switch at flash rate for long, so flashing modes need the relay removed. All of this depends on the measured draw.
 
+## 31 October update: two relays and CanTrol wiring as approved
+
+On 31 Oct 2026 I approved the final rocker wiring (project document sections 3.1 and 9.2 G). It is now in [Upfit Studio](/projects/upfit-studio/) and on the generated [output plan](/projects/f150-upfit/cantrol-output-plan/). It replaces the single relay, the capped white, blue and green wires, and the in-cab yellow button above. The relay, wiring and option sections above are kept as the earlier plan.
+
+### Relays (two 30A SPDT, ISO style)
+
+| Relay | Coil trigger (pin 86) | Load (pin 87) | When it is on |
+| --- | --- | --- | --- |
+| A | LED Output 3 (J4-5, orange) | Both bars' red (Mode 1), each bar fused | Slides 2 and 3 |
+| B | J1 Output 7 | Both bars' white (Mode 2, overrides Mode 1), each bar fused | Slide 3 |
+
+Pin 30 on each relay is a fused battery feed and pin 85 goes to ground, as before. Fuse sizes per bar still wait on the measured draw.
+
+### Bar wires
+
+| Wire | Function | Goes to |
+| --- | --- | --- |
+| Red | Mode 1 | Relay A pin 87 (fuse each bar) |
+| White | Mode 2 (overrides Mode 1) | Relay B pin 87 (fuse each bar) |
+| Blue (both bars joined) | Left arrow | LED Output 22: left-arrow and both-arrows keys |
+| Green (both bars joined) | Right arrow | LED Output 23: right-arrow and both-arrows keys. Blue and green together = center out |
+| Yellow (both bars joined) | Pattern / color step | LED Output 32: LEFT ALLEY key, momentary (under 1 s = color, 2 s = pattern) |
+| Black | Ground | Bare chassis ground (frame rail or Ford ground point, never battery negative) |
+
+- The yellow pattern step moves from a separate cab button to the LEFT ALLEY key on the control head.
+- The arrow wires are now used, so the rockers join the arrow keys with the Color Flood bar. Rocker arrow behavior is marked "BENCH" in the plan.
+- Status: bars and relays still to buy; nothing bench-tested or programmed.
+
 ## Bench test
 
 Measure the draw steady and flashing, size the fuse and wire, and practice the sync steps, all before mounting.
@@ -145,4 +173,4 @@ Measure the draw steady and flashing, size the fuse and wire, and practice the s
 
 ## Changelog
 
-<Changelog entries={[{ date: '2026-10-27', change: 'Page published from the 23 October project files.', rollback: 'Revert the commit that rebuilt the F-150 section.' }]} />
+<Changelog entries={[{ date: '2026-10-31', change: 'Added the 31 October approved wiring: relay A (LED Output 3, Mode 1, slides 2-3) and relay B (J1 Output 7, Mode 2, slide 3), arrows on LED Outputs 22/23, pattern step on LED Output 32 (LEFT ALLEY).', rollback: 'Revert the commit that added the 31 October wiring section.', log: '/log/2026-10-31-upfit-studio-sync/' }, { date: '2026-10-27', change: 'Page published from the 23 October project files.', rollback: 'Revert the commit that rebuilt the F-150 section.' }]} />
