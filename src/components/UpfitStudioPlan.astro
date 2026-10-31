@@ -1,0 +1,115 @@
+---
+// Tables generated from Upfit Studio's export (src/data/f150-upfit/upfit-studio.json).
+// That file is written by the app on every saved change; do not edit it or these tables by hand.
+import data from '../data/f150-upfit/upfit-studio.json';
+
+interface Props {
+	show?: 'outputs' | 'head' | 'circuits';
+}
+const { show = 'outputs' } = Astro.props;
+
+type Entry = { name: string; outputs: string[]; flash: Record<string, string> };
+const flashOf = (fl: unknown): Record<string, string> => {
+	const out: Record<string, string> = {};
+	if (Array.isArray(fl)) fl.forEach((o) => (out[o] = 'A'));
+	else if (fl && typeof fl === 'object') Object.entries(fl as Record<string, string[]>).forEach(([ph, os]) => (os || []).forEach((o) => (out[o] = ph)));
+	return out;
+};
+const ctl = data.controls;
+const keyOf = (button: string) => ctl.head.keys.find((k) => k.button === button);
+const entries: Entry[] = [
+	...Object.entries(ctl.slide).map(([k, s]) => ({ name: `Slide ${k}`, outputs: s.outputs || [], flash: flashOf(s.flash) })),
+	...ctl.buttons.map((b) => {
+		const k = keyOf(b.name as string);
+		return { name: k ? `${k.label || k.cap} (SW${k.sw})` : (b.name as string), outputs: (b.outputs as string[]) || [], flash: flashOf(b.flash) };
+	}),
+	{ name: 'Brake pop', outputs: (ctl.brake_pop.outputs as string[]) || [], flash: flashOf(ctl.brake_pop.flash) },
+];
+
+const outId = (t: string | null) => {
+	const m = /\b(J1|LED)(?:\s+Output\s+|-)(\d+)\b/i.exec(t || '');
+	return m ? `${m[1].toUpperCase()}-${m[2]}` : null;
+};
+const feeds: Record<string, string[]> = {};
+for (const c of data.circuits) {
+	let any = false;
+	for (const w of c.wires) {
+		const o = outId(w.connects_to);
+		if (o) { any = true; (feeds[o] ||= []).push(`${c.product}: ${w.color ?? ''} ${w.function ?? ''}`.trim()); }
+	}
+	if (!any) {
+		const o = outId(c.controller_output);
+		if (o) (feeds[o] ||= []).push(`${c.product}: ${c.role}`);
+	}
+}
+const sortKey = (o: string) => (o.startsWith('J1') ? 0 : 100) + Number(o.split('-')[1]);
+const outputs = [...new Set([...Object.keys(feeds), ...entries.flatMap((e) => e.outputs)])].sort((a, b) => sortKey(a) - sortKey(b));
+const onIn = (o: string) => entries.filter((e) => e.outputs.includes(o)).map((e) => `${e.name}${e.flash[o] ? ` (flash ${e.flash[o]})` : ''}`);
+---
+
+<p class="ss-gen">Generated from Upfit Studio ({data.generated_by}), updated {data.updated}. {data.status_note}</p>
+
+{show === 'outputs' && (
+	<div class="ss-table-wrap not-content" tabindex="0">
+		<table class="ss-table">
+			<thead><tr><th>Output</th><th>Rating</th><th>Feeds</th><th>Turned on by</th></tr></thead>
+			<tbody>
+				{outputs.map((o) => (
+					<tr>
+						<td class="ss-mono">{o.replace('-', ' ')}</td>
+						<td class="ss-mono">{o.startsWith('J1') ? '10A' : '2.5A'}</td>
+						<td>{(feeds[o] || ['Not wired yet']).map((f) => <div>{f}</div>)}</td>
+						<td>{onIn(o).join(', ') || '—'}</td>
+					</tr>
+				))}
+			</tbody>
+		</table>
+	</div>
+)}
+
+{show === 'head' && (
+	<div class="ss-table-wrap not-content" tabindex="0">
+		<table class="ss-table">
+			<thead><tr><th>Key</th><th>Printed cap</th><th>Label</th><th>Runs</th></tr></thead>
+			<tbody>
+				{ctl.head.keys.map((k) => {
+					const b = ctl.buttons.find((x) => x.name === k.button);
+					return (
+						<tr>
+							<td class="ss-mono">SW{k.sw}</td>
+							<td>{k.cap || 'Blank'}</td>
+							<td>{k.label}</td>
+							<td>{b ? `${b.name} (${b.action})` : k.sw <= 8 ? 'Siren' : '—'}</td>
+						</tr>
+					);
+				})}
+			</tbody>
+		</table>
+	</div>
+)}
+
+{show === 'circuits' && (
+	<div class="ss-table-wrap not-content" tabindex="0">
+		<table class="ss-table">
+			<thead><tr><th>Circuit</th><th>Product</th><th>Role</th><th>CanTrol output</th></tr></thead>
+			<tbody>
+				{data.circuits.map((c) => (
+					<tr>
+						<td class="ss-mono">{c.id}</td>
+						<td>{c.product}</td>
+						<td>{c.role}</td>
+						<td>{c.controller_output ?? '—'}</td>
+					</tr>
+				))}
+			</tbody>
+		</table>
+	</div>
+)}
+
+<style>
+	.ss-gen { font-size: var(--sl-text-sm); color: var(--ss-muted); }
+	.ss-table { border-collapse: collapse; margin-block: 1rem; }
+	.ss-table :is(th, td) { border: 1px solid var(--ss-border); padding: 0.45rem 0.6rem; text-align: left; vertical-align: top; }
+	.ss-table th { background: var(--ss-surface); color: var(--ss-muted); font-weight: 600; font-size: var(--sl-text-xs); text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; }
+	.ss-table td { color: var(--ss-text); }
+</style>
