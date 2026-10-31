@@ -1,0 +1,25 @@
+---
+title: '2026-10-31: Output plan now generated from Upfit Studio'
+description: 'The CanTrol output plan and the CCTL7 control head key map on this site are now built from the data file Upfit Studio writes on every saved change, so the site and the build plan no longer drift apart.'
+sidebar:
+  order: -20261031.1
+---
+
+Parent project: [F-150 Emergency Lighting and 12V Upfit](/projects/f150-upfit/).
+
+## What changed
+
+Upfit Studio is the offline Windows app that holds the F-150 build: every product, circuit, wire and the CanTrol control plan. From version 0.5.0 it writes a public-safe data file (`src/data/f150-upfit/upfit-studio.json`) into this site's repository each time a change is saved, and commits it. When that commit reaches GitHub, Cloudflare Pages rebuilds the site.
+
+| Area | Change | Page |
+| --- | --- | --- |
+| Output plan | The outputs table is generated from the app: the 31 October slide layout, rocker panel relays, U-Lite and Putco wiring, and whether each output is steady or flashed by the CanTrol | [Output plan](/projects/f150-upfit/cantrol-output-plan/) |
+| Control head | New table of the Whelen CCTL7 21-button head: each key's printed cap, label and the function it runs | [Output plan](/projects/f150-upfit/cantrol-output-plan/#control-head-keys) |
+
+## What the data file leaves out
+
+Notes, order numbers, tracking numbers and prices stay out of the file. It holds product names, circuits, wire colors and functions, and the control plan.
+
+## Status
+
+Nothing in the plan is bench-tested or programmed into the CanTrol yet. Pin numbers come from Whelen guide 14580G and are not yet proven on the module.

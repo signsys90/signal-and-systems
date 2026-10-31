@@ -1,0 +1,1203 @@
+{
+  "generated_by": "Upfit Studio 0.5.0",
+  "updated": "2026-10-31",
+  "vehicle": {
+    "year": 2017,
+    "make": "Ford",
+    "model": "F-150",
+    "trim": "Lariat",
+    "cab": "SuperCrew"
+  },
+  "status_note": "Nothing in this plan is bench-tested or programmed into the CanTrol unless marked.",
+  "parts": [
+    {
+      "id": "cantrol",
+      "name": "Whelen CanTrol WC Siren / Light Control System (Gen 3) with 21-button WeCan control head (CCTL7)",
+      "manufacturer": "Whelen",
+      "status": "purchased",
+      "category": "controller",
+      "qty": 1
+    },
+    {
+      "id": "control_head_mount",
+      "name": "Ben3DBuild Ford Overhead Mount for Whelen CCTL 6/7 (F-150 2015-2020)",
+      "manufacturer": "Ben3DBuild",
+      "status": "purchased",
+      "category": "mounting",
+      "qty": 1
+    },
+    {
+      "id": "raptor_bar",
+      "name": "SpeedTech Lights Super Takedown® Raptor Elite Striker-TIR Split LED Visor Light Bar (Dual Memory)",
+      "manufacturer": "SpeedTech Lights",
+      "status": "installed",
+      "category": "warning_light",
+      "qty": 1
+    },
+    {
+      "id": "grand_control_box",
+      "name": "SpeedTech Lights Grand Control Box",
+      "manufacturer": "SpeedTech Lights",
+      "status": "installed",
+      "category": "controller",
+      "qty": 1
+    },
+    {
+      "id": "booyu_ta",
+      "name": "BooYu Rear LED TIR Amber Warning Light & Traffic Advisor",
+      "manufacturer": "BooYu",
+      "status": "installed",
+      "category": "warning_light",
+      "qty": 1
+    },
+    {
+      "id": "rocker_bars",
+      "name": "UBL LED Running Board Rocker Panel Lights",
+      "manufacturer": "UBL",
+      "status": "planned",
+      "category": "warning_light",
+      "qty": 2
+    },
+    {
+      "id": "rocker_relay",
+      "name": "Relays for UBL LED Running Board Rocker Panel Lights (30A SPDT, ISO style)",
+      "manufacturer": null,
+      "status": "planned",
+      "category": "switching",
+      "qty": 2
+    },
+    {
+      "id": "efm3",
+      "name": "Speed Turtle Engineering Easy Flash Module 3.0 (EFM 3.0), Ford version",
+      "manufacturer": "Speed Turtle Engineering",
+      "status": "installed",
+      "category": "factory_flash",
+      "qty": 1
+    },
+    {
+      "id": "efm_voltage_harness",
+      "name": "Speed Turtle Engineering EFM 2.0 / 3.0 Voltage Input Harness",
+      "manufacturer": "Speed Turtle Engineering",
+      "status": "planned",
+      "category": "factory_flash",
+      "qty": 1
+    },
+    {
+      "id": "siren_speakers",
+      "name": "UBL 100W Large Siren Speaker",
+      "manufacturer": "UBL",
+      "status": "purchased",
+      "category": "siren_speaker",
+      "qty": 2
+    },
+    {
+      "id": "z6_pair",
+      "name": "SpeedTech Lights Brake Light (Secondary Red) Z-6® TIR LED Surface Mount Warning Light Head (Dual Memory) - Amber Clear",
+      "manufacturer": "SpeedTech Lights",
+      "status": "purchased",
+      "category": "warning_light",
+      "qty": 2
+    },
+    {
+      "id": "plate_bracket",
+      "name": "SpeedTech Lights License Plate Bracket",
+      "manufacturer": "SpeedTech Lights",
+      "status": "purchased",
+      "category": "mounting",
+      "qty": 1
+    },
+    {
+      "id": "cc5k1",
+      "name": "Whelen Carbide CanTrol OBDII CANport Kit For CCSRN5 (CC5K1 - Ford)",
+      "manufacturer": "Whelen",
+      "status": "purchased",
+      "category": "controller",
+      "qty": 1
+    },
+    {
+      "id": "e68xtreme_stick",
+      "name": "Strobes N' More E68Xtreme LED Stick (8 Module), R/A/W/W/W/W/A/R",
+      "manufacturer": "Strobes N' More",
+      "status": "purchased",
+      "category": "warning_light",
+      "qty": 1
+    },
+    {
+      "id": "stick_mount",
+      "name": "Federal Signal SLB-FRD15ND No-Drill Mount Kit (Ford F-150 2015+, Super Duty 2017+)",
+      "manufacturer": "Federal Signal",
+      "status": "planned",
+      "category": "mounting",
+      "qty": 1
+    },
+    {
+      "id": "u_lites",
+      "name": "UBL U-Lite Surface Mount LED Grille Light (Amber/White)",
+      "manufacturer": "UBL",
+      "status": "purchased",
+      "category": "warning_light",
+      "qty": 2
+    },
+    {
+      "id": "color_flood",
+      "name": "UBL Color Flood 2.0 20\" Amber/White LED Light Bar",
+      "manufacturer": "UBL",
+      "status": "purchased",
+      "category": "warning_light",
+      "qty": 1
+    },
+    {
+      "id": "putco_blade",
+      "name": "Putco Amber & White Work Blade LED Lights - 60\" Long - Amber and White Strobe",
+      "manufacturer": "Putco",
+      "status": "purchased",
+      "category": "warning_light",
+      "qty": 1
+    },
+    {
+      "id": "putco_remote",
+      "name": "Putco Wireless Remote Kit V3",
+      "manufacturer": "Putco",
+      "status": "purchased",
+      "category": "switching",
+      "qty": 1
+    },
+    {
+      "id": "agm_battery",
+      "name": "AGM battery upgrade",
+      "manufacturer": null,
+      "status": "planned",
+      "category": "power",
+      "qty": 1
+    }
+  ],
+  "circuits": [
+    {
+      "id": "C01",
+      "product": "Whelen CanTrol WC Siren / Light Control System (Gen 3) with 21-button WeCan control head (CCTL7)",
+      "role": "Main power feed",
+      "title": "Whelen CanTrol WC Siren / Light Control System (Gen 3) with 21-button WeCan control head (CCTL7): Main power feed",
+      "type": "power",
+      "controller_output": null,
+      "fuse_a": 40,
+      "wire_awg": 8,
+      "current_a": null,
+      "wires": [
+        {
+          "color": "Red",
+          "function": "+12V main input 1",
+          "connects_to": "Battery + via 40A fuse",
+          "light": null
+        },
+        {
+          "color": "Red",
+          "function": "+12V main input 2",
+          "connects_to": "Battery + via 40A fuse",
+          "light": null
+        },
+        {
+          "color": "Black",
+          "function": "Ground 1",
+          "connects_to": "Ford factory ground point or steel frame rail (never battery negative post)",
+          "light": null
+        },
+        {
+          "color": "Black",
+          "function": "Ground 2",
+          "connects_to": "Ford factory ground point or steel frame rail (never battery negative post)",
+          "light": null
+        },
+        {
+          "color": "Red/White",
+          "function": "Ignition sense J17-7",
+          "connects_to": null,
+          "light": null
+        }
+      ]
+    },
+    {
+      "id": "C02",
+      "product": "SpeedTech Lights Super Takedown® Raptor Elite Striker-TIR Split LED Visor Light Bar (Dual Memory)",
+      "role": "Power, through the SpeedTech Lights Grand Control Box",
+      "title": "SpeedTech Lights Super Takedown® Raptor Elite Striker-TIR Split LED Visor Light Bar (Dual Memory): Power, through the SpeedTech Lights Grand Control Box",
+      "type": "power",
+      "controller_output": "J1 Output 2 (slide 1, 2, 3)",
+      "fuse_a": 10,
+      "wire_awg": null,
+      "current_a": null,
+      "wires": []
+    },
+    {
+      "id": "C03",
+      "product": "BooYu Rear LED TIR Amber Warning Light & Traffic Advisor",
+      "role": "Power",
+      "title": "BooYu Rear LED TIR Amber Warning Light & Traffic Advisor: Power",
+      "type": "power",
+      "controller_output": "J1 Output 3 (slide 1, 2, 3)",
+      "fuse_a": 10,
+      "wire_awg": null,
+      "current_a": null,
+      "wires": []
+    },
+    {
+      "id": "C04",
+      "product": "Relays for UBL LED Running Board Rocker Panel Lights (30A SPDT, ISO style)",
+      "role": "Relay A coil trigger (Mode 1)",
+      "title": "Relays for UBL LED Running Board Rocker Panel Lights (30A SPDT, ISO style): Relay A coil trigger (Mode 1)",
+      "type": "signal",
+      "controller_output": "LED Output 3 (J4-5, orange) (slide 2, 3)",
+      "fuse_a": 2.5,
+      "wire_awg": null,
+      "current_a": null,
+      "wires": []
+    },
+    {
+      "id": "C05",
+      "product": "UBL LED Running Board Rocker Panel Lights",
+      "role": "Relay load side, arrow and pattern wires",
+      "title": "UBL LED Running Board Rocker Panel Lights: Relay load side, arrow and pattern wires",
+      "type": "power",
+      "controller_output": null,
+      "fuse_a": null,
+      "wire_awg": null,
+      "current_a": null,
+      "wires": [
+        {
+          "color": "Red",
+          "function": "Mode 1",
+          "connects_to": "Relay A pin 87 (fuse each bar)",
+          "light": {
+            "drive": "pattern",
+            "color": null
+          }
+        },
+        {
+          "color": "White",
+          "function": "Mode 2 (overrides Mode 1)",
+          "connects_to": "Relay B pin 87 (fuse each bar)",
+          "light": {
+            "drive": "pattern",
+            "color": null
+          }
+        },
+        {
+          "color": "Blue",
+          "function": "Left arrow (both bars joined)",
+          "connects_to": "LED Output 22 (left and both-arrows buttons)",
+          "light": {
+            "drive": "arrow-left",
+            "color": null
+          }
+        },
+        {
+          "color": "Green",
+          "function": "Right arrow (both bars joined)",
+          "connects_to": "LED Output 23 (right and both-arrows buttons); blue + green = center out",
+          "light": {
+            "drive": "arrow-right",
+            "color": null
+          }
+        },
+        {
+          "color": "Yellow",
+          "function": "Pattern / color step (both bars joined)",
+          "connects_to": "LED Output 32 (LEFT ALLEY, momentary: under 1 s color, 2 s pattern)",
+          "light": {
+            "drive": "input",
+            "color": null
+          }
+        },
+        {
+          "color": "Black",
+          "function": "Ground",
+          "connects_to": "Bare chassis ground",
+          "light": null
+        }
+      ]
+    },
+    {
+      "id": "C06",
+      "product": "UBL 100W Large Siren Speaker",
+      "role": "Speaker 1",
+      "title": "UBL 100W Large Siren Speaker: Speaker 1",
+      "type": "speaker",
+      "controller_output": null,
+      "fuse_a": null,
+      "wire_awg": null,
+      "current_a": null,
+      "wires": []
+    },
+    {
+      "id": "C07",
+      "product": "UBL 100W Large Siren Speaker",
+      "role": "Speaker 2",
+      "title": "UBL 100W Large Siren Speaker: Speaker 2",
+      "type": "speaker",
+      "controller_output": null,
+      "fuse_a": null,
+      "wire_awg": null,
+      "current_a": null,
+      "wires": []
+    },
+    {
+      "id": "C08",
+      "product": "SpeedTech Lights Brake Light (Secondary Red) Z-6® TIR LED Surface Mount Warning Light Head (Dual Memory) - Amber Clear",
+      "role": "Mode 1 (warning), both heads",
+      "title": "SpeedTech Lights Brake Light (Secondary Red) Z-6® TIR LED Surface Mount Warning Light Head (Dual Memory) - Amber Clear: Mode 1 (warning), both heads",
+      "type": "power",
+      "controller_output": "LED Output 12 (J4-16), Mode 1 (slide 2, 3)",
+      "fuse_a": 2.5,
+      "wire_awg": null,
+      "current_a": 1.0,
+      "wires": [
+        {
+          "color": "Red",
+          "function": "Mode 1",
+          "connects_to": "LED Output 12",
+          "light": {
+            "drive": "pattern",
+            "color": "amber/white"
+          }
+        },
+        {
+          "color": "Brown",
+          "function": "Mode 2",
+          "connects_to": null,
+          "light": {
+            "drive": "pattern",
+            "color": null
+          }
+        },
+        {
+          "color": "Black",
+          "function": "Ground",
+          "connects_to": null,
+          "light": null
+        },
+        {
+          "color": "White",
+          "function": "Sync (max 8 units)",
+          "connects_to": null,
+          "light": {
+            "drive": "input",
+            "color": null
+          }
+        },
+        {
+          "color": "Blue",
+          "function": "Alternating sync pattern programming",
+          "connects_to": null,
+          "light": {
+            "drive": "input",
+            "color": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "C09",
+      "product": "Strobes N' More E68Xtreme LED Stick (8 Module), R/A/W/W/W/W/A/R",
+      "role": "Eight modules, one LED output each (flash only)",
+      "title": "Strobes N' More E68Xtreme LED Stick (8 Module), R/A/W/W/W/W/A/R: Eight modules, one LED output each (flash only)",
+      "type": "power",
+      "controller_output": "LED 6, 7, 8, 27, 28, 29, 30, 31, one per module; slide 1 ambers (7, 30), slide 2 adds whites (8, 27-29), slide 3 adds reds (6, 31); flash only",
+      "fuse_a": 2.5,
+      "wire_awg": 18,
+      "current_a": null,
+      "wires": [
+        {
+          "color": "Black",
+          "function": "Ground (common)",
+          "connects_to": "Ford factory ground stud",
+          "light": null
+        },
+        {
+          "color": "Red",
+          "function": "Module 1 red (nearest cable exit)",
+          "connects_to": "LED Output 6",
+          "light": {
+            "drive": "output",
+            "color": "red"
+          }
+        },
+        {
+          "color": "Yellow",
+          "function": "Module 2 amber",
+          "connects_to": "LED Output 7",
+          "light": {
+            "drive": "output",
+            "color": "amber"
+          }
+        },
+        {
+          "color": "Green",
+          "function": "Module 3 white",
+          "connects_to": "LED Output 8",
+          "light": {
+            "drive": "output",
+            "color": "white"
+          }
+        },
+        {
+          "color": "Blue",
+          "function": "Module 4 white",
+          "connects_to": "LED Output 27",
+          "light": {
+            "drive": "output",
+            "color": "white"
+          }
+        },
+        {
+          "color": "Purple",
+          "function": "Module 5 white",
+          "connects_to": "LED Output 28",
+          "light": {
+            "drive": "output",
+            "color": "white"
+          }
+        },
+        {
+          "color": "White",
+          "function": "Module 6 white",
+          "connects_to": "LED Output 29",
+          "light": {
+            "drive": "output",
+            "color": "white"
+          }
+        },
+        {
+          "color": "Brown",
+          "function": "Module 7 amber",
+          "connects_to": "LED Output 30",
+          "light": {
+            "drive": "output",
+            "color": "amber"
+          }
+        },
+        {
+          "color": "Gray",
+          "function": "Module 8 red",
+          "connects_to": "LED Output 31",
+          "light": {
+            "drive": "output",
+            "color": "red"
+          }
+        }
+      ]
+    },
+    {
+      "id": "C10",
+      "product": "UBL Color Flood 2.0 20\" Amber/White LED Light Bar",
+      "role": "Power and mode wires",
+      "title": "UBL Color Flood 2.0 20\" Amber/White LED Light Bar: Power and mode wires",
+      "type": "power",
+      "controller_output": "J1 Output 6 power (slides 1-3, STEADY, SCENE, arrows, TAKE DOWN); J1 Output 1 orange, stored as steady amber (flashed in slide 1, steady with STEADY); LED Output 10 Mode 1 (slides 2, 3); LED Output 1 Mode 3 (SCENE, TAKE DOWN)",
+      "fuse_a": 10,
+      "wire_awg": 14,
+      "current_a": null,
+      "wires": [
+        {
+          "color": "Red",
+          "function": "Power",
+          "connects_to": "J1 Output 6",
+          "light": {
+            "drive": "power",
+            "color": null
+          }
+        },
+        {
+          "color": "Brown",
+          "function": "Mode 1",
+          "connects_to": "LED Output 10",
+          "light": {
+            "drive": "pattern",
+            "color": "amber/white"
+          }
+        },
+        {
+          "color": "Orange",
+          "function": "Mode 2, re-stored as steady amber",
+          "connects_to": "J1 Output 1",
+          "light": {
+            "drive": "output",
+            "color": "amber"
+          }
+        },
+        {
+          "color": "White",
+          "function": "Mode 3 (steady white flood)",
+          "connects_to": "LED Output 1",
+          "light": {
+            "drive": "output",
+            "color": "white"
+          }
+        },
+        {
+          "color": "Blue",
+          "function": "Right arrow (starts cable side)",
+          "connects_to": "LED Output 2",
+          "light": {
+            "drive": "arrow-right",
+            "color": null
+          }
+        },
+        {
+          "color": "Green",
+          "function": "Left arrow (starts non-cable side)",
+          "connects_to": "LED Output 11",
+          "light": {
+            "drive": "arrow-left",
+            "color": null
+          }
+        },
+        {
+          "color": "Yellow",
+          "function": "Pattern (momentary)",
+          "connects_to": "LED Output 9",
+          "light": {
+            "drive": "input",
+            "color": null
+          }
+        },
+        {
+          "color": "Black",
+          "function": "Ground",
+          "connects_to": null,
+          "light": null
+        }
+      ]
+    },
+    {
+      "id": "C11",
+      "product": "SpeedTech Lights Brake Light (Secondary Red) Z-6® TIR LED Surface Mount Warning Light Head (Dual Memory) - Amber Clear",
+      "role": "Brake pop (green steady-burn override)",
+      "title": "SpeedTech Lights Brake Light (Secondary Red) Z-6® TIR LED Surface Mount Warning Light Head (Dual Memory) - Amber Clear: Brake pop (green steady-burn override)",
+      "type": "signal",
+      "controller_output": "LED Output 13, brake pop together with E68Xtreme LED 6 and LED 31, always on (Option A)",
+      "fuse_a": 2.5,
+      "wire_awg": null,
+      "current_a": null,
+      "wires": [
+        {
+          "color": "Green",
+          "function": "Steady-burn override (red brake)",
+          "connects_to": "LED Output 13",
+          "light": {
+            "drive": "output",
+            "color": "red"
+          }
+        }
+      ]
+    },
+    {
+      "id": "C12",
+      "product": "UBL U-Lite Surface Mount LED Grille Light (Amber/White)",
+      "role": "Power and mode wires, both lights",
+      "title": "UBL U-Lite Surface Mount LED Grille Light (Amber/White): Power and mode wires, both lights",
+      "type": "power",
+      "controller_output": "J1 Output 4 Mode 1 (slides 2, 3); LED Output 16 blue and LED Output 17 green (slide 1 flashed, STEADY); LED Output 24 yellow (RIGHT ALLEY)",
+      "fuse_a": 3,
+      "wire_awg": null,
+      "current_a": null,
+      "wires": [
+        {
+          "color": "Red",
+          "function": "Mode 1",
+          "connects_to": "J1 Output 4 via 3A fuse",
+          "light": {
+            "drive": "pattern",
+            "color": null
+          }
+        },
+        {
+          "color": "Blue",
+          "function": "Mode 2 (both blues joined)",
+          "connects_to": "LED Output 16",
+          "light": {
+            "drive": "output",
+            "color": null
+          }
+        },
+        {
+          "color": "Green",
+          "function": "Mode 3 (both greens joined)",
+          "connects_to": "LED Output 17",
+          "light": {
+            "drive": "output",
+            "color": null
+          }
+        },
+        {
+          "color": "Yellow",
+          "function": "Pattern/Sync (both yellows joined)",
+          "connects_to": "LED Output 24 (both yellows joined; RIGHT ALLEY, momentary pattern step)",
+          "light": {
+            "drive": "input",
+            "color": null
+          }
+        },
+        {
+          "color": "White",
+          "function": "Alternate",
+          "connects_to": "One light's white to the same switched 12V; other taped off",
+          "light": {
+            "drive": "input",
+            "color": null
+          }
+        },
+        {
+          "color": "Black",
+          "function": "Ground",
+          "connects_to": null,
+          "light": null
+        }
+      ]
+    },
+    {
+      "id": "C13",
+      "product": "Putco Amber & White Work Blade LED Lights - 60\" Long - Amber and White Strobe",
+      "role": "Trigger (harness BLUE spade)",
+      "title": "Putco Amber & White Work Blade LED Lights - 60\" Long - Amber and White Strobe: Trigger (harness BLUE spade)",
+      "type": "signal",
+      "controller_output": "J1 Output 5",
+      "fuse_a": 10,
+      "wire_awg": 18,
+      "current_a": null,
+      "wires": [
+        {
+          "color": "Blue (harness spade)",
+          "function": "Relay trigger",
+          "connects_to": "J1 Output 5 via 1N4004 diode",
+          "light": {
+            "drive": "pattern",
+            "color": "amber"
+          }
+        }
+      ]
+    },
+    {
+      "id": "C14",
+      "product": "Putco Amber & White Work Blade LED Lights - 60\" Long - Amber and White Strobe",
+      "role": "White override (REAR FLOOD)",
+      "title": "Putco Amber & White Work Blade LED Lights - 60\" Long - Amber and White Strobe: White override (REAR FLOOD)",
+      "type": "signal",
+      "controller_output": "J1 Output 8",
+      "fuse_a": 10,
+      "wire_awg": 18,
+      "current_a": null,
+      "wires": [
+        {
+          "color": "White (controller)",
+          "function": "White override",
+          "connects_to": "J1 Output 8 via Posi-Tap",
+          "light": {
+            "drive": "output",
+            "color": "white"
+          }
+        }
+      ]
+    },
+    {
+      "id": "C15",
+      "product": "Putco Wireless Remote Kit V3",
+      "role": "Remote relay box power",
+      "title": "Putco Wireless Remote Kit V3: Remote relay box power",
+      "type": "power",
+      "controller_output": null,
+      "fuse_a": 3,
+      "wire_awg": 18,
+      "current_a": null,
+      "wires": [
+        {
+          "color": "Red",
+          "function": "Supply +",
+          "connects_to": "Accessory fuse block 3A",
+          "light": {
+            "drive": "power",
+            "color": null
+          }
+        },
+        {
+          "color": "Blue",
+          "function": "Button A on/off",
+          "connects_to": "Harness BLUE spade via its own 1A diode",
+          "light": {
+            "drive": "input",
+            "color": null
+          }
+        },
+        {
+          "color": "Yellow",
+          "function": "Button B next pattern",
+          "connects_to": "Controller orange",
+          "light": {
+            "drive": "input",
+            "color": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "C16",
+      "product": "Speed Turtle Engineering Easy Flash Module 3.0 (EFM 3.0), Ford version",
+      "role": "Input 1 (front factory lamps)",
+      "title": "Speed Turtle Engineering Easy Flash Module 3.0 (EFM 3.0), Ford version: Input 1 (front factory lamps)",
+      "type": "signal",
+      "controller_output": "LED Output 4 (J4-6, yellow)",
+      "fuse_a": 2.5,
+      "wire_awg": 18,
+      "current_a": null,
+      "wires": [
+        {
+          "color": "White",
+          "function": "Input 1",
+          "connects_to": "LED Output 4",
+          "light": {
+            "drive": "pattern",
+            "color": "factory"
+          }
+        }
+      ]
+    },
+    {
+      "id": "C17",
+      "product": "Speed Turtle Engineering Easy Flash Module 3.0 (EFM 3.0), Ford version",
+      "role": "Input 2 (rear factory lamps)",
+      "title": "Speed Turtle Engineering Easy Flash Module 3.0 (EFM 3.0), Ford version: Input 2 (rear factory lamps)",
+      "type": "signal",
+      "controller_output": "LED Output 5 (J4-7, white/brown)",
+      "fuse_a": 2.5,
+      "wire_awg": 18,
+      "current_a": null,
+      "wires": [
+        {
+          "color": "Green",
+          "function": "Input 2",
+          "connects_to": "LED Output 5",
+          "light": {
+            "drive": "pattern",
+            "color": "factory"
+          }
+        }
+      ]
+    },
+    {
+      "id": "C18",
+      "product": "Relays for UBL LED Running Board Rocker Panel Lights (30A SPDT, ISO style)",
+      "role": "Relay B coil trigger (Mode 2)",
+      "title": "Relays for UBL LED Running Board Rocker Panel Lights (30A SPDT, ISO style): Relay B coil trigger (Mode 2)",
+      "type": "signal",
+      "controller_output": "J1 Output 7 (slide 3)",
+      "fuse_a": 10,
+      "wire_awg": null,
+      "current_a": null,
+      "wires": [
+        {
+          "color": null,
+          "function": "Relay B coil pin 86",
+          "connects_to": "J1 Output 7",
+          "light": null
+        }
+      ]
+    }
+  ],
+  "controls": {
+    "priority": [
+      "Brake pop",
+      "TAKE DOWN",
+      "WHITE",
+      "STEADY",
+      "Slide"
+    ],
+    "slide": {
+      "1": {
+        "label": "M3 amber flash",
+        "outputs": [
+          "J1-2",
+          "J1-3",
+          "J1-5",
+          "LED-7",
+          "LED-30",
+          "J1-6",
+          "J1-1",
+          "LED-16",
+          "LED-17"
+        ],
+        "flash": {
+          "A": [
+            "LED-7",
+            "LED-30",
+            "J1-1",
+            "LED-16",
+            "LED-17"
+          ]
+        }
+      },
+      "2": {
+        "label": "M5 amber/white flash",
+        "outputs": [
+          "J1-2",
+          "J1-3",
+          "J1-5",
+          "LED-7",
+          "LED-30",
+          "J1-6",
+          "LED-10",
+          "J1-4",
+          "LED-12",
+          "LED-8",
+          "LED-27",
+          "LED-28",
+          "LED-29",
+          "LED-3"
+        ],
+        "flash": {
+          "A": [
+            "LED-7",
+            "LED-30"
+          ],
+          "B": [
+            "LED-8",
+            "LED-27",
+            "LED-28",
+            "LED-29"
+          ]
+        }
+      },
+      "3": {
+        "label": "Everything",
+        "outputs": [
+          "J1-2",
+          "J1-3",
+          "J1-5",
+          "LED-7",
+          "LED-30",
+          "J1-6",
+          "LED-10",
+          "J1-4",
+          "LED-12",
+          "LED-8",
+          "LED-27",
+          "LED-28",
+          "LED-29",
+          "LED-3",
+          "J1-7",
+          "LED-4",
+          "LED-6",
+          "LED-31"
+        ],
+        "flash": {
+          "A": [
+            "LED-7",
+            "LED-30",
+            "LED-6",
+            "LED-31"
+          ],
+          "B": [
+            "LED-8",
+            "LED-27",
+            "LED-28",
+            "LED-29"
+          ]
+        }
+      }
+    },
+    "buttons": [
+      {
+        "name": "TAKE DOWN",
+        "action": "latch",
+        "outputs": [
+          "LED-1",
+          "J1-6",
+          "J1-8"
+        ],
+        "flash": null,
+        "note": "M2 steady white, 60 min timer; E68Xtreme off (can't burn steady)"
+      },
+      {
+        "name": "STEADY (blank 3)",
+        "action": "latch",
+        "outputs": [
+          "J1-1",
+          "J1-6",
+          "LED-16",
+          "LED-17",
+          "LED-7",
+          "LED-30"
+        ],
+        "flash": {
+          "A": [
+            "LED-7",
+            "LED-30"
+          ]
+        },
+        "note": "M1; U-Lite steady wire BENCH; 60 min timer"
+      },
+      {
+        "name": "WHITE (blank 4)",
+        "action": "latch",
+        "outputs": [
+          "LED-8",
+          "LED-27",
+          "LED-28",
+          "LED-29"
+        ],
+        "flash": {
+          "A": [
+            "LED-8",
+            "LED-27",
+            "LED-28",
+            "LED-29"
+          ]
+        },
+        "note": "M4; Color Flood white and Putco white only after the bench"
+      },
+      {
+        "name": "PATTERN (CORNER)",
+        "action": "press",
+        "outputs": [],
+        "flash": null,
+        "note": "Pattern Override, 3-4 press states, changes CanTrol-flashed patterns"
+      },
+      {
+        "name": "REAR FLOOD (Star of Life)",
+        "action": "latch",
+        "outputs": [
+          "J1-8"
+        ],
+        "flash": null,
+        "note": "Putco white override on its own"
+      },
+      {
+        "name": "RIGHT ALLEY",
+        "action": "momentary",
+        "outputs": [
+          "LED-24"
+        ],
+        "flash": null,
+        "note": "U-Lite pattern step (joined yellows)"
+      },
+      {
+        "name": "LEFT ALLEY",
+        "action": "momentary",
+        "outputs": [
+          "LED-32"
+        ],
+        "flash": null,
+        "note": "Rocker pattern step (joined yellows); under 1 s = color, 2 s = pattern"
+      },
+      {
+        "name": "SCENE",
+        "action": "latch",
+        "outputs": [
+          "LED-1",
+          "J1-6"
+        ],
+        "flash": null,
+        "note": "Color Flood steady white flood (CONFIRMED)"
+      },
+      {
+        "name": "Right arrow",
+        "action": "latch",
+        "outputs": [
+          "LED-2",
+          "J1-6",
+          "LED-23"
+        ],
+        "flash": null,
+        "note": "Color Flood right (CONFIRMED); rocker green (BENCH); E68 sweep BENCH"
+      },
+      {
+        "name": "Left arrow",
+        "action": "latch",
+        "outputs": [
+          "LED-11",
+          "J1-6",
+          "LED-22"
+        ],
+        "flash": null,
+        "note": "Color Flood left (CONFIRMED); rocker blue (BENCH)"
+      },
+      {
+        "name": "Both arrows (FLASH)",
+        "action": "latch",
+        "outputs": [
+          "LED-2",
+          "LED-11",
+          "J1-6",
+          "LED-22",
+          "LED-23"
+        ],
+        "flash": null,
+        "note": "Center out"
+      },
+      {
+        "name": "Blank 1",
+        "action": "latch",
+        "outputs": [
+          "LED-5"
+        ],
+        "flash": null,
+        "note": "EFM 3.0 Input 2 rear factory lamps"
+      },
+      {
+        "name": "Blank 2",
+        "action": "momentary",
+        "outputs": [
+          "LED-9"
+        ],
+        "flash": null,
+        "note": "Color Flood pattern step"
+      }
+    ],
+    "brake_pop": {
+      "outputs": [
+        "LED-13",
+        "LED-6",
+        "LED-31"
+      ],
+      "flash": {
+        "A": [
+          "LED-13",
+          "LED-6",
+          "LED-31"
+        ]
+      },
+      "then_steady": [
+        "LED-13"
+      ],
+      "pop_seconds": 2
+    },
+    "head": {
+      "model": "Whelen CCTL7 21-button slide control head (CanTrol WC)",
+      "keys": [
+        {
+          "sw": 1,
+          "cap": "STBY",
+          "label": "STBY",
+          "button": null
+        },
+        {
+          "sw": 2,
+          "cap": "RAD",
+          "label": "RAD",
+          "button": null
+        },
+        {
+          "sw": 3,
+          "cap": "HF",
+          "label": "HF",
+          "button": null
+        },
+        {
+          "sw": 4,
+          "cap": "WAIL",
+          "label": "WAIL",
+          "button": null
+        },
+        {
+          "sw": 5,
+          "cap": "YELP",
+          "label": "YELP",
+          "button": null
+        },
+        {
+          "sw": 6,
+          "cap": "PIER",
+          "label": "PIER",
+          "button": null
+        },
+        {
+          "sw": 7,
+          "cap": "MAN",
+          "label": "MAN",
+          "button": null
+        },
+        {
+          "sw": 8,
+          "cap": "HORN",
+          "label": "HORN",
+          "button": null
+        },
+        {
+          "sw": 9,
+          "cap": "",
+          "label": "REAR LAMPS",
+          "button": "Blank 1"
+        },
+        {
+          "sw": 10,
+          "cap": "LEFT ALLEY",
+          "label": "LEFT ALLEY",
+          "button": "LEFT ALLEY"
+        },
+        {
+          "sw": 11,
+          "cap": "CORNER",
+          "label": "CORNER",
+          "button": "PATTERN (CORNER)"
+        },
+        {
+          "sw": 12,
+          "cap": "",
+          "label": "FLOOD PATTERN",
+          "button": "Blank 2"
+        },
+        {
+          "sw": 13,
+          "cap": "",
+          "label": "STEADY",
+          "button": "STEADY (blank 3)"
+        },
+        {
+          "sw": 14,
+          "cap": "SCENE",
+          "label": "SCENE",
+          "button": "SCENE"
+        },
+        {
+          "sw": 15,
+          "cap": "RIGHT ALLEY",
+          "label": "RIGHT ALLEY",
+          "button": "RIGHT ALLEY"
+        },
+        {
+          "sw": 16,
+          "cap": "",
+          "label": "WHITE",
+          "button": "WHITE (blank 4)"
+        },
+        {
+          "sw": 17,
+          "cap": "STAR OF LIFE",
+          "label": "REAR FLOOD",
+          "button": "REAR FLOOD (Star of Life)"
+        },
+        {
+          "sw": 18,
+          "cap": "TAKE DOWN",
+          "label": "TAKE DOWN",
+          "button": "TAKE DOWN"
+        },
+        {
+          "sw": 19,
+          "cap": "LEFT ARROW",
+          "label": "◄",
+          "button": "Left arrow"
+        },
+        {
+          "sw": 20,
+          "cap": "RIGHT ARROW",
+          "label": "►",
+          "button": "Right arrow"
+        },
+        {
+          "sw": 21,
+          "cap": "FLASH",
+          "label": "◄ FLASH ►",
+          "button": "Both arrows (FLASH)"
+        }
+      ]
+    }
+  }
+}
