@@ -72,7 +72,7 @@
     }
   ],
   "command_file": {
-    "file": "command_cantrol_g3_f150_31oct_programmed_3.wln",
+    "file": "NewCantrolG3Config - 2017_F-150 - 4.wln",
     "command_version": "2.4.8.0",
     "can_in_file": [
       "Brake - Parking",
@@ -85,6 +85,7 @@
       "Door - Any Back"
     ],
     "only_in_file": [],
-    "only_in_plan": []
+    "only_in_plan": [],
+    "note": "Current file \"-4\": its programming-logic change from \"-3\" is not confirmed yet; the slot notes still describe \"-3\"."
   }
 }
