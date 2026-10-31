@@ -4,7 +4,7 @@ description: Two UBL U-Lite amber/white surface mount lights in the upper corner
 summary: Two amber/white U-Lites in the upper punch plate corners, fed from J1-4 through a 3A fuse, yellows joined for sync and one white lead used so they alternate.
 status: Bench-tested
 category: Vehicle Upfit and 12V
-updated: 2026-10-27
+updated: 2026-10-31
 sidebar:
   label: UBL U-Lite grille lights
   order: 11
@@ -106,6 +106,23 @@ Full hardware and prices are on the [grille guard](/projects/f150-upfit/grille-g
 | Draw measured | Not yet |
 | On the CanTrol, J1-4 | Not yet |
 
+## 31 October update: CanTrol wiring as approved
+
+On 31 Oct 2026 I approved the final U-Lite wiring (project document sections 3.1 and 9.2 G). It is now in [Upfit Studio](/projects/upfit-studio/) and on the generated [output plan](/projects/f150-upfit/cantrol-output-plan/). Where this differs from the wiring table above, this section wins.
+
+| Wire (both lights) | Function | Goes to | When it is on |
+| --- | --- | --- | --- |
+| Red | Mode 1 | J1 Output 4 through the 3A fuse | Slides 2 and 3 |
+| Blue (both joined) | Mode 2 | LED Output 16 | Slide 1 (flashed by the CanTrol), STEADY key |
+| Green (both joined) | Mode 3 | LED Output 17 | Slide 1 (flashed by the CanTrol), STEADY key |
+| Yellow (both joined) | Pattern / sync | LED Output 24 | RIGHT ALLEY key, momentary pattern step |
+| White | Alternate | One light's white to the same switched 12V; the other taped off | With the red |
+| Black | Ground | Frame rail or Ford ground point | Always |
+
+- The yellows now go to a CanTrol output (RIGHT ALLEY) instead of only being joined, so the pattern can be stepped from the control head.
+- Which mode the blue and green wires give, and whether the U-Lite holds steady on them, is marked "BENCH" in the plan: confirm on the bench before programming.
+- Nothing here is programmed into the CanTrol yet. Draw is still to be measured.
+
 ## Parts
 
 <PartsTable
@@ -132,4 +149,4 @@ Full hardware and prices are on the [grille guard](/projects/f150-upfit/grille-g
 
 ## Changelog
 
-<Changelog entries={[{ date: '2026-10-27', change: 'Page published from the 23 October project files.', rollback: 'Revert the commit that rebuilt the F-150 section.' }]} />
+<Changelog entries={[{ date: '2026-10-31', change: 'Added the 31 October approved wiring: red on J1-4, blues on LED Output 16, greens on LED Output 17, yellows on LED Output 24 (RIGHT ALLEY).', rollback: 'Revert the commit that added the 31 October wiring section.', log: '/log/2026-10-31-upfit-studio-sync/' }, { date: '2026-10-27', change: 'Page published from the 23 October project files.', rollback: 'Revert the commit that rebuilt the F-150 section.' }]} />

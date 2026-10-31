@@ -54,6 +54,7 @@ export default defineConfig({
 								{ label: 'AI Outbound Sales Platform', link: '/projects/ai-outbound-platform/' },
 								{ label: 'Signal & Systems Engineering Website', link: '/projects/signal-and-systems-site/' },
 								{ label: 'Vehicle Light Controller', link: '/projects/vehicle-light-controller/' },
+								{ label: 'Upfit Studio', link: '/projects/upfit-studio/' },
 							],
 						},
 						{

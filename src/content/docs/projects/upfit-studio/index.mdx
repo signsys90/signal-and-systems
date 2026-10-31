@@ -1,0 +1,206 @@
+---
+title: Upfit Studio
+description: Offline Windows app that holds the whole F-150 emergency-lighting build as one config file, checks the 12V design, simulates the Whelen control head and publishes a public-safe copy to this site.
+summary: Config-as-code for a vehicle upfit. One YAML file holds every part, circuit, wire and the CanTrol control plan; the app checks the electrical design, simulates the 21-button control head, runs bench tests and syncs a public-safe copy to this portfolio on every save.
+status: In progress
+category: Software and Automation
+started: 2026-10-30
+updated: 2026-10-31
+project: true
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+import Gallery from '../../../../components/Gallery.astro';
+import command from '../../../../assets/upfit-studio/01-command-center.jpg';
+import map from '../../../../assets/upfit-studio/02-wiring-map-slide3.jpg';
+import head from '../../../../assets/upfit-studio/03-control-head-slide3.jpg';
+import preview from '../../../../assets/upfit-studio/04-light-preview.jpg';
+import outputs from '../../../../assets/upfit-studio/05-output-board.jpg';
+import circuits from '../../../../assets/upfit-studio/06-circuits.jpg';
+import lab from '../../../../assets/upfit-studio/07-test-lab.jpg';
+import bench from '../../../../assets/upfit-studio/08-bench-test.jpg';
+import hardware from '../../../../assets/upfit-studio/09-hardware-lab.jpg';
+import calc from '../../../../assets/upfit-studio/10-wire-fuse-calculator.jpg';
+import mount from '../../../../assets/upfit-studio/11-head-mount-designer.jpg';
+import mockup from '../../../../assets/upfit-studio/12-product-mockup.jpg';
+import sandboxes from '../../../../assets/upfit-studio/13-sandboxes.jpg';
+import tracker from '../../../../assets/upfit-studio/14-install-tracker.jpg';
+import findings from '../../../../assets/upfit-studio/15-findings.jpg';
+import sync from '../../../../assets/upfit-studio/16-sync.jpg';
+import reports from '../../../../assets/upfit-studio/17-reports.jpg';
+import about from '../../../../assets/upfit-studio/18-about-safety.jpg';
+
+<ProjectHeader hero={head} heroAlt="Upfit Studio control head screen: a replica of the Whelen CCTL7 21-button slide head with the slide in position 3, and a table of the 18 CanTrol outputs that turn on, each marked Steady, Flash A or Flash B." />
+
+## One-line summary
+
+A local, offline Windows app that turns the [F-150 emergency-lighting upfit](/projects/f150-upfit/) into one checked config file, and lets me run the Whelen control head, the wiring and the bench test on screen before a single wire goes into the truck.
+
+## Why I built it
+
+The F-150 build had grown to 20 products, 18 circuits, 32 of the CanTrol's 40 outputs and a three-position slide plan, spread across a 98-page project document, a parts list and a wiring sheet. Every change (a new rear light, a relay moved to a different output, a re-labelled key) had to be retyped in three places, and the copies drifted. I wanted one source of truth that would:
+
+- check the 12V design every time it changes (voltage drop, fuse against wire, total load against the module's rating),
+- show exactly which light does what in each slide position and button, steady or flashed,
+- keep every unconfirmed value visibly blank instead of quietly filling in a guess,
+- and keep this portfolio's output plan current without hand-editing it.
+
+## What it is
+
+Upfit Studio (package name `upfit-kit`) is a Python application with two front ends on one engine:
+
+- **Upfit Studio**, the main app: a modern interface in a native Windows window (Microsoft Edge WebView2 through pywebview). The page is a local file. There is no web server, and the page's content security policy blocks every network connection.
+- **Classic app**: a standard-library Tkinter window with the same engine, which opens automatically if WebView2 can't start.
+- **Command line**: `validate`, `build`, `diff` and `bench` for scripted checks. `validate` and `build` exit with an error code when the design has an ERROR finding, so they can gate a release.
+
+The build lives in one file, `config/upfit.yaml`. The app reads it, checks it and writes it back only when I press Save, with a timestamped backup first and the file's comments and layout kept.
+
+<SpecBox
+	title="Release details"
+	specs={[
+		['Version', '0.5.2 (31 Oct 2026)'],
+		['Platform', 'Windows 10/11 (target: Panasonic Toughbook CF-33); Python 3.10+'],
+		['Interface', 'pywebview + Microsoft Edge WebView2, with a Tkinter fallback'],
+		['Engine', 'Python; PyYAML and ruamel.yaml (comment-preserving saves)'],
+		['Diagrams', 'WireViz + Graphviz (optional)'],
+		['Head mount', 'OpenSCAD (optional, for STL export)'],
+		['Packaging', 'PyInstaller one-folder build via build_exe.bat (runs the tests first)'],
+		['Tests', 'pytest: 135 pass, 6 skipped (re-run 31 Oct 2026 on Linux, Python 3.13; Tk, WireViz and OpenSCAD tests skip without those tools)'],
+		['Network', 'None. No telemetry, no accounts'],
+		['Source', 'Private GitHub repository'],
+		['Built with', 'AI-assisted development (Claude Code) from my requirements and build data'],
+	]}
+	source={{ label: 'Project README, CHANGES.txt and pyproject.toml (repository is private)' }}
+/>
+
+<Callout type="safety" title="Safety boundaries (by design)">
+Upfit Studio is read-only toward the truck. It never talks to the Ford BCM, the CAN bus or the Whelen CanTrol, and it has no USB, serial or CAN access. The CanTrol stays the only thing that controls warning lights and siren; the simulator shows the plan, it does not drive anything. Emergency lighting and siren use is regulated by state law and permits. This page is not legal guidance.
+</Callout>
+
+## Screenshots
+
+Captured 31 Oct 2026 from version 0.5.2 running the live F-150 config in a browser harness on Linux (the same page the Windows window loads). Prices and order notes were removed from the screenshot copy of the config, and the budget card was hidden, so no spend totals appear. Folder paths shown are the app's placeholders. These show the software only: nothing on these screens has been bench-tested or programmed into the CanTrol.
+
+### Design
+
+<Gallery
+	photos={[
+		{ src: command, alt: 'Command center: tiles for 18 circuits (27% of electrical data filled in), 20 parts (4 installed, 11 bought, 5 to buy), 131 open items with 0 warnings and 0 errors, and 32 of 40 CanTrol outputs used; known load 1.00 A of 40 A; a list of the next open items.', caption: 'Command center. Circuits, parts, open items and CanTrol outputs used, the known 12V load against the module total, and the next things that need a measurement or a source.' },
+		{ src: map, alt: 'Wiring map: the Whelen CanTrol WC module with J1 outputs 1 to 8 (10 A) and LED outputs (2.5 A) on the left, colored wires running to device cards on the right such as the UBL Color Flood 2.0 light bar and the SpeedTech Raptor visor bar, with slide 3 simulated.', caption: 'Wiring map in slide 3. Each wire is drawn in its real color from the CanTrol output to the product and wire function. Steady and flashed outputs are drawn differently; click a wire to edit it.' },
+		{ src: head, alt: 'Control head replica with the slide in position 3 and a table of 18 outputs that are on, each marked Steady, Flash A or Flash B, and which product it feeds.', caption: 'Control head: a replica of the Whelen CCTL7 21-button slide head with my key caps. Slide 3 turns on 18 outputs; each is shown as Steady or CanTrol Flash A/B.' },
+		{ src: preview, alt: 'Light preview: each product drawn by where it sits on the truck (grille guard, visor, rocker panels, rear window, plate, tailgate) with its LED colors lit and labelled own pattern, flash A or flash B.', caption: 'Light preview. Every product drawn where it sits on the truck with its colors and drive type. Unconfirmed colors show as "color TBD". Timing is illustrative.' },
+		{ src: outputs, alt: 'Output board: all 40 CanTrol outputs as cards, J1 high-current outputs and LED outputs, each showing what it feeds, the slide positions and buttons that turn it on, and free outputs.', caption: 'Output board. All 40 CanTrol outputs at a glance: what each one feeds, which slide positions and keys use it, and which are still free.' },
+		{ src: circuits, alt: 'Circuits screen: a list of circuits on the left and an edit form on the right for the CanTrol main power feed, with current draw, fuse, wire gauge, feed run and ground fields and live checks.', caption: 'Circuits with live checks. As values are typed, voltage drop, wire protection and fuse size update. A blank box saves as blank, never as a guess.' },
+		{ src: mockup, alt: 'Product mockup wizard: steps for product, circuit, outputs and wiring, control plan and review, with free CanTrol outputs listed on the right.', caption: 'Product mockup. Try a product in a sandbox before buying it: name it, give it a circuit and outputs, and see it in the map and simulator.' },
+		{ src: mount, alt: 'Head mount designer: fields for head width, height and depth (to measure), fit clearance, wall thickness, tilt and base size, with a side and front preview and print guidance.', caption: 'Head mount designer. A parametric OpenSCAD cradle for the control head; STL export when OpenSCAD is installed. The head dimensions have no default: they must be measured.' },
+	]}
+/>
+
+### Test
+
+<Gallery
+	photos={[
+		{ src: lab, alt: 'Test lab: 18 scenarios run (1 pass, 17 incomplete, 0 fail), 4 open wiring checks, validator 0 errors and 0 warnings, and a scenario table from Slide off to Rear Flood.', caption: 'Test lab after "Run all tests": 18 simulated scenarios (every slide position, button and the brake), 0 failures. 17 are "incomplete" because most circuits have no measured draw yet. These are paper simulations, not bench results.' },
+		{ src: bench, alt: 'Bench test screen: before-you-start safety notes and a step list of every circuit with the reading to take.', caption: 'Bench test. Step through each circuit on the bench supply, type the clamp-meter reading, tick the checks and save a dated report. Not yet run on real hardware.' },
+		{ src: hardware, alt: 'Hardware lab: cards for project 5 bench rig (software ready), project 6 harness continuity tester (usable now), and projects 7 to 10 marked Needs hardware, plus a generated continuity and polarity checklist.', caption: 'Hardware lab. The continuity checklist is generated from every wire in the config. Monitoring projects that need a device stay unbuilt until the hardware is chosen: no guessing at hardware APIs.' },
+	]}
+/>
+
+### Build and records
+
+<Gallery
+	photos={[
+		{ src: calc, alt: 'Wire and fuse calculator with current, feed run, ground run and circuit type fields.', caption: 'Wire and fuse calculator. Same rules as the validator: copper resistance, 1.25x fuse headroom, 3% drop for critical circuits and 10% for the rest.' },
+		{ src: tracker, alt: 'Install tracker board with columns Planned, Parts in hand, Bench passed, Installed and Verified in truck.', caption: 'Install tracker. Each circuit moves from Planned to Verified in truck; progress is saved beside the config, not in it.' },
+		{ src: sandboxes, alt: 'Sandboxes screen: create a sandbox from the live config, and a list showing the live upfit.yaml.', caption: 'Sandboxes. Full copies of the config to try a change, compare it with live, then promote it (live is backed up first) or delete it.' },
+		{ src: findings, alt: 'Findings list filtered to all, with open items per circuit such as measure the feed run and choose the ground point.', caption: 'Findings. Every error, warning, open item and unverified value, filterable and searchable.' },
+		{ src: sync, alt: 'Sync settings: sync after every save, project repo and subfolder, Signal & Systems portfolio clone and data file path, include part prices (off), and pull-then-push options.', caption: 'Sync. Each save can be committed to the project repo and to this site (public-safe JSON only, prices off). Pushes use my own Git sign-in and only where I switch them on.' },
+		{ src: reports, alt: 'Reports and exports: the generated install config sheet text with status counts and circuit C01 details, wires and open items.', caption: 'Reports. The install config sheet, findings, BOM and harness drawings, written only when I press Build.' },
+		{ src: about, alt: 'About and safety screen listing the rules: the CanTrol stays the only controller, read-only toward the truck, private and offline, your file your call, blanks stay blank.', caption: 'About & safety. The rules the app follows, shown in the app itself.' },
+	]}
+/>
+
+## Key capabilities
+
+**Design**
+- One YAML file for the whole build: vehicle, parts (with status), circuits, wires (color, function, where each lands), and the CanTrol control plan for slide positions 1 to 3, every key and the brake pop.
+- Full product names everywhere. A check flags ruled-out short forms (for example "SpeedTurtle" or "STL") as errors so reports stay consistent with the project document.
+- Wiring map, output board and control head views all read the same data.
+
+**Electrical checks**
+- Voltage drop over feed plus ground return, against 3% (critical) or 10% (non-critical). A blank ground length is assumed equal to the feed and flagged.
+- ERROR if a fuse or CanTrol per-output limit exceeds the wire's ampacity; WARN if a fuse is under 1.25x continuous load.
+- ERROR if the everything-on draw of CanTrol-fed circuits exceeds the module's 40 A total output rating (Whelen guide 14580G, p.3).
+- ERROR if the plan would burn a flash-only product steady (set on the E68Xtreme stick from the Strobes N' More guide).
+- Suggests the smallest standard fuse and thinnest wire that pass both checks.
+
+**Simulation**
+- Control head replica: 21 keys with my printed caps, 4-position slide (far left is off), slide LEDs, 7-dot arrow indicator, simulated siren keys, a hold-to-press brake pedal and a night backlight view. Priority order: brake pop, TAKE DOWN, WHITE, STEADY, slide.
+- Each output is shown as steady (Turn On) or CanTrol Flash A/B.
+- Test lab runs every combination and lists wiring gaps and suggested fixes, each of which asks before it saves.
+
+**Records and publishing**
+- Every save writes a timestamped backup; Change history compares and restores them.
+- Sync logs every save and can commit it to the private project repo, to this site and to a plain folder. Before each push it pulls with rebase so a change made elsewhere never blocks the next save; a real conflict stops before the push.
+- The site copy leaves out notes, order numbers, tracking numbers and prices.
+
+## How it feeds this site
+
+Since version 0.5.0, each save writes `src/data/f150-upfit/upfit-studio.json` into this site's repository and commits it. When that reaches GitHub, Cloudflare Pages rebuilds the site. The [CanTrol output plan](/projects/f150-upfit/cantrol-output-plan/) and its [control head key map](/projects/f150-upfit/cantrol-output-plan/#control-head-keys) are generated from that file, so the published plan matches the app. The first sync landed on 31 Oct 2026 (see the [build log](/log/2026-10-31-upfit-studio-sync/)).
+
+## Architecture (pattern level)
+
+| Layer | What it does |
+| --- | --- |
+| `config/upfit.yaml` | The build: parts, circuits, wires, control plan, head key labels |
+| Engine | Model loading, validator, electrical math, wiring map and plan simulator, test lab, bench session, diff, report and harness generation, head mount generator |
+| Back end | A single API object exposed to the page through pywebview; only a fixed list of methods is reachable |
+| Front end | One local HTML page (no network allowed by its content security policy) |
+| Fallback | Tkinter classic app on the same engine |
+| Sync | Local git commits; pushes only where switched on, with the user's own sign-in |
+
+## Development history
+
+All from the change log in the repository.
+
+| Version | Date | What changed |
+| --- | --- | --- |
+| 0.1.0 | 30 Oct 2026 | First release: validate, build, diff, bench (command line) |
+| 0.1.1 to 0.1.2 | 31 Oct | Config synced with the project document and approved slide layout; harness diagram fix for names containing "&" |
+| 0.2.0 to 0.2.2 | 31 Oct | Tkinter desktop app and Windows build script; the build script now picks a Python whose Tk really works |
+| 0.3.0 | 31 Oct | Edit circuits with live checks; comment-preserving saves with backup and re-check |
+| 0.4.0 | 31 Oct | Upfit Studio: the WebView2 interface, wiring map, simulator, test lab, sandboxes, head mount designer |
+| 0.4.1 | 31 Oct | Config only: rocker and U-Lite wiring as approved 31 Oct; every planned output now wired |
+| 0.5.0 | 31 Oct | CCTL7 head replica, steady vs flash, light preview, uniform product names, Sync |
+| 0.5.1 | 31 Oct | Code moved to a private GitHub repository; sync commits in place when run from that repo |
+| 0.5.2 | 31 Oct | Sync pulls (rebase) before each push; conflicts stop safely |
+
+## Testing and verification
+
+- **Done:** the pytest suite passes on Linux (135 pass, 6 skipped on Python 3.13 in a cloud container on 31 Oct 2026). The change log records every Studio screen being driven in Chromium with no page errors (0.4.0 and 0.5.0), and I re-checked all 18 screens with no page errors while taking the screenshots above.
+- **Not done:** not yet run on Windows, in WebView2 or on the Toughbook; no Windows .exe built and tested yet. pywebview's Windows parts are untested.
+- **Nothing electrical is tested.** The control plan is not bench-tested or programmed into the CanTrol, and CanTrol pin numbers come from Whelen guide 14580G without being proven on the module.
+
+## Privacy
+
+No network, no telemetry, no accounts. The app writes only when a button is pressed. The public data file excludes notes, order numbers, tracking numbers and prices; including prices is an opt-in setting that is off.
+
+## Lessons learned
+
+- Keeping blanks blank works: 131 open items is an honest picture of what still needs a measurement or a source, and it is much more useful than a filled-in sheet I can't trust.
+- The first simulator showed every lit output as plain "on", which made a correct plan look like it burned the E68Xtreme steady. Showing steady vs flash per output fixed a display problem that looked like a design problem.
+- Publishing from the same file as the app removes a whole class of drift between the build plan and the portfolio.
+
+## Open items
+
+- Run and package on Windows and the Toughbook CF-33, then record the result here.
+- Measure each circuit's draw on the bench and fill it in; most test lab scenarios stay "incomplete" until then.
+- Install WireViz and Graphviz on the PC to render harness diagrams.
+- Choose hardware for the automated bench rig and the monitoring projects (battery, OBD-II, thermal) before any driver is written.
+
+## Changelog
+
+<Changelog entries={[{ date: '2026-10-31', version: '0.5.2', change: 'Page published with 18 screenshots of version 0.5.2.', rollback: 'Revert the commit that added projects/upfit-studio.' }]} />
