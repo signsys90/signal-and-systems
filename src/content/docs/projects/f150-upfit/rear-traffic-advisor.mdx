@@ -19,6 +19,7 @@ import Gallery from '../../../../components/Gallery.astro';
 import Changelog from '../../../../components/Changelog.astro';
 import booyu from '../../../../assets/f150/booyu.jpg';
 import e68 from '../../../../assets/f150/e68xtreme-stick.jpg';
+import colors from '../../../../assets/f150/putco-colors.png';
 
 <ProjectHeader hero={booyu} heroAlt="BooYu rear-window LED traffic advisor bars on suction cups with the controller and 12V plug, product photo." />
 
@@ -174,6 +175,12 @@ The wire colors, the common ground and the 0.9A per-head draw are all inferred: 
 | X1, X2: LED Outputs 7 and 8 spare | X1: LED Output 32 spare. X2 removed |
 | J1-3: BooYu | J1-3: BooYu until the E68Xtreme goes in, then free (not reassigned in the document) |
 
+### Rear color combinations (Putco Work Blade chart)
+
+<Gallery wide photos={[{ src: colors, alt: 'Putco Work Blade color combinations chart showing white override, amber/amber, blue/blue and split half-bar combinations, with amber/blue and amber/white pattern lists.', caption: 'Putco Work Blade color combination chart (manufacturer graphic). It shows the 60 in tailgate bar, not the E68Xtreme: this bar is the amber/white version, so the amber/white column applies.' }]} />
+
+This chart is for the [Putco Work Blade](/projects/f150-upfit/putco-work-blade/) on the tailgate, which sits below this light on the back of the truck. It's here so the rear colors can be planned together. The E68Xtreme's own colors are fixed by its heads (R/A/W/W/W/W/A/R) and its patterns come from the CanTrol, so none of the Work Blade's stored patterns or wig-wag combinations apply to the stick.
+
 ## Dropped option: Whelen Dominator Plus (11 Oct)
 
 On 11 October I found a used Whelen 8-head Dominator Plus traffic advisor, all amber (AAAAAAAA), with LIN6 optics and end flashers, at Brooks Government Surplus for $325.00 (listing price, condition A, never bought). The listing's example unit was model DPTAW8, PN 01-0688639-F80, LINZ6 Super-LED, 12VDC, made 05/20. It had four control wires (TA left, TA right, end flash only, TA flash), so the CanTrol would only have switched it: power on J1-3, TA flash joined to power, end flash on LED 6, TA left on LED 7, TA right on LED 8 (all inferred at the time). On 27 October the E68Xtreme replaced it in the plan, and the Dominator listing images were removed from the project files.
@@ -213,6 +220,7 @@ On 11 October I found a used Whelen 8-head Dominator Plus traffic advisor, all a
 ## Changelog
 
 <Changelog entries={[
+	{ date: '2026-10-31', change: 'Added the Putco Work Blade color combination chart under the E68Xtreme section, for planning the rear colors together.', rollback: 'Revert the commit that added the chart.' },
 	{ date: '2026-10-27', change: 'Added the planned Strobes N\' More E68Xtreme stick and Federal Signal SLB-FRD15ND bracket from the 27 October files, new K1–K10 wiring, output plan changes, and moved the Whelen Dominator to a dropped option.', rollback: 'Revert the commit that added the E68Xtreme.' },
 	{ date: '2026-10-27', change: 'Page published from the 23 October project files.', rollback: 'Revert the commit that rebuilt the F-150 section.' },
 ]} />

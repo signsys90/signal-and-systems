@@ -12,6 +12,8 @@ sidebar:
 import ProjectHeader from '../../../../components/ProjectHeader.astro';
 import Callout from '../../../../components/Callout.astro';
 import Changelog from '../../../../components/Changelog.astro';
+import Gallery from '../../../../components/Gallery.astro';
+import colors from '../../../../assets/f150/putco-colors.png';
 import kit from '../../../../assets/f150/cantrol-head-lit.jpg';
 
 <ProjectHeader hero={kit} heroAlt="The 21-button WeCan control head lit up on the bench." />
@@ -96,6 +98,8 @@ Method B can't go through the 30A relay, because a mechanical relay clicking at 
 ### Putco 60" Work Blade
 
 Wires: blue +12V (runs the stored pattern), white steady override, orange next pattern when grounded, red auxiliary, black ground. One stored pattern. Putco's chart lists amber-only, white-only and amber/white flashes. Plan: stored pattern = amber flash, and the white wire moves to a CanTrol LED output. The remote's button A and the CanTrol can't both feed the white wire without isolation, so the simplest choice leaves button A unused. Two 3A diodes would let both work (general knowledge).
+
+<Gallery wide photos={[{ src: colors, alt: 'Putco Work Blade color combinations chart showing white override, amber/amber, blue/blue and split half-bar combinations, with amber/blue and amber/white pattern lists.', caption: 'Putco Work Blade color combination chart (manufacturer graphic). This bar is the amber/white version, so the amber/white column applies: amber/amber is the amber mode and white override is the white mode.' }]} />
 
 ### SpeedTech Z-6 heads (rear plate)
 
@@ -208,4 +212,4 @@ Whelen CanTrol WC guide 14580G and Whelen Command CanTrol WC guide. Whelen price
 
 ## Changelog
 
-<Changelog entries={[{ date: '2026-10-27', change: 'Noted the planned E68Xtreme rear stick on LED Outputs 6–8 and 27–31 (27 October files).', rollback: 'Revert the commit that added the E68Xtreme.' }, { date: '2026-10-26', change: 'Five-modes proposal published from the 21 October plan. Not adopted yet.', rollback: 'Revert the commit that added this page.' }]} />
+<Changelog entries={[{ date: '2026-10-31', change: 'Added the Putco Work Blade color combination chart to the Work Blade section.', rollback: 'Revert the commit that added the chart.' }, { date: '2026-10-27', change: 'Noted the planned E68Xtreme rear stick on LED Outputs 6–8 and 27–31 (27 October files).', rollback: 'Revert the commit that added the E68Xtreme.' }, { date: '2026-10-26', change: 'Five-modes proposal published from the 21 October plan. Not adopted yet.', rollback: 'Revert the commit that added this page.' }]} />
