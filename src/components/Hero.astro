@@ -1,66 +1,927 @@
 ---
 /*
- * Home page hero: the Signal & Systems cover banner full width, then Starlight's default hero
- * (title, three-line tagline, actions) centered underneath so the text stays readable on phones.
+ * Home page hero: a live, code-drawn version of the Signal & Systems cover banner.
+ *
+ * Layers, back to front:
+ *   1. Console panel with a drifting engineering grid, a pointer spotlight and a slow scan line (CSS).
+ *   2. Circuit traces on the left with data pulses running along them to the terminals (SVG + CSS).
+ *   3. Canvas: spectrum analyzer with peak hold and marker on the right, oscilloscope trace along
+ *      the bottom that bends toward the pointer (requestAnimationFrame, paused when off screen).
+ *   4. Real HTML copy: h1, tagline with a decode effect, capability chips, byline and the actions
+ *      from the page frontmatter (hero.actions in src/content/docs/index.mdx).
+ *
+ * The panel is always the dark console (same as the banner) in both site themes. Under
+ * prefers-reduced-motion everything renders as one still frame. No dependencies.
+ * The static banner PNG is still the social share image (public/og-image.png).
  */
-import { Picture } from 'astro:assets';
-import Default from '@astrojs/starlight/components/Hero.astro';
-import banner from '../assets/brand/cover-banner.png';
+import { Icon } from '@astrojs/starlight/components';
+// Same id Starlight's own hero uses for the page title (skip link and table of contents target).
+const PAGE_TITLE_ID = '_top';
+
+const { data } = Astro.locals.starlightRoute.entry;
+const actions = data.hero?.actions ?? [];
+
+const chips = ['AI Automation', 'RevOps', 'Public-Safety Tech', '12V Upfit', 'EmComm'];
+
+// Left circuit traces (viewBox 0 0 360 520). Each ends in a terminal circle.
+const traces = [
+	{ d: 'M40 0 V60 L80 100 H190', end: [190, 100], delay: 0.2, hot: true },
+	{ d: 'M0 80 H120 L160 120 H300', end: [300, 120], delay: 1.6 },
+	{ d: 'M0 140 H80 L120 180 H240 L280 220', end: [280, 220], delay: 3.1 },
+	{ d: 'M0 240 H180 L220 200 H340', end: [340, 200], delay: 0.9 },
+	{ d: 'M0 340 H100 L140 300 H260', end: [260, 300], delay: 2.4 },
+	{ d: 'M0 400 H70 L110 440 H210', end: [210, 440], delay: 4.0 },
+	{ d: 'M0 510 H120 L150 480 H200', end: [200, 480], delay: 1.2 },
+];
 ---
 
-<div class="ss-home-hero">
-	<Picture
-		src={banner}
-		formats={['avif', 'webp']}
-		widths={[640, 960, 1280, 1702]}
-		sizes="(min-width: 72rem) 68rem, 100vw"
-		alt="Signal & Systems Engineering, LLC. banner: Built in the field. Engineered for business. AI automation, RevOps, public-safety tech, 12V upfit, EmComm."
-		loading="eager"
-		fetchpriority="high"
-		class="ss-banner"
-	/>
-	<Default {...Astro.props} />
-</div>
+<section class="ss-hero" data-ss-hero aria-labelledby={PAGE_TITLE_ID}>
+	<div class="ss-hero__grid" aria-hidden="true"></div>
+	<div class="ss-hero__scan" aria-hidden="true"></div>
+
+	<svg class="ss-hero__circuit" viewBox="0 0 360 520" preserveAspectRatio="xMinYMid meet" aria-hidden="true" focusable="false">
+		<g class="ss-trace-base">
+			{traces.map((t) => <path d={t.d} />)}
+			<rect x="60" y="430" width="88" height="58" rx="3" />
+			{[72, 92, 112, 132].map((x) => <path d={`M${x} 418 V430 M${x} 488 V500`} />)}
+		</g>
+		<g class="ss-trace-pulse">
+			{traces.map((t) => <path d={t.d} pathLength="100" style={`--d:${t.delay}s`} />)}
+		</g>
+		<g class="ss-trace-ends">
+			{
+				traces.map((t) => (
+					<circle cx={t.end[0]} cy={t.end[1]} r="6" class:list={{ hot: t.hot }} style={`--d:${t.delay}s`} />
+				))
+			}
+		</g>
+	</svg>
+
+	<canvas class="ss-hero__fx" aria-hidden="true"></canvas>
+
+	<div class="ss-hero__hud" aria-hidden="true">
+		<span class="ss-hud__status"><span class="ss-led"></span>Systems online</span>
+		<span class="ss-hud__right">
+			<span class="ss-hud__call">KR4JSQ</span>
+			<span class="ss-hud__sep">//</span>
+			<span>Jacksonville, FL</span>
+			<span class="ss-hud__sep ss-hud__clock-wrap">//</span>
+			<span class="ss-hud__clock-wrap">UTC <time data-ss-clock>--:--:--</time></span>
+		</span>
+	</div>
+
+	<div class="ss-hero__body">
+		<p class="ss-hero__eyebrow" style="--i:0">
+			<span class="ss-blue">signal-and-systems.pages.dev</span>
+			<span class="ss-amber">//</span>
+			<span class="ss-blue">System documentation &amp; technical architecture</span>
+		</p>
+
+		<h1 id={PAGE_TITLE_ID} data-page-title class="ss-hero__title" style="--i:1">
+			<span class="ss-hero__name">Signal <span class="ss-amber">&amp;</span> Systems</span>
+			<span class="ss-hero__llc">Engineering, LLC.</span>
+		</h1>
+
+		<div class="ss-hero__rule" style="--i:2" aria-hidden="true"></div>
+
+		<p class="ss-hero__tagline" style="--i:3">
+			<span>Built in the field.</span>
+			<span class="ss-amber" data-ss-decode>Engineered for business.</span>
+		</p>
+
+		<ul class="ss-hero__chips" style="--i:4" aria-label="Focus areas">
+			{chips.map((c, n) => <li style={`--n:${n}`}>{c}</li>)}
+		</ul>
+
+		<p class="ss-hero__byline" style="--i:5">
+			by William A. Atkins <span class="ss-amber">|</span> KR4JSQ
+		</p>
+
+		{
+			actions.length > 0 && (
+				<div class="ss-hero__actions" style="--i:6">
+					{actions.map(({ link, text, variant, icon, attrs }) => (
+						<a href={link} class:list={['ss-btn', variant === 'minimal' || variant === 'secondary' ? 'ss-btn--ghost' : 'ss-btn--primary']} {...(attrs ?? {})}>
+							<span>{text}</span>
+							{icon?.name ? <Icon name={icon.name} size="1.15rem" /> : icon?.html && <Fragment set:html={icon.html} />}
+						</a>
+					))}
+				</div>
+			)
+		}
+	</div>
+
+	<div class="ss-hero__ruler" aria-hidden="true"></div>
+</section>
+
+<script>
+	const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+	function initHero(root: HTMLElement) {
+		const canvas = root.querySelector<HTMLCanvasElement>('.ss-hero__fx');
+		const ctx = canvas?.getContext('2d');
+		if (!canvas || !ctx) return;
+
+		const AMBER = '#f59e0b';
+		const BLUE = '#60a5fa';
+		const BAR = 'rgba(59, 130, 246,';
+		const N_BARS = 30;
+		const bars = new Float32Array(N_BARS);
+		const peaks = new Float32Array(N_BARS);
+		let w = 0;
+		let h = 0;
+		let dpr = 1;
+		let running = false;
+		let visible = true;
+		let raf = 0;
+		let t0 = performance.now();
+		// Pointer position in canvas pixels; -1 means no pointer.
+		let px = -1;
+		let py = -1;
+		let pAmt = 0;
+
+		const resize = () => {
+			const r = canvas.getBoundingClientRect();
+			dpr = Math.min(window.devicePixelRatio || 1, 2);
+			w = r.width;
+			h = r.height;
+			canvas.width = Math.round(w * dpr);
+			canvas.height = Math.round(h * dpr);
+			ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+			if (!running) draw(performance.now());
+		};
+
+		// Spectrum shape: a few drifting carriers over a noise floor.
+		const spectrumAt = (i: number, t: number) => {
+			const x = i / (N_BARS - 1);
+			const c1 = 0.3 + 0.03 * Math.sin(t * 0.21);
+			const c2 = 0.72 + 0.05 * Math.sin(t * 0.13 + 1.7);
+			const c3 = 0.52 + 0.2 * Math.sin(t * 0.07 + 0.4);
+			const g = (c: number, s: number) => Math.exp(-((x - c) ** 2) / (2 * s * s));
+			const floor = 0.08 + 0.05 * Math.sin(i * 12.9898 + t * 3.1) ** 2;
+			return Math.min(
+				1,
+				floor +
+					0.92 * g(c1, 0.045) * (0.85 + 0.15 * Math.sin(t * 2.3)) +
+					0.55 * g(c2, 0.06) * (0.8 + 0.2 * Math.sin(t * 1.7 + 2)) +
+					0.25 * g(c3, 0.03) * (0.5 + 0.5 * Math.sin(t * 0.9)) +
+					0.06 * Math.sin(i * 78.233 + t * 9.7)
+			);
+		};
+
+		const drawSpectrum = (t: number, dt: number) => {
+			// Only where there is clear space to the right of the copy column.
+			if (w < 1000) return;
+			const x0 = w * 0.85;
+			const x1 = w - 26;
+			const base = h * 0.6;
+			const maxH = h * 0.3;
+			const bw = (x1 - x0) / N_BARS;
+			let peakI = 0;
+			for (let i = 0; i < N_BARS; i++) {
+				const target = spectrumAt(i, t);
+				bars[i] += (target - bars[i]) * Math.min(1, dt * 10);
+				peaks[i] = Math.max(bars[i], peaks[i] - dt * 0.18);
+				if (bars[i] > bars[peakI]) peakI = i;
+			}
+			// Baseline
+			ctx.fillStyle = 'rgba(96, 165, 250, 0.25)';
+			ctx.fillRect(x0, base + 1, x1 - x0, 1);
+			for (let i = 0; i < N_BARS; i++) {
+				const bh = bars[i] * maxH;
+				const x = x0 + i * bw;
+				const grad = ctx.createLinearGradient(0, base - bh, 0, base);
+				grad.addColorStop(0, BAR + ' 0.95)');
+				grad.addColorStop(1, BAR + ' 0.25)');
+				ctx.fillStyle = grad;
+				ctx.fillRect(x, base - bh, Math.max(1, bw - 2), bh);
+				ctx.fillStyle = 'rgba(147, 197, 253, 0.8)';
+				ctx.fillRect(x, base - peaks[i] * maxH - 3, Math.max(1, bw - 2), 1.5);
+			}
+			// Marker on the strongest carrier
+			const mx = x0 + peakI * bw + (bw - 2) / 2;
+			const my = base - bars[peakI] * maxH - 10;
+			ctx.fillStyle = AMBER;
+			ctx.beginPath();
+			ctx.moveTo(mx, my);
+			ctx.lineTo(mx - 6, my - 10);
+			ctx.lineTo(mx + 6, my - 10);
+			ctx.closePath();
+			ctx.fill();
+			ctx.font = '500 12px "JetBrains Mono", ui-monospace, monospace';
+			ctx.textAlign = mx > (x0 + x1) / 2 ? 'right' : 'left';
+			ctx.fillText('MKR 146.520', mx + (ctx.textAlign === 'right' ? -10 : 10), my - 1);
+			ctx.textAlign = 'left';
+		};
+
+		const drawScope = (t: number) => {
+			const mid = h * (w < 640 ? 0.9 : 0.86);
+			const amp = Math.min(28, h * 0.045);
+			const step = w < 640 ? 4 : 3;
+			const sigma = Math.max(120, w * 0.12);
+			const env = (x: number) => {
+				const u = x / w;
+				// Strong in the middle, quiet at the edges, plus a lobe that travels.
+				const travel = Math.exp(-((u - ((t * 0.06) % 1.4) + 0.2) ** 2) / 0.02);
+				const center = Math.exp(-((u - 0.5) ** 2) / 0.09);
+				const pointer = px >= 0 ? pAmt * Math.exp(-((x - px) ** 2) / (2 * sigma * sigma)) : 0;
+				return 0.25 + 0.75 * center + 0.5 * travel + 0.9 * pointer;
+			};
+			// Fewer cycles on narrow screens so the trace stays readable.
+			const fs = Math.max(0.5, Math.min(1, w / 1100));
+			const trace = (phase: number, freq: number, scale: number) => {
+				freq *= fs;
+				ctx.beginPath();
+				for (let x = 0; x <= w + step; x += step) {
+					const k = x / w;
+					const y =
+						Math.sin(k * freq * Math.PI * 2 - t * 2.2 + phase) * 0.7 +
+						Math.sin(k * freq * 2.7 * Math.PI - t * 3.4 + phase * 2) * 0.3;
+					const yy = mid + y * amp * scale * env(x);
+					x === 0 ? ctx.moveTo(x, yy) : ctx.lineTo(x, yy);
+				}
+			};
+			ctx.lineJoin = 'round';
+			// Blue reference trace
+			trace(1.3, 9, 0.6);
+			ctx.strokeStyle = 'rgba(96, 165, 250, 0.45)';
+			ctx.lineWidth = 1.25;
+			ctx.stroke();
+			// Amber signal trace with phosphor glow
+			trace(0, 14, 1);
+			ctx.save();
+			ctx.shadowColor = 'rgba(245, 158, 11, 0.85)';
+			ctx.shadowBlur = 14;
+			ctx.strokeStyle = AMBER;
+			ctx.lineWidth = 2.25;
+			ctx.stroke();
+			ctx.restore();
+			// Sweep write head
+			const sx = ((t * 0.18) % 1) * w;
+			const k = sx / w;
+			const sy =
+				mid +
+				(Math.sin(k * 14 * fs * Math.PI * 2 - t * 2.2) * 0.7 + Math.sin(k * 14 * fs * 2.7 * Math.PI - t * 3.4) * 0.3) * amp * env(sx);
+			const g = ctx.createRadialGradient(sx, sy, 0, sx, sy, 18);
+			g.addColorStop(0, 'rgba(253, 230, 138, 0.95)');
+			g.addColorStop(1, 'rgba(245, 158, 11, 0)');
+			ctx.fillStyle = g;
+			ctx.fillRect(sx - 18, sy - 18, 36, 36);
+		};
+
+		let last = performance.now();
+		function draw(now: number) {
+			const t = (now - t0) / 1000;
+			const dt = Math.min(0.05, (now - last) / 1000);
+			last = now;
+			pAmt += ((px >= 0 ? 1 : 0) - pAmt) * Math.min(1, dt * 4);
+			ctx!.clearRect(0, 0, w, h);
+			drawSpectrum(t, running ? dt : 1);
+			drawScope(t);
+		}
+
+		const loop = (now: number) => {
+			draw(now);
+			raf = requestAnimationFrame(loop);
+		};
+		const start = () => {
+			if (running || REDUCED.matches || !visible || document.hidden) return;
+			running = true;
+			last = performance.now();
+			raf = requestAnimationFrame(loop);
+		};
+		const stop = () => {
+			running = false;
+			cancelAnimationFrame(raf);
+		};
+
+		new ResizeObserver(resize).observe(canvas);
+		new IntersectionObserver(([e]) => {
+			visible = e.isIntersecting;
+			visible ? start() : stop();
+		}).observe(root);
+		document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+		REDUCED.addEventListener('change', () => {
+			if (REDUCED.matches) {
+				stop();
+				t0 = performance.now() - 4000;
+				resize();
+			} else start();
+		});
+
+		root.addEventListener('pointermove', (e) => {
+			const r = root.getBoundingClientRect();
+			const cr = canvas.getBoundingClientRect();
+			px = e.clientX - cr.left;
+			py = e.clientY - cr.top;
+			root.style.setProperty('--mx', `${((e.clientX - r.left) / r.width) * 100}%`);
+			root.style.setProperty('--my', `${((e.clientY - r.top) / r.height) * 100}%`);
+			root.classList.add('is-pointer');
+		});
+		root.addEventListener('pointerleave', () => {
+			px = py = -1;
+			root.classList.remove('is-pointer');
+		});
+
+		// Reduced motion: one settled frame a few seconds into the animation.
+		if (REDUCED.matches) t0 = performance.now() - 4000;
+		resize();
+		start();
+	}
+
+	function initClock(root: HTMLElement) {
+		const el = root.querySelector<HTMLTimeElement>('[data-ss-clock]');
+		if (!el) return;
+		const tick = () => {
+			const d = new Date();
+			el.textContent = d.toISOString().slice(11, 19);
+			el.dateTime = d.toISOString();
+		};
+		tick();
+		setInterval(tick, 1000);
+	}
+
+	// "Signal lock" decode on the second half of the tagline. Screen readers get the real text.
+	function initDecode(root: HTMLElement) {
+		const el = root.querySelector<HTMLElement>('[data-ss-decode]');
+		if (!el || REDUCED.matches) return;
+		const final = el.textContent ?? '';
+		const glyphs = '01<>/\\|=+*#%ABCDEFX';
+		el.setAttribute('aria-label', final);
+		const start = performance.now() + 700;
+		const dur = 1100;
+		const step = (now: number) => {
+			const p = Math.max(0, Math.min(1, (now - start) / dur));
+			const locked = Math.floor(p * final.length);
+			let out = '';
+			for (let i = 0; i < final.length; i++) {
+				const ch = final[i];
+				out += i < locked || ch === ' ' || ch === '.' ? ch : glyphs[(Math.random() * glyphs.length) | 0];
+			}
+			el.textContent = out;
+			if (p < 1) requestAnimationFrame(step);
+			else el.removeAttribute('aria-label');
+		};
+		requestAnimationFrame(step);
+	}
+
+	document.querySelectorAll<HTMLElement>('[data-ss-hero]').forEach((root) => {
+		initHero(root);
+		initClock(root);
+		initDecode(root);
+		root.classList.add('is-live');
+	});
+</script>
 
 <style>
-	.ss-home-hero {
-		padding-top: 1.5rem;
+	.ss-hero {
+		/* The panel is the dark console in both site themes, so it carries its own palette. */
+		--c-bg: #0b1220;
+		--c-bg-2: #0e172b;
+		--c-line: rgba(96, 165, 250, 0.08);
+		--c-line-strong: rgba(96, 165, 250, 0.14);
+		--c-text: #e5e7eb;
+		--c-muted: #94a3b8;
+		--c-amber: #f59e0b;
+		--c-blue: #60a5fa;
+		--c-trace: #3b6fc4;
+		--c-border: #1f2a44;
+		--mx: 50%;
+		--my: 40%;
+
+		position: relative;
+		isolation: isolate;
+		overflow: hidden;
+		margin-top: 1.5rem;
+		min-height: clamp(34rem, 62vh, 42rem);
+		display: grid;
+		grid-template-rows: auto 1fr auto;
+		border: 1px solid var(--c-border);
+		border-radius: 1rem;
+		color: var(--c-text);
+		background:
+			radial-gradient(ellipse 60% 55% at 50% 42%, rgba(30, 58, 110, 0.35), transparent 70%),
+			linear-gradient(180deg, var(--c-bg-2), var(--c-bg) 60%);
+		box-shadow:
+			0 0 0 1px rgba(255, 255, 255, 0.02) inset,
+			0 30px 80px -40px rgba(0, 0, 0, 0.8);
 	}
-	.ss-home-hero :global(picture),
-	.ss-banner {
-		display: block;
+	:global(:root[data-theme='light']) .ss-hero {
+		box-shadow: 0 24px 60px -28px rgba(15, 23, 42, 0.45);
+		border-color: #cbd5e1;
+	}
+
+	/* 1. Grid, spotlight and scan line */
+	.ss-hero__grid {
+		position: absolute;
+		inset: -40px;
+		z-index: -2;
+		background-image:
+			linear-gradient(var(--c-line-strong) 1px, transparent 1px),
+			linear-gradient(90deg, var(--c-line-strong) 1px, transparent 1px),
+			linear-gradient(var(--c-line) 1px, transparent 1px),
+			linear-gradient(90deg, var(--c-line) 1px, transparent 1px);
+		background-size:
+			160px 160px,
+			160px 160px,
+			32px 32px,
+			32px 32px;
+		mask-image: radial-gradient(ellipse 75% 70% at 50% 45%, #000 40%, transparent 100%);
+		animation: ss-grid-drift 40s linear infinite;
+	}
+	.ss-hero::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		pointer-events: none;
+		background: radial-gradient(420px circle at var(--mx) var(--my), rgba(245, 158, 11, 0.08), transparent 60%);
+		opacity: 0;
+		transition: opacity 0.4s ease;
+	}
+	.ss-hero.is-pointer::before {
+		opacity: 1;
+	}
+	.ss-hero__scan {
+		position: absolute;
+		inset-inline: 0;
+		top: 0;
+		height: 140px;
+		z-index: -1;
+		pointer-events: none;
+		background: linear-gradient(180deg, transparent, rgba(96, 165, 250, 0.04) 80%, rgba(96, 165, 250, 0.12) 99%, transparent);
+		opacity: 0;
+		transform: translateY(-140px);
+		animation: ss-scan 9s cubic-bezier(0.45, 0, 0.55, 1) 1.2s infinite;
+	}
+
+	/* 2. Circuit traces */
+	.ss-hero__circuit {
+		position: absolute;
+		left: 0;
+		top: 50%;
+		translate: 0 -55%;
+		height: 72%;
+		width: auto;
+		max-width: 17%;
+		z-index: -1;
+		overflow: visible;
+		mask-image: linear-gradient(90deg, #000 45%, transparent 95%);
+	}
+	.ss-trace-base :is(path, rect) {
+		fill: none;
+		stroke: var(--c-trace);
+		stroke-width: 1.5;
+		opacity: 0.55;
+	}
+	.ss-trace-pulse path {
+		fill: none;
+		stroke: var(--c-blue);
+		stroke-width: 2.5;
+		stroke-linecap: round;
+		stroke-dasharray: 8 200;
+		stroke-dashoffset: 8;
+		filter: drop-shadow(0 0 4px rgba(96, 165, 250, 0.9));
+		animation: ss-pulse 5s cubic-bezier(0.5, 0, 0.8, 1) var(--d) infinite;
+	}
+	.ss-trace-ends circle {
+		fill: var(--c-bg);
+		stroke: var(--c-blue);
+		stroke-width: 1.75;
+		animation: ss-node 5s ease-out var(--d) infinite;
+	}
+	.ss-trace-ends circle.hot {
+		fill: var(--c-amber);
+		stroke: var(--c-amber);
+	}
+
+	/* 3. Canvas */
+	.ss-hero__fx {
+		position: absolute;
+		inset: 0;
 		width: 100%;
+		height: 100%;
+		z-index: -1;
+		pointer-events: none;
 	}
-	.ss-banner {
-		height: auto;
-		aspect-ratio: 1702 / 630;
-		border: 1px solid var(--ss-border);
-		border-radius: 0.75rem;
-		background: #0b1220;
+
+	/* HUD strip */
+	.ss-hero__hud {
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 1.1rem 1.5rem 0;
+		font-family: var(--sl-font-mono);
+		font-size: 0.75rem;
+		letter-spacing: 0.22em;
+		text-transform: uppercase;
+		color: var(--c-muted);
+		animation: ss-fade 0.8s ease 0.1s both;
 	}
-	/* No side image any more, so the default two-column layout collapses to one centered column */
-	.ss-home-hero :global(.hero) {
-		grid-template-columns: 100%;
-		padding-block: 2rem 1rem;
-	}
-	.ss-home-hero :global(.hero .stack) {
-		text-align: center;
-	}
-	.ss-home-hero :global(.hero .copy) {
+	.ss-hud__status {
+		display: inline-flex;
 		align-items: center;
+		gap: 0.6rem;
+		color: var(--c-text);
 	}
-	.ss-home-hero :global(.hero .copy > *) {
-		max-width: 60ch;
+	.ss-led {
+		width: 0.55rem;
+		height: 0.55rem;
+		border-radius: 50%;
+		background: #4ade80;
+		box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.6);
+		animation: ss-led 2.4s ease-out infinite;
 	}
-	.ss-home-hero :global(.hero .actions) {
+	.ss-hud__right {
+		display: inline-flex;
+		gap: 0.75rem;
+	}
+	.ss-hud__call {
+		color: var(--c-text);
+	}
+	.ss-hud__sep {
+		color: var(--c-amber);
+	}
+	.ss-hud__clock-wrap time {
+		color: var(--c-blue);
+		font-variant-numeric: tabular-nums;
+	}
+
+	/* Copy */
+	.ss-hero__body {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 		justify-content: center;
+		text-align: center;
+		gap: 1.1rem;
+		padding: 2rem 1.5rem 6.5rem;
+	}
+	.ss-hero__body > * {
+		margin: 0;
+		animation: ss-rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) calc(0.25s + var(--i) * 0.12s) both;
+	}
+	.ss-blue {
+		color: var(--c-blue);
+	}
+	.ss-amber {
+		color: var(--c-amber);
+	}
+	.ss-hero__eyebrow {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.4rem 1rem;
+		font-family: var(--sl-font-mono);
+		font-size: 0.78rem;
+		letter-spacing: 0.28em;
+		text-transform: uppercase;
+	}
+	.ss-hero__title {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.6rem;
+		font-family: var(--ss-font-heading);
+		line-height: 1;
+		color: #f1f5f9;
+	}
+	.ss-hero__name {
+		font-size: clamp(2.6rem, 1rem + 6.2vw, 5.6rem);
+		font-weight: 600;
+		letter-spacing: -0.035em;
+		background: linear-gradient(180deg, #ffffff 30%, #c7d2e3);
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+		animation: ss-lock 1.3s cubic-bezier(0.2, 0.7, 0.2, 1) 0.35s both;
+	}
+	.ss-hero__name .ss-amber {
+		color: var(--c-amber);
+		-webkit-text-fill-color: var(--c-amber);
+		text-shadow: 0 0 28px rgba(245, 158, 11, 0.35);
+	}
+	.ss-hero__llc {
+		font-family: var(--sl-font-mono);
+		font-size: clamp(0.95rem, 0.6rem + 1.2vw, 1.5rem);
+		font-weight: 700;
+		letter-spacing: 0.55em;
+		margin-right: -0.55em;
+		text-transform: uppercase;
+		color: var(--c-amber);
+	}
+	.ss-hero__rule {
+		position: relative;
+		width: min(36rem, 80%);
+		height: 1px;
+		background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.35), transparent);
+		overflow: hidden;
+	}
+	.ss-hero__rule::after {
+		content: '';
+		position: absolute;
+		inset: 0 auto 0 0;
+		width: 30%;
+		background: linear-gradient(90deg, transparent, var(--c-amber), transparent);
+		transform: translateX(-100%);
+		animation: ss-glint 4.5s ease-in-out 1.4s infinite;
+	}
+	.ss-hero__tagline {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.2rem 0.8rem;
+		font-family: var(--ss-font-heading);
+		font-weight: 600;
+		font-size: clamp(1rem, 0.75rem + 1vw, 1.45rem);
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+	}
+	.ss-hero__tagline [data-ss-decode] {
+		font-variant-numeric: tabular-nums;
+	}
+	.ss-hero__chips {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.6rem;
+		padding: 0;
+		list-style: none;
+	}
+	.ss-hero__chips li {
+		position: relative;
+		margin: 0;
+		padding: 0.45rem 0.85rem;
+		border: 1px solid #263452;
+		border-radius: 0.35rem;
+		background: rgba(17, 26, 46, 0.7);
+		backdrop-filter: blur(4px);
+		font-family: var(--sl-font-mono);
+		font-size: 0.78rem;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: #cbd5e1;
+		overflow: hidden;
+		animation: ss-chip 10s ease-in-out calc(2s + var(--n) * 0.35s) infinite;
+	}
+	.ss-hero__byline {
+		font-family: var(--sl-font-mono);
+		font-size: 0.85rem;
+		letter-spacing: 0.08em;
+		color: var(--c-muted);
+	}
+	.ss-hero__actions {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.75rem 1rem;
+		margin-top: 0.4rem !important;
+	}
+	.ss-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.55rem;
+		padding: 0.8rem 1.35rem;
+		border-radius: 999px;
+		font-weight: 600;
+		font-size: 0.98rem;
+		text-decoration: none;
+		transition:
+			transform 0.2s ease,
+			box-shadow 0.2s ease,
+			background-color 0.2s ease,
+			border-color 0.2s ease;
+	}
+	.ss-btn--primary {
+		background: var(--c-amber);
+		color: #0b1220;
+		box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+	}
+	.ss-btn--primary:hover {
+		color: #0b1220;
+		transform: translateY(-1px);
+		box-shadow: 0 8px 30px -6px rgba(245, 158, 11, 0.55);
+	}
+	.ss-btn--primary :global(svg) {
+		transition: transform 0.2s ease;
+	}
+	.ss-btn--primary:hover :global(svg) {
+		transform: translateX(3px);
+	}
+	.ss-btn--ghost {
+		color: var(--c-text);
+		border: 1px solid #334155;
+		background: rgba(15, 23, 42, 0.5);
+	}
+	.ss-btn--ghost:hover {
+		color: #fff;
+		border-color: var(--c-blue);
+		background: rgba(30, 58, 110, 0.35);
+	}
+	.ss-btn:focus-visible {
+		outline: 2px solid var(--c-blue);
+		outline-offset: 3px;
+	}
+
+	/* Bottom tick ruler under the scope trace */
+	.ss-hero__ruler {
+		height: 14px;
+		margin: 0 0 0.6rem;
+		background:
+			repeating-linear-gradient(90deg, rgba(148, 163, 184, 0.35) 0 1px, transparent 1px 80px),
+			repeating-linear-gradient(90deg, rgba(148, 163, 184, 0.18) 0 1px, transparent 1px 16px);
+		background-size:
+			100% 14px,
+			100% 7px;
+		background-position:
+			0 0,
+			0 7px;
+		background-repeat: no-repeat;
+		mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+	}
+
+	/* Keyframes */
+	@keyframes ss-grid-drift {
+		to {
+			transform: translate(32px, 32px);
+		}
+	}
+	@keyframes ss-scan {
+		0% {
+			transform: translateY(-140px);
+			opacity: 0;
+		}
+		10% {
+			opacity: 1;
+		}
+		60%,
+		100% {
+			transform: translateY(46rem);
+			opacity: 0;
+		}
+	}
+	@keyframes ss-pulse {
+		0% {
+			stroke-dashoffset: 8;
+			opacity: 0;
+		}
+		5% {
+			opacity: 1;
+		}
+		45% {
+			stroke-dashoffset: -100;
+			opacity: 1;
+		}
+		50%,
+		100% {
+			stroke-dashoffset: -100;
+			opacity: 0;
+		}
+	}
+	@keyframes ss-node {
+		0%,
+		42% {
+			filter: none;
+		}
+		47% {
+			filter: drop-shadow(0 0 6px var(--c-blue)) brightness(1.6);
+		}
+		70%,
+		100% {
+			filter: none;
+		}
+	}
+	@keyframes ss-led {
+		0% {
+			box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.6);
+		}
+		70%,
+		100% {
+			box-shadow: 0 0 0 8px rgba(74, 222, 128, 0);
+		}
+	}
+	@keyframes ss-fade {
+		from {
+			opacity: 0;
+		}
+	}
+	@keyframes ss-rise {
+		from {
+			opacity: 0;
+			transform: translateY(14px);
+		}
+	}
+	@keyframes ss-lock {
+		0% {
+			opacity: 0;
+			filter: blur(10px);
+			letter-spacing: 0.02em;
+		}
+		60% {
+			opacity: 1;
+		}
+		100% {
+			filter: blur(0);
+			letter-spacing: -0.035em;
+		}
+	}
+	@keyframes ss-glint {
+		0% {
+			transform: translateX(-100%);
+		}
+		40%,
+		100% {
+			transform: translateX(340%);
+		}
+	}
+	@keyframes ss-chip {
+		0%,
+		6%,
+		100% {
+			border-color: #263452;
+			color: #cbd5e1;
+			box-shadow: none;
+		}
+		2% {
+			border-color: var(--c-amber);
+			color: #fde68a;
+			box-shadow:
+				0 0 0 1px rgba(245, 158, 11, 0.25),
+				0 0 18px -4px rgba(245, 158, 11, 0.6);
+		}
+	}
+
+	/* Tablet and phone */
+	@media (max-width: 64rem) {
+		.ss-hero__circuit {
+			display: none;
+		}
+		.ss-hero__eyebrow > :nth-child(-n + 2) {
+			display: none;
+		}
 	}
 	@media (max-width: 50rem) {
-		.ss-home-hero {
-			padding-top: 0.5rem;
+		.ss-hero {
+			margin-top: 0.5rem;
+			min-height: 0;
+			border-radius: 0.75rem;
 		}
-		.ss-banner {
-			border-radius: 0.5rem;
+		.ss-hero__hud {
+			padding: 0.9rem 1rem 0;
+			font-size: 0.66rem;
+			letter-spacing: 0.16em;
+		}
+		.ss-hud__right > :not(.ss-hud__call) {
+			display: none;
+		}
+		.ss-hero__body {
+			gap: 0.95rem;
+			padding: 2.25rem 1rem 5.5rem;
+		}
+		.ss-hero__eyebrow {
+			font-size: 0.66rem;
+			letter-spacing: 0.2em;
+		}
+		.ss-hero__eyebrow {
+			display: none;
+		}
+		.ss-hero__llc {
+			letter-spacing: 0.4em;
+			margin-right: -0.4em;
+		}
+		.ss-hero__tagline {
+			flex-direction: column;
+			letter-spacing: 0.12em;
+		}
+		.ss-hero__chips {
+			gap: 0.45rem;
+		}
+		.ss-hero__chips li {
+			font-size: 0.68rem;
+			padding: 0.35rem 0.6rem;
+			letter-spacing: 0.1em;
+		}
+		.ss-hero__actions {
+			gap: 0.6rem;
+		}
+		.ss-btn {
+			padding: 0.65rem 1rem;
+			font-size: 0.9rem;
+		}
+		.ss-hero__byline {
+			font-size: 0.78rem;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.ss-hero *,
+		.ss-hero::before {
+			animation: none !important;
+			transition: none !important;
+		}
+		.ss-hero__scan,
+		.ss-trace-pulse {
+			display: none;
 		}
 	}
 </style>
