@@ -5,7 +5,7 @@ summary: Config-as-code for a vehicle upfit. One YAML file holds every part, cir
 status: In progress
 category: Software and Automation
 started: 2026-10-30
-updated: 2026-11-06
+updated: 2026-11-07
 project: true
 ---
 
@@ -71,17 +71,17 @@ The build lives in one file, `config/upfit.yaml`. The app reads it, checks it an
 <SpecBox
 	title="Release details"
 	specs={[
-		['Version', '0.8.14 (1 Nov 2026)'],
+		['Version', '0.8.14 (7 Nov 2026; on a branch, merge request not yet merged)'],
 		['Platform', 'Windows 10/11 (target: Panasonic Toughbook CF-33); Python 3.10+'],
 		['Interface', 'pywebview + Microsoft Edge WebView2, with a Tkinter fallback'],
 		['Engine', 'Python; PyYAML and ruamel.yaml (comment-preserving saves)'],
 		['Diagrams', 'WireViz + Graphviz (optional)'],
 		['Head mount', 'OpenSCAD (optional, for STL export)'],
 		['Packaging', 'PyInstaller one-folder build via build_exe.bat (runs the tests first)'],
-		['Tests', 'pytest on Windows (my PC, Python 3.14, version 0.8.13, 1 Nov 2026): 205 pass; one Tk window start-up test failed once and passed 3 of 3 on rerun. The Windows build script run: 204 pass, 2 skipped'],
+		['Tests', 'pytest on Windows (my PC, Python 3.14.10, version 0.8.14, 7 Nov 2026): 257 pass, none skipped. The Windows build script\'s own run before packaging: 204 pass, 2 skipped'],
 		['Network', 'None. No telemetry, no accounts'],
 		['Vehicle inputs', 'Whelen Command CANport plan: 8 of 8 CAN slots used (F150 2017 signal list, CC5K1 kit)'],
-		['Source', 'Private GitHub repository'],
+		['Source', 'Private GitLab repository (moved from GitHub on 6 Nov 2026 after that GitHub account was suspended)'],
 		['Built with', 'AI-assisted development (Claude Code) from my requirements and build data'],
 	]}
 	source={{ label: 'Project README, CHANGES.txt and pyproject.toml (repository is private)' }}
@@ -305,6 +305,12 @@ The screens below were captured 31 Oct 2026 from version 0.5.2, except the contr
 - Simulates each signal, including one-time turn-offs (Park ends, Drive starts).
 - Compares the plan with a Whelen Command `.wln` file, read-only.
 
+**Gaps and readiness (0.8.14)**
+- Fill the gaps ranks circuits missing a current draw, shows where in the manual to look, and saves each value with a required source (manual page, bench measurement or estimate).
+- Ready to transfer lists what is still open before a setup goes into the CanTrol. It only reads; Transfer stays in Whelen Command.
+- A whole-harness overview drawing comes first in the harness diagrams list; drawings fit the panel width by default.
+- tools/make_package.py refreshes the Claude Project package from the repo and lists what to re-upload.
+
 **Records and publishing**
 - Every save writes a timestamped backup; Change history compares and restores them.
 - Sync logs every save and can commit it to the private project repo, to this site and to a plain folder. Before each push it pulls with rebase so a change made elsewhere never blocks the next save; a real conflict stops before the push.
@@ -354,14 +360,15 @@ All from the change log in the repository.
 | 0.8.11 | 31 Oct | Command file "-4" stored as a test sample: same Command version, name table and eight CAN signals as "-3" |
 | 0.8.12 | 31 Oct | Harness diagrams wrap long labels at 32 characters, so the widest diagram (C09) shrank from about 2,660 to 1,700 points |
 | 0.8.13 | 1 Nov | Build outputs finds WireViz and Graphviz in their usual install folders when they are not on PATH, and shows a red warning naming the missing tool when it can't draw |
-| 0.8.14 | 1 Nov | WireViz runs without flashing a console window for each diagram on Windows |
+| 0.8.14 | 7 Nov | Fill the gaps screen (ranks circuits missing a current draw; each value saved with a required source, estimates flagged unverified). Ready to transfer screen (config errors, CHECK rows, bench results, Command file vs plan; read-only, never says ready while anything is open). Whole-harness overview drawing and a fit-to-width diagram viewer. Build outputs reports what was really drawn, read from disk. No console flash, one Studio window per config, build date and stale-build warning in the window. tools/make_package.py refreshes the project package. Two skipped render tests and a Tk test flake fixed |
 | 0.9.0-rc1 | 6 Nov | Release candidate on a branch: Command Builder (Whelen Command run packet, versioned file names, read-back check) |
 | 0.9.0-rc2 | 6 Nov | Release candidate: scans each folder once, and the run prompt uses full file paths so a computer-use session can open them |
 
 ## Testing and verification
 
 - **Done:** the pytest suite passes on Linux (195 pass, 6 skipped on version 0.8.10, Python 3.13, cloud container, 31 Oct 2026). New tests since 0.5.2 cover the CANport rules, the Command file reader against my programmed file, the sweep, the installer packet, reserved Windows file names and the build script. The change log records every Studio screen being driven in Chromium with no page errors (0.4.0 and 0.5.0), and I re-checked all 18 screens with no page errors while taking the screenshots above.
-- **On Windows (1 Nov 2026):** version 0.8.13 was built into the Windows app on my PC. The test suite passed there (205 pass on Python 3.14; one Tk start-up test failed once and passed 3 of 3 on rerun), and with Graphviz 16.1.0 and WireViz 0.4.1 installed all 18 harness diagrams drew. The missing-diagram bug fixed in 0.8.13 was found there: a Studio window opened before Graphviz was installed kept a stale PATH, wrote the diagram files without pictures and still said Built. Version 0.8.14 is merged but not yet rebuilt on the Toughbook. I have not recorded a full run of every screen in WebView2, so this page doesn't claim one.
+- **On Windows (7 Nov 2026):** version 0.8.14 was built into the Windows app on my PC and the screens clicked through. The test suite passed there (257 pass, none skipped, Python 3.14.10, Graphviz 16.1.0, WireViz 0.4.1). In the rebuilt app, Fill the gaps showed 15 circuits and refused a save with a blank source; Ready to transfer showed "Not ready: 3 of 4 checks still open"; Build outputs gave "18 of 18 circuits have a drawing, plus the whole-harness overview" even though the app was started from a shell without Graphviz on PATH; a second launch exited and left one process. The missing-diagram bug fixed in 0.8.13 (a window opened before Graphviz was installed kept a stale PATH) is what led to the honest build summary.
+- **Not verified in 0.8.14:** the Choose Command file button (needs the native file dialog), the footer build date and stale-build chip, whether a second launch brings the first window to the front, and any value actually saved from Fill the gaps in the app (covered by tests only). The Tk test flake fix rests on its cause: 15 repeat runs were clean, but the original failure was never reproduced. 0.8.14 is not yet rebuilt on the Toughbook. I have not recorded a full run of every screen in WebView2, so this page doesn't claim one.
 - **Nothing electrical is tested.** The control plan is not bench-tested or programmed into the CanTrol, and CanTrol pin numbers come from Whelen guide 14580G without being proven on the module.
 
 ## Privacy
@@ -381,9 +388,11 @@ No network, no telemetry, no accounts. The app writes only when a button is pres
 
 - Run and package on Windows and the Toughbook CF-33, then record the result here.
 - Measure each circuit's draw on the bench and fill it in; most test lab scenarios stay "incomplete" until then.
-- Pull 0.8.14 onto the Toughbook and rebuild the Windows app there.
+- Merge the 0.8.14 merge request on GitLab, then pull it onto the Toughbook and rebuild the Windows app there.
+- Fill the gaps: enter the 15 missing circuit current draws from the manuals, each with its source.
+- Ready to transfer must read "Ready" before any Transfer in Whelen Command; today 3 of its 4 checks are open.
 - Choose hardware for the automated bench rig and the monitoring projects (battery, OBD-II, thermal) before any driver is written.
 
 ## Changelog
 
-<Changelog entries={[{ date: '2026-11-06', version: '0.9.0-rc2', change: 'Added the Command Builder section (run packet, versioned files, read-back check, safety rules, test status) and 0.9.0-rc1 and rc2 to the version history.', rollback: 'Revert the commit that added the Command Builder section.', log: '/log/2026-11-06-command-builder/' }, { date: '2026-11-06', version: '0.8.14', change: 'Version history to 0.8.14 (diagram label wrap, WireViz and Graphviz found outside PATH with a warning when drawing fails, no console flash); Windows test and build results from 1 Nov; Command file "-4" confirmed as a plain re-save of "-3".', rollback: 'Revert the commit that added the 6 Nov upfit update.', log: '/log/2026-11-06-head-mounted-tools-touch-up/' }, { date: '2026-10-31', version: '0.8.10', change: 'Command file "-4" is now the compare file: same eight CAN signal names; its programming-logic change from "-3" is not yet confirmed.', rollback: 'Revert the commit that named Command file -4.' }, { date: '2026-10-31', version: '0.8.10', change: 'Added the Whelen Command CANport setup (8 CAN inputs, Command file compare, simulation, programming sheet), the stand-alone controllers and the installer packet, with 9 new screenshots; version history to 0.8.10.', rollback: 'Revert the commit that added the CANport section.' }, { date: '2026-10-31', version: '0.5.2', change: 'Page published with 18 screenshots of version 0.5.2.', rollback: 'Revert the commit that added projects/upfit-studio.' }]} />
+<Changelog entries={[{ date: '2026-11-07', version: '0.8.14', change: 'Updated for the real 0.8.14 release: Fill the gaps, Ready to transfer, whole-harness overview, honest build summary, one window per config, GitLab as the repository, Windows test and rebuilt-app results (257 pass), and what was not verified.', rollback: 'Revert the commit that updated Upfit Studio to 0.8.14.' }, { date: '2026-11-06', version: '0.9.0-rc2', change: 'Added the Command Builder section (run packet, versioned files, read-back check, safety rules, test status) and 0.9.0-rc1 and rc2 to the version history.', rollback: 'Revert the commit that added the Command Builder section.', log: '/log/2026-11-06-command-builder/' }, { date: '2026-11-06', version: '0.8.14', change: 'Version history to 0.8.14 (diagram label wrap, WireViz and Graphviz found outside PATH with a warning when drawing fails, no console flash); Windows test and build results from 1 Nov; Command file "-4" confirmed as a plain re-save of "-3".', rollback: 'Revert the commit that added the 6 Nov upfit update.', log: '/log/2026-11-06-head-mounted-tools-touch-up/' }, { date: '2026-10-31', version: '0.8.10', change: 'Command file "-4" is now the compare file: same eight CAN signal names; its programming-logic change from "-3" is not yet confirmed.', rollback: 'Revert the commit that named Command file -4.' }, { date: '2026-10-31', version: '0.8.10', change: 'Added the Whelen Command CANport setup (8 CAN inputs, Command file compare, simulation, programming sheet), the stand-alone controllers and the installer packet, with 9 new screenshots; version history to 0.8.10.', rollback: 'Revert the commit that added the CANport section.' }, { date: '2026-10-31', version: '0.5.2', change: 'Page published with 18 screenshots of version 0.5.2.', rollback: 'Revert the commit that added projects/upfit-studio.' }]} />
