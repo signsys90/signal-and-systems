@@ -23,6 +23,11 @@ import shotTasks from '../../../../assets/ares-gis/desktop-tasks-drawer.webp';
 import shotLayers from '../../../../assets/ares-gis/desktop-layers-drawer.webp';
 import shotDiagnostics from '../../../../assets/ares-gis/desktop-diagnostics-drawer.webp';
 import shotMobile from '../../../../assets/ares-gis/mobile-map-day.webp';
+import v8Overlays from '../../../../assets/ares-gis/v8-desktop-live-overlays.webp';
+import v8Palette from '../../../../assets/ares-gis/v8-desktop-command-palette.webp';
+import v8Dispatch from '../../../../assets/ares-gis/v8-desktop-dispatch.webp';
+import v8Day from '../../../../assets/ares-gis/v8-desktop-day-theme.webp';
+import v8Mobile from '../../../../assets/ares-gis/v8-mobile-map.webp';
 
 <ProjectHeader />
 
@@ -257,6 +262,22 @@ This tour describes the v7.1.5 layout. The v8.0.0 layout is summarized under [Wh
 
 ## Screenshots
 
+### v8 screenshots
+
+These come from version 8.0.0 running in a cloud sandbox on 2026-11-07 with fictional demo data. The sandbox had no internet access, so no map tiles loaded. Two call signs in the dispatch list were blacked out before publishing, and the net control log screenshots were left out because they show a frequency and possibly real call signs.
+
+<Gallery
+	photos={[
+		{ src: v8Overlays, alt: 'v8 command view in night mode with the Live Overlays panel open, showing base map choices, quick presets and weather and radar overlay toggles beside clustered map markers', caption: 'v8.0.0 interface with demo data, captured in a sandbox without internet, so the map background is blank.' },
+		{ src: v8Palette, alt: 'v8 command palette open over a dimmed map, listing panel, map and create commands with single-key shortcuts', caption: 'v8.0.0 interface with demo data, captured in a sandbox without internet, so the map background is blank.' },
+		{ src: v8Dispatch, alt: 'v8 Dispatch and Assignment panel showing nearest operator candidates for a demo Severe Weather Monitoring incident, with two call signs blacked out', caption: 'v8.0.0 interface with demo data, captured in a sandbox without internet, so the map background is blank.' },
+		{ src: v8Day, alt: 'v8 command view in day theme with the Live Overlays panel open on a light background', caption: 'v8.0.0 interface with demo data, captured in a sandbox without internet, so the map background is blank.' },
+		{ src: v8Mobile, alt: 'v8 phone layout with an incident focus card, clustered map markers and a bottom dock of Message, Dispatch, Zoom and Edit buttons', caption: 'v8.0.0 interface with demo data, captured in a sandbox without internet, so the map background is blank.' },
+	]}
+/>
+
+### Version 7.1.5 screenshots (October 2026)
+
 These screenshots come from a local copy of version 7.1.5 on the CF-33, captured on 2026-10-26. It was loaded with fictional demo data only: operators DEMO1 to DEMO3, two "Demo:" incidents in Jacksonville and two demo tasks. Carto tile requests were blocked so the map shows the app's built-in OpenStreetMap fallback (see Testing). Before publishing, every image was checked for real names, call sign lists, phone numbers, addresses, credentials and file paths. Two candidate shots were thrown out because they showed real repeater call signs and hospital contact details.
 
 <Gallery
@@ -366,7 +387,7 @@ The 16 UI tests cover:
 - The full create, update, dispatch and delete cycle for an incident
 
 <Callout type="unverified">
-**v8.0.0 and v8.0.1:** the live data services answer (see the 7 Nov checks above), but no overlay or map tile has yet been seen drawing inside the v8 or v8.0.1 app. The FEMA flood query now returns all Duval polygons when called directly, but the overlay has not been seen drawing in the app. v8.0.1 is in the project files only. It is not deployed and not yet in the GitLab ares-duval-gis repository. Map screenshot comparison tests are now opt-in and their baselines have not been created. v8 has not been run on a physical phone or on the CF-33, and it has not been tested with real GPS hardware or live APRS, Meshtastic or DMR feeds. It is not deployed to Render.
+**v8.0.0 and v8.0.1:** the live data services answer (see the 7 Nov checks above), but no overlay or map tile has yet been seen drawing inside the v8 or v8.0.1 app. The FEMA flood query now returns all Duval polygons when called directly, but the overlay has not been seen drawing in the app. v8.0.1 is on the GitLab ares-duval-gis repository as branch `release/v8.0.1` (tag `v8.0.1`). It is not merged to main and not deployed. Map screenshot comparison tests are now opt-in and their baselines have not been created. v8 has not been run on a physical phone or on the CF-33, and it has not been tested with real GPS hardware or live APRS, Meshtastic or DMR feeds. It is not deployed to Render.
 </Callout>
 
 <Callout type="unverified">
@@ -401,7 +422,7 @@ At least one fire station on the map uses an approximate coordinate that still n
 9. Walk ARES Duval leadership through the platform and collect feedback on how it fits activations and exercises.
 10. Carto basemaps: **fixed in v8.0.1 code; not yet seen rendering in the app.** Carto is no longer used, and the OpenStreetMap and Esri replacement tiles all answered the 7 Nov checks. Refresh the visual baselines once v8.0.1 runs on a networked machine.
 11. FEMA flood zones: **fixed in v8.0.1 code (generalized, paged NFHL query confirmed from the CF-33 on 7 Nov); not yet seen rendering in the app.**
-12. Push v8.0.1 to the ares-duval-gis GitLab repository.
+12. v8.0.1 is on the ares-duval-gis GitLab repository as branch `release/v8.0.1` (tag `v8.0.1`), pushed 2026-11-07. It is not merged to main and not deployed, because Render deploys main automatically.
 
 ## Version history
 
@@ -427,6 +448,7 @@ Taken from the release note files in the project folder.
 
 <Changelog
 	entries={[
+		{ date: '2026-11-07', change: 'Added v8 screenshots.', rollback: 'Revert the commit that made this change.' },
 		{ date: '2026-11-07', change: 'FEMA flood query fix confirmed.', rollback: 'Revert the commit that made this change.' },
 		{ date: '2026-11-07', change: 'v8.0.1 fixes for FEMA flood source and basemaps.', rollback: 'Revert the commit that made this change.' },
 		{ date: '2026-11-07', change: 'Added live service reachability check.', rollback: 'Revert the commit that made this change.' },
