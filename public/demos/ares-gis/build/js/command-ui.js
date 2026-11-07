@@ -1249,6 +1249,7 @@ window.addEventListener("ares:selected-record", (event) => {
       return;
     }
     if (!wasCompact) {
+      wasCompact = true;
       (_b = (_a = window.AresCommandUi) == null ? void 0 : _a.closeAllDrawers) == null ? void 0 : _b.call(_a);
     }
     wasCompact = true;
