@@ -1,0 +1,25 @@
+---
+title: '2026-11-07: ARES GIS dashboard rebuilt as v8.0.0'
+description: 'The ARES Duval GIS Command Dashboard moves from v7.1.5 to v8.0.0: a tactical command interface, 17 live hazard overlays, an ICS-309 net log, nine bug fixes and security hardening. Not deployed yet.'
+sidebar:
+  order: -20261107.1
+---
+
+Parent project: [ARES Duval GIS Command Dashboard](/projects/ares-gis-dashboard/).
+
+## What changed
+
+The ARES Duval GIS Command Dashboard moved from v7.1.5 to v8.0.0. The rebuild adds a tactical command interface (HUD, command palette, night-vision mode, mobile command mode), a Live Wx drawer with 17 public weather, flood, outage and traffic overlays, and a Net Log that produces ICS-309 communications logs. It also fixes nine bugs, including a mobile crash and an XSS hole in address search, and hardens auth, headers and data writes.
+
+| Area | Change | Page |
+| --- | --- | --- |
+| Interface | HUD top bar, command rail, action dock, command palette, night-vision mode, mobile command mode | [What's new in v8.0.0](/projects/ares-gis-dashboard/#whats-new-in-v800) |
+| Security | Timing-safe auth checks, security headers, timeouts, atomic data writes, escaped user text | [Security and reliability (v8)](/projects/ares-gis-dashboard/#security-and-reliability-v8) |
+| Bug fixes | Nine fixes, including the mobile crash and the address search XSS | [Bugs fixed in v8](/projects/ares-gis-dashboard/#bugs-fixed-in-v8) |
+| Testing | New v8.0.0 rows and an "unverified" note | [Testing and verification](/projects/ares-gis-dashboard/#testing-and-verification) |
+
+## Status
+
+- 16 unit tests, the API smoke test and 22 browser UI tests pass (Linux cloud sandbox, 7 Nov 2026).
+- **Live overlays and map tiles have not yet been seen loading** on a networked machine.
+- **v8 is not deployed yet.** The live Render service still runs the earlier build.

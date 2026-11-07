@@ -1,7 +1,7 @@
 ---
 title: ARES Duval GIS Command Dashboard
-description: A web-based GIS command dashboard for Duval County ARES that fuses APRS, Meshtastic, DMR and manual check-ins onto one map with incident, task, dispatch and ICS-style workflows.
-summary: Node/Express and Leaflet command map for Duval County ARES with multi-source operator tracking, incidents, tasks, nearest-operator dispatch, ICS-style incident workspaces and system diagnostics.
+description: 'Map-first ESF-2 command dashboard for Duval County ARES: live hazard overlays, ICS-309 net control log, dispatch and incident tracking.'
+summary: Version 8.0.0. Node/Express and Leaflet command map for Duval County ARES with a tactical command interface, 17 live hazard overlays, an ICS-309 net control log, multi-source operator tracking, incidents, tasks and nearest-operator dispatch.
 status: In progress
 category: Radio and Emergency Comms
 started: Spring 2026
@@ -26,6 +26,37 @@ import shotMobile from '../../../../assets/ares-gis/mobile-map-day.webp';
 
 <ProjectHeader />
 
+## What's new in v8.0.0
+
+Version 8.0.0 (7 November 2026) is a full modernization of the v7.1.5 codebase, done with Claude Code. The original v7 code stays in the git history (commit `c915772`) as the rollback point.
+
+**Tactical command interface**
+
+- Full-screen map with a HUD top bar (status chips, UTC and local clocks), a left command rail, a bottom action dock, and one slide-in drawer at a time.
+- Night ops dark theme by default, a refreshed day theme, and a red night-vision mode (`V`) that preserves dark adaptation.
+- Basemaps: Auto, Dark, Streets, Satellite (Esri imagery with labels) and Topo, with automatic provider fallback.
+- Cursor readout in lat/lon, Maidenhead grid square and zoom. Right-click gives a copyable position report to read over the air.
+- Command palette (`Ctrl+K` or `/`) and single-key shortcuts (`?` lists them).
+- Mobile command mode with bottom-sheet drawers and a thumb-reach action bar.
+
+**Live Wx drawer (17 overlays)**
+
+| Group | Overlays |
+| --- | --- |
+| Weather and radar | Animated NEXRAD loop with play and scrub (Iowa Environmental Mesonet), NOAA MRMS radar mosaic, NWS watches/warnings/advisories, NWS alert polygons for Duval, SPC Day 1 and Day 2 convective outlooks, NHC tropical cones and tracks |
+| Water | NWS river gauges, FEMA flood hazard zones, City of Jacksonville flood zones |
+| Emergency management | Florida power outages, shelters, hospitals, JFRD stations, ARES repeaters |
+| Traffic | FL511 cameras and message boards |
+
+- One-tap presets (Severe Wx, Hurricane, Flooding, Clear all) and per-overlay opacity.
+- An NWS alert ticker across the top of the map for SKYWARN triggers. It turns red when a warning is active.
+
+**Net control**
+
+- A Net Log drawer to open a net and log check-ins, check-outs, traffic and notes in UTC, with routine, priority and emergency precedence. The roster builds itself from check-ins.
+- ICS-309 communications log as a CSV export and a printable form, with net history.
+- A printable ICS-213 general message form.
+
 ## Live demo
 
 **[Open the live demo](/demos/ares-gis/)**. It opens the real GIS command dashboard in your browser.
@@ -43,25 +74,22 @@ import shotMobile from '../../../../assets/ares-gis/mobile-map-day.webp';
 <SpecBox
 	title="Release details"
 	specs={[
-		['Version', '7.1.5'],
-		['Live deployment', 'Render web service (login required)'],
-		['Server', 'Node.js 20, Express 4'],
-		['Map', 'Leaflet 1.9 with marker clustering, bundled locally (no CDN)'],
-		['Client build', 'esbuild, 11 browser bundles'],
-		['Realtime', 'MQTT (Meshtastic), APRS polling, browser Web Serial GPS'],
-		['HTTP client', 'axios'],
-		['Storage', 'Local JSON files on a persistent disk'],
-		['Hosting', 'Render Blueprint (render.yaml), or local on the field laptop'],
-		['Tests', 'Playwright UI suite (16 tests × desktop and mobile), API smoke test, GeoJSON validation'],
-		['CI', 'GitHub Actions verify workflow'],
-		['Built with', 'OpenAI Codex'],
+		['Version', '8.0.0 (7 November 2026)'],
+		['Runtime', 'Node.js 22 or newer, Express 5'],
+		['Map', 'Leaflet 1.9 with marker clustering, bundled locally'],
+		['Build', 'esbuild client bundle; Safari/iOS 15+ and current Chrome, Edge, Firefox'],
+		['Realtime', 'MQTT (Meshtastic), APRS polling, Web Serial GPS (unchanged)'],
+		['Storage', 'Local JSON files, now written atomically'],
+		['Hosting', 'Render Blueprint or the field laptop. v8 is not deployed yet; the live Render service still runs the earlier build'],
+		['Tests', '16 unit tests (node:test), API smoke test, 22 Playwright UI tests (desktop and mobile Chromium), GeoJSON validation'],
+		['Built with', 'OpenAI Codex through v7.1.5; v8.0.0 modernization with Claude Code'],
 	]}
 	source={{ label: 'Project README, package.json, release notes and source code (repository not public)' }}
 />
 
 **Live deployment:** [ares-duval-gis-render-v2-1.onrender.com](https://ares-duval-gis-render-v2-1.onrender.com/). It is protected by a login for authorized operators, so the screenshots on this page come from a local copy loaded with fictional demo data instead.
 
-The hosted build is labeled **ARES Duval GIS v3.7.2 (Development)** and currently works best on a desktop browser. Its version label follows a different numbering from the local release line in the version history below (7.1.5), so treat the two as separate tracks until they are reconciled.
+The hosted build is labeled **ARES Duval GIS v3.7.2 (Development)** and currently works best on a desktop browser. Its version label follows a different numbering from the release line in the version history below (now 8.0.0), so treat the two as separate tracks until they are reconciled. Version 8.0.0 has not been deployed there yet.
 
 ## What the platform does
 
@@ -183,7 +211,33 @@ The layer service loads 28 layers in six categories: infrastructure, operations,
 
 The sources policy is "live-preferred": live feeds and official layers are always used when they respond, with validated local data as the fallback.
 
+### Security and reliability (v8)
+
+- Timing-safe comparison for the login password and the admin write token.
+- Production will not start with auth off while default credentials are in use.
+- Security headers: nosniff, frame and referrer policy, and a permissions policy limited to geolocation and Web Serial. `X-Powered-By` is removed and CORS is off by default.
+- Timeouts on every outside data call. The FL511 camera proxy refuses redirects.
+- Crash-safe data file writes, graceful shutdown, and no internal error details sent to browsers.
+- The ICS-309 CSV export neutralizes spreadsheet formula injection. User text in popups, the net log and printed forms is HTML-escaped.
+- `npm audit` reported 0 vulnerabilities at release.
+
+**Known follow-ups:** no Content-Security-Policy yet, the admin token is held in browser storage, and basic auth has no rate limiting.
+
+### Bugs fixed in v8
+
+- Mobile crashed on load and showed a blank map.
+- The map crashed during zoom when a basemap provider failed over.
+- Saving a record lost the selection and blanked the operations panel.
+- The operations console could not be opened on desktop.
+- Three diagnostics panels never rendered (duplicate IDs).
+- Dispatch listed operators with no position as 5,721 miles away.
+- The address search popup was open to script injection (XSS).
+- Shipped data held about 480 leftover test records. They are removed, and tests now use a temporary data copy.
+- The client build broke after the build-tool upgrade.
+
 ## Screen tour
+
+This tour describes the v7.1.5 layout. The v8.0.0 layout is summarized under [What's new in v8.0.0](#whats-new-in-v800).
 
 - **Top bar:** Overview, Ops, Tasking and System views, Night Mode, Fit Duval, Locate Me, and a startup diagnostics chip.
 - **Operator Board:** filter by source (All, APRS, Meshtastic, DMR, Manual) and by status (Available, Assigned, En Route, On Scene, Needs Relief, Stale). It also has an operator reachability view and an add-operator form.
@@ -207,7 +261,7 @@ These screenshots come from a local copy of version 7.1.5 on the CF-33, captured
 		{ src: shotTasks, alt: 'Incident and Tasking panel listing two demo incidents with priority badges', caption: 'Incident + Tasking: open incidents and tasks with priority, location and assignment, editable without leaving the map.' },
 		{ src: shotLayers, alt: 'Layer records drawer showing the Major Bridges reference layer with validation fields', caption: 'Layer records: each reference record shows its criticality, validation status and whether it still needs manual review (Major Bridges layer shown).' },
 		{ src: shotDiagnostics, alt: 'System Diagnostics drawer showing read-only console auth, provider counts and runtime JSON', caption: 'System Diagnostics: read-only until an admin token is entered, provider and request counts, and a runtime status report.' },
-		{ src: shotMobile, alt: 'Mobile layout showing the command-ready card and dock buttons with no map drawn', caption: 'Mobile layout: the command card and dock work, but the map area currently renders 0 px wide. This is a known bug listed under Open items.' },
+		{ src: shotMobile, alt: 'Mobile layout showing the command-ready card and dock buttons with no map drawn', caption: 'Mobile layout in 7.1.5: the command card and dock work, but the map area renders 0 px wide. The v8.0.0 code fixes this (see Bugs fixed in v8).' },
 	]}
 />
 
@@ -272,6 +326,11 @@ Operational settings such as tracked call sign lists, mesh channel settings, rad
 | Live deployment reachability (2026-10-26) | `/healthz` returned 200. `/` returned 401 and asked for a login, as designed. |
 | GitHub Actions verify workflow | Present in the repository; latest result not recorded here |
 | Live APRS, Meshtastic and DMR feeds | Depend on runtime credentials and upstream availability; not verified for this page |
+| Unit tests (2026-11-07, Linux cloud sandbox, v8.0.0) | **16 of 16 passed** |
+| API smoke test (2026-11-07, Linux cloud sandbox, v8.0.0) | **Passed** |
+| Playwright full verify run, desktop and mobile Chromium (2026-11-07, Linux cloud sandbox, v8.0.0) | **22 of 22 passed** |
+| GeoJSON validation (2026-11-07, Linux cloud sandbox, v8.0.0) | **Passed** |
+| Desktop and phone-size screenshots (2026-11-07, Linux cloud sandbox, v8.0.0) | Reviewed by eye |
 
 The two visual failures on Windows:
 
@@ -297,6 +356,10 @@ The 16 UI tests cover:
 - The full create, update, dispatch and delete cycle for an incident
 
 <Callout type="unverified">
+**v8.0.0:** live overlays and map tiles were never seen loading, because the build sandbox had no outside internet. The NOAA, IEM, SPC, NHC and Florida outage service addresses and layer numbers were checked against their public pages. The FEMA flood (NFHL) service could not be checked at all. Map screenshot comparison tests are now opt-in and their baselines have not been created. v8 has not been tested on a physical phone, the CF-33, real GPS hardware, or live APRS, Meshtastic or DMR feeds, and it is not deployed to Render.
+</Callout>
+
+<Callout type="unverified">
 At least one fire station on the map uses an approximate coordinate that still needs to be replaced with an authoritative county GIS coordinate. Of the 100 reference records, 62 are flagged for manual review.
 </Callout>
 
@@ -312,16 +375,21 @@ At least one fire station on the map uses an approximate coordinate that still n
 - An auth layer that quietly leaves routes open when settings are missing is worse than no auth layer. The middleware now rejects unauthenticated requests even when the auth settings were left out.
 - Showing each feed's health on screen matters more than adding another feed.
 - A failing test suite is not always a failing app. Read the first error before fixing code. Here, the browser had simply never been installed.
+- Running UI tests against the live data folder had quietly shipped about 480 test records. Tests now run on a throwaway copy.
+- Map-tile visual tests are only meaningful where real tiles load, so they are now opt-in instead of failing every offline run.
 
 ## Open items
 
-- Record a fully green Playwright run on Windows, including the visual baselines.
-- Replace approximate station coordinates with authoritative county GIS data, and work through the 62 manual-review records.
-- Decide whether the repository will be public.
-- Make OpenStreetMap the primary basemap (or add a Carto API key), and treat a placeholder tile as a failure so the fallback triggers. Then refresh the visual baselines.
-- Fix the 0-width map in the mobile layout and capture a valid mobile baseline.
-- Reconcile the hosted build's version label (v3.7.2 Development) with the local 7.1.x release line.
-- Walk ARES Duval leadership through the platform and collect feedback on how it fits activations and exercises.
+1. Run v8 on a networked machine and confirm map tiles and all 17 live overlays load, including FEMA flood zones.
+2. Create the map visual baselines there (`npm run test:visual -- --update-snapshots`) and record a fully green run on Windows and the CF-33.
+3. Deploy v8 to Render and confirm `/healthz` and the login.
+4. Test on a physical phone and on the CF-33 with real GPS.
+5. Add a Content-Security-Policy (report-only first).
+6. Replace approximate station coordinates with authoritative county GIS data, and work through the 62 manual-review records.
+7. Decide whether the repository will be public.
+8. Reconcile the hosted build's label (v3.7.2 Development) with the release line. Deploying v8 would settle it.
+9. Walk ARES Duval leadership through the platform and collect feedback on how it fits activations and exercises.
+10. Make OpenStreetMap the primary basemap (or add a Carto API key), and treat a placeholder tile as a failure so the fallback triggers. Then refresh the visual baselines.
 
 ## Version history
 
@@ -340,11 +408,13 @@ Taken from the release note files in the project folder.
 | 7.1.0 | Clean architecture: strict auth on protected routes; assignments reflected on operators immediately; data layer and live feed engine |
 | 7.1.1 to 7.1.3 | Mobile UI and UX optimization; map rendering correction; build fixes |
 | 7.1.4 to 7.1.5 | Opt-in browser GPS sharing and the current diagnostics (from the README and settings; no separate release note) |
+| 8.0.0 (2026-11-07) | Tactical command UI, 17 live hazard overlays, ICS-309 net control log, ICS-213 form, security hardening, Node 22 and Express 5, nine bug fixes, unit tests added |
 
 ## Changelog
 
 <Changelog
 	entries={[
+		{ date: '2026-11-07', change: 'Updated for v8.0.0.', rollback: 'Revert the commit that made this change.' },
 		{ date: '2026-10-27', change: 'Start date set to Spring 2026.', rollback: 'Revert the commit that made this change.' },
 		{ date: '2026-10-26', change: 'Project page published.', rollback: 'Revert the commit that added this page.' },
 		{ date: '2026-10-26', change: 'Expanded with the live deployment, architecture, workflows, layers, API, root cause of the test failures and version history.', rollback: 'Revert the commit that expanded this page.' },
