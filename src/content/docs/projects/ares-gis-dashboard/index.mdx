@@ -1,7 +1,7 @@
 ---
 title: ARES Duval GIS Command Dashboard
 description: 'Map-first ESF-2 command dashboard for Duval County ARES: live hazard overlays, ICS-309 net control log, dispatch and incident tracking.'
-summary: Version 8.0.0. Node/Express and Leaflet command map for Duval County ARES with a tactical command interface, 17 live hazard overlays, an ICS-309 net control log, multi-source operator tracking, incidents, tasks and nearest-operator dispatch.
+summary: Version 8.0.1. Node/Express and Leaflet command map for Duval County ARES with a tactical command interface, 17 live hazard overlays, an ICS-309 net control log, multi-source operator tracking, incidents, tasks and nearest-operator dispatch.
 status: In progress
 category: Radio and Emergency Comms
 started: Spring 2026
@@ -57,6 +57,13 @@ Version 8.0.0 (7 November 2026) is a full modernization of the v7.1.5 codebase, 
 - ICS-309 communications log as a CSV export and a printable form, with net history.
 - A printable ICS-213 general message form.
 
+**v8.0.1 (7 Nov 2026)**
+
+- FEMA flood zones now come from FEMA's official National Flood Hazard Layer (layer 28, special flood hazard areas only). The earlier source was a copy that held only Massachusetts data. A check from the CF-33 found that the new query fails (see Testing and verification).
+- Basemaps no longer use Carto. Day and Streets use OpenStreetMap with an Esri Streets fallback. Dark uses Esri World Dark Gray with labels, with an OpenStreetMap fallback.
+- A race in the Playwright test data was fixed.
+- v8.0.1 is in the project files only. It is not yet in the GitLab repository and is not deployed.
+
 ## Live demo
 
 **[Open the live demo](/demos/ares-gis/)**. It opens the real GIS command dashboard in your browser.
@@ -74,7 +81,7 @@ Version 8.0.0 (7 November 2026) is a full modernization of the v7.1.5 codebase, 
 <SpecBox
 	title="Release details"
 	specs={[
-		['Version', '8.0.0 (7 November 2026)'],
+		['Version', '8.0.1 (7 November 2026)'],
 		['Runtime', 'Node.js 22 or newer, Express 5'],
 		['Map', 'Leaflet 1.9 with marker clustering, bundled locally'],
 		['Build', 'esbuild client bundle; Safari/iOS 15+ and current Chrome, Edge, Firefox'],
@@ -332,6 +339,8 @@ Operational settings such as tracked call sign lists, mesh channel settings, rad
 | GeoJSON validation (2026-11-07, Linux cloud sandbox, v8.0.0) | **Passed** |
 | Desktop and phone-size screenshots (2026-11-07, Linux cloud sandbox, v8.0.0) | Reviewed by eye |
 | Live data services reachability check from the CF-33 (2026-11-07, Windows, 20-second timeout) | This checks that each service answers. It does not show that the v8 app draws them, because the v8 code is not on the CF-33. **Pass:** NOAA radar (layer 3 present), NWS watches/warnings/advisories (layers 0 and 1), SPC outlooks (layer 1 is Day 1 Categorical, layer 9 is Day 2 Categorical), NHC tropical (layers 1, 7 and 8 present), NWS river gauges (layer 0), IEM NEXRAD tile (PNG), NWS alerts API (GeoJSON), City of Jacksonville ERAT (layers 13 Hospitals, 15 Shelters, 20 Fire Stations, 21 Police Stations, 39 Flood Zones), Florida power outages, FL511 cameras and message boards, OpenStreetMap, Esri imagery and Esri topo tiles. **Fail:** the configured FEMA flood service answers but holds only 66 polygons in Massachusetts, so it returns no flood zones for Duval. FEMA's official NFHL service (layer 28, Flood Hazard Zones) did return a zone for a downtown Jacksonville test point. **Fail:** the Carto dark and Voyager tiles return HTTP 200 with a small "API key required" placeholder image (about 2 kB) instead of map tiles, the same problem found in October. |
+| Cloud sandbox run (2026-11-07, Linux, v8.0.1) | **17 of 17 unit tests passed**, API smoke test passed, **22 of 22 Playwright UI tests passed** in two consecutive full runs, GeoJSON validation passed, `npm audit` reported 0 vulnerabilities |
+| v8.0.1 data sources check from the CF-33 (2026-11-07, Windows, 20-second timeout) | Checks that the new sources answer, not that the app draws them. **Pass:** Esri World Dark Gray base tile (JPEG, 7.7 kB), Esri World Dark Gray labels tile (PNG, 2.9 kB) and Esri World Street Map tile (JPEG, 34 kB). Each was opened and shows real Jacksonville map content. **Fail:** the exact FEMA flood query the app sends returned HTTP 500 ("Error performing query operation") after 10.5 and 11.4 seconds on two runs. Duval has 3,786 special flood hazard area polygons. Full-detail polygons are about 64 kB each, and the server fails on requests for 500 or 2,000 of them. The same query with simplified geometry (`maxAllowableOffset=0.0005`, `geometryPrecision=5`) returned 2,000 features (0.9 MB) in about 3 seconds. That is still capped at the server's 2,000-record limit (`exceededTransferLimit` set), so complete coverage would need paging. |
 
 The two visual failures on Windows:
 
@@ -357,7 +366,7 @@ The 16 UI tests cover:
 - The full create, update, dispatch and delete cycle for an incident
 
 <Callout type="unverified">
-**v8.0.0:** the live data services answer (see the 7 Nov reachability check above), but no overlay or map tile has yet been seen drawing inside the v8 app. FEMA flood zones will not show for Duval until the app points at FEMA's official NFHL service. The Carto basemaps return a placeholder, and it is not yet known whether v8's provider fallback catches it. Map screenshot comparison tests are now opt-in and their baselines have not been created. v8 has not been run on a physical phone or on the CF-33, and it has not been tested with real GPS hardware or live APRS, Meshtastic or DMR feeds. It is not deployed to Render.
+**v8.0.0 and v8.0.1:** the live data services answer (see the 7 Nov checks above), but no overlay or map tile has yet been seen drawing inside the v8 or v8.0.1 app. FEMA flood zones will not load as v8.0.1 is written, because the FEMA query fails (see open item 11). v8.0.1 is in the project files only. It is not deployed and not yet in the GitLab ares-duval-gis repository. Map screenshot comparison tests are now opt-in and their baselines have not been created. v8 has not been run on a physical phone or on the CF-33, and it has not been tested with real GPS hardware or live APRS, Meshtastic or DMR feeds. It is not deployed to Render.
 </Callout>
 
 <Callout type="unverified">
@@ -390,8 +399,9 @@ At least one fire station on the map uses an approximate coordinate that still n
 7. Decide whether the repository will be public.
 8. Reconcile the hosted build's label (v3.7.2 Development) with the release line. Deploying v8 would settle it.
 9. Walk ARES Duval leadership through the platform and collect feedback on how it fits activations and exercises.
-10. Make OpenStreetMap the primary basemap (or add a Carto API key), and treat a placeholder tile as a failure so the fallback triggers. Then refresh the visual baselines. The 7 Nov check confirmed that Carto still returns the placeholder.
-11. Point the FEMA flood overlay at FEMA's official NFHL map service (Flood Hazard Zones, layer 28). The service configured now has no Duval data.
+10. Carto basemaps: **fixed in v8.0.1 code; not yet seen rendering in the app.** Carto is no longer used, and the OpenStreetMap and Esri replacement tiles all answered the 7 Nov checks. Refresh the visual baselines once v8.0.1 runs on a networked machine.
+11. FEMA flood zones: **still open.** v8.0.1 points at FEMA's official NFHL layer 28, but the app's query fails with HTTP 500 after about 11 seconds because the full-detail polygons are too large. Add geometry simplification (for example `maxAllowableOffset` and `geometryPrecision`) and page through the 3,786 Duval polygons, or request them by map area. Then confirm the overlay draws.
+12. Push v8.0.1 to the ares-duval-gis GitLab repository.
 
 ## Version history
 
@@ -410,12 +420,14 @@ Taken from the release note files in the project folder.
 | 7.1.0 | Clean architecture: strict auth on protected routes; assignments reflected on operators immediately; data layer and live feed engine |
 | 7.1.1 to 7.1.3 | Mobile UI and UX optimization; map rendering correction; build fixes |
 | 7.1.4 to 7.1.5 | Opt-in browser GPS sharing and the current diagnostics (from the README and settings; no separate release note) |
+| 8.0.1 (2026-11-07) | FEMA flood source moved to FEMA's official NFHL (query still failing, see Open items), Carto basemaps replaced with OpenStreetMap and Esri, Playwright test-data race fixed |
 | 8.0.0 (2026-11-07) | Tactical command UI, 17 live hazard overlays, ICS-309 net control log, ICS-213 form, security hardening, Node 22 and Express 5, nine bug fixes, unit tests added |
 
 ## Changelog
 
 <Changelog
 	entries={[
+		{ date: '2026-11-07', change: 'v8.0.1 fixes for FEMA flood source and basemaps.', rollback: 'Revert the commit that made this change.' },
 		{ date: '2026-11-07', change: 'Added live service reachability check.', rollback: 'Revert the commit that made this change.' },
 		{ date: '2026-11-07', change: 'Updated for v8.0.0.', rollback: 'Revert the commit that made this change.' },
 		{ date: '2026-10-27', change: 'Start date set to Spring 2026.', rollback: 'Revert the commit that made this change.' },
