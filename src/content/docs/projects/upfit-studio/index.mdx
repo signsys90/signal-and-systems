@@ -319,7 +319,7 @@ The screens below were captured 31 Oct 2026 from version 0.5.2, except the contr
 
 ## How it feeds this site
 
-Since version 0.5.0, each save writes `src/data/f150-upfit/upfit-studio.json` into this site's repository and commits it. When that reaches GitHub, Cloudflare Pages rebuilds the site. The [CanTrol output plan](/projects/f150-upfit/cantrol-output-plan/) and its [control head key map](/projects/f150-upfit/cantrol-output-plan/#control-head-keys) are generated from that file, so the published plan matches the app. The first sync landed on 31 Oct 2026 (see the [build log](/log/2026-10-31-upfit-studio-sync/)).
+Since version 0.5.0, each save writes `src/data/f150-upfit/upfit-studio.json` into this site's repository and commits it. When that commit is pushed to the site's GitLab repository and the site is deployed to Cloudflare Pages, the public pages update. (Until 6 Nov 2026 this rebuild ran automatically from GitHub.) The [CanTrol output plan](/projects/f150-upfit/cantrol-output-plan/) and its [control head key map](/projects/f150-upfit/cantrol-output-plan/#control-head-keys) are generated from that file, so the published plan matches the app. The first sync landed on 31 Oct 2026 (see the [build log](/log/2026-10-31-upfit-studio-sync/)).
 
 ## Architecture (pattern level)
 
