@@ -3703,3 +3703,8 @@ body.theme-dark #map[data-basemap-provider="osm-dark-fallback"] .leaflet-tile-pa
 .gps-marker.is-stale::after {
   background: #94a3b8;
 }
+
+/* Phone/tablet: hide the command card while the sidebar is open so it does not cover the sidebar header. */
+body.mobile-command-mode.sidebar-open #mobile-command-strip {
+  display: none;
+}
