@@ -71,7 +71,7 @@ The build lives in one file, `config/upfit.yaml`. The app reads it, checks it an
 <SpecBox
 	title="Release details"
 	specs={[
-		['Version', '0.8.14 (7 Nov 2026; on a branch, merge request not yet merged)'],
+		['Version', '0.8.14 (7 Nov 2026; merged into main on GitLab)'],
 		['Platform', 'Windows 10/11 (target: Panasonic Toughbook CF-33); Python 3.10+'],
 		['Interface', 'pywebview + Microsoft Edge WebView2, with a Tkinter fallback'],
 		['Engine', 'Python; PyYAML and ruamel.yaml (comment-preserving saves)'],
@@ -388,7 +388,7 @@ No network, no telemetry, no accounts. The app writes only when a button is pres
 
 - Run and package on Windows and the Toughbook CF-33, then record the result here.
 - Measure each circuit's draw on the bench and fill it in; most test lab scenarios stay "incomplete" until then.
-- Merge the 0.8.14 merge request on GitLab, then pull it onto the Toughbook and rebuild the Windows app there.
+- Pull the merged 0.8.14 onto the Toughbook and rebuild the Windows app there.
 - Fill the gaps: enter the 15 missing circuit current draws from the manuals, each with its source.
 - Ready to transfer must read "Ready" before any Transfer in Whelen Command; today 3 of its 4 checks are open.
 - Choose hardware for the automated bench rig and the monitoring projects (battery, OBD-II, thermal) before any driver is written.
