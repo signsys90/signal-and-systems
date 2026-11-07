@@ -1,6 +1,6 @@
 ---
 title: Upfit Studio
-description: Offline Windows app that holds the whole F-150 emergency-lighting build as one config file, checks the 12V design, simulates the Whelen control head, plans the Whelen Command CANport (OBDII) inputs and publishes a public-safe copy to this site.
+description: Offline Windows app that holds the whole F-150 emergency-lighting build as one config file, checks the 12V design, simulates the Whelen control head, plans the Whelen Command CANport (OBDII) inputs, builds Whelen Command setup run packets and publishes a public-safe copy to this site.
 summary: Config-as-code for a vehicle upfit. One YAML file holds every part, circuit, wire and the CanTrol control plan; the app checks the electrical design, simulates the 21-button control head, plans and checks the eight Whelen Command CANport vehicle inputs, builds an installer packet, runs bench tests and syncs a public-safe copy to this portfolio on every save.
 status: In progress
 category: Software and Automation
@@ -173,6 +173,45 @@ The installer packet (below) now includes Appendix A3, a CANport sheet with a ti
 - **Not bench-tested:** none of the CANport behavior has been run on the module and truck. To confirm at the bench: the one-time turn-off on Park and Drive (not a lockout), the brake pop timer, and that the CanTrol module reads the CC5K1 (the module's model has not been read off its label yet; see the [controller page](/projects/f150-upfit/cantrol-controller/#canport-and-brake-pop)).
 - **Safety boundary:** Studio only plans, simulates and compares. It never talks to the CANport, the truck or Command. Command transfers the setup to the CANport over USB itself. The CANport kit is a read-only input to the CanTrol, and nothing writes to the Ford BCM or CAN bus.
 
+## Command Builder for Whelen Command
+
+New on 6 Nov 2026 as a release candidate (0.9.0-rc1 and rc2, on a separate branch, not merged into the released app). On 31 Oct, a Claude computer-use session filled in my Whelen Command file from Studio's setup sheet: it opened Command on my PC, clicked through each setting and saved the result as Command file "-3". That worked, but the instructions were written by hand each time. Command Builder makes the same pass repeatable from the plan.
+
+### What it produces
+
+One command, `python -m upfit command-run`, writes a run packet:
+
+- **Setup sheet** (printable, with tick boxes): every Command setting in the plan, screen by screen, each marked SET, CHECK or BLOCKED.
+- **Click order**: the SET rows in the exact order to enter them in Command, then the CHECK rows to skip.
+- **Plan file** (JSON) for the read-back check.
+- **A ready-to-paste prompt** for a Claude computer-use session, with the guardrails and Command screen notes from the 31 Oct run already filled in.
+
+The first packet, generated from the live plan on 6 Nov, has **96 settings to enter, 64 to skip and set by hand, and 0 that break a rule**.
+
+| Status | Meaning |
+| --- | --- |
+| SET | Entered in the pass: key modes, slide positions, key states and outputs turned on. |
+| CHECK | Skipped and listed: flash patterns, phase, sweeps, timers, value signals and unconfirmed one-time turn-offs. I set these in Command by hand after the bench test. |
+| BLOCKED | Breaks a hard rule (for example an E68Xtreme output on plain Turn On with no flash pattern). The packet is refused until the plan is fixed. |
+
+### Versioned files, never overwritten
+
+Command files are saved as numbered versions ("- 4", "- 5" and so on). Command Builder scans the folders where Command files live, starts from the highest version and names the next unused number, so a pass never overwrites earlier work. Today that is "- 4" to "- 5". It also warns when two folders hold different files under the same number. Two "- 3" files exist, and only the one on the Desktop is the programmed file.
+
+### Read-back check
+
+After a pass, `python -m upfit command-verify` reads the newly saved `.wln` file read-only and checks it against the plan: the Command version, that every output the plan sets exists in the file, and that the CAN signals match. Against Command file "-4" it reports OK. Which output each key, slide position or signal drives isn't decoded from the file, so I spot-check those on screen in Command before any transfer.
+
+<Callout type="safety" title="What Command Builder will never do">
+It never opens Command itself, never writes or edits a `.wln` file, and never presses Transfer or Extract. The prompt it writes tells the computer-use session the same, and also never to overwrite a file and to stop and ask on any unexpected dialog. Programming the CanTrol stays a manual step I do at the PC, after the read-back check and a bench test with the siren speakers disconnected.
+</Callout>
+
+### Status
+
+- **Tested:** unit tests only. 217 pass on my PC (Windows, Python 3.14, 6 Nov 2026), including tests that the plan reproduces every setting recorded for Command file "-3", that E68Xtreme outputs are never set steady, that version numbers are never reused, and that the package contains no file-writing of `.wln` files, no subprocess calls and no UI automation.
+- **Not tested yet:** the new packet hasn't been run against the live Command app, and nothing has been transferred to the CanTrol.
+- **Planned, not built:** an optional stand-alone driver for Command that uses Windows UI Automation with screen controls recorded from the real app (no guessed controls), and a local-only trigger from another device. Neither will be able to press Transfer or Extract.
+
 ## Stand-alone controllers on the Control head screen
 
 Version 0.6.0 added the two lights that have their own controllers, drawn beside the CCTL7. Each one gets 12V only when its CanTrol output is on (J1-2 and J1-3, slides 1 to 3), as in the wiring plan.
@@ -316,6 +355,8 @@ All from the change log in the repository.
 | 0.8.12 | 31 Oct | Harness diagrams wrap long labels at 32 characters, so the widest diagram (C09) shrank from about 2,660 to 1,700 points |
 | 0.8.13 | 1 Nov | Build outputs finds WireViz and Graphviz in their usual install folders when they are not on PATH, and shows a red warning naming the missing tool when it can't draw |
 | 0.8.14 | 1 Nov | WireViz runs without flashing a console window for each diagram on Windows |
+| 0.9.0-rc1 | 6 Nov | Release candidate on a branch: Command Builder (Whelen Command run packet, versioned file names, read-back check) |
+| 0.9.0-rc2 | 6 Nov | Release candidate: scans each folder once, and the run prompt uses full file paths so a computer-use session can open them |
 
 ## Testing and verification
 
@@ -335,6 +376,7 @@ No network, no telemetry, no accounts. The app writes only when a button is pres
 
 ## Open items
 
+- Command Builder: run the first packet in Command to make file "- 5", run the read-back check, then decide whether to merge 0.9.0 into the released app.
 - CANport: program CAN 6 (Park) and the brake pop timer in Command, then bench-test all eight inputs on the module and truck.
 
 - Run and package on Windows and the Toughbook CF-33, then record the result here.
@@ -344,4 +386,4 @@ No network, no telemetry, no accounts. The app writes only when a button is pres
 
 ## Changelog
 
-<Changelog entries={[{ date: '2026-11-06', version: '0.8.14', change: 'Version history to 0.8.14 (diagram label wrap, WireViz and Graphviz found outside PATH with a warning when drawing fails, no console flash); Windows test and build results from 1 Nov; Command file "-4" confirmed as a plain re-save of "-3".', rollback: 'Revert the commit that added the 6 Nov upfit update.', log: '/log/2026-11-06-head-mounted-tools-touch-up/' }, { date: '2026-10-31', version: '0.8.10', change: 'Command file "-4" is now the compare file: same eight CAN signal names; its programming-logic change from "-3" is not yet confirmed.', rollback: 'Revert the commit that named Command file -4.' }, { date: '2026-10-31', version: '0.8.10', change: 'Added the Whelen Command CANport setup (8 CAN inputs, Command file compare, simulation, programming sheet), the stand-alone controllers and the installer packet, with 9 new screenshots; version history to 0.8.10.', rollback: 'Revert the commit that added the CANport section.' }, { date: '2026-10-31', version: '0.5.2', change: 'Page published with 18 screenshots of version 0.5.2.', rollback: 'Revert the commit that added projects/upfit-studio.' }]} />
+<Changelog entries={[{ date: '2026-11-06', version: '0.9.0-rc2', change: 'Added the Command Builder section (run packet, versioned files, read-back check, safety rules, test status) and 0.9.0-rc1 and rc2 to the version history.', rollback: 'Revert the commit that added the Command Builder section.', log: '/log/2026-11-06-command-builder/' }, { date: '2026-11-06', version: '0.8.14', change: 'Version history to 0.8.14 (diagram label wrap, WireViz and Graphviz found outside PATH with a warning when drawing fails, no console flash); Windows test and build results from 1 Nov; Command file "-4" confirmed as a plain re-save of "-3".', rollback: 'Revert the commit that added the 6 Nov upfit update.', log: '/log/2026-11-06-head-mounted-tools-touch-up/' }, { date: '2026-10-31', version: '0.8.10', change: 'Command file "-4" is now the compare file: same eight CAN signal names; its programming-logic change from "-3" is not yet confirmed.', rollback: 'Revert the commit that named Command file -4.' }, { date: '2026-10-31', version: '0.8.10', change: 'Added the Whelen Command CANport setup (8 CAN inputs, Command file compare, simulation, programming sheet), the stand-alone controllers and the installer packet, with 9 new screenshots; version history to 0.8.10.', rollback: 'Revert the commit that added the CANport section.' }, { date: '2026-10-31', version: '0.5.2', change: 'Page published with 18 screenshots of version 0.5.2.', rollback: 'Revert the commit that added projects/upfit-studio.' }]} />

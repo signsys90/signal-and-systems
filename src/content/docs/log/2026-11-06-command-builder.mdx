@@ -1,0 +1,23 @@
+---
+title: '2026-11-06: Command Builder for Whelen Command (release candidate)'
+description: 'Upfit Studio 0.9.0 release candidates add Command Builder: it turns the build plan into a Whelen Command setup sheet, a click order and a ready-to-run prompt for a Claude computer-use session, then checks the saved Command file against the plan. Never transfers to the controller.'
+sidebar:
+  order: -20261106.2
+---
+
+Parent projects: [Upfit Studio](/projects/upfit-studio/) and [F-150 Emergency Lighting and 12V Upfit](/projects/f150-upfit/).
+
+## What changed
+
+On 31 Oct, a Claude computer-use session filled in my Whelen Command file from Upfit Studio's setup sheet and saved it as Command file "-3". It worked, but the instructions were written by hand. Command Builder turns that one-off into a repeatable feature.
+
+| Area | Change | Page |
+| --- | --- | --- |
+| Upfit Studio | New Command Builder section: run packet, versioned file names, read-back check, safety rules and test status | [Upfit Studio](/projects/upfit-studio/#command-builder-for-whelen-command) |
+| Upfit Studio | Version history adds 0.9.0-rc1 and rc2 (release candidate on a branch, not merged) | [Upfit Studio](/projects/upfit-studio/#development-history) |
+
+## Status
+
+- Built and unit-tested on Windows: 217 tests pass (Python 3.14, my PC, 6 Nov 2026).
+- The first run packet is generated: 96 settings to enter, 64 to skip and set by hand, 0 that break a rule. It starts from Command file "-4" and saves as "-5".
+- **Not yet run against the live Whelen Command app** with the new packet, and nothing has been transferred to the CanTrol or bench-tested.
