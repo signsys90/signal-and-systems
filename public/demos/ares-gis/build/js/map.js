@@ -243,6 +243,10 @@ function clearBasemapLayer() {
 function setBaseMapTheme(mode = "day", variantIndex = 0) {
   var _a;
   if (!map || !window.L) return;
+  if (map._animatingZoom) {
+    map.once("zoomend", () => setBaseMapTheme(mode, variantIndex));
+    return;
+  }
   const requestId = ++baseTileRequestId;
   const resolvedMode = normalizedThemeMode(mode);
   const config = getBasemapConfig(resolvedMode, variantIndex);
