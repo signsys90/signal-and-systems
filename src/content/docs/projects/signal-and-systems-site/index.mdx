@@ -64,8 +64,10 @@ Give every project one public home where the parts, wiring, code and test result
 ## Architecture
 
 ```text
-MDX pages in GitLab ─► push to main ─► Cloudflare Pages build (astro build, Node 24) ─► static site on pages.dev
+MDX pages in GitLab ─► push to main ─► GitLab CI (astro build, Node 24) ─► wrangler pages deploy ─► static site on pages.dev
 ```
+
+Until 6 Nov 2026, Cloudflare Pages built the site itself from a GitHub repository. After that GitHub account was suspended, the source moved to GitLab. Cloudflare can't switch an existing Pages project to a different Git provider without making a new project and a new address, so a GitLab CI job now builds the site and publishes it to the same Pages project with Wrangler. The address stays the same.
 
 The site is fully static. Content lives in `src/content/docs/` as MDX files, and reusable components (header card, status badges, spec box, parts table, wiring table, callouts, changelog, gallery, before/after slider, download card and project grid) live in `src/components/`.
 
@@ -98,7 +100,7 @@ I wrote the site plan: the name, design tokens, menu, categories, status badges,
 2. Scaffold Astro and Starlight, and add the design tokens and fonts.
 3. Build the documentation components.
 4. Publish the first project pages.
-5. Connect the repository to Cloudflare Pages (first GitHub; GitLab from Nov 2026).
+5. Connect the repository to Cloudflare Pages (GitHub at launch). From 7 Nov 2026, a GitLab CI job deploys the site with Wrangler, using a Cloudflare API token stored as a masked GitLab CI/CD variable.
 
 ## Testing and verification
 
