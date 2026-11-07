@@ -5,7 +5,7 @@ summary: Config-as-code for a vehicle upfit. One YAML file holds every part, cir
 status: In progress
 category: Software and Automation
 started: 2026-10-30
-updated: 2026-10-31
+updated: 2026-11-06
 project: true
 ---
 
@@ -71,14 +71,14 @@ The build lives in one file, `config/upfit.yaml`. The app reads it, checks it an
 <SpecBox
 	title="Release details"
 	specs={[
-		['Version', '0.8.10 (31 Oct 2026)'],
+		['Version', '0.8.14 (1 Nov 2026)'],
 		['Platform', 'Windows 10/11 (target: Panasonic Toughbook CF-33); Python 3.10+'],
 		['Interface', 'pywebview + Microsoft Edge WebView2, with a Tkinter fallback'],
 		['Engine', 'Python; PyYAML and ruamel.yaml (comment-preserving saves)'],
 		['Diagrams', 'WireViz + Graphviz (optional)'],
 		['Head mount', 'OpenSCAD (optional, for STL export)'],
 		['Packaging', 'PyInstaller one-folder build via build_exe.bat (runs the tests first)'],
-		['Tests', 'pytest: 195 pass, 6 skipped (re-run on 0.8.10, 31 Oct 2026, Linux, Python 3.13; Tk, WireViz and OpenSCAD tests skip without those tools)'],
+		['Tests', 'pytest on Windows (my PC, Python 3.14, version 0.8.13, 1 Nov 2026): 205 pass; one Tk window start-up test failed once and passed 3 of 3 on rerun. The Windows build script run: 204 pass, 2 skipped'],
 		['Network', 'None. No telemetry, no accounts'],
 		['Vehicle inputs', 'Whelen Command CANport plan: 8 of 8 CAN slots used (F150 2017 signal list, CC5K1 kit)'],
 		['Source', 'Private GitHub repository'],
@@ -134,7 +134,7 @@ The plan went through ten small releases in one day because I was setting up Com
 Whelen Command saves the CanTrol's setup as a `.wln` file. Whelen doesn't publish that format. From two files I saved from Command 2.4.8.0 on 31 Oct, the app reads only the table of names inside (inputs, CAN signals, outputs) and the Command version, then lists the CAN signals in the file next to the plan's.
 
 - My current Command file is "-4" (saved 31 Oct, Command 2.4.8.0). Against it, all eight signal names match the plan, the same as "-3".
-- Between "-3" and "-4" about 50 bytes changed in the undecoded programming-logic part of the file, while the names and CAN signals stayed the same. Which input, output or rule changed is **not confirmed**. Until I check it on Command's logic screens, the slot notes below still describe "-3".
+- "-4" is a plain re-save of "-3": I confirmed on 1 Nov that I changed nothing in Command before saving it. The roughly 50 bytes that differ sit outside the compressed setup data, which is byte-for-byte the same in both files, so the slot notes below describe "-4" as well.
 - Only the names are compared. Which output each signal drives, patterns and priorities are binary values the app does not decode, so I check those in Command by hand.
 - The app **never writes** a `.wln` file. A wrong byte could load a bad setup into the controller that runs the warning lights and siren.
 - The format notes are worked out from my own sample files and are marked UNVERIFIED in the code. A regression test checks the programmed file against the plan.
@@ -168,8 +168,8 @@ The installer packet (below) now includes Appendix A3, a CANport sheet with a ti
 ### CANport status and open items
 
 - **Programmed in my Command file "-3" (31 Oct):** CAN 2, 3, 4, 5, 7 and 8. CAN 1 has its first pass only (steady, no 2-second flash yet).
-- **Command file "-4" (31 Oct, current):** same eight CAN signals; a programming-logic change from "-3" that is not yet confirmed. It may or may not include CAN 6 or the brake pop timer, so both stay marked as not programmed until I confirm them in Command.
-- **Not programmed yet (unconfirmed in "-4"):** CAN 6 (shift out of Park turns the arrows off once).
+- **Command file "-4" (31 Oct, current):** a plain re-save of "-3" (confirmed 1 Nov), so it holds exactly the same setup.
+- **Not programmed yet:** CAN 6 (shift out of Park turns the arrows off once) and the brake pop timer.
 - **Not bench-tested:** none of the CANport behavior has been run on the module and truck. To confirm at the bench: the one-time turn-off on Park and Drive (not a lockout), the brake pop timer, and that the CanTrol module reads the CC5K1 (the module's model has not been read off its label yet; see the [controller page](/projects/f150-upfit/cantrol-controller/#canport-and-brake-pop)).
 - **Safety boundary:** Studio only plans, simulates and compares. It never talks to the CANport, the truck or Command. Command transfers the setup to the CANport over USB itself. The CANport kit is a read-only input to the CanTrol, and nothing writes to the Ford BCM or CAN bus.
 
@@ -312,11 +312,15 @@ All from the change log in the repository.
 | 0.8.1 | 31 Oct | Fixed a file name reserved on Windows (aux.js) that stopped git pull on the Toughbook, plus a reserved-name test; reverse turns on the rear flood |
 | 0.8.2 | 31 Oct | The Windows build now ships the current plan instead of a stale copy |
 | 0.8.3 to 0.8.10 | 31 Oct | CANport slots 3 to 8, read-only Command file compare, notes matched to Command file "-3" |
+| 0.8.11 | 31 Oct | Command file "-4" stored as a test sample: same Command version, name table and eight CAN signals as "-3" |
+| 0.8.12 | 31 Oct | Harness diagrams wrap long labels at 32 characters, so the widest diagram (C09) shrank from about 2,660 to 1,700 points |
+| 0.8.13 | 1 Nov | Build outputs finds WireViz and Graphviz in their usual install folders when they are not on PATH, and shows a red warning naming the missing tool when it can't draw |
+| 0.8.14 | 1 Nov | WireViz runs without flashing a console window for each diagram on Windows |
 
 ## Testing and verification
 
 - **Done:** the pytest suite passes on Linux (195 pass, 6 skipped on version 0.8.10, Python 3.13, cloud container, 31 Oct 2026). New tests since 0.5.2 cover the CANport rules, the Command file reader against my programmed file, the sweep, the installer packet, reserved Windows file names and the build script. The change log records every Studio screen being driven in Chromium with no page errors (0.4.0 and 0.5.0), and I re-checked all 18 screens with no page errors while taking the screenshots above.
-- **On Windows:** the change log shows the app being pulled and built on my Toughbook (0.8.1 fixed a Windows-only file name problem found there, and 0.8.2 fixed which config a rebuild ships). I have not recorded a full run of every screen in WebView2 on the Toughbook, so this page doesn't claim one.
+- **On Windows (1 Nov 2026):** version 0.8.13 was built into the Windows app on my PC. The test suite passed there (205 pass on Python 3.14; one Tk start-up test failed once and passed 3 of 3 on rerun), and with Graphviz 16.1.0 and WireViz 0.4.1 installed all 18 harness diagrams drew. The missing-diagram bug fixed in 0.8.13 was found there: a Studio window opened before Graphviz was installed kept a stale PATH, wrote the diagram files without pictures and still said Built. Version 0.8.14 is merged but not yet rebuilt on the Toughbook. I have not recorded a full run of every screen in WebView2, so this page doesn't claim one.
 - **Nothing electrical is tested.** The control plan is not bench-tested or programmed into the CanTrol, and CanTrol pin numbers come from Whelen guide 14580G without being proven on the module.
 
 ## Privacy
@@ -335,9 +339,9 @@ No network, no telemetry, no accounts. The app writes only when a button is pres
 
 - Run and package on Windows and the Toughbook CF-33, then record the result here.
 - Measure each circuit's draw on the bench and fill it in; most test lab scenarios stay "incomplete" until then.
-- Install WireViz and Graphviz on the PC to render harness diagrams.
+- Pull 0.8.14 onto the Toughbook and rebuild the Windows app there.
 - Choose hardware for the automated bench rig and the monitoring projects (battery, OBD-II, thermal) before any driver is written.
 
 ## Changelog
 
-<Changelog entries={[{ date: '2026-10-31', version: '0.8.10', change: 'Command file "-4" is now the compare file: same eight CAN signal names; its programming-logic change from "-3" is not yet confirmed.', rollback: 'Revert the commit that named Command file -4.' }, { date: '2026-10-31', version: '0.8.10', change: 'Added the Whelen Command CANport setup (8 CAN inputs, Command file compare, simulation, programming sheet), the stand-alone controllers and the installer packet, with 9 new screenshots; version history to 0.8.10.', rollback: 'Revert the commit that added the CANport section.' }, { date: '2026-10-31', version: '0.5.2', change: 'Page published with 18 screenshots of version 0.5.2.', rollback: 'Revert the commit that added projects/upfit-studio.' }]} />
+<Changelog entries={[{ date: '2026-11-06', version: '0.8.14', change: 'Version history to 0.8.14 (diagram label wrap, WireViz and Graphviz found outside PATH with a warning when drawing fails, no console flash); Windows test and build results from 1 Nov; Command file "-4" confirmed as a plain re-save of "-3".', rollback: 'Revert the commit that added the 6 Nov upfit update.', log: '/log/2026-11-06-head-mounted-tools-touch-up/' }, { date: '2026-10-31', version: '0.8.10', change: 'Command file "-4" is now the compare file: same eight CAN signal names; its programming-logic change from "-3" is not yet confirmed.', rollback: 'Revert the commit that named Command file -4.' }, { date: '2026-10-31', version: '0.8.10', change: 'Added the Whelen Command CANport setup (8 CAN inputs, Command file compare, simulation, programming sheet), the stand-alone controllers and the installer packet, with 9 new screenshots; version history to 0.8.10.', rollback: 'Revert the commit that added the CANport section.' }, { date: '2026-10-31', version: '0.5.2', change: 'Page published with 18 screenshots of version 0.5.2.', rollback: 'Revert the commit that added projects/upfit-studio.' }]} />
