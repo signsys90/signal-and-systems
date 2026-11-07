@@ -1,0 +1,24 @@
+# Build the site and publish it to the existing Cloudflare Pages project
+# (signal-and-systems.pages.dev) on every push to main.
+#
+# Needs two CI/CD variables in GitLab (Settings > CI/CD > Variables):
+#   CLOUDFLARE_API_TOKEN   - token with "Cloudflare Pages: Edit" (masked, protected)
+#   CLOUDFLARE_ACCOUNT_ID  - your Cloudflare account ID
+# Until both are set, this job is skipped, so pushes never fail because of it.
+# Manual deploys with wrangler from the PC keep working either way.
+
+deploy_pages:
+  image: node:24
+  stage: deploy
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main" && $CLOUDFLARE_API_TOKEN && $CLOUDFLARE_ACCOUNT_ID'
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - .npm/
+  script:
+    - npm ci --cache .npm --prefer-offline
+    - npm run build
+    - npx wrangler pages deploy dist --project-name signal-and-systems --branch main --commit-hash "$CI_COMMIT_SHA" --commit-message "$CI_COMMIT_TITLE"
