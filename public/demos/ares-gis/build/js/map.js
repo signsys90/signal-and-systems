@@ -8,6 +8,7 @@ let searchMarker = null;
 let pointPickState = null;
 let pointPickMarker = null;
 let baseTileLayer = null;
+let baseTileOverlay = null;
 let baseTileFallbackTimer = null;
 let baseTileRequestId = 0;
 let incidentFocusLayer = null;
@@ -15,14 +16,7 @@ let focusedMarker = null;
 const BASEMAP_CONFIG = {
   day: [
     {
-      provider: "carto-voyager",
-      url: "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
-      attribution: "&copy; OpenStreetMap contributors &copy; CARTO",
-      subdomains: "abcd",
-      opacity: 1
-    },
-    {
-      provider: "osm-day-fallback",
+      provider: "osm-day",
       url: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
       attribution: "&copy; OpenStreetMap contributors",
       subdomains: "abc",
@@ -31,10 +25,11 @@ const BASEMAP_CONFIG = {
   ],
   dark: [
     {
-      provider: "carto-dark",
-      url: "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
-      attribution: "&copy; OpenStreetMap contributors &copy; CARTO",
-      subdomains: "abcd",
+      provider: "esri-dark",
+      url: "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+      overlayUrl: "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}",
+      attribution: "Tiles &copy; Esri",
+      maxNativeZoom: 16,
       opacity: 1
     },
     {
@@ -237,6 +232,13 @@ function clearBasemapLayer() {
     }
     baseTileLayer = null;
   }
+  if (baseTileOverlay) {
+    try {
+      map.removeLayer(baseTileOverlay);
+    } catch (_) {
+    }
+    baseTileOverlay = null;
+  }
 }
 function setBaseMapTheme(mode = "day", variantIndex = 0) {
   var _a;
@@ -251,6 +253,7 @@ function setBaseMapTheme(mode = "day", variantIndex = 0) {
   let tileErrors = 0;
   baseTileLayer = L.tileLayer(config.url, {
     maxZoom: 19,
+    maxNativeZoom: config.maxNativeZoom || 19,
     attribution: config.attribution,
     subdomains: config.subdomains || "abc",
     crossOrigin: true,
@@ -288,6 +291,15 @@ function setBaseMapTheme(mode = "day", variantIndex = 0) {
     }, 4500);
   }
   tileLayer.addTo(map);
+  if (config.overlayUrl) {
+    baseTileOverlay = L.tileLayer(config.overlayUrl, {
+      maxZoom: 19,
+      maxNativeZoom: config.maxNativeZoom || 19,
+      crossOrigin: true,
+      updateWhenIdle: true,
+      keepBuffer: 4
+    }).addTo(map);
+  }
 }
 function clearIncidentFocus() {
   if (!map) return;
