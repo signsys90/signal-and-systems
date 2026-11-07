@@ -5,7 +5,7 @@ summary: Emergency lighting, siren and 12V build on a 2017 F-150 Lariat SuperCre
 status: In progress
 category: Vehicle Upfit and 12V
 started: Spring 2026
-updated: 2026-10-31
+updated: 2026-11-06
 project: true
 sidebar:
   label: Overview
@@ -67,8 +67,8 @@ Build a clean, serviceable warning light and siren package on a daily-driven tru
 | Workstream | Plan | State |
 | --- | --- | --- |
 | Whelen CanTrol WC | Complete used set programmed over USB | Bought 16 Oct ($425.00 shipped). Bench test next. Main power 2 x 40A at the battery |
-| Control head mount | Ben3DBuild overhead mount in the sunglasses holder opening | Bought 21 Oct ($120.00), 2–3 week lead time |
-| Grille guard package | 2 speakers, Color Flood bar, 2 U-Lites | Parts bought, mounts decided 7 Oct. Touch-up done 23 Oct. Shop install to book |
+| Control head mount | Ben3DBuild overhead mount in the sunglasses holder opening | Received 5 Nov; head fitted in it. Cable route to the module next |
+| Grille guard package | 2 speakers, Color Flood bar, 2 U-Lites | Parts bought, mounts decided 7 Oct. Touch-up done 23 Oct (in-progress photos added 6 Nov). Shop install to book |
 | Other warning lights | Visor bar, BooYu (to be replaced by the E68Xtreme stick), rocker bars via relay, Putco Work Blade, rear plate Z-6 heads | Visor and BooYu installed. Putco and Z-6 bought. E68Xtreme, its Federal Signal bracket and rocker bars to buy |
 | Factory lamps | EFM 3.0 and F150LEDs CREE bulbs | Installed and flashing clean 8 Oct. Voltage input harness to buy |
 | Power and wiring | Full wire schedule, two fuse blocks, amp under the rear seat | Planned. Parts to buy |
@@ -80,7 +80,7 @@ Build a clean, serviceable warning light and siren package on a daily-driven tru
   { src: kit, alt: 'The complete used Whelen CanTrol WC set: module, 21-button head, microphone and cables.', caption: 'The controller: a used CanTrol WC set with the 21-button WeCan head (William, 16 Oct).' },
   { src: head, alt: 'The 21-button control head backlit on the bench.', caption: 'Control head lit on the bench.' },
   { src: diagram, alt: 'Line drawing of the grille guard with numbered positions for the two siren speakers, the flood bar and the two surface lights.', caption: 'Grille guard package layout: speakers through the punch plates, flood bar under the lower tube, U-Lites in the upper corners.' },
-  { src: ben3d, alt: 'Ben3DBuild overhead console mount holding a Whelen control head, seller photo.', caption: 'Ben3DBuild overhead mount for the control head (seller photo). Bought 21 Oct; not yet installed.' },
+  { src: ben3d, alt: 'Ben3DBuild overhead console mount holding a Whelen control head, seller photo.', caption: 'Ben3DBuild overhead mount for the control head (seller photo). Received 5 Nov and the head fitted.' },
   { src: booyu, alt: 'BooYu rear amber traffic advisor bars with controller, product photo.', caption: 'BooYu rear window traffic advisor (product photo).' },
   { src: guardA, alt: 'Used Steelcraft grille guard in the garage before touch-up, showing worn paint on a mounting tab.', caption: 'The used Steelcraft HD guard before touch-up. Touch-up finished 23 Oct.' },
   { src: guardB, alt: 'Grille guard mounting brackets with surface rust before refinishing.', caption: 'Brackets before sanding, primer and satin black.' },
@@ -162,7 +162,7 @@ Prices are what I paid, before tax and shipping unless noted.
 <PartsTable
 	parts={[
 		{ name: 'Whelen CanTrol WC, complete used set (module, 21-button WeCan head, mic, cables)', price: '$425.00 shipped', specs: 'See spec box above', status: 'In progress' },
-		{ name: 'Ben3DBuild Ford Overhead Mount for Whelen CCTL 6/7 (F-150 2015–2020)', price: '$120.00 shipped', specs: '3D printed, fits sunglasses holder opening', status: 'In progress' },
+		{ name: 'Ben3DBuild Ford Overhead Mount for Whelen CCTL 6/7 (F-150 2015–2020)', price: '$120.00 shipped', specs: '3D printed, fits sunglasses holder opening. Received 5 Nov; head fitted', status: 'In progress' },
 		{ name: 'Whelen Carbide CanTrol OBDII CANport Kit (CC5K1 - Ford)', sku: 'CC5K1', price: '$52.98', specs: 'Reads 8 vehicle signals over OBDII (brake pop, reverse, doors, hazards, Park, parking brake, Drive). Arrived 26 Oct; set up in Command 31 Oct, not bench-tested', status: 'In progress' },
 		{ name: 'SpeedTech Lights Super Takedown Raptor Elite Striker-TIR Split LED Visor Light Bar (Dual Memory), amber/amber', sku: 'B-RTXE8', price: '$150.00', specs: 'Draws under 2.4A', status: 'Installed' },
 		{ name: 'SpeedTech Lights Raptor visor brackets', sku: 'Q-RVF15', price: '$49.99', status: 'Installed' },
@@ -288,7 +288,7 @@ If the player doesn't load, [watch the video on Google Drive](https://drive.goog
 
 - Order the rocker bars, the EFM Voltage Input Harness ($15), the relay, fuse blocks and wire.
 - Order the Strobes N' More E68Xtreme stick and the Federal Signal SLB-FRD15ND kit (1–3 week lead time). Then confirm its wire colors, ground and per-head draw on the bench, the bracket fit at the mock-up, and program LED Outputs 6–8 and 27–31 with flash patterns only.
-- Ben3DBuild mount: arriving 2 to 3 weeks after 21 October.
+- Control head: route the head cable from the overhead console to the module (mount received and head fitted 5 Nov).
 - Book the shop install of the grille guard.
 
 ## Troubleshooting
@@ -312,6 +312,7 @@ If the player doesn't load, [watch the video on Google Drive](https://drive.goog
 
 <Changelog
 	entries={[
+		{ date: '2026-11-06', change: 'Control head mount received and the head fitted (5 Nov); bench and wiring tools bought 6 Nov; touch-up in-progress photos; Upfit Studio to 0.8.14.', rollback: 'Revert the commit that added the 6 Nov upfit update.', log: '/log/2026-11-06-head-mounted-tools-touch-up/' },
 		{ date: '2026-10-31', change: 'Linked the Whelen Command CANport setup (eight CAN inputs) in Upfit Studio and the output plan.', rollback: 'Revert the commit that added the CANport section.' },
 		{ date: '2026-10-31', change: 'Linked Upfit Studio, which now generates the output plan; rocker bars shown on relays A and B (LED Output 3 and J1 Output 7) per the 31 Oct approved wiring; rocker and U-Lite pages given the 31 Oct wiring.', rollback: 'Revert the commit that added Upfit Studio.', log: '/log/2026-10-31-upfit-studio-sync/' },
 		{ date: '2026-10-27', change: 'Build video reviewed for privacy (no VIN or location details; the plate is a vanity plate) and captioned. Start date set to Spring 2026.', rollback: 'Revert the commit that made this change.' },

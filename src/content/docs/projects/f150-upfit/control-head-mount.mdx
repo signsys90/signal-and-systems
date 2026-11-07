@@ -4,7 +4,7 @@ description: Where the Whelen 21-button control head lives in a 2017 F-150 with 
 summary: Finding a home for the control head in a cab with no equipment console. Four locations measured up, one custom-print brief, and the overhead console mount that won.
 status: In progress
 category: Vehicle Upfit and 12V
-updated: 2026-10-27
+updated: 2026-11-06
 sidebar:
   order: 18
 ---
@@ -18,6 +18,9 @@ import head from '../../../../assets/f150/cantrol-head.jpg';
 import aboveMirror from '../../../../assets/f150/cab-above-mirror.jpg';
 import armrest from '../../../../assets/f150/cab-armrest-bin.jpg';
 import frontTray from '../../../../assets/f150/cab-front-tray.jpg';
+import fitTop from '../../../../assets/f150/ben3d-installed-1454.jpg';
+import fitAngle from '../../../../assets/f150/ben3d-installed-1455.jpg';
+import fitBelow from '../../../../assets/f150/ben3d-installed-1452.jpg';
 
 <ProjectHeader />
 
@@ -34,7 +37,7 @@ Put the control head where every button and the slide are in easy reach from the
 
 ## How the plan changed
 
-The first plan, on 2 October 2026, was for a Whelen CenCom Sapphire head (model CCSRNT3A, 3-position slide, 18 push-buttons). I wrote a design brief for a custom 3D-printed mount and sent it to a 3D print shop, with four candidate locations ranked in order of preference. The build then switched to a complete used Whelen CanTrol WC set with a 21-button WeCan head (photographed 16 October). An off-the-shelf overhead console mount already existed for that head family, so the Ben3DBuild mount was bought on 21 October.
+The first plan, on 2 October 2026, was for a Whelen CenCom Sapphire head (model CCSRNT3A, 3-position slide, 18 push-buttons). I wrote a design brief for a custom 3D-printed mount and sent it to a 3D print shop, with four candidate locations ranked in order of preference. The build then switched to a complete used Whelen CanTrol WC set with a 21-button WeCan head (photographed 16 October). An off-the-shelf overhead console mount already existed for that head family, so the Ben3DBuild mount was bought on 21 October. It arrived on 5 November and I fitted the head in it the same day.
 
 ## The four locations considered
 
@@ -69,7 +72,7 @@ Notes from the brief that still matter:
 		['Product', 'Ben3DBuild Ford Overhead Mount for Whelen CCTL 6/7 (F-150 2015 to 2020)'],
 		['Made', '3D printed by Ben3DBuild for the 2015 to 2020 F-150 overhead console'],
 		['Bought', '$120.00 shipped, 21 October 2026'],
-		['Lead time', '2 to 3 weeks, so expected around 4 to 11 November'],
+		['Lead time', '2 to 3 weeks; received 5 November 2026'],
 		['Location', 'Overhead console, in the sunglasses holder opening, between the map lights and the windshield. The sunglasses holder is deleted'],
 		['How it holds the head', 'From the seller photos: an angled cradle flush with the console face, head tilted down toward the cab, a hex screw on each side (inferred)'],
 	]}
@@ -87,6 +90,18 @@ Notes from the brief that still matter:
 />
 
 <Gallery photos={[{ src: head, alt: 'The 21-button WeCan control head that goes in the overhead mount.', caption: 'The head that goes in the mount. The listing is for CCTL6 and CCTL7 heads; the seller photos show a CCTL6.' }]} />
+
+## Fitted (5 November 2026)
+
+The mount arrived on 5 November. I took the overhead console out, removed the sunglasses holder and fitted the mount and the head in its place. The head cable route to the module is the next step.
+
+<Gallery
+	photos={[
+		{ src: fitTop, alt: 'The F-150 overhead console on the bench with the Whelen 21-button control head seated in the Ben3DBuild mount where the sunglasses holder was.', caption: 'Head in the Ben3DBuild mount, console out of the truck. My photo, 5 Nov.' },
+		{ src: fitAngle, alt: 'Angled view of the overhead console showing the control head sitting flush in the mount between the sunroof switch and the map light buttons.', caption: 'The head sits between the sunroof switch and the map light buttons.' },
+		{ src: fitBelow, alt: 'The overhead console held up from below, showing the control head angled down toward the seats.', caption: 'From below, roughly as the driver sees it. The head tilts down toward the cab.' },
+	]}
+/>
 
 ## Install steps
 
@@ -106,8 +121,8 @@ Keep the head cable above or behind the curtain airbag and its mounting clips, t
 
 | Item | Status |
 | --- | --- |
-| Mount delivered | Waiting, ordered 21 October |
-| Head fits the cradle | Not yet |
+| Mount delivered | Received 5 November |
+| Head fits the cradle | Done 5 November (photos above) |
 | Cable run measured | Not yet. Estimate is 10 to 12 ft |
 | Mirror, sunroof switch, map lights still work | Not yet |
 | Reach check from the driver's seat | Not yet |
@@ -120,10 +135,9 @@ Keep the head cable above or behind the curtain airbag and its mounting clips, t
 ## Open items
 
 - Measure the head cable run and confirm the cable in the set reaches. If not, buy a longer Whelen head cable.
-- Confirm how the mount fastens once Ben3DBuild's instructions arrive.
 - Decide whether the existing switch panel in the front tray stays once the CanTrol is live.
 - A printed mount for the Grand Control Box, only if it stays in the circuit.
 
 ## Changelog
 
-<Changelog entries={[{ date: '2026-10-26', change: 'Control head mount page published from the 2 October design brief and the project document, with my own cab photos (location data stripped).', rollback: 'Revert the commit that added this page.' }]} />
+<Changelog entries={[{ date: '2026-11-06', change: 'Mount received 5 Nov and the head fitted; three of my photos of the fitted head added (location data stripped).', rollback: 'Revert the commit that added the 6 Nov upfit update.', log: '/log/2026-11-06-head-mounted-tools-touch-up/' }, { date: '2026-10-26', change: 'Control head mount page published from the 2 October design brief and the project document, with my own cab photos (location data stripped).', rollback: 'Revert the commit that added this page.' }]} />
