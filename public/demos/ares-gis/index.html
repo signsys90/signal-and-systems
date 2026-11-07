@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ARES Duval GIS Command Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./build/vendor/leaflet/leaflet.css?v=7.1.5" />
+  <link rel="stylesheet" href="./build/vendor/markercluster/MarkerCluster.css?v=7.1.5" />
+  <link rel="stylesheet" href="./build/vendor/markercluster/MarkerCluster.Default.css?v=7.1.5" />
+  <link rel="stylesheet" href="./css/styles.css?v=7.1.5" />
+  <meta name="robots" content="noindex">
+  <script src="./demo-data.js"></script>
+  <script src="./demo-backend.js"></script>
+  <script defer src="/demos/_shared/demo-banner.js" data-back="/projects/ares-gis-dashboard/" data-note="The real GIS command dashboard in your browser with fictional DEMO operators, incidents and tasks. Public infrastructure layers are real; repeater and frequency lists are left out. Live tracking is off and changes are turned off."></script>
+  <script>
+    (function () {
+      const buildVersion = '7.1.5';
+      const buildKey = 'ares-client-build';
+      let previousVersion = '';
+      try {
+        previousVersion = window.localStorage.getItem(buildKey) || '';
+        window.localStorage.setItem(buildKey, buildVersion);
+      } catch (_) {}
+      if (previousVersion === buildVersion) return;
+
+      function unregisterServiceWorkers() {
+        if (!('serviceWorker' in navigator)) return Promise.resolve();
+        return navigator.serviceWorker
+          .getRegistrations()
+          .then((registrations) => Promise.all(registrations.map((registration) => registration.unregister())))
+          .catch(() => undefined);
+      }
+
+      function clearLegacyCaches() {
+        if (!('caches' in window)) return Promise.resolve();
+        return caches.keys()
+          .then((keys) => Promise.all(
+            keys
+              .filter((key) => /ares-duval/i.test(key))
+              .map((key) => caches.delete(key))
+          ))
+          .catch(() => undefined);
+      }
+
+      window.addEventListener('load', () => {
+        Promise.all([unregisterServiceWorkers(), clearLegacyCaches()]).catch(() => undefined);
+      }, { once: true });
+    })();
+  </script>
+  <script>
+    (function () {
+      const boot = window.__ARES_BOOT__ = window.__ARES_BOOT__ || { state: 'starting', detail: '', ready: false };
+
+      function isInteractiveBootState(state) {
+        return state === 'map-ready' || state === 'ready' || state === 'degraded';
+      }
+
+      function renderBootBanner(detail) {
+        const banner = document.getElementById('boot-fallback-banner');
+        const text = document.getElementById('boot-fallback-detail');
+        if (!banner || !text) return;
+        text.textContent = detail || 'The command shell did not finish booting.';
+        banner.hidden = false;
+      }
+
+      window.addEventListener('error', function (event) {
+        const target = event && event.target;
+        if (target && (target.tagName === 'SCRIPT' || target.tagName === 'LINK')) {
+          const source = target.getAttribute('src') || target.getAttribute('href') || 'asset';
+          renderBootBanner('A required app asset failed to load: ' + source);
+          boot.state = 'asset-failed';
+          boot.detail = source;
+          return;
+        }
+        if (!boot.ready) {
+          renderBootBanner((event && event.message) || 'A client-side error stopped the app from booting.');
+        }
+      }, true);
+
+      window.addEventListener('ares:boot-state', function (event) {
+        const detail = event && event.detail ? event.detail : {};
+        boot.state = detail.state || boot.state;
+        boot.detail = detail.detail || boot.detail;
+        boot.ready = isInteractiveBootState(boot.state);
+        const banner = document.getElementById('boot-fallback-banner');
+        if (banner && boot.ready) banner.hidden = true;
+      });
+
+      window.addEventListener('load', function () {
+        window.setTimeout(function () {
+          if (!boot.ready) {
+            renderBootBanner(boot.detail || 'Startup is taking longer than expected on this device.');
+          }
+        }, 6500);
+      }, { once: true });
+    })();
+  </script>
+</head>
+<body>
+  <div id="boot-fallback-banner" class="boot-fallback-banner" hidden>
+    <strong>Command shell startup issue</strong>
+    <span id="boot-fallback-detail">Startup is taking longer than expected on this device.</span>
+  </div>
+  <div id="app-shell">
+    <aside id="sidebar" class="sidebar-open">
+      <div class="sidebar-inner">
+        <div class="brand-card">
+          <div class="brand-copy">
+            <p class="eyebrow">Auxiliary Communications / Emergency Ops</p>
+            <div class="brand-row">
+              <div>
+                <h1>ARES Duval GIS</h1>
+                <p class="lede">Map-first emergency communications command platform for Duval ARES, Net Control, and EOC operations.</p>
+              </div>
+              <div class="brand-meta">
+                <div class="brand-badge">Render-ready Command Platform</div>
+                <button id="sidebar-close" class="icon-button mobile-only" type="button" aria-label="Close sidebar">&times;</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="toolbar-card command-card">
+          <div class="toolbar-grid top-actions">
+            <button id="fit-duval" class="button button-secondary">Fit Duval</button>
+            <button id="locate-me" class="button button-secondary">Locate Me</button>
+            <button id="refresh-feeds" class="button">Refresh Feeds</button>
+          </div>
+          <div class="search-wrap">
+            <input id="layer-search" type="search" placeholder="Search layers, hospitals, fire, shelters, flood..." />
+          </div>
+          <div class="status-strip">
+            <div class="status-pill"><span class="dot dot-live"></span><span id="status-layer-count">0 active</span></div>
+            <div class="status-pill"><span class="dot dot-cache"></span><span id="status-last-refresh">No refresh yet</span></div>
+            <div class="status-pill"><span class="dot dot-empty"></span><span id="status-startup">Starting...</span></div>
+          </div>
+          <div class="quick-stats" id="quick-stats">
+            <div class="quick-stat"><span class="quick-stat-label">Layers</span><strong id="quick-stat-layers">0</strong></div>
+            <div class="quick-stat"><span class="quick-stat-label">Feeds</span><strong id="quick-stat-feeds">0</strong></div>
+            <div class="quick-stat"><span class="quick-stat-label">Tracked Assets</span><strong id="quick-stat-assets">0</strong></div>
+            <div class="quick-stat"><span class="quick-stat-label">Issues</span><strong id="quick-stat-issues">0</strong></div>
+          </div>
+        </div>
+
+        <nav class="section-nav panel">
+          <button class="section-chip active" type="button" data-section="overview">Overview</button>
+          <button class="section-chip" type="button" data-section="operations">Ops</button>
+          <button class="section-chip" type="button" data-section="reference">Reference</button>
+          <button class="section-chip" type="button" data-section="agencies">Agencies</button>
+          <button class="section-chip" type="button" data-section="all">All</button>
+        </nav>
+
+        <section class="panel ops-workspace-panel" data-section-panel="operations">
+          <div class="panel-header ops-workspace-header">
+            <div>
+              <h2>Dispatch Console</h2>
+              <p class="panel-description">Fast triage for incidents, operators, and tasking with a cleaner single-column workflow.</p>
+            </div>
+            <div class="ops-workspace-actions">
+              <button id="create-incident" type="button" class="button" data-ops-create="incident">New Incident</button>
+              <button id="create-operator" type="button" class="button button-secondary" data-ops-create="operator">Add Operator</button>
+              <button id="create-task" type="button" class="button button-secondary" data-ops-create="task">New Task</button>
+            </div>
+          </div>
+          <div class="ops-auth-panel" id="ops-auth-panel">
+            <div class="ops-auth-copy">
+              <div class="ops-auth-title">Console Auth</div>
+              <div class="ops-auth-status" id="ops-auth-status">Read-only mode</div>
+            </div>
+            <form id="ops-token-form" class="ops-token-form">
+              <label class="form-field compact">
+                <span>Admin token</span>
+                <input id="ops-token-input" name="token" type="text" placeholder="Paste API token" autocomplete="off" />
+              </label>
+              <div class="ops-auth-actions">
+                <button id="ops-set-token" class="button button-secondary" type="submit">Save Token</button>
+                <button id="ops-clear-token" class="button button-ghost" type="button">Clear</button>
+              </div>
+            </form>
+          </div>
+          <div class="ops-summary-strip" id="ops-summary-strip">
+            <div class="ops-summary-card"><span class="ops-summary-label">Open Incidents</span><strong id="ops-summary-incidents">0</strong></div>
+            <div class="ops-summary-card"><span class="ops-summary-label">Available Operators</span><strong id="ops-summary-operators">0</strong></div>
+            <div class="ops-summary-card"><span class="ops-summary-label">Open Tasks</span><strong id="ops-summary-tasks">0</strong></div>
+            <div class="ops-summary-card"><span class="ops-summary-label">Needs Attention</span><strong id="ops-summary-attention">0</strong></div>
+          </div>
+          <div class="ops-tab-bar">
+            <button class="ops-tab active" type="button" data-ops-tab="incidents">Incidents</button>
+            <button class="ops-tab" type="button" data-ops-tab="operators">Operators</button>
+            <button class="ops-tab" type="button" data-ops-tab="tasks">Tasks</button>
+            <button class="ops-tab" type="button" data-ops-tab="tracking">Tracking</button>
+            <button class="ops-tab" type="button" data-ops-tab="system">System</button>
+          </div>
+          <div class="ops-grid-layout">
+            <div class="ops-primary-column">
+              <div class="ops-list-panel" data-ops-panel="incidents">
+                <div class="ops-list-head">
+                  <div>
+                    <h3>Incident Queue</h3>
+                    <p>Prioritized incident queue with quick focus and less visual noise.</p>
+                  </div>
+                  <span class="panel-meta" id="incident-queue-meta">0 incidents</span>
+                </div>
+                <div id="incident-list" class="ops-list"></div>
+              </div>
+              <div class="ops-list-panel is-hidden" data-ops-panel="operators">
+                <div class="ops-list-head">
+                  <div>
+                    <h3>Operator Board</h3>
+                    <p>Compact operator board for availability, assignment, and check-in status.</p>
+                  </div>
+                  <span class="panel-meta" id="operator-board-meta">0 operators</span>
+                </div>
+                <div class="operator-status-board" id="operator-status-board">
+                  <div class="operator-status-summary" id="operator-status-summary"></div>
+                  <div class="operator-status-filters" id="operator-status-filters">
+                    <button class="status-filter-chip active" type="button" data-operator-filter="all">All</button>
+                    <button class="status-filter-chip" type="button" data-operator-filter="available">Available</button>
+                    <button class="status-filter-chip" type="button" data-operator-filter="en_route">En Route</button>
+                    <button class="status-filter-chip" type="button" data-operator-filter="assigned">Assigned</button>
+                    <button class="status-filter-chip" type="button" data-operator-filter="on_scene">On Scene</button>
+                    <button class="status-filter-chip" type="button" data-operator-filter="needs_relief">Needs Relief</button>
+                    <button class="status-filter-chip" type="button" data-operator-filter="stale">Stale</button>
+                  </div>
+                </div>
+                <div id="operator-list" class="ops-list"></div>
+              </div>
+              
+              <div class="ops-list-panel is-hidden" data-ops-panel="tracking">
+                <div class="ops-list-head">
+                  <div>
+                    <h3>Live RF Tracking</h3>
+                    <p>Provider health, tracked radios, and fast locate controls.</p>
+                  </div>
+                  <span class="panel-meta" id="rf-tracking-console-summary">0 tracked</span>
+                </div>
+                <div id="rf-provider-status-console" class="stack-cards compact-stack"></div>
+                <div id="rf-tracking-list-console" class="ops-list"></div>
+              </div>
+              <div class="ops-list-panel is-hidden" data-ops-panel="system">
+                <div class="ops-list-head">
+                  <div>
+                    <h3>System Diagnostics</h3>
+                    <p>Tracking health, feed state, and persistence snapshot export.</p>
+                  </div>
+                  <span class="panel-meta" id="system-diagnostics-meta">Awaiting refresh</span>
+                </div>
+                <div class="action-row wrap-actions system-actions">
+                  <button class="button button-secondary" type="button" id="refresh-system-diagnostics">Refresh Diagnostics</button>
+                  <button class="button" type="button" id="download-system-snapshot">Download Snapshot</button>
+                </div>
+                <div id="system-diagnostics-grid" class="system-diagnostics-grid"></div>
+                <div id="system-persistence-list" class="stack-cards compact-stack"></div>
+              </div>
+              <div class="ops-list-panel is-hidden" data-ops-panel="tasks">
+                <div class="ops-list-head">
+                  <div>
+                    <h3>Task Board</h3>
+                    <p>Simple work queue for assignments and follow-ups.</p>
+                  </div>
+                  <span class="panel-meta" id="task-board-meta">0 tasks</span>
+                </div>
+                <div id="task-list" class="ops-list"></div>
+              </div>
+            </div>
+            <div class="ops-secondary-column">
+              <div class="ops-focus-card">
+                <div class="ops-focus-head">
+                  <div>
+                    <h3>Focus Card</h3>
+                    <p>Selected record details stay pinned here for quick reference.</p>
+                  </div>
+                  <span class="panel-meta">Live</span>
+                </div>
+                <div id="ops-focus-card" class="ops-focus-body empty-state">Select an incident, operator, or task to inspect it here.</div>
+              </div>
+              <div class="ops-focus-card">
+                <div class="ops-focus-head">
+                  <div>
+                    <h3>Quick Recommendations</h3>
+                    <p>Manual guidance for Net Control when things get busy.</p>
+                  </div>
+                </div>
+                <div id="ops-recommendations" class="ops-recommendations"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel" data-section-panel="overview">
+          <div class="panel-header">
+            <div>
+              <h2>Operational Layers</h2>
+              <p class="panel-description">Toggle live and validated layers without losing the map view.</p>
+            </div>
+            <span class="panel-meta" id="layer-results-count">0 shown</span>
+          </div>
+          <div id="layer-groups" class="layer-groups"></div>
+        </section>
+
+        <section class="panel accordion open" data-section-panel="operations">
+          <button class="accordion-toggle" type="button" data-target="ops-status-panel">
+            <span>Operational Status Layer</span>
+            <span class="panel-meta" id="ops-status-summary">0 tracked</span>
+          </button>
+          <div id="ops-status-panel" class="accordion-body">
+            <div id="ops-status-cards" class="stack-cards compact-stack"></div>
+          </div>
+        </section>
+
+        <section class="panel accordion open" data-section-panel="overview">
+          <button class="accordion-toggle" type="button" data-target="diagnostics-panel">
+            <span>Startup Diagnostics</span>
+            <span class="panel-meta" id="diagnostics-summary">Pending</span>
+          </button>
+          <div id="diagnostics-panel" class="accordion-body">
+            <div id="diagnostics-cards" class="stack-cards compact-stack"></div>
+          </div>
+        </section>
+
+        <section class="panel accordion open" data-section-panel="overview">
+          <button class="accordion-toggle" type="button" data-target="feeds-panel">
+            <span>Live Agency / API Status</span>
+            <span class="panel-meta">Validated base + live overlays</span>
+          </button>
+          <div id="feeds-panel" class="accordion-body">
+            <div id="feed-cards" class="feed-cards"></div>
+          </div>
+        </section>
+
+
+        <section class="panel accordion open" data-section-panel="operations">
+          <button class="accordion-toggle" type="button" data-target="rf-tracking-panel">
+            <span>Live RF Tracking</span>
+            <span class="panel-meta" id="rf-tracking-summary">0 tracked</span>
+          </button>
+          <div id="rf-tracking-panel" class="accordion-body">
+            <div id="rf-provider-status" class="stack-cards compact-stack"></div>
+            <div class="subpanel-title">Live operator positions</div>
+            <div id="rf-tracking-list" class="stack-cards compact-stack"></div>
+          </div>
+        </section>
+
+        <section class="panel accordion" data-section-panel="operations">
+          <button class="accordion-toggle" type="button" data-target="erat-sync-panel">
+            <span>ERAT Sync Status</span>
+            <span class="panel-meta" id="erat-sync-summary">Checking...</span>
+          </button>
+          <div id="erat-sync-panel" class="accordion-body">
+            <div id="erat-sync-list" class="stack-cards compact-stack"></div>
+          </div>
+        </section>
+
+        <section class="panel accordion" data-section-panel="reference">
+          <button class="accordion-toggle" type="button" data-target="freq-panel">
+            <span>Duval ARES / SKYWARN Frequencies</span>
+            <span id="freq-summary" class="panel-meta">0 channels</span>
+          </button>
+          <div id="freq-panel" class="accordion-body">
+            <div id="freq-list" class="stack-cards compact-stack"></div>
+          </div>
+        </section>
+
+        <section class="panel accordion" data-section-panel="agencies">
+          <button class="accordion-toggle" type="button" data-target="agency-panel">
+            <span>Official Agency Locations</span>
+            <span class="panel-meta" id="agency-summary">0 refs</span>
+          </button>
+          <div id="agency-panel" class="accordion-body">
+            <div class="subpanel-title">Official JSO Substations</div>
+            <div id="jso-list" class="stack-cards compact-stack"></div>
+            <div class="subpanel-title">FHP in Duval</div>
+            <div id="fhp-list" class="stack-cards compact-stack"></div>
+            <div class="subpanel-title">Official COJ Shelter Sites</div>
+            <div id="shelter-list" class="stack-cards compact-stack"></div>
+          </div>
+        </section>
+
+
+        <section class="panel accordion" data-section-panel="reference">
+          <button class="accordion-toggle" type="button" data-target="gator-panel">
+            <span>Florida State Ops / GATOR</span>
+            <span class="panel-meta" id="gator-summary">0 resources</span>
+          </button>
+          <div id="gator-panel" class="accordion-body">
+            <div id="gator-links-list" class="stack-cards compact-stack"></div>
+          </div>
+        </section>
+
+
+        <section class="panel accordion" data-section-panel="reference">
+          <button class="accordion-toggle" type="button" data-target="fl511-panel">
+            <span>Sigalert Transportation</span>
+            <span class="panel-meta" id="sigalert-summary">0 resources</span>
+          </button>
+          <div id="fl511-panel" class="accordion-body">
+            <div id="fl511-links-list" class="stack-cards compact-stack"></div>
+          </div>
+        </section>
+
+        <section class="panel accordion" data-section-panel="reference">
+          <button class="accordion-toggle" type="button" data-target="validation-panel">
+            <span>Validation Summary</span>
+            <span class="panel-meta" id="validation-summary-pill">0 checks</span>
+          </button>
+          <div id="validation-panel" class="accordion-body">
+            <div id="validation-summary" class="mini-grid"></div>
+          </div>
+        </section>
+
+        <section class="panel accordion" data-section-panel="agencies">
+          <button class="accordion-toggle" type="button" data-target="jfrd-panel">
+            <span>JFRD Station Directory</span>
+            <span class="panel-meta" id="jfrd-summary">0 stations</span>
+          </button>
+          <div id="jfrd-panel" class="accordion-body">
+            <div id="jfrd-list" class="stack-cards compact-stack"></div>
+          </div>
+        </section>
+      </div>
+    </aside>
+
+    <main id="map-shell">
+      <div id="map-toolbar" class="map-toolbar">
+        <div class="map-toolbar-left">
+          <button id="sidebar-open" class="icon-button" type="button" aria-label="Open sidebar">&#9776;</button>
+          <div class="map-title-wrap">
+            <strong>ARES Duval Command View</strong>
+            <span>Jacksonville / Coastal Northeast Florida - Day / Night Command Platform</span>
+          </div>
+        </div>
+        <div class="map-toolbar-right">
+          <div id="map-health" class="map-health-pill">System booting...</div>
+          <div id="map-legend" class="legend-inline"></div>
+        </div>
+      </div>
+      <div id="map"></div>
+      <div id="command-bar" class="command-bar">
+        <div class="command-bar-left">
+          <button id="command-refresh-tracking" class="button button-secondary" type="button">Refresh Tracking</button>
+          <button id="command-force-poll" class="button" type="button">Force Provider Sync</button>
+          <button id="command-fit-duval" class="button button-secondary" type="button">Fit Duval</button>
+          <button id="command-focus-gps" class="button button-secondary" type="button">My GPS</button>
+          <button id="command-share-gps" class="button button-secondary" type="button" disabled>Share GPS</button>
+          <button id="command-mark-incident" class="button command-action-button" type="button">Mark Incident</button>
+          <button id="command-mark-operator" class="button button-secondary command-action-button" type="button">Mark Operator</button>
+          <button id="command-mark-task" class="button button-secondary command-action-button" type="button">Mark Task</button>
+        </div>
+        <div class="command-bar-right">
+          <div id="gps-status-chip" class="command-chip gps-chip"><span class="command-chip-label">GPS</span><strong id="gps-status-label">Starting</strong></div>
+          <div class="command-chip"><span class="command-chip-label">Tracked</span><strong id="command-tracked-count">0</strong></div>
+          <div class="command-chip"><span class="command-chip-label">Incidents</span><strong id="command-incident-count">0</strong></div>
+          <div class="command-chip"><span class="command-chip-label">Tasks</span><strong id="command-task-count">0</strong></div>
+          <div class="command-chip"><span class="command-chip-label">Sync</span><strong id="command-poll-status">Standby</strong></div>
+          <button id="toggle-dispatch-drawer" class="button button-secondary" type="button">Dispatch</button>
+          <button id="toggle-task-drawer" class="button button-secondary" type="button">Tasking</button>
+          <button id="toggle-operator-drawer" class="button button-secondary" type="button">Operators</button>
+          <button id="toggle-layers-drawer" class="button button-secondary" type="button">Layers</button>
+          <button id="command-theme-toggle" class="button button-secondary" type="button" aria-pressed="false">Night Mode</button>
+          <a id="command-sigalert-link" class="button button-ghost" href="https://www.sigalert.com/" target="_blank" rel="noopener">Sigalert &rarr;</a>
+          <button id="toggle-diagnostics-drawer" class="button button-secondary" type="button">Diagnostics</button>
+        </div>
+      </div>
+      <div id="command-map-hint" class="command-map-hint">Map click ready: use <strong>Mark Incident</strong>, <strong>Mark Operator</strong>, or <strong>Mark Task</strong>, then click the map to place the location.</div>
+      <div id="command-operator-drawer" class="command-drawer operator-drawer">
+        <div class="command-drawer-head">
+          <div>
+            <h3>Operator Reachability</h3>
+            <p>Live tracked radios with quick locate, dispatch, and comms-aware freshness status.</p>
+          </div>
+          <button id="close-operator-drawer" class="icon-button" type="button" aria-label="Hide operator panel">&times;</button>
+        </div>
+        <div class="command-drawer-stats">
+          <div class="command-stat"><span>Live</span><strong id="command-live-count">0</strong></div>
+          <div class="command-stat"><span>Aging</span><strong id="command-aging-count">0</strong></div>
+          <div class="command-stat"><span>Stale</span><strong id="command-stale-count">0</strong></div>
+        </div>
+        <div class="command-source-summary" id="command-source-summary">
+          <span class="command-source-pill source-aprs">APRS <strong id="command-source-aprs-count">0</strong></span>
+          <span class="command-source-pill source-meshtastic">Mesh <strong id="command-source-meshtastic-count">0</strong></span>
+          <span class="command-source-pill source-dmr">DMR <strong id="command-source-dmr-count">0</strong></span>
+          <span class="command-source-pill source-gps-share">GPS <strong id="command-source-gps-share-count">0</strong></span>
+          <span class="command-source-pill source-manual">Manual <strong id="command-source-manual-count">0</strong></span>
+        </div>
+        <div class="command-source-filters" id="command-source-filters">
+          <button class="command-source-filter active" type="button" data-source-filter="all">All</button>
+          <button class="command-source-filter" type="button" data-source-filter="aprs">APRS</button>
+          <button class="command-source-filter" type="button" data-source-filter="meshtastic">Meshtastic</button>
+          <button class="command-source-filter" type="button" data-source-filter="dmr">DMR</button>
+          <button class="command-source-filter" type="button" data-source-filter="gps-share">GPS</button>
+          <button class="command-source-filter" type="button" data-source-filter="manual">Manual</button>
+        </div>
+        <div class="command-task-actions">
+          <button id="command-new-operator" class="button" type="button">New Operator</button>
+        </div>
+        <div id="command-operator-list" class="command-list"></div>
+      </div>
+      <div id="command-dispatch-drawer" class="command-drawer dispatch-drawer">
+        <div class="command-drawer-head">
+          <div>
+            <h3>Dispatch + Assignment</h3>
+            <p>Match operators to incidents fast, review nearest candidates, and push assignments without leaving the map.</p>
+          </div>
+          <button id="close-dispatch-drawer" class="icon-button" type="button" aria-label="Hide dispatch panel">&times;</button>
+        </div>
+        <div class="command-drawer-stats dispatch-stats">
+          <div class="command-stat"><span>Assignments</span><strong id="command-assignment-count">0</strong></div>
+          <div class="command-stat"><span>Recommendable</span><strong id="command-dispatch-recommend-count">0</strong></div>
+          <div class="command-stat"><span>Selected Incident</span><strong id="command-selected-incident-label">-</strong></div>
+        </div>
+        <div class="command-dispatch-toolbar">
+          <label class="form-field compact">
+            <span>Active Incident</span>
+            <select id="command-dispatch-incident-select"></select>
+          </label>
+          <button id="command-dispatch-refresh" class="button button-secondary" type="button">Refresh Recommendations</button>
+        </div>
+        <section class="command-dispatch-section">
+          <div class="command-section-head"><h4>Nearest Operators</h4><span id="command-dispatch-meta">Awaiting selection</span></div>
+          <div id="command-dispatch-recommendations" class="command-list compact"></div>
+        </section>
+        <section class="command-dispatch-section">
+          <div class="command-section-head"><h4>Recent Assignments</h4><span id="command-dispatch-recent-meta">0 recent</span></div>
+          <div id="command-assignment-list" class="command-list compact"></div>
+        </section>
+      </div>
+
+      <div id="command-task-drawer" class="command-drawer task-drawer">
+        <div class="command-drawer-head">
+          <div>
+            <h3>Incident + Tasking Panel</h3>
+            <p>Create, edit, delete, and assign incidents and tasks without leaving the map.</p>
+          </div>
+          <button id="close-task-drawer" class="icon-button" type="button" aria-label="Hide tasking panel">&times;</button>
+        </div>
+        <div class="command-drawer-stats task-stats">
+          <div class="command-stat"><span>Open Incidents</span><strong id="command-open-incidents">0</strong></div>
+          <div class="command-stat"><span>Open Tasks</span><strong id="command-open-tasks">0</strong></div>
+          <div class="command-stat"><span>Assigned</span><strong id="command-assigned-tasks">0</strong></div>
+        </div>
+        <div class="command-task-actions">
+          <button id="command-new-incident" class="button" type="button">New Incident</button>
+          <button id="command-new-task" class="button button-secondary" type="button">New Task</button>
+        </div>
+        <div class="command-task-sections">
+          <section>
+            <div class="command-section-head"><h4>Incidents</h4><span id="command-incidents-meta">0 active</span></div>
+            <div id="command-incident-list" class="command-list compact"></div>
+          </section>
+          <section>
+            <div class="command-section-head"><h4>Tasks</h4><span id="command-tasks-meta">0 open</span></div>
+            <div id="command-task-list" class="command-list compact"></div>
+          </section>
+        </div>
+      </div>
+
+      <div id="command-layers-drawer" class="command-drawer layers-drawer">
+        <div class="command-drawer-head">
+          <div>
+            <h3>Search + Operational Layers</h3>
+            <p>Quick-search operators, incidents, tasks, and key operational layers from one panel.</p>
+          </div>
+          <button id="close-layers-drawer" class="icon-button" type="button" aria-label="Hide layers panel">&times;</button>
+        </div>
+        <div class="command-search-console">
+          <label class="form-field compact">
+            <span>Search Console</span>
+            <input id="command-search-input" type="search" placeholder="Search operators, incidents, tasks, hospitals, shelters, fire..." />
+          </label>
+          <div id="command-search-results" class="command-list compact"></div>
+        </div>
+        <section class="command-dispatch-section command-layer-panel">
+          <div class="command-section-head"><h4>ARES Frequency Reference</h4><span id="command-frequency-meta">Awaiting load</span></div>
+          <div id="command-frequency-reference" class="command-list compact"></div>
+        </section>
+        <section class="command-dispatch-section command-layer-panel">
+          <div class="command-section-head"><h4>Operational Layers</h4><span id="command-layer-panel-meta">0 available</span></div>
+          <div class="command-inline-tools">
+            <label class="form-field compact compact-inline"><span>Layer Search</span><input id="command-layer-search" type="search" placeholder="Search layers, hospitals, shelters, repeaters..." /></label>
+          </div>
+          <div id="command-key-layers" class="command-list compact layer-accordion-list"></div>
+        </section>
+        <section class="command-dispatch-section command-layer-panel">
+          <div class="command-section-head"><h4>Layer Records</h4><span id="command-layer-records-meta">Choose a layer</span></div>
+          <div id="command-layer-records" class="command-list compact"></div>
+        </section>
+      </div>
+
+      <div id="command-diagnostics-drawer" class="command-drawer diagnostics-drawer">
+        <div class="command-drawer-head">
+          <div>
+            <h3>System Diagnostics</h3>
+            <p>Runtime health, provider status, recent request activity, and live RF provider detail.</p>
+          </div>
+          <button id="close-diagnostics-drawer" class="icon-button" type="button" aria-label="Hide diagnostics panel">&times;</button>
+        </div>
+        <div class="command-drawer-stats diagnostics-stats">
+        </div>
+        <section class="command-inline-console auth-inline-console">
+          <div class="command-section-head compact-head"><h4>Console Auth</h4><span id="command-auth-status-inline">Read-only mode</span></div>
+          <div class="command-auth-row">
+            <input id="command-auth-token" class="command-auth-input" type="text" placeholder="Paste API auth token" autocomplete="off" />
+            <button id="command-auth-save" class="button button-secondary" type="button">Save</button>
+            <button id="command-auth-clear" class="button button-ghost" type="button">Clear</button>
+          </div>
+        </section>
+        <div class="command-drawer-stats diagnostics-stats">
+          <div class="command-stat"><span>APRS</span><strong id="diag-aprs-enabled">-</strong></div>
+          <div class="command-stat"><span>Providers</span><strong id="diag-provider-summary">-</strong></div>
+          <div class="command-stat"><span>Requests</span><strong id="diag-request-total">0</strong></div>
+        </div>
+        <section class="command-inline-console">
+          <div class="command-section-head compact-head"><h4>RF Provider Console</h4><span id="rf-tracking-summary">0 tracked</span></div>
+          <div id="rf-provider-status" class="stack-cards compact-stack"></div>
+          <div id="rf-tracking-list" class="command-list compact tracked-inline-list"></div>
+        </section>
+        <div id="command-diagnostics-grid" class="command-diagnostics-grid"></div>
+        <pre id="command-diagnostics-raw" class="command-raw">Awaiting diagnostics...</pre>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="./build/vendor/leaflet/leaflet.js?v=7.1.5"></script>
+  <script src="./build/vendor/markercluster/leaflet.markercluster.js?v=7.1.5"></script>
+  <script defer src="./build/js/api.js?v=7.1.5"></script>
+  <script defer src="./build/js/theme.js?v=7.1.5"></script>
+  <script defer src="./build/js/map.js?v=7.1.5"></script>
+  <script defer src="./build/js/gps.js?v=7.1.5"></script>
+  <script defer src="./build/js/layers.js?v=7.1.5"></script>
+  <script defer src="./build/js/app.js?v=7.1.5"></script>
+  <script defer src="./build/js/tracking.js?v=7.1.5"></script>
+  <script defer src="./build/js/system.js?v=7.1.5"></script>
+  <script defer src="./build/js/dispatch.js?v=7.1.5"></script>
+  <script defer src="./build/js/command-ui.js?v=7.1.5"></script>
+
+  <div class="ops-modal is-hidden" id="ops-modal" aria-hidden="true">
+    <div class="ops-modal-backdrop" data-close-ops-modal="true"></div>
+    <div class="ops-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="ops-composer-title">
+      <div class="ops-composer-card" id="ops-composer-card">
+        <div class="ops-composer-head">
+          <div>
+            <h3 id="ops-composer-title">New record</h3>
+            <p id="ops-composer-subtitle">Create or update operational records without leaving the console.</p>
+          </div>
+          <button id="ops-composer-close" class="icon-button" type="button" aria-label="Close form">&times;</button>
+        </div>
+        <form id="ops-composer-form" class="ops-composer-form"></form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

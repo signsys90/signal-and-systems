@@ -5,7 +5,7 @@ summary: Offline Windows app for the Toughbook CF-33 that decodes PDF417/AAMVA I
 status: In progress
 category: Software and Automation
 started: July 2026
-updated: 2026-10-27
+updated: 2026-11-07
 project: true
 ---
 
@@ -19,6 +19,13 @@ import ready from '../../../../assets/id-scanner/01-ready-empty.jpg';
 import sample from '../../../../assets/id-scanner/02-sample-record-masked.jpg';
 
 <ProjectHeader hero={ready} heroAlt="Responder ID Scanner window showing SCANNER READY - PRESS DEVICE TRIGGER, with empty name and date of birth fields and the copy, save and reveal buttons greyed out." />
+
+## Online access
+
+There is no online demo of the ID Scanner, on purpose. It handles driver license data, so it is built to run only on the Toughbook with no network at all, and a hosted copy would go against its privacy rules. The screenshots below use a synthetic TEST DATA record.
+
+**Source:** kept in a private GitLab repository under Signal & Systems Engineering, LLC. The code is not public and there is no source download. The GitLab repository holds the upstream AAMVA decoder project the scanner builds on (see Architecture below).
+
 
 An offline Windows desktop app that reads the PDF417 barcode on the back of a US driver license or state ID and shows the AAMVA fields on screen. It runs on my Panasonic Toughbook CF-33, never touches the network, and keeps nothing about the person scanned unless the operator chooses to export it. I build it with AI-assisted development (OpenAI Codex), under a written maintenance policy whose first rule is to preserve proven behavior.
 

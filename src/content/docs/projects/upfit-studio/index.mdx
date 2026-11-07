@@ -5,7 +5,7 @@ summary: Config-as-code for a vehicle upfit. One YAML file holds every part, cir
 status: In progress
 category: Software and Automation
 started: 2026-10-30
-updated: 2026-10-31
+updated: 2026-11-07
 project: true
 ---
 
@@ -45,6 +45,18 @@ import UpfitStudioPlan from '../../../../components/UpfitStudioPlan.astro';
 
 <ProjectHeader hero={head} heroAlt="Upfit Studio 0.8.10 control head screen: a replica of the Whelen CCTL7 21-button slide head with the slide in position 3, the Grand Control Box and BooYu controllers powered below it, and a table of the 19 CanTrol outputs that turn on, each marked Steady, Flash A or Flash B." />
 
+## Live demo
+
+**[Open the live demo](/demos/upfit-studio/)**. It opens the real Upfit Studio interface in your browser.
+
+- **What runs:** the app's own interface (version 0.8.13, the build in my GitLab repository on 7 Nov 2026) on a recorded copy of the F-150 plan, with prices and part notes removed and the budget card hidden.
+- **Interactive:** every screen reads the plan. The control head simulator answers every slide position, the brake (pop and held) and any mix of up to three buttons, from 4,536 answers recorded from the real app. The wire and fuse calculator and the bench current check use the app's own formulas, carried over to the browser. I checked them against the app on 547 sample inputs on 7 Nov 2026, and all 547 matched.
+- **Turned off:** edits, saves, sandboxes, sync, exports, the installer packet and anything that opens files or folders. The app says so when you try.
+- **CANport:** the demo's eight CANport slots match the Whelen Command CANport setup on this page and on the F-150 output plan page. Nothing about CANport changed with this demo.
+
+**Source:** kept in a private GitLab repository under Signal & Systems Engineering, LLC. The code is not public and there is no source download. The demo ships only the interface files and the recorded, public-safe answers.
+
+
 ## One-line summary
 
 A local, offline Windows app that turns the [F-150 emergency-lighting upfit](/projects/f150-upfit/) into one checked config file, and lets me run the Whelen control head, the wiring and the bench test on screen before a single wire goes into the truck.
@@ -81,7 +93,7 @@ The build lives in one file, `config/upfit.yaml`. The app reads it, checks it an
 		['Tests', 'pytest: 195 pass, 6 skipped (re-run on 0.8.10, 31 Oct 2026, Linux, Python 3.13; Tk, WireViz and OpenSCAD tests skip without those tools)'],
 		['Network', 'None. No telemetry, no accounts'],
 		['Vehicle inputs', 'Whelen Command CANport plan: 8 of 8 CAN slots used (F150 2017 signal list, CC5K1 kit)'],
-		['Source', 'Private GitHub repository'],
+		['Source', 'Private GitLab repository (moved from GitHub, Nov 2026)'],
 		['Built with', 'AI-assisted development (Claude Code) from my requirements and build data'],
 	]}
 	source={{ label: 'Project README, CHANGES.txt and pyproject.toml (repository is private)' }}
@@ -312,6 +324,7 @@ All from the change log in the repository.
 | 0.8.1 | 31 Oct | Fixed a file name reserved on Windows (aux.js) that stopped git pull on the Toughbook, plus a reserved-name test; reverse turns on the rear flood |
 | 0.8.2 | 31 Oct | The Windows build now ships the current plan instead of a stale copy |
 | 0.8.3 to 0.8.10 | 31 Oct | CANport slots 3 to 8, read-only Command file compare, notes matched to Command file "-3" |
+| 0.8.11 to 0.8.13 | 31 Oct | Command file "-4" stored with a test (same CAN signals as "-3"); harness diagram labels wrap; Build outputs finds WireViz and Graphviz and says when it can't draw |
 
 ## Testing and verification
 

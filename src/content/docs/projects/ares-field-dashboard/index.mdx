@@ -5,7 +5,7 @@ summary: Offline Electron dashboard for the Toughbook CF-33 that organizes ARES 
 status: In progress
 category: Radio and Emergency Comms
 started: Spring 2026
-updated: 2026-10-27
+updated: 2026-11-07
 project: true
 ---
 
@@ -21,6 +21,17 @@ import checks from '../../../../assets/ares-field/03-checklists.jpg';
 import com from '../../../../assets/ares-field/04-com-usb.jpg';
 
 <ProjectHeader hero={home} heroAlt="Mission Readiness screen of the CF-33 Field Dashboard: tiles for 20 of 20 pack paths ready, 6 of 6 PACE rows, 0 of 7 critical assets staged and 5 serial devices, then the active Duval ARES Field Activation pack and two standby packs." />
+
+## Live demo
+
+**[Open the live demo](/demos/ares-field-dashboard/)**. It opens the real field dashboard interface in your browser.
+
+- **What runs:** the dashboard's React interface, compiled from the repository, with its built-in default settings (mission packs, PACE plan, checklists, hardware list and launcher list). The Windows user folder in the default program paths is shown as `C:\Users\Operator`.
+- **Try:** switch mission packs, tick checklist items, edit the PACE plan or settings, and add an operator log entry. Changes last until you close the tab.
+- **What it is not:** buttons that start programs, open folders or pick files belong to the Toughbook. In the browser they say what they would do. Readiness checks show "Missing" because a browser can't see the Toughbook's drives. The two COM ports are demo entries. Battery and network come from your own browser.
+
+**Source:** kept in a private GitLab repository under Signal & Systems Engineering, LLC. The code is not public and there is no source download. The demo ships only the compiled interface. The Electron main process, my settings files and logs are not included.
+
 
 ## Screenshots
 

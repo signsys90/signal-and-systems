@@ -25,7 +25,7 @@ Always run `npm run build` before pushing. If it fails locally, it will fail on 
 3. Environment variable: `NODE_VERSION` = `24` (Cloudflare also reads `.node-version`).
 4. Save and deploy. Every push to `main` now publishes automatically.
 5. Turn on Web Analytics for the Pages project (free, cookie-free).
-6. Turn on two-factor login for both GitHub and Cloudflare.
+6. Turn on two-factor login for both GitLab and Cloudflare.
 
 ## Where things live
 

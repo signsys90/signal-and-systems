@@ -5,7 +5,7 @@ summary: Touch dashboard on the field laptop that drives a USB relay board for a
 status: In progress
 category: Software and Automation
 started: Spring 2026
-updated: 2026-10-27
+updated: 2026-11-07
 project: true
 ---
 
@@ -20,6 +20,18 @@ import full from '../../../../assets/light-controller/02-dashboard-full.jpg';
 import parked from '../../../../assets/light-controller/03-parked-incident-active.jpg';
 
 <ProjectHeader hero={off} heroAlt="Vehicle Light Controller dashboard with the red ALL OFF button, status tiles showing System OK, Relay Board Simulation, Simulation Mode On and Watchdog OK, and all relay channels off." />
+
+## Live demo
+
+**[Open the live demo](/demos/vehicle-light-controller/)**. It opens the real dashboard in your browser.
+
+- **What runs:** the app's own dashboard page, styles and script (version 0.1.0). The Python back end is replaced by a small browser stand-in that follows the app's simulation mode rules: ALL OFF at startup, channel toggles, the six operating modes, the watchdog, the event log and the safety lockout after a fault.
+- **Try:** Parked Incident Mode, then a direct channel, then ALL OFF. Turning Simulation Mode off shows the fault the app raises when no USB relay board is attached, and the safety lockout that follows.
+- **What it is not:** no relay board, no serial port and no vehicle. Nothing is saved, and a reload starts fresh.
+- **How I checked it (7 Nov 2026):** the same steps in the demo and in the real app running locally in simulation mode gave the same channel states, control sources and log entries.
+
+**Source:** kept in a private GitLab repository under Signal & Systems Engineering, LLC. The code is not public and there is no source download. The demo ships only the files a browser needs to draw the dashboard.
+
 
 ## Screenshots
 

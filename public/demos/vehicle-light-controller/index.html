@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ARES Vehicle Light Controller</title>
+    <link rel="stylesheet" href="./static/css/style.css">
+    <script>window.__VLC_DEMO_CONFIG__ = {"app_name": "ARES Vehicle Light Controller Dashboard", "port": 8765, "simulation_mode": true, "serial": {"com_port": "COM3", "baud_rate": 9600, "timeout_seconds": 1.0}, "relay_board": {"type": "kmtronic_style", "channel_count": 8, "debug_raw_commands": false, "command_templates": {"on": "hex:FF {channel:02X} 01", "off": "hex:FF {channel:02X} 00", "all_off": "sequence:off_each_channel"}}, "channels": [{"id": "rear_warning", "channel": 1, "label": "Rear Warning", "description": "Amber rear-facing warning trigger", "default_state": false}, {"id": "side_warning", "channel": 2, "label": "Side Warning", "description": "Amber side warning trigger", "default_state": false}, {"id": "front_warning", "channel": 3, "label": "Front Warning", "description": "Amber or white front support warning trigger", "default_state": false}, {"id": "scene_left", "channel": 4, "label": "Scene Left", "description": "Left-side scene light trigger", "default_state": false}, {"id": "scene_right", "channel": 5, "label": "Scene Right", "description": "Right-side scene light trigger", "default_state": false}, {"id": "rear_scene", "channel": 6, "label": "Rear Scene / Work Light", "description": "Rear work or scene light trigger", "default_state": false}, {"id": "brake_override", "channel": 7, "label": "Brake Override / Brake Pop Hold", "description": "Low-current brake override input trigger, if wired through a compliant controller", "default_state": false}, {"id": "spare", "channel": 8, "label": "Spare", "description": "Unassigned spare low-current relay trigger", "default_state": false}], "profiles": [{"id": "parked_incident", "label": "Parked Incident Mode", "description": "Support posture for a stationary ARES communications incident vehicle.", "states": {"rear_warning": true, "side_warning": true, "front_warning": false, "scene_left": false, "scene_right": false}}, {"id": "roadside_warning", "label": "Roadside Warning Mode", "description": "Amber warning posture for roadside support while keeping scene lights off.", "states": {"rear_warning": true, "side_warning": true, "front_warning": false, "scene_left": false, "scene_right": false, "rear_scene": false}}, {"id": "scene_lighting", "label": "Scene Lighting", "description": "Turns on work lighting while leaving warning channels unchanged.", "states": {"scene_left": true, "scene_right": true, "rear_scene": true}}, {"id": "low_power", "label": "Low Power Mode", "description": "Keeps essential warning triggers active and disables scene lighting.", "states": {"rear_warning": true, "side_warning": true, "front_warning": false, "scene_left": false, "scene_right": false, "rear_scene": false}}, {"id": "night_mode", "label": "Night Mode", "description": "Dims the local dashboard and optionally maps to a dimmer channel later.", "states": {}, "ui_mode": "night"}, {"id": "all_off", "label": "All Off", "description": "Turns every configured relay trigger off.", "states": {"rear_warning": false, "side_warning": false, "front_warning": false, "scene_left": false, "scene_right": false, "rear_scene": false, "brake_override": false, "spare": false}}], "safety": {"all_off_on_startup": true, "all_off_on_shutdown": true, "watchdog_enabled": true, "watchdog_timeout_seconds": 5, "require_confirmation_for_profiles": false, "require_confirmation_for_all_off": false}};</script>
+    <script src="./demo-backend.js"></script>
+    <script defer src="/demos/_shared/demo-banner.js" data-back="/projects/vehicle-light-controller/" data-note="The real dashboard running in your browser. A simulated relay board stands in for the USB hardware, as in the app&#39;s simulation mode. Nothing is saved or sent."></script>
+    <meta name="robots" content="noindex">
+    <script defer src="./static/js/dashboard.js"></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="command-header">
+        <div class="identity-block">
+          <p class="eyebrow">ARES Duval Emergency Communications Support</p>
+          <h1>ARES Vehicle Light Controller</h1>
+          <p class="subheader">Local Laptop Control Interface</p>
+        </div>
+        <button id="allOffButton" class="all-off-button" type="button">
+          <span>ALL OFF</span>
+          <small>Immediate relay trigger shutdown</small>
+        </button>
+      </header>
+
+      <section class="status-strip" aria-label="System status">
+        <div class="status-badge" data-badge="system">
+          <span>System</span>
+          <strong id="systemState">STARTING</strong>
+        </div>
+        <div class="status-badge" data-badge="relay">
+          <span>Relay Board</span>
+          <strong id="relayState">DISCONNECTED</strong>
+        </div>
+        <div class="status-badge" data-badge="simulation">
+          <span>Simulation Mode</span>
+          <strong id="simulationState">ON</strong>
+        </div>
+        <div class="status-badge" data-badge="watchdog">
+          <span>Watchdog</span>
+          <strong id="watchdogState">IDLE</strong>
+        </div>
+        <div class="status-badge wide" data-badge="last">
+          <span>Last Command</span>
+          <strong id="lastCommand">None</strong>
+        </div>
+      </section>
+
+      <section id="faultBanner" class="fault-banner" hidden>
+        <strong>FAULT</strong>
+        <span id="faultText">No active faults</span>
+      </section>
+
+      <main class="dashboard-layout">
+        <section class="console-section command-section">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Direct Channels</p>
+              <h2>Relay Trigger Controls</h2>
+            </div>
+            <p class="section-note">Low-current control outputs only</p>
+          </div>
+
+          <div class="control-grid channel-grid">
+            
+            <button class="control-card channel-card is-off" type="button" data-channel-id="rear_warning">
+              <span class="card-row top">
+                <span class="control-label">Rear Warning</span>
+                <span class="state-pill" data-field="status">OFF</span>
+              </span>
+              <span class="mapping" data-field="mapping">Relay CH1</span>
+              <span class="detail-line">Control: <b data-field="controlled_by">laptop</b></span>
+              <span class="detail-line">Last: <b data-field="last_command">None</b></span>
+            </button>
+            
+            <button class="control-card channel-card is-off" type="button" data-channel-id="side_warning">
+              <span class="card-row top">
+                <span class="control-label">Side Warning</span>
+                <span class="state-pill" data-field="status">OFF</span>
+              </span>
+              <span class="mapping" data-field="mapping">Relay CH2</span>
+              <span class="detail-line">Control: <b data-field="controlled_by">laptop</b></span>
+              <span class="detail-line">Last: <b data-field="last_command">None</b></span>
+            </button>
+            
+            <button class="control-card channel-card is-off" type="button" data-channel-id="front_warning">
+              <span class="card-row top">
+                <span class="control-label">Front Warning</span>
+                <span class="state-pill" data-field="status">OFF</span>
+              </span>
+              <span class="mapping" data-field="mapping">Relay CH3</span>
+              <span class="detail-line">Control: <b data-field="controlled_by">laptop</b></span>
+              <span class="detail-line">Last: <b data-field="last_command">None</b></span>
+            </button>
+            
+            <button class="control-card channel-card is-off" type="button" data-channel-id="scene_left">
+              <span class="card-row top">
+                <span class="control-label">Scene Left</span>
+                <span class="state-pill" data-field="status">OFF</span>
+              </span>
+              <span class="mapping" data-field="mapping">Relay CH4</span>
+              <span class="detail-line">Control: <b data-field="controlled_by">laptop</b></span>
+              <span class="detail-line">Last: <b data-field="last_command">None</b></span>
+            </button>
+            
+            <button class="control-card channel-card is-off" type="button" data-channel-id="scene_right">
+              <span class="card-row top">
+                <span class="control-label">Scene Right</span>
+                <span class="state-pill" data-field="status">OFF</span>
+              </span>
+              <span class="mapping" data-field="mapping">Relay CH5</span>
+              <span class="detail-line">Control: <b data-field="controlled_by">laptop</b></span>
+              <span class="detail-line">Last: <b data-field="last_command">None</b></span>
+            </button>
+            
+            <button class="control-card channel-card is-off" type="button" data-channel-id="rear_scene">
+              <span class="card-row top">
+                <span class="control-label">Rear Scene / Work Light</span>
+                <span class="state-pill" data-field="status">OFF</span>
+              </span>
+              <span class="mapping" data-field="mapping">Relay CH6</span>
+              <span class="detail-line">Control: <b data-field="controlled_by">laptop</b></span>
+              <span class="detail-line">Last: <b data-field="last_command">None</b></span>
+            </button>
+            
+            <button class="control-card channel-card is-off" type="button" data-channel-id="brake_override">
+              <span class="card-row top">
+                <span class="control-label">Brake Override / Brake Pop Hold</span>
+                <span class="state-pill" data-field="status">OFF</span>
+              </span>
+              <span class="mapping" data-field="mapping">Relay CH7</span>
+              <span class="detail-line">Control: <b data-field="controlled_by">laptop</b></span>
+              <span class="detail-line">Last: <b data-field="last_command">None</b></span>
+            </button>
+            
+            <button class="control-card channel-card is-off" type="button" data-channel-id="spare">
+              <span class="card-row top">
+                <span class="control-label">Spare</span>
+                <span class="state-pill" data-field="status">OFF</span>
+              </span>
+              <span class="mapping" data-field="mapping">Relay CH8</span>
+              <span class="detail-line">Control: <b data-field="controlled_by">laptop</b></span>
+              <span class="detail-line">Last: <b data-field="last_command">None</b></span>
+            </button>
+            
+          </div>
+        </section>
+
+        <section class="console-section profile-section">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Profiles</p>
+              <h2>Operating Modes</h2>
+            </div>
+            <p class="section-note">Config-driven relay groups</p>
+          </div>
+
+          <div class="control-grid profile-grid">
+            
+            
+            <button class="control-card profile-card" type="button" data-profile-id="parked_incident">
+              <span class="card-row top">
+                <span class="control-label">Parked Incident Mode</span>
+                <span class="state-pill" data-field="profile_status">READY</span>
+              </span>
+              <span class="mapping">
+                
+                5 channel changes
+                
+              </span>
+              <span class="detail-line">Support posture for a stationary ARES communications incident vehicle.</span>
+            </button>
+            
+            
+            
+            <button class="control-card profile-card" type="button" data-profile-id="roadside_warning">
+              <span class="card-row top">
+                <span class="control-label">Roadside Warning Mode</span>
+                <span class="state-pill" data-field="profile_status">READY</span>
+              </span>
+              <span class="mapping">
+                
+                6 channel changes
+                
+              </span>
+              <span class="detail-line">Amber warning posture for roadside support while keeping scene lights off.</span>
+            </button>
+            
+            
+            
+            <button class="control-card profile-card" type="button" data-profile-id="scene_lighting">
+              <span class="card-row top">
+                <span class="control-label">Scene Lighting</span>
+                <span class="state-pill" data-field="profile_status">READY</span>
+              </span>
+              <span class="mapping">
+                
+                3 channel changes
+                
+              </span>
+              <span class="detail-line">Turns on work lighting while leaving warning channels unchanged.</span>
+            </button>
+            
+            
+            
+            <button class="control-card profile-card" type="button" data-profile-id="low_power">
+              <span class="card-row top">
+                <span class="control-label">Low Power Mode</span>
+                <span class="state-pill" data-field="profile_status">READY</span>
+              </span>
+              <span class="mapping">
+                
+                6 channel changes
+                
+              </span>
+              <span class="detail-line">Keeps essential warning triggers active and disables scene lighting.</span>
+            </button>
+            
+            
+            
+            <button class="control-card profile-card" type="button" data-profile-id="night_mode">
+              <span class="card-row top">
+                <span class="control-label">Night Mode</span>
+                <span class="state-pill" data-field="profile_status">READY</span>
+              </span>
+              <span class="mapping">
+                
+                UI mode only
+                
+              </span>
+              <span class="detail-line">Dims the local dashboard and optionally maps to a dimmer channel later.</span>
+            </button>
+            
+            
+            
+            
+          </div>
+        </section>
+
+        <aside class="side-rail">
+          <section class="console-section settings-section">
+            <div class="section-heading compact">
+              <div>
+                <p class="eyebrow">Connection</p>
+                <h2>Relay Board</h2>
+              </div>
+            </div>
+
+            <label class="field-label" for="comPortInput">COM port</label>
+            <input id="comPortInput" class="console-input" value="COM3" autocomplete="off">
+
+            <label class="field-label" for="baudRateInput">Baud rate</label>
+            <input id="baudRateInput" class="console-input" type="number" value="9600" min="1" step="1">
+
+            <label class="toggle-row" for="simulationToggle">
+              <span>
+                <b>Simulation Mode</b>
+                <small>Use mock relay driver</small>
+              </span>
+              <input id="simulationToggle" type="checkbox" checked>
+            </label>
+
+            <div class="settings-actions">
+              <button id="testConnectionButton" class="secondary-button" type="button">Test Connection</button>
+              <button id="disconnectButton" class="secondary-button muted" type="button">Disconnect</button>
+            </div>
+          </section>
+
+          <section class="console-section log-section">
+            <div class="section-heading compact">
+              <div>
+                <p class="eyebrow">Events</p>
+                <h2>Recent Log</h2>
+              </div>
+            </div>
+            <ol id="recentLog" class="event-log" aria-live="polite"></ol>
+          </section>
+        </aside>
+      </main>
+
+      <footer class="safety-footer">
+        Software control only. High-current vehicle lighting circuits must be fused, relay-controlled, and manually overrideable.
+      </footer>
+    </div>
+  </body>
+</html>

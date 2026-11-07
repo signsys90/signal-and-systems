@@ -5,7 +5,7 @@ summary: This site. A $0 documentation and portfolio site on Astro, Starlight an
 status: In progress
 category: Software and Automation
 started: 2026-10-25
-updated: 2026-10-27
+updated: 2026-11-07
 project: true
 ---
 
@@ -35,7 +35,7 @@ import mobile from '../../../../assets/site/home-mobile.jpg';
 		['Address', 'signal-and-systems.pages.dev'],
 		['Budget', '$0'],
 	]}
-	source={{ label: 'Source on GitHub', href: 'https://github.com/signsys90/signal-and-systems' }}
+	source={{ label: 'Source in a private GitLab repository (moved from GitHub, Nov 2026)' }}
 />
 
 ## Screenshots
@@ -64,7 +64,7 @@ Give every project one public home where the parts, wiring, code and test result
 ## Architecture
 
 ```text
-MDX pages in GitHub ─► push to main ─► Cloudflare Pages build (astro build, Node 24) ─► static site on pages.dev
+MDX pages in GitLab ─► push to main ─► Cloudflare Pages build (astro build, Node 24) ─► static site on pages.dev
 ```
 
 The site is fully static. Content lives in `src/content/docs/` as MDX files, and reusable components (header card, status badges, spec box, parts table, wiring table, callouts, changelog, gallery, before/after slider, download card and project grid) live in `src/components/`.
@@ -98,7 +98,7 @@ I wrote the site plan: the name, design tokens, menu, categories, status badges,
 2. Scaffold Astro and Starlight, and add the design tokens and fonts.
 3. Build the documentation components.
 4. Publish the first project pages.
-5. Connect the GitHub repository to Cloudflare Pages.
+5. Connect the repository to Cloudflare Pages (first GitHub; GitLab from Nov 2026).
 
 ## Testing and verification
 
