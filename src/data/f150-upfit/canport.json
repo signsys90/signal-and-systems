@@ -86,6 +86,6 @@
     ],
     "only_in_file": [],
     "only_in_plan": [],
-    "note": "Current file \"-4\": its programming-logic change from \"-3\" is not confirmed yet; the slot notes still describe \"-3\"."
+    "note": "File \"-4\" is a re-save of \"-3\" with the same settings; the slot notes apply to both."
   }
 }
