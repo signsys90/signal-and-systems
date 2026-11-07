@@ -5,7 +5,7 @@ summary: Turning a Jacksonville PB&J idea into a licensable, sellable business. 
 status: In progress
 category: Business Consulting
 started: 2026-10-24
-updated: 2026-10-31
+updated: 2026-11-06
 project: true
 ---
 
@@ -25,9 +25,34 @@ import posterEating from '../../../../assets/big-time/jax-poster-eating.jpg';
 
 <ProjectHeader hero={hero} heroAlt="Top of the Big Time Sandwich Co. website draft: a black page with the marker-lettered headline 'Healthy sandwiches, made Big Time' and the sticker logo tilted on the right." />
 
+I own the business plan, go-to-market and storefront for this Duval County food startup, and I use AI-assisted development (Claude) to build and iterate the Shopify store, the menu, the brand assets and the launch documents.
+
 <Callout type="open" title="What this page leaves out">
 Big Time is a real partner business I'm helping launch. This page covers the scope, the method and what I built. It leaves out the owner's name, every price, fee and financial projection, the ownership terms, and all contact details. The screenshots come from the website draft with the price tag, the email address and the menu prices hidden.
 </Callout>
+
+## Status (as of 6 Nov 2026)
+
+- **Storefront:** a custom Shopify Online Store 2.0 theme, now on its 14th revision. Revision 13 is live on the brand's own domain with SSL. The store stays password protected, and online ordering is switched off in the theme until the food permit is issued.
+- **Menu:** one build-your-own signature sandwich with four jellies and two peanut butters, with or without honey (no honey makes it vegan). A "Super Big Time" specialty line for group orders shows as Coming Soon.
+- **Merch:** a branded tee is in the store and can be ordered while food ordering is off. Six limited-run tee concepts exist as rendered mockups.
+- **Channels:** pop-ups at bars, yoga studios, business complexes and apartment communities, plus delivery group orders for offices and 55+ condo buildings in four Jacksonville neighborhoods. There's no local pickup.
+- **Compliance:** the licensing research and a pre-sale legal checklist are done. The food permit, a permitted commercial kitchen and liability insurance are still open, and the business owns all three.
+
+## What changed since 27 Oct
+
+- **Rebrand.** The header and product imagery moved to the new company wordmark and the "home of the original Big Time PB&J" logo. The skyline logo is retired.
+- **Likeness risk removed.** I took a sports mascot graphic out of the theme so nothing suggests a team's or player's likeness.
+- **Navigation.** The header Swag button now opens a Swag collection. Revision 14 removes a duplicate swag link from the footer; it's unpublished and waiting for review.
+- **Menu options.** Added strawberry jelly and a honey or no-honey choice, for 16 variants in total, with separate SKUs for the vegan builds.
+- **Specialty line.** The specialty sandwiches moved into a Coming Soon panel, and Vegetarian and Vegan were added to the scrolling ticker.
+- **Payment icons fix.** The footer payment icons were hidden by a Liquid quirk: the code reassigned a for-loop variable, which Liquid doesn't allow. Fixed.
+- **Ordering switch.** Kept a theme-level online-ordering switch. While it's off, add-to-cart is hidden on food and swag stays purchasable.
+- **Point of sale.** Set up the drink lineup and an automatic sandwich-plus-drink combo discount for in-person sales. Neither has been tested on a real sale yet.
+- **Group orders, plan v2.** One concierge or office manager places a single online order for the building or office. Four neighborhoods, drinks as the only add-on, and no free tastings.
+- **Limited-run tees.** Six concepts: Jelly Drip Series, Pick a Side, Made in Duval, Real Food Club, Last Call Lunch and Founders' Batch. None uses team marks or makes an unverified health claim.
+- **Licensing re-check.** Confirmed that Florida's cottage food exemption doesn't cover selling through bars, studios or a resale counter, so a state food permit and a permitted kitchen are needed before the first paid order.
+- **Pre-sale checklist.** Wrote a pre-sale legal checklist and flagged the "Zero Poison" tagline and any vegan claim for review.
 
 ## Goal
 
@@ -311,7 +336,7 @@ The first menu item is **The PB&J**: one sandwich at one price, built as a singl
 | Cottage food vs. food permit question researched against FDACS, the statute and UF/IFAS guidance | Done |
 | Website draft built | Done |
 | Payment providers compared against official pricing pages | Done, 25 October 2026 |
-| Shopify store built | Not yet. Waits on the owner's Phase A |
+| Shopify store built | Done. Custom theme, live on the brand's domain behind a password (see Status) |
 | Test orders and refunds, online and in person | Not yet |
 | FDACS permit category and refrigeration rule confirmed with FDACS | Not yet |
 | Venue license allows reselling prepackaged food | Not yet |
@@ -325,6 +350,9 @@ No sales have happened. Every volume and cost in the plan is an assumption until
 - **One product with variants beats six products.** Cleaner menu, faster POS, better reports.
 - **The owner owns the accounts.** It's the right way to set up anyone's business, and it makes the handoff clean.
 - **Label every number.** Writing "assumption" next to each input keeps a plan honest and makes it easy to update.
+- **Build the store early, but gate it.** The password and the theme's ordering switch let the store go through 14 revisions without ever taking a food order before the permit.
+- **Check regulations before channel strategy.** The permit rules decide which channels are allowed at all, so they get checked before choosing where to sell.
+- **Verify changes in a real render.** Theme code can look right and still render wrong, as the hidden payment icons showed. Revision 14 hasn't been checked in a real render yet, which is why it isn't published.
 
 ## Open items
 
@@ -333,8 +361,11 @@ No sales have happened. Every volume and cost in the plan is an assumption until
 - FDACS permit timeline, which sets when paid orders turn on.
 - Florida sales tax registration and the Duval rate.
 - Whether the third-party fee applies to PayPal with Shopify Payments active.
-- Final domain name.
 - Whether the "Zero Poison" tagline stays.
+- Food permit, permitted kitchen and liability insurance (owned by the business).
+- Review and publish theme revision 14.
+- Choose which limited-run tees to produce. The printer needs vector art.
+- Turn on the remaining payment method and staff order notifications in Shopify admin.
 
 ## Sources
 
@@ -353,4 +384,4 @@ No sales have happened. Every volume and cost in the plan is an assumption until
 
 ## Changelog
 
-<Changelog entries={[{ date: '2026-10-31', change: 'Added the two Jacksonville posters from 27 Oct (base and PB&J versions).', rollback: 'Revert the commit that added the posters.' }, { date: '2026-10-26', change: 'Project page published from the business proposal, the go-live plan and the website draft, with names, prices and contacts left out.', rollback: 'Revert the commit that added this page.' }]} />
+<Changelog entries={[{ date: '2026-11-06', change: 'Added a role line, a status section as of 6 Nov, the changes since 27 Oct, new lessons and open items.', rollback: 'Revert the commit that made this update.' }, { date: '2026-10-31', change: 'Added the two Jacksonville posters from 27 Oct (base and PB&J versions).', rollback: 'Revert the commit that added the posters.' }, { date: '2026-10-26', change: 'Project page published from the business proposal, the go-live plan and the website draft, with names, prices and contacts left out.', rollback: 'Revert the commit that added this page.' }]} />
