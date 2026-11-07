@@ -1,6 +1,6 @@
 ---
-title: SaniGLAZE Franchise Media Asset Library
-description: An internal, browser-based application, built with AI-assisted development in OpenAI Codex, that gave SaniGLAZE International franchise members self-service access to corporate marketing assets kept in the company's HubSpot file store.
+title: Franchise Media Asset Library
+description: An internal, browser-based application, built with AI-assisted development in OpenAI Codex, that gave franchise members of a national franchise brand self-service access to corporate marketing assets kept in the company's HubSpot file store.
 summary: An internal application that gave franchise members self-service search and access to corporate marketing assets in the company's HubSpot file store, with tools for before-and-after images, client-specific media packages, and library maintenance.
 status: Delivered
 category: Business Systems
@@ -20,8 +20,8 @@ import Changelog from '../../../../components/Changelog.astro';
 	title="At a glance"
 	specs={[
 		['Full title', 'Franchise Media Asset Library & Distribution Platform'],
-		['Organization served', 'SaniGLAZE International franchise network and corporate team'],
-		['My role', 'Vice President of Marketing, SaniGLAZE International'],
+		['Organization served', 'A national franchise brand: its franchise network and corporate team'],
+		['My role', 'Vice President of Marketing, a national franchise brand'],
 		['Built', '2026'],
 		['Usage', 'Used by the franchise network nationwide'],
 		['Category', 'Business Systems · Marketing Operations · Platform Integration · AI-Assisted Development'],
@@ -42,14 +42,14 @@ import Changelog from '../../../../components/Changelog.astro';
 
 ## Overview
 
-The Franchise Media Asset Library & Distribution Platform was an internal, browser-based application that gave SaniGLAZE International franchise members self-service search and access to corporate marketing assets kept in the company's HubSpot file store. It added tools for creating before-and-after images, assembling client-specific media packages, and maintaining the library itself.
+The Franchise Media Asset Library & Distribution Platform was an internal, browser-based application that gave franchise members of a national franchise brand self-service search and access to corporate marketing assets kept in the company's HubSpot file store. It added tools for creating before-and-after images, assembling client-specific media packages, and maintaining the library itself.
 
-I built it in 2026 as Vice President of Marketing at SaniGLAZE International, and it was used by the company's franchise network nationwide.
+I built it in 2026 as Vice President of Marketing at a national franchise brand, and it was used by the company's franchise network nationwide.
 
 The application was built around the company's existing content system rather than beside it. Media files stayed where the corporate team already kept them, and the application retrieved them on demand through an authenticated API integration. That one decision shaped the rest of the design: franchise members got a single place to find and prepare approved materials, and the corporate team kept a single library to maintain.
 
 <Callout type="open" title="Internal tool, public write-up">
-This application was built for SaniGLAZE International's franchise network and corporate team. It was never a public website, and no public demonstration or live link exists.
+This application was built for the franchise brand's network and corporate team. It was never a public website, and no public demonstration or live link exists.
 
 This case study describes my design and development contributions at a functional level. Proprietary data, credentials, and confidential implementation details are excluded.
 </Callout>
@@ -60,9 +60,9 @@ This case study describes my design and development contributions at a functiona
 
 | Question | Answer |
 | --- | --- |
-| What was it? | An internal web application that put SaniGLAZE's corporate marketing library in front of the franchise network in a searchable, self-service form. |
+| What was it? | An internal web application that put the brand's corporate marketing library in front of the franchise network in a searchable, self-service form. |
 | Who used it? | Franchise members across the nationwide franchise network, corporate marketing personnel, and authorized administrators. |
-| When and in what role? | Built in 2026, while I was Vice President of Marketing at SaniGLAZE International. |
+| When and in what role? | Built in 2026, while I was Vice President of Marketing at a national franchise brand. |
 | What problem did it address? | Franchise members needed an easier way to find and use approved collateral, and the corporate team needed a way to provide it without maintaining a second copy of the library. |
 | What made the design distinctive? | It left every media file in the existing HubSpot file store and retrieved assets on demand, so the corporate store remained the single source of truth. |
 | What could users do beyond finding files? | Combine two photos into a before-and-after image, assemble client-specific media packages for download, and (for authorized staff) identify duplicates and rename files at the source. |
@@ -71,7 +71,7 @@ This case study describes my design and development contributions at a functiona
 
 ## 1. Role and Context
 
-I designed and built this application in 2026 while serving as Vice President of Marketing at SaniGLAZE International. It served three groups: franchise members, corporate marketing personnel, and authorized administrators. It was an internal tool, not a public website, and it was used by the franchise network nationwide.
+I designed and built this application in 2026 while serving as Vice President of Marketing at a national franchise brand. It served three groups: franchise members, corporate marketing personnel, and authorized administrators. It was an internal tool, not a public website, and it was used by the franchise network nationwide.
 
 As the executive responsible for marketing, I worked with both sides of the problem: the corporate team that maintained the collateral and the franchise members who needed to use it in the field.
 
@@ -96,7 +96,7 @@ The exact sequence of prompts, iterations, debugging sessions, tests, code revie
 
 ## 2. The Problem
 
-SaniGLAZE's marketing collateral lived in the corporate HubSpot file store. That collection covered videos, sales brochures, technical data sheets, safety data sheets (SDS), before-and-after photographs, and other marketing materials. Franchise members needed these materials to market and sell in their own territories, and the corporate team needed to keep the collection organized.
+The brand's marketing collateral lived in the corporate HubSpot file store. That collection covered videos, sales brochures, technical data sheets, safety data sheets (SDS), before-and-after photographs, and other marketing materials. Franchise members needed these materials to market and sell in their own territories, and the corporate team needed to keep the collection organized.
 
 The application was designed to address four points of friction.
 
@@ -126,7 +126,7 @@ Corporate personnel needed practical tools to find duplicate files and correct f
 
 ## 3. What I Built
 
-I built a hosted web application that acted as a search and access layer in front of SaniGLAZE's existing HubSpot file store.
+I built a hosted web application that acted as a search and access layer in front of the brand's existing HubSpot file store.
 
 Franchise members opened the application in a browser, searched or browsed an indexed catalog of corporate media, and opened or downloaded the assets they needed. The application retrieved each asset from HubSpot through an authenticated API integration rather than serving it from a separate copy, so HubSpot remained the single source of truth for the media files themselves.
 
@@ -188,7 +188,7 @@ These workflows describe purpose and sequence as remembered. Screen layouts, men
 | Other marketing collateral | Additional approved materials held in the corporate store |
 
 <Callout type="unverified" title="About the right-hand column">
-The left column lists the categories the library held. The right column is a general description of what each type of material is typically used for, not a record of how SaniGLAZE or individual franchises used them.
+The left column lists the categories the library held. The right column is a general description of what each type of material is typically used for, not a record of how the brand or individual franchises used them.
 </Callout>
 
 ### Integration with the corporate content system
@@ -262,7 +262,7 @@ The application was a **search and access layer over an existing corporate conte
 
 ### Technical highlights
 
-- **A layer over an existing platform.** The application was built around SaniGLAZE's HubSpot environment. It did not replace HubSpot or create a competing content system.
+- **A layer over an existing platform.** The application was built around the brand's HubSpot environment. It did not replace HubSpot or create a competing content system.
 - **The source system kept the media.** Media files stayed in the corporate HubSpot file store and were retrieved on demand. This kept one authoritative library and avoided maintaining a duplicate media repository.
 - **Read and write paths.** Most users read from the library through search, browsing, and downloads. Administrative renaming wrote changes back to the HubSpot file store, so a correction applied to the corporate original rather than to a local copy.
 - **Separated audiences.** Franchise-facing features (search, before-and-after images, packages) were distinct from maintenance features (duplicate identification, renaming), which were intended for authorized corporate personnel and administrators.
@@ -301,7 +301,7 @@ Beyond nationwide use by the franchise network, no usage, adoption, or time-savi
 
 ### Demonstrated scope
 
-The application was put into use by SaniGLAZE International's franchise network nationwide. That is the extent of the demonstrated result claimed here: no user counts, download volumes, time savings, or cost figures were recorded for this case study.
+The application was put into use by the franchise brand's network nationwide. That is the extent of the demonstrated result claimed here: no user counts, download volumes, time savings, or cost figures were recorded for this case study.
 
 ### Intended operational benefits
 
@@ -370,7 +370,7 @@ Developed through an AI-assisted software development workflow using OpenAI Code
 
 ## 11. Confidentiality and Public Documentation
 
-This page describes my own design and development work. It is not a disclosure of SaniGLAZE International's confidential information, and it does not claim ownership of the company's data, its HubSpot platform, or its intellectual property.
+This page describes my own design and development work. It is not a disclosure of the franchise brand's confidential information, and it does not claim ownership of the company's data, its HubSpot platform, or its intellectual property.
 
 Deliberately excluded from this page:
 
@@ -397,8 +397,8 @@ The HubSpot integration is described only by what it did for the business: retri
 
 | Statement | Status |
 | --- | --- |
-| Internal application for SaniGLAZE International franchise members, corporate marketing personnel, and authorized administrators | Confirmed by project description |
-| Built in 2026 by William A. Atkins while Vice President of Marketing at SaniGLAZE International | Confirmed by William A. Atkins |
+| Internal application for franchise members of a national franchise brand, corporate marketing personnel, and authorized administrators | Confirmed by project description |
+| Built in 2026 by William A. Atkins while Vice President of Marketing at a national franchise brand | Confirmed by William A. Atkins |
 | Used by the franchise network nationwide | Confirmed by William A. Atkins |
 | Built with OpenAI Codex as an AI-assisted development workflow | Confirmed by project description |
 | Browser-based, running on a hosted server | Confirmed by project description |
@@ -454,7 +454,7 @@ The ideas below are possible future enhancements. They are not features of the o
 | Term | Meaning on this page |
 | --- | --- |
 | Media asset library | A searchable collection of marketing files such as videos, documents, and photos |
-| HubSpot file store | The file storage in SaniGLAZE International's HubSpot environment, where the corporate media lived |
+| HubSpot file store | The file storage in the franchise brand's HubSpot environment, where the corporate media lived |
 | Authenticated API integration | A connection that lets one application work with another system's data after proving it is allowed to |
 | Single source of truth | One official location for each file, rather than several copies that can drift apart |
 | Safety data sheet (SDS) | A standardized document with hazard and handling information for a chemical product |
@@ -508,20 +508,21 @@ Everything in this section is a proposed reference design: one coherent way the 
 This checklist describes how a rebuild should be verified. It is not a claim that the original application was tested this way.
 </Callout>
 
-## Related SaniGLAZE Work
+## Related Franchise Work
 
-- [SaniGLAZE Video End-Slide Generator](/projects/saniglaze-video-end-slide-tool/): another Codex-built self-service tool for the same franchise network, focused on localized marketing video.
-- [SaniGLAZE Web Privacy & Tracking Audit Platform](/projects/saniglaze-privacy-tracking-audit/): a Codex-built auditing application that scanned the organization's corporate web properties for trackers, cookies, and consent-related concerns.
-- [SaniGLAZE Opportunity Map](/projects/saniglaze-opportunity-map/) and [SaniGLAZE Trade Show Map](/projects/saniglaze-trade-show-map/): business-systems dashboards for the same organization.
-- [SaniCONNECT Private Franchise Collaboration Platform](/projects/saniconnect/): a private WordPress-based community I built and launched in Spring 2024 for the SaniGLAZE franchise network, technicians, sales members, and corporate leadership, with more than 40 members.
+- [Franchise Video End-Slide Generator](/projects/franchise-video-end-slide-tool/): another Codex-built self-service tool for the same franchise network, focused on localized marketing video.
+- [Franchise Web Privacy & Tracking Audit Platform](/projects/franchise-privacy-tracking-audit/): a Codex-built auditing application that scanned the organization's corporate web properties for trackers, cookies, and consent-related concerns.
+- [Franchise Opportunity Map](/projects/franchise-opportunity-map/) and [Franchise Trade Show Map](/projects/franchise-trade-show-map/): business-systems dashboards for the same organization.
+- [Private Franchise Collaboration Platform](/projects/franchise-collaboration-platform/): a private WordPress-based community I built and launched in Spring 2024 for the franchise network, technicians, sales members, and corporate leadership, with more than 40 members.
 
 ## Changelog
 
 <Changelog
 	entries={[
+		{ date: '2026-11-07', change: 'Anonymized at William\'s request: the employer and product names were removed and replaced with a neutral description, the page URL was renamed, and screenshots and diagrams were updated to match.', rollback: 'Revert the commit that made this change.' },
 		{ date: '2026-10-31', change: 'Published the Proposed Technical Reconstruction — Not Historically Verified section with William\'s approval: evidence ledger, proposed reference architecture, and a verification checklist for a rebuild, all labelled as a reference design rather than the original implementation.', rollback: 'Revert the commit that added this section.' },
 		{ date: '2026-10-27', change: 'Status set to Delivered and start date to Spring 2026.', rollback: 'Revert the commit that made this change.' },
-		{ date: '2026-10-27', change: 'Added confirmed facts from William: built in 2026 while Vice President of Marketing at SaniGLAZE International, and used by the franchise network nationwide.', rollback: 'Revert the commit that added these facts.' },
+		{ date: '2026-10-27', change: 'Added confirmed facts from William: built in 2026 while Vice President of Marketing at a national franchise brand, and used by the franchise network nationwide.', rollback: 'Revert the commit that added these facts.' },
 		{ date: '2026-10-27', change: 'Expanded to full detail at William\'s request: executive summary, Codex role table, user-group problem table, user workflows, per-capability detail with explicit "not claimed" notes, layer-by-layer architecture table, design principles, stakeholder value and measurement framework (no values), confidentiality list, verification ledger, proposed enhancements (labelled as proposed), glossary, and two functional diagrams.', rollback: 'Revert the commit that expanded this page.' },
 		{ date: '2026-10-27', change: 'Case study first published from William\'s description of the application, following the Signal & Systems documentation standard: confirmed capabilities only, no implementation stack, metrics, or integration details.', rollback: 'Revert the commit that added this page.' },
 	]}

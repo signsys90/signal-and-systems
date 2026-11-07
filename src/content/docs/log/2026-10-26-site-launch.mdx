@@ -118,7 +118,7 @@ Times are UTC as recorded by git and GitHub. US Eastern (EDT) is UTC minus 4 hou
 | 04:18 | I started the Cloudflare setup and landed on the newer Workers screen. Claude walked me to the Pages path. |
 | 04:21 | Cloudflare Pages deployed the site. Claude checked the live home, F-150 and About pages and the resume link. |
 | 04:23 | I enabled Cloudflare Web Analytics. |
-| 04:26 to 05:08 | Five more PRs: the site's own project page, two SaniGLAZE map pages, the executive search page, start dates, and three Codex-built ARES tools with an expanded executive bio. |
+| 04:26 to 05:08 | Five more PRs: the site's own project page, two franchise map pages, the executive search page, start dates, and three Codex-built ARES tools with an expanded executive bio. |
 | 06:13 to 06:54 | Ten more PRs: rename, SDS200 glare shroud and license, resume update, five F-150 component pages, the video end-slide tool, headshot, expanded ARES pages and four business and boat pages. |
 | 11:20 to 12:46 | Six more PRs: visuals, the Duval Fan Apparel page, the new tagline (then split onto three lines), two case-study rewrites, and the first F-150 wiring page with the build video. |
 | 16:50 | PR #23: screenshots captured on my Toughbook for three software pages. |
@@ -133,9 +133,9 @@ Every PR was opened by Claude on its own branch and merged by me. The merge time
 | --- | --- | --- |
 | #1 | 04:15 | Launched the site: design system, 11 components, page template, projects grid, F-150 overview and CanTrol output plan, Responder ID Scanner, AI Outbound Sales Platform, Mobile Ham Radio, Build Log, Reference, About, Contact, Privacy and the web resume. 38 files, 3 commits. |
 | #2 | 04:57 | Added a project page for this site. |
-| #3 | 04:59 | Added the SaniGLAZE Opportunity Map and Trade Show Map case studies. |
+| #3 | 04:59 | Added the Franchise Opportunity Map and Trade Show Map case studies. |
 | #4 | 05:02 | Added the AI-Assisted Executive Search page (method only). |
-| #5 | 05:03 | Set the two SaniGLAZE map start dates to Spring 2026. |
+| #5 | 05:03 | Set the two franchise map start dates to Spring 2026. |
 | #6 | 05:08 | Added the ARES CF-33 Field Dashboard, ARES Duval GIS Command Dashboard and Vehicle Light Controller, and expanded the executive bio on About. |
 | #9 | 06:13 | Renamed the site to Signal & Systems Engineering, LLC (no period yet). |
 | #10 | 06:16 | Added the SDS200 Display Glare Shroud page with CAD renders and the v1.0 kit downloads. |
@@ -143,7 +143,7 @@ Every PR was opened by Claude on its own branch and merged by me. The merge time
 | #12 | 06:18 | Licensed the SDS200 kit under CC BY-NC 4.0. |
 | #13 | 06:29 | Replaced the resume with my latest two-page version, phone and email removed. |
 | #14 | 06:29 | Added five F-150 pages (CanTrol controller, bench test plan, five modes plan, grille guard, control head mount) and install photos on the ham radio page. |
-| #15 | 06:44 | Added the SaniGLAZE Video End-Slide Generator page. |
+| #15 | 06:44 | Added the Franchise Video End-Slide Generator page. |
 | #7 | 06:45 | Added my headshot and personal bio to About and the home hero. |
 | #17 | 06:53 | Added Big Time Sandwich Co., Wicks Surplus, North FL Motorsports and the Quest Angler 10' upfit. |
 | #16 | 06:54 | Expanded the three ARES pages, recorded the GIS dashboard test results and added 8 demo-data GIS screenshots. |
@@ -315,9 +315,9 @@ Status is what each page's own frontmatter says today. "Launch" means the page s
 | [Mobile Ham Radio Install](/projects/mobile-ham-radio/) | Radio and Emergency Comms | Installed | Launch (added the same night) |
 | [ARES CF-33 Field Dashboard](/projects/ares-field-dashboard/) | Radio and Emergency Comms | In progress | PR #6 |
 | [ARES Duval GIS Command Dashboard](/projects/ares-gis-dashboard/) | Radio and Emergency Comms | In progress | PR #6 |
-| [SaniGLAZE National Opportunity Map](/projects/saniglaze-opportunity-map/) | Business Systems | Installed | PR #3 |
-| [SaniGLAZE 2026 Trade Show Map](/projects/saniglaze-trade-show-map/) | Business Systems | Installed | PR #3 |
-| [SaniGLAZE Video End-Slide Generator](/projects/saniglaze-video-end-slide-tool/) | Business Systems | Not set | PR #15, rewritten in PR #20 |
+| [National Franchise Opportunity Map](/projects/franchise-opportunity-map/) | Business Systems | Installed | PR #3 |
+| [2026 Franchise Trade Show Map](/projects/franchise-trade-show-map/) | Business Systems | Installed | PR #3 |
+| [Franchise Video End-Slide Generator](/projects/franchise-video-end-slide-tool/) | Business Systems | Not set | PR #15, rewritten in PR #20 |
 | [AI-Assisted Executive Search](/projects/ai-assisted-executive-search/) | Business Systems | In progress | PR #4, rewritten in PR #21 |
 | [Big Time Sandwich Co.](/projects/big-time-sandwich-co/) | Business Systems | In progress | PR #17 |
 | [Wicks Surplus](/projects/wicks-surplus/) | Business Systems | In progress | PR #17 |
@@ -396,7 +396,7 @@ The site is public, and so is its repository, so even a draft branch counts as p
 - Photos have location data stripped. Plates and house numbers are blurred.
 - The Responder ID Scanner only ever shows synthetic sample IDs.
 - No passwords, logins, tokens or private URLs, in the repo or on the site. Logins I shared so Claude could view a dashboard were used for viewing only.
-- No employer confidential data. The SaniGLAZE pages describe what I built and how it works, without franchise, prospect or territory records, contacts or internal links.
+- No employer confidential data. The franchise case-study pages describe what I built and how it works, without franchise, prospect or territory records, contacts or internal links.
 - No unpublished ARES or ESF-2 operational details, frequencies, repeater lists or rosters. My callsign is public and fine to show.
 - The executive search page shows the method only: no target companies, applications, contacts, pay or results.
 - Partner and client businesses appear by name only where I approved it, and never with people's names, fees, prices, projections or contact details. The Quest Angler page leaves off the client's name, spend and photo.
@@ -417,7 +417,7 @@ The site is public, and so is its repository, so even a draft branch counts as p
 ## How the work was done
 
 - **Plan first.** I wrote the plan, made the calls on name, domain, privacy and what to publish, and reviewed every PR.
-- **Built with Claude.** Claude did the build in a Claude project with one thread per piece of work, so several pages moved forward in parallel: site build, project pages, SaniGLAZE dashboards, Codex projects, F-150 wiring, SDS200 shroud, rename and tagline, resume, video end-slide tool, Facebook images, every-project detail, and banner and logo.
+- **Built with Claude.** Claude did the build in a Claude project with one thread per piece of work, so several pages moved forward in parallel: site build, project pages, the franchise dashboards, Codex projects, F-150 wiring, SDS200 shroud, rename and tagline, resume, video end-slide tool, Facebook images, every-project detail, and banner and logo.
 - **Pull requests only.** Nothing went straight to main except the small initial commit (a .gitignore) that created the main branch. Each thread opened its own PR, watched Cloudflare's preview build, and fixed conflicts. I merged all 24 myself.
 - **Decisions on cards.** When a choice changed what would be public, Claude stopped and asked: whether the job search should get a page, and how to show the partner businesses. I picked "portfolio-style page" and "named, no money or contacts".
 - **My devices.** Where the cloud container could not reach something, Claude read my Codex folder through approved folder access and ran apps on my Toughbook through a remote session, without changing project code or data.
@@ -435,7 +435,7 @@ The site is public, and so is its repository, so even a draft branch counts as p
 | Sidebar groups would not render | Starlight 0.39 and later need autogenerate inside an items list | Changed to the `{ label, items: [{ autogenerate }] }` form. |
 | Frontmatter dates failed validation | YAML turns bare dates into Date objects | A union transform in `content.config.ts` keeps them as text, which also allows "TBD" and "Spring 2026". |
 | Merge conflicts between parallel PRs | Several threads added pages to the same sidebar list in `astro.config.mjs` | Each PR merged main back in, combined the lists and rebuilt before I merged. |
-| The SaniGLAZE dashboards were unreachable | The cloud environment's network policy blocked the dashboard host | I added the host to a new cloud environment's allowed domains, and the work moved to a thread on that environment. |
+| The franchise dashboards were unreachable | The cloud environment's network policy blocked the dashboard host | I added the host to a new cloud environment's allowed domains, and the work moved to a thread on that environment. |
 | The Codex projects zip would not download | The container cannot download from Google Drive | Claude read the same projects from my Codex folder on the Toughbook through folder access. |
 | The live GIS dashboard was unreachable | The container's network blocks its host | Claude captured demo-data screenshots and ran its tests on my Toughbook. |
 | Some PR preview links could not be opened from the container | Network policy | I checked previews on my phone. Cloudflare's build status still confirmed each build passed. |
@@ -493,7 +493,7 @@ These are open as of 2026-10-26.
 
 - Shorten or wrap the header name at phone width. At 390 px the header cuts off at "Signal & Systems Engineerir" (see the phone screenshot above).
 - The Privacy page mentions a contact form, but the site has none. Contact is LinkedIn only. Either set up a form or update the Privacy page.
-- The SaniGLAZE Video End-Slide Generator page has no status set, so it shows no badge and cannot be filtered by status.
+- The Franchise Video End-Slide Generator page has no status set, so it shows no badge and cannot be filtered by status.
 - Check the share preview in the Facebook, LinkedIn and X debuggers.
 - Run a broken-link check and a page-speed check on the live site.
 - Re-run the WCAG contrast check after the banner and logo changes.
@@ -501,7 +501,7 @@ These are open as of 2026-10-26.
 - Add visuals for the AI Outbound Sales Platform and AI-Assisted Executive Search pages, such as workflow diagrams.
 - Replace the 270 px headshot with a larger original.
 - Add a caption for the F-150 build video, and confirm it shows no plate, house number or location and that Drive downloads are off.
-- Confirm or rewrite the draft lessons learned on the SaniGLAZE map pages, and add their version history.
+- Confirm or rewrite the draft lessons learned on the franchise map pages, and add their version history.
 - Start dates are still "TBD" on several project pages.
 - Two build log entries share the same sidebar order value, so their order in the sidebar is not guaranteed.
 

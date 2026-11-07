@@ -75,12 +75,12 @@ export default defineConfig({
 						{
 							label: 'Business Systems',
 							items: [
-								{ label: 'SaniGLAZE Opportunity Map', link: '/projects/saniglaze-opportunity-map/' },
-								{ label: 'SaniGLAZE Trade Show Map', link: '/projects/saniglaze-trade-show-map/' },
-								{ label: 'SaniGLAZE Video End-Slide Generator', link: '/projects/saniglaze-video-end-slide-tool/' },
-								{ label: 'SaniGLAZE Media Asset Library', link: '/projects/saniglaze-media-asset-library/' },
-								{ label: 'SaniGLAZE Privacy & Tracking Audit', link: '/projects/saniglaze-privacy-tracking-audit/' },
-								{ label: 'SaniCONNECT Collaboration Platform', link: '/projects/saniconnect/' },
+								{ label: 'Franchise Opportunity Map', link: '/projects/franchise-opportunity-map/' },
+								{ label: 'Franchise Trade Show Map', link: '/projects/franchise-trade-show-map/' },
+								{ label: 'Franchise Video End-Slide Generator', link: '/projects/franchise-video-end-slide-tool/' },
+								{ label: 'Franchise Media Asset Library', link: '/projects/franchise-media-asset-library/' },
+								{ label: 'Franchise Privacy & Tracking Audit', link: '/projects/franchise-privacy-tracking-audit/' },
+								{ label: 'Franchise Collaboration Platform', link: '/projects/franchise-collaboration-platform/' },
 								{ label: 'AI-Assisted Executive Search', link: '/projects/ai-assisted-executive-search/' },
 							],
 						},
