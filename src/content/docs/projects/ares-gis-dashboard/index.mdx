@@ -67,7 +67,7 @@ Version 8.0.0 (7 November 2026) is a full modernization of the v7.1.5 codebase, 
 - FEMA flood zones now come from FEMA's official National Flood Hazard Layer (layer 28, special flood hazard areas only). The earlier source was a copy that held only Massachusetts data. The query simplifies the polygon shapes and fetches them in pages. A check from the CF-33 confirmed that it returns all 3,786 Duval polygons (see Testing and verification).
 - Basemaps no longer use Carto. Day and Streets use OpenStreetMap with an Esri Streets fallback. Dark uses Esri World Dark Gray with labels, with an OpenStreetMap fallback.
 - A race in the Playwright test data was fixed.
-- v8.0.1 is in the project files only. It is not yet in the GitLab repository and is not deployed.
+- v8.0.1 was deployed to Render on 2026-11-07 (commit `c29e29e`). `/healthz` reports 8.0.1, `/api/health` is ok, and the dashboard requires a login.
 
 ## Live demo
 
@@ -92,7 +92,7 @@ Version 8.0.0 (7 November 2026) is a full modernization of the v7.1.5 codebase, 
 		['Build', 'esbuild client bundle; Safari/iOS 15+ and current Chrome, Edge, Firefox'],
 		['Realtime', 'MQTT (Meshtastic), APRS polling, Web Serial GPS (unchanged)'],
 		['Storage', 'Local JSON files, now written atomically'],
-		['Hosting', 'Render Blueprint or the field laptop. v8 is not deployed yet; the live Render service still runs the earlier build'],
+		['Hosting', 'Render free plan (v8.0.1 deployed 2026-11-07, commit c29e29e) or the field laptop. No persistent disk, so data entered on the live site is lost on restart or redeploy'],
 		['Tests', '16 unit tests (node:test), API smoke test, 22 Playwright UI tests (desktop and mobile Chromium), GeoJSON validation'],
 		['Built with', 'OpenAI Codex through v7.1.5; v8.0.0 modernization with Claude Code'],
 	]}
@@ -101,7 +101,9 @@ Version 8.0.0 (7 November 2026) is a full modernization of the v7.1.5 codebase, 
 
 **Live deployment:** [ares-duval-gis-render-v2-1.onrender.com](https://ares-duval-gis-render-v2-1.onrender.com/). It is protected by a login for authorized operators, so the screenshots on this page come from a local copy loaded with fictional demo data instead.
 
-The hosted build is labeled **ARES Duval GIS v3.7.2 (Development)** and currently works best on a desktop browser. Its version label follows a different numbering from the release line in the version history below (now 8.0.0), so treat the two as separate tracks until they are reconciled. Version 8.0.0 has not been deployed there yet.
+Version 8.0.1 was deployed there on 2026-11-07 (commit `c29e29e`). `/healthz` reports 8.0.1, `/api/health` is ok, and the dashboard requires a login. This replaces the earlier hosted build labeled v3.7.2 (Development), so the hosted version now matches the release line.
+
+The service runs on Render's free plan with no persistent disk. Anything entered on the live site (operators, incidents, tasks, check-ins, net logs) is lost when the service restarts or is redeployed.
 
 ## What the platform does
 
@@ -316,7 +318,8 @@ All routes except the health checks need a login. Routes marked "admin" also nee
 <PartsTable
 	parts={[
 		{ name: 'Field laptop with u-blox GNSS receiver', specs: 'NMEA over USB serial at 9600 baud' },
-		{ name: 'Render web service and persistent disk', specs: 'Starter plan, 10 GB disk (from render.yaml)', status: 'Installed' },
+		{ name: 'Render web service', specs: 'Free plan, no persistent disk (data is lost on restart or redeploy)', status: 'Installed' },
+		{ name: 'Render persistent disk', specs: 'Needs a paid plan; not attached yet' },
 	]}
 />
 
@@ -325,7 +328,7 @@ All routes except the health checks need a login. Routes marked "admin" also nee
 Configuration is environment-driven. The repository ships an example file with placeholder values only.
 
 - **Security:** basic authentication on, a non-default username and password set in the host dashboard, and a generated admin API token.
-- **Persistence:** the app data root points at the Render disk mount, so operators, incidents, tasks and check-ins survive restarts and redeploys.
+- **Persistence:** the app data root (`APP_DATA_ROOT`) is meant to point at a mounted persistent disk so operators, incidents, tasks and check-ins survive restarts and redeploys. The live service has no disk yet, so its data does not survive.
 - **Tracking:** tracking on, with a 20-second render interval and a 6-hour stale threshold.
 - **Providers:** APRS, Meshtastic and DMR are each off by default and are turned on only after their credentials and endpoints are configured. APRS polling uses caching, batch limits and a rate-limit backoff.
 - **GPS:** server-side serial GPS is for local Windows use only. Cloud deployments leave it off and use the browser's Connect GPS button instead.
@@ -387,7 +390,7 @@ The 16 UI tests cover:
 - The full create, update, dispatch and delete cycle for an incident
 
 <Callout type="unverified">
-**v8.0.0 and v8.0.1:** the live data services answer (see the 7 Nov checks above), but no overlay or map tile has yet been seen drawing inside the v8 or v8.0.1 app. The FEMA flood query now returns all Duval polygons when called directly, but the overlay has not been seen drawing in the app. v8.0.1 is on the GitLab ares-duval-gis repository as branch `release/v8.0.1` (tag `v8.0.1`). It is not merged to main and not deployed. Map screenshot comparison tests are now opt-in and their baselines have not been created. v8 has not been run on a physical phone or on the CF-33, and it has not been tested with real GPS hardware or live APRS, Meshtastic or DMR feeds. It is not deployed to Render.
+**v8.0.0 and v8.0.1:** the live data services answer (see the 7 Nov checks above), but no overlay or map tile has yet been seen drawing inside the v8 or v8.0.1 app. The FEMA flood query now returns all Duval polygons when called directly, but the overlay has not been seen drawing in the app. v8.0.1 was deployed to Render on 2026-11-07 (commit `c29e29e`): `/healthz` reports 8.0.1, `/api/health` is ok, and the dashboard requires a login. Map screenshot comparison tests are now opt-in and their baselines have not been created. v8 has not been run on a physical phone or on the CF-33, and it has not been tested with real GPS hardware or live APRS, Meshtastic or DMR feeds.
 </Callout>
 
 <Callout type="unverified">
@@ -413,16 +416,18 @@ At least one fire station on the map uses an approximate coordinate that still n
 
 1. Run v8 on a networked machine and confirm map tiles and all 17 live overlays load, including FEMA flood zones.
 2. Create the map visual baselines there (`npm run test:visual -- --update-snapshots`) and record a fully green run on Windows and the CF-33.
-3. Deploy v8 to Render and confirm `/healthz` and the login.
+3. ~~Deploy v8 to Render and confirm `/healthz` and the login.~~ **Done 2026-11-07:** v8.0.1 (commit `c29e29e`) is live; `/healthz` reports 8.0.1, `/api/health` is ok, and the dashboard requires a login.
 4. Test on a physical phone and on the CF-33 with real GPS.
 5. Add a Content-Security-Policy (report-only first).
 6. Replace approximate station coordinates with authoritative county GIS data, and work through the 62 manual-review records.
 7. Decide whether the repository will be public.
-8. Reconcile the hosted build's label (v3.7.2 Development) with the release line. Deploying v8 would settle it.
+8. ~~Reconcile the hosted build's label (v3.7.2 Development) with the release line.~~ **Done 2026-11-07:** the v8.0.1 deploy settled it.
 9. Walk ARES Duval leadership through the platform and collect feedback on how it fits activations and exercises.
 10. Carto basemaps: **fixed in v8.0.1 code; not yet seen rendering in the app.** Carto is no longer used, and the OpenStreetMap and Esri replacement tiles all answered the 7 Nov checks. Refresh the visual baselines once v8.0.1 runs on a networked machine.
 11. FEMA flood zones: **fixed in v8.0.1 code (generalized, paged NFHL query confirmed from the CF-33 on 7 Nov); not yet seen rendering in the app.**
-12. v8.0.1 is on the ares-duval-gis GitLab repository as branch `release/v8.0.1` (tag `v8.0.1`), pushed 2026-11-07. It is not merged to main and not deployed, because Render deploys main automatically.
+12. ~~Merge v8.0.1 to main and deploy.~~ **Done 2026-11-07:** deployed to Render, commit `c29e29e`.
+13. Attach a persistent disk to the Render service (needs a paid plan) and set `APP_DATA_ROOT` to its mount path, so live data survives restarts and redeploys.
+14. Replace the short admin API token (`API_ADMIN_TOKEN`) with a long random value.
 
 ## Version history
 
@@ -448,6 +453,7 @@ Taken from the release note files in the project folder.
 
 <Changelog
 	entries={[
+		{ date: '2026-11-07', change: 'v8.0.1 deployed to Render (commit c29e29e); hosting corrected to the free plan with no persistent disk.', rollback: 'Revert the commit that made this change.' },
 		{ date: '2026-11-07', change: 'Added v8 screenshots.', rollback: 'Revert the commit that made this change.' },
 		{ date: '2026-11-07', change: 'FEMA flood query fix confirmed.', rollback: 'Revert the commit that made this change.' },
 		{ date: '2026-11-07', change: 'v8.0.1 fixes for FEMA flood source and basemaps.', rollback: 'Revert the commit that made this change.' },

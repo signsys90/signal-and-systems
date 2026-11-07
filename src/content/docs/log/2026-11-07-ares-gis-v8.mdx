@@ -1,6 +1,6 @@
 ---
 title: '2026-11-07: ARES GIS dashboard rebuilt as v8.0.0'
-description: 'The ARES Duval GIS Command Dashboard moves from v7.1.5 to v8.0.0: a tactical command interface, 17 live hazard overlays, an ICS-309 net log, nine bug fixes and security hardening. Not deployed yet.'
+description: 'The ARES Duval GIS Command Dashboard moves from v7.1.5 to v8.0.0: a tactical command interface, 17 live hazard overlays, an ICS-309 net log, nine bug fixes and security hardening. v8.0.1 deployed to Render the same day.'
 sidebar:
   order: -20261107.1
 ---
@@ -22,4 +22,5 @@ The ARES Duval GIS Command Dashboard moved from v7.1.5 to v8.0.0. The rebuild ad
 
 - 16 unit tests, the API smoke test and 22 browser UI tests pass (Linux cloud sandbox, 7 Nov 2026).
 - **Live overlays and map tiles have not yet been seen loading** on a networked machine.
-- **v8 is not deployed yet.** The live Render service still runs the earlier build.
+- **v8.0.1 is deployed to Render** (2026-11-07, commit `c29e29e`). `/healthz` reports 8.0.1, `/api/health` is ok, and the dashboard requires a login.
+- The live service is on Render's free plan with no persistent disk, so data entered there is lost on restart or redeploy.
