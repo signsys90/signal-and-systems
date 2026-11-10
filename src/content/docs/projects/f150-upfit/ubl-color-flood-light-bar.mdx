@@ -98,18 +98,18 @@ Gauges come from the project document's fuse and wire table: 16 AWG for power, 1
 		{ wire: 'C1', color: 'Red', function: 'Power. Own feed only, never joined to a mode wire', source: 'J1-6 (10A), positive-switched', draw: '3.3A max (unverified)', fuse: 'Bar in-line fuse (rating not read yet; the parts list allots a 5A blade for this feed) + CanTrol internal', gauge: '16 AWG', termination: 'Bench: wire nut. Truck: TBD' },
 		{ wire: 'C2', color: 'Blue', function: 'Right arrow, as seen facing the bar', source: 'J4-4 (LED 2)', draw: 'Signal only, not measured', fuse: 'CanTrol J4 group 20A', gauge: '18 AWG', termination: 'Bench: wire nut. Truck: TBD' },
 		{ wire: 'C3', color: 'White', function: 'Mode 3, set to steady white flood. Overrides Modes 1 and 2', source: 'J4-3 (LED 1)', draw: 'Signal only, not measured', fuse: 'CanTrol J4 group 20A', gauge: '18 AWG', termination: 'Bench: wire nut. Truck: TBD' },
-		{ wire: 'C4', color: 'Yellow', function: 'Pattern: tap = next, double tap = color, 2 s hold = steady', source: 'J4-13 (LED 9), momentary', draw: 'Signal only, not measured', fuse: 'CanTrol J4 group 20A', gauge: '18 AWG', termination: 'Bench: wire nut. Truck: TBD' },
+		{ wire: 'C4', color: 'Yellow', function: 'Pattern: tap = next, double tap = color, 2 s hold = steady', source: 'J4-13 (LED 9, Green on my harness, metered 10 Nov), momentary', draw: 'Signal only, not measured', fuse: 'CanTrol J4 group 20A', gauge: '18 AWG', termination: 'Bench: wire nut. Truck: TBD' },
 		{ wire: 'C5', color: 'Black', function: 'Ground', source: '—', draw: 'Return for C1', fuse: '—', gauge: '16 AWG', termination: 'Ring terminal, star washer, sealed', ground: 'Side of a steel frame rail, or the Ford SVE Q-231 ground point. Never battery negative' },
 		{ wire: 'C6', color: 'Brown', function: 'Mode 1, warning pattern', source: 'J4-14 (LED 10)', draw: 'Signal only, not measured', fuse: 'CanTrol J4 group 20A', gauge: '18 AWG', termination: 'Bench: wire nut. Truck: TBD' },
 		{ wire: 'C7', color: 'Orange', function: 'Mode 2, warning pattern. Overrides Mode 1', source: 'J1-1 (10A)', draw: 'Signal only, not measured', fuse: 'CanTrol internal', gauge: '18 AWG', termination: 'Bench: wire nut. Truck: TBD' },
-		{ wire: 'C8', color: 'Green', function: 'Left arrow, as seen facing the bar. Blue + green = center-out', source: 'J4-15 (LED 11)', draw: 'Signal only, not measured', fuse: 'CanTrol J4 group 20A', gauge: '18 AWG', termination: 'Bench: wire nut. Truck: TBD' },
+		{ wire: 'C8', color: 'Green', function: 'Left arrow, as seen facing the bar. Blue + green = center-out', source: 'J4-15 (LED 11, Gray on my harness, found 10 Nov)', draw: 'Signal only, not measured', fuse: 'CanTrol J4 group 20A', gauge: '18 AWG', termination: 'Bench: wire nut. Truck: TBD' },
 	]}
 />
 
 No relay is used. Every bar wire lands directly on a CanTrol output.
 
 <Callout type="unverified" title="Unverified: CanTrol lead colors">
-My CanTrol harness is aftermarket, so Whelen's lead colors do not apply to it. On 9 November 2026 I found LED Output 27 (J2-11) is White/Amber and LED Output 28 (J2-12) is Yellow/White on my harness. Every other lead color, including the ones this bar uses, is unverified. Identify each lead by connector, pin number and a meter.
+My CanTrol harness is aftermarket, so Whelen's lead colors do not apply to it. On 9 November 2026 I found LED Output 27 (J2-11) is White/Amber and LED Output 28 (J2-12) is Yellow/White on my harness. On 10 November I found LED Output 11 (J4-15), which drives this bar's green left-arrow wire, is Gray, and the left arrow works on it, and metered LED Output 9 (J4-13), which drives the yellow pattern wire, as Green. Every other lead color this bar uses is unverified. Identify each lead by connector, pin number and a meter.
 </Callout>
 
 <Callout type="unverified" title="Unverified: J1-6 switching polarity">
@@ -198,6 +198,7 @@ The arrow keys are planned so each button ends on the same side of the truck fro
 
 <Changelog
 	entries={[
+		{ date: '2026-11-10', change: 'LED Output 11 (J4-15, left arrow) recorded as Gray and LED Output 9 (J4-13, pattern wire) as Green on my harness.', rollback: 'Revert the commit that recorded J4-15 as Gray.' },
 		{ date: '2026-11-10', change: 'Added the CanTrol bench wiring diagram (Rev 2, custom harness identified by pin). It is a bench plan; the bar is not yet tested on the CanTrol. Removed the Whelen guide lead colors from the wiring table, because my harness is custom.', rollback: 'Revert the commit that added the bench wiring diagrams.', log: '/log/2026-11-10-bench-wiring-diagrams/' },
 		{ date: '2026-10-27', change: 'Wire IDs renamed from CF1–CF8 to C1–C8 to match the project document and the power and wiring page. Colors and functions unchanged.', rollback: 'Revert the commit that made this change.' },
 		{ date: '2026-10-27', change: 'Added the 5A fuse allotted for the power feed in the project parts list, and the 295HFSA6 all-features bench diagram. Moved in the sidebar to sit with the other grille guard products.', rollback: 'Revert the commit that rebuilt the F-150 section.' },

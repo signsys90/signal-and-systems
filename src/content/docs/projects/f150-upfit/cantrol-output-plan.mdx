@@ -4,7 +4,7 @@ description: Every Whelen CanTrol WC output on the F-150 upfit, what it feeds, i
 summary: What each CanTrol WC output feeds, its rating, and which slide position or button turns it on.
 status: In progress
 category: Vehicle Upfit and 12V
-updated: 2026-10-31
+updated: 2026-11-10
 sidebar:
   order: 1
 ---
@@ -28,7 +28,7 @@ The tables below are generated from Upfit Studio, the desktop app that holds the
 <Callout type="unverified">
 Guide 14580G shows two different colors for LED Outputs 11 and 12 on different pages. Identify those two leads by pin (J4-15 and J4-16) and with a meter, not by color.
 
-More broadly, my harness is custom and its wire colors do not follow the guide (found 9 November 2026: LED Output 27 is White/Amber and LED Output 28 is Yellow/White on my bench harness). Identify every lead by connector and pin position, not by guide color.
+More broadly, my harness is custom and its wire colors do not follow the guide (found 9 November 2026: LED Output 27 is White/Amber and LED Output 28 is Yellow/White on my bench harness; found 10 November: LED Output 11 is Gray and LED Output 9 is Green). Identify every lead by connector and pin position, not by guide color.
 </Callout>
 
 ## Outputs
@@ -71,4 +71,4 @@ Eight vehicle signals from the OBD-II port, through the Whelen CC5K1 CANport kit
 
 ## Changelog
 
-<Changelog entries={[{ date: '2026-10-31', change: 'Added the CANport vehicle inputs table (8 CAN signals, generated from Upfit Studio 0.8.10); output and key tables regenerated from 0.8.10 (E68Xtreme sweep on the arrow keys, EFM rear in slide 3).', rollback: 'Revert the commit that added the CANport section.' }, { date: '2026-10-31', change: 'Output and control head tables now generated from Upfit Studio 0.5.0 (31 Oct approved slide layout, rocker relays, U-Lite and Putco wiring, steady vs flash per output, CCTL7 key map).', rollback: 'Revert the commit that added UpfitStudioPlan.' }, { date: '2026-10-27', change: 'LED Outputs 6–8 and 27–31 assigned to the planned E68Xtreme rear stick (27 Oct files); spares now 14–26 and 32. J1-3 noted as freed when the BooYu comes out.', rollback: 'Revert the commit that added the E68Xtreme.' }, { date: '2026-10-26', change: 'Output plan published from the project document.', rollback: 'Revert the commit that added this page.' }]} />
+<Changelog entries={[{ date: '2026-11-10', change: 'Added LED Output 11 (J4-15) = Gray and LED Output 9 (J4-13) = Green to the custom harness colors found so far.', rollback: 'Revert the commit that recorded J4-15 as Gray.' }, { date: '2026-10-31', change: 'Added the CANport vehicle inputs table (8 CAN signals, generated from Upfit Studio 0.8.10); output and key tables regenerated from 0.8.10 (E68Xtreme sweep on the arrow keys, EFM rear in slide 3).', rollback: 'Revert the commit that added the CANport section.' }, { date: '2026-10-31', change: 'Output and control head tables now generated from Upfit Studio 0.5.0 (31 Oct approved slide layout, rocker relays, U-Lite and Putco wiring, steady vs flash per output, CCTL7 key map).', rollback: 'Revert the commit that added UpfitStudioPlan.' }, { date: '2026-10-27', change: 'LED Outputs 6–8 and 27–31 assigned to the planned E68Xtreme rear stick (27 Oct files); spares now 14–26 and 32. J1-3 noted as freed when the BooYu comes out.', rollback: 'Revert the commit that added the E68Xtreme.' }, { date: '2026-10-26', change: 'Output plan published from the project document.', rollback: 'Revert the commit that added this page.' }]} />
