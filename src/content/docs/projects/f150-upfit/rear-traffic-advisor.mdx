@@ -4,7 +4,7 @@ description: The F-150's rear-window warning light. Today a BooYu 8-head amber t
 summary: The BooYu amber traffic advisor is installed and stays in use until the planned Strobes N' More E68Xtreme stick (red/amber/white, 35.5 in) and its Federal Signal no-drill bracket are bought. The CanTrol becomes the stick's flasher, one LED output per head.
 status: Installed
 category: Vehicle Upfit and 12V
-updated: 2026-10-27
+updated: 2026-11-10
 sidebar:
   label: Rear window light (BooYu, E68Xtreme)
   order: 13
@@ -20,6 +20,7 @@ import Changelog from '../../../../components/Changelog.astro';
 import booyu from '../../../../assets/f150/booyu.jpg';
 import e68 from '../../../../assets/f150/e68xtreme-stick.jpg';
 import colors from '../../../../assets/f150/putco-colors.png';
+import e68bench from '../../../../assets/f150/e68xtreme-bench-wiring.png';
 
 <ProjectHeader hero={booyu} heroAlt="BooYu rear-window LED traffic advisor bars on suction cups with the controller and 12V plug, product photo." />
 
@@ -188,7 +189,13 @@ On 11 October I found a used Whelen 8-head Dominator Plus traffic advisor, all a
 ## Bench test
 
 - **BooYu:** power-on behavior noted (it needs its button every time). Still to do: measure the draw with a meter in series on red so the 10A fuse can be confirmed.
-- **E68Xtreme (when bought):** on 12V through a fused lead, find each head's positive and the ground with a meter, measure each head's current, then run each head from its CanTrol output with a flash pattern (never steady) before anything is mounted.
+- **E68Xtreme:** on 12V through a fused lead, find each head's positive and the ground with a meter, measure each head's current, then run each head from its CanTrol output with a flash pattern (never steady) before anything is mounted.
+
+### E68Xtreme bench wiring (Rev 2, 10 Nov 2026)
+
+<Gallery photos={[{ src: e68bench, alt: 'Bench wiring diagram: a 12V 30A bench supply feeds the Whelen CanTrol WC through two 20A main fuses and a 5A ignition fuse. LED outputs 6, 7, 8 and 27 to 31 each join one E68Xtreme module wire with a wire nut, the stick black ground returns to the supply through a multimeter in series, and boxes list the rules, data status and the slide plan.', caption: 'Bench plan, not yet a test result. The CanTrol lead colors are the ones found on my custom harness (J2-11 White/Amber and J2-12 Yellow/White corrected in Rev 2); always go by pin number. Stick wire colors are from the Strobes N\' More install guide. Current draw is still to be measured.' }]} />
+
+This is the wiring plan for the bench, drawn before the test. Every stick output gets a flash pattern only, never steady, and +12V never goes straight onto a stick wire.
 
 ## Troubleshooting
 
@@ -220,6 +227,7 @@ On 11 October I found a used Whelen 8-head Dominator Plus traffic advisor, all a
 ## Changelog
 
 <Changelog entries={[
+	{ date: '2026-11-10', change: 'Added the E68Xtreme bench wiring diagram (Rev 2, with the corrected J2-11 and J2-12 harness colors). It is a bench plan; nothing on it is tested yet.', rollback: 'Revert the commit that added the bench wiring diagrams.', log: '/log/2026-11-10-bench-wiring-diagrams/' },
 	{ date: '2026-10-31', change: 'E68Xtreme photo now shows full width instead of as a thumbnail.', rollback: 'Revert the commit that widened the photo.' },
 	{ date: '2026-10-31', change: 'Added the Putco Work Blade color combination chart under the E68Xtreme section, for planning the rear colors together.', rollback: 'Revert the commit that added the chart.' },
 	{ date: '2026-10-27', change: 'Added the planned Strobes N\' More E68Xtreme stick and Federal Signal SLB-FRD15ND bracket from the 27 October files, new K1–K10 wiring, output plan changes, and moved the Whelen Dominator to a dropped option.', rollback: 'Revert the commit that added the E68Xtreme.' },
