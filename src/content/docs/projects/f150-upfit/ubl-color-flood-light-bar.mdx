@@ -4,7 +4,7 @@ description: Wire-by-wire plan for the UBL Color Flood 2.0 20-inch amber/white l
 summary: 20" amber/white warning and white flood bar under the grille guard's lower tube, with seven CanTrol outputs for power, three modes, two arrows and pattern.
 status: Bench-tested
 category: Vehicle Upfit and 12V
-updated: 2026-11-10
+updated: 2026-11-12
 sidebar:
   label: UBL Color Flood 2.0 light bar
   order: 10
@@ -95,21 +95,21 @@ Gauges come from the project document's fuse and wire table: 16 AWG for power, 1
 
 <WiringTable
 	rows={[
-		{ wire: 'C1', color: 'Red', function: 'Power. Own feed only, never joined to a mode wire', source: 'J1-6 (10A), positive-switched', draw: '3.3A max (unverified)', fuse: 'Bar in-line fuse (rating not read yet; the parts list allots a 5A blade for this feed) + CanTrol internal', gauge: '16 AWG', termination: 'Bench: wire nut. Truck: TBD' },
+		{ wire: 'C1', color: 'Red', function: 'Power. Own feed only, never joined to a mode wire', source: 'J1-6 (10A), positive-switched', draw: '3.3A max (unverified)', fuse: 'Bar in-line fuse, 5A (factory, read 12 Nov) + CanTrol internal', gauge: '16 AWG', termination: 'Bench: wire nut. Truck: TBD' },
 		{ wire: 'C2', color: 'Blue', function: 'Right arrow, as seen facing the bar', source: 'J4-4 (LED 2)', draw: 'Signal only, not measured', fuse: 'CanTrol J4 group 20A', gauge: '18 AWG', termination: 'Bench: wire nut. Truck: TBD' },
 		{ wire: 'C3', color: 'White', function: 'Mode 3, set to steady white flood. Overrides Modes 1 and 2', source: 'J4-3 (LED 1)', draw: 'Signal only, not measured', fuse: 'CanTrol J4 group 20A', gauge: '18 AWG', termination: 'Bench: wire nut. Truck: TBD' },
-		{ wire: 'C4', color: 'Yellow', function: 'Pattern: tap = next, double tap = color, 2 s hold = steady', source: 'J4-13 (LED 9, Green on my harness, metered 10 Nov), momentary', draw: 'Signal only, not measured', fuse: 'CanTrol J4 group 20A', gauge: '18 AWG', termination: 'Bench: wire nut. Truck: TBD' },
+		{ wire: 'C4', color: 'Yellow', function: 'Pattern: tap = next, double tap = color, 2 s hold = steady', source: 'J4-13 (LED 9, Green on my harness, metered 10 Nov), momentary, through a 1N4004 diode (banded end toward the bar)', draw: 'Signal only, not measured', fuse: 'CanTrol J4 group 20A', gauge: '18 AWG', termination: 'Bench: wire nut. Truck: TBD' },
 		{ wire: 'C5', color: 'Black', function: 'Ground', source: '—', draw: 'Return for C1', fuse: '—', gauge: '16 AWG', termination: 'Ring terminal, star washer, sealed', ground: 'Side of a steel frame rail, or the Ford SVE Q-231 ground point. Never battery negative' },
 		{ wire: 'C6', color: 'Brown', function: 'Mode 1, warning pattern', source: 'J4-14 (LED 10)', draw: 'Signal only, not measured', fuse: 'CanTrol J4 group 20A', gauge: '18 AWG', termination: 'Bench: wire nut. Truck: TBD' },
 		{ wire: 'C7', color: 'Orange', function: 'Mode 2, warning pattern. Overrides Mode 1', source: 'J1-1 (10A)', draw: 'Signal only, not measured', fuse: 'CanTrol internal', gauge: '18 AWG', termination: 'Bench: wire nut. Truck: TBD' },
-		{ wire: 'C8', color: 'Green', function: 'Left arrow, as seen facing the bar. Blue + green = center-out', source: 'J4-15 (LED 11, Gray on my harness, found 10 Nov)', draw: 'Signal only, not measured', fuse: 'CanTrol J4 group 20A', gauge: '18 AWG', termination: 'Bench: wire nut. Truck: TBD' },
+		{ wire: 'C8', color: 'Green', function: 'Left arrow, as seen facing the bar. Blue + green = center-out', source: 'J4-15 (LED 11, Violet on my harness, confirmed 12 Nov)', draw: 'Signal only, not measured', fuse: 'CanTrol J4 group 20A', gauge: '18 AWG', termination: 'Bench: wire nut. Truck: TBD' },
 	]}
 />
 
-No relay is used. Every bar wire lands directly on a CanTrol output.
+No relay is used. Every bar wire lands directly on a CanTrol output, except yellow, which goes through a 1N4004 diode (1A, 400V). The plain end goes on J4-13 and the banded end toward the bar. Without the diode the bar shuts down whenever yellow is joined to J4-13 (bench, 11 and 12 Nov). Never put the yellow wire on +12V.
 
 <Callout type="unverified" title="Unverified: CanTrol lead colors">
-My CanTrol harness is aftermarket, so Whelen's lead colors do not apply to it. On 9 November 2026 I found LED Output 27 (J2-11) is White/Amber and LED Output 28 (J2-12) is Yellow/White on my harness. On 10 November I found LED Output 11 (J4-15), which drives this bar's green left-arrow wire, is Gray, and the left arrow works on it, and metered LED Output 9 (J4-13), which drives the yellow pattern wire, as Green. Every other lead color this bar uses is unverified. Identify each lead by connector, pin number and a meter.
+My CanTrol harness is aftermarket, so Whelen's lead colors do not apply to it. On 9 November 2026 I found LED Output 27 (J2-11) is White/Amber and LED Output 28 (J2-12) is Yellow/White on my harness. On 10 November I metered LED Output 9 (J4-13), which drives the yellow pattern wire, as Green. On 12 November I confirmed LED Output 11 (J4-15), which drives the green left-arrow wire, is Violet (I had recorded it as Gray on 10 November; that was wrong). Every other lead color this bar uses is unverified. Identify each lead by connector, pin number and a meter.
 </Callout>
 
 <Callout type="unverified" title="Unverified: J1-6 switching polarity">
@@ -118,7 +118,7 @@ J1 Outputs 5 to 8 can switch positive or ground, set by which fuse slot each out
 
 ### CanTrol programming
 
-Set in Whelen Command, per the project's wiring research. These settings are inferred from how the bar works and have not been programmed yet.
+Set in Whelen Command. Programmed in the bench files CF1 to CF4 and passed on the bench on 12 Nov 2026 (see the [controller page](/projects/f150-upfit/cantrol-controller/#command-files-on-the-bench-12-nov-2026)). LEFT, RIGHT and FLASH also turn J1-1 (Mode 2) off so the arrows sweep clean.
 
 | Output | Action | Switch type | Notes |
 | --- | --- | --- | --- |
@@ -154,16 +154,17 @@ A flash pattern or Low Power on any of these outputs would switch the bar's inpu
 - Blue gives the right arrow and green the left arrow, as seen facing the bar. Both together give center-out. The arrows override all three modes.
 - Yellow: a tap steps to the next pattern, a quick double tap switches amber/white, and a 2 s hold gives steady color. Each mode keeps its own setting.
 
+**Bench-tested on the CanTrol, 12 Nov 2026: passed,** with a 1N4004 diode on the yellow wire. Slide 2 ran 60 s; yellow taps, the 2 s hold and the tap back to flashing all worked; STEADY, SCENE, RIGHT, LEFT and FLASH each ran 30 s without the bar dying; it came back after a power cycle. The arrow directions passed (RIGHT ends on the passenger side). A triple tap on yellow set slide 2's color to amber/white.
+
 **Not yet tested:**
 
-- Driving the bar from the CanTrol. The bench plan for it is below.
 - Whether each mode's memory survives a power-off of at least 10 seconds.
-- Measured current on the red wire in Mode 2 and in the white flood.
+- Measured current on the red wire in Mode 2 and in the white flood (the meter read 0 on 12 Nov, so it was skipped; the wiring is sized to the 5A factory fuse).
 - Anything in the truck.
 
 ### CanTrol bench wiring (Rev 2, 10 Nov 2026)
 
-<Gallery photos={[{ src: cfbench, alt: 'Bench wiring diagram: a 12V 30A bench supply feeds the Whelen CanTrol WC. J1 outputs 6 and 1 feed the bar red and orange through 5A fuses; LED outputs 10, 1, 2, 11 and 9 feed brown, white, blue, green and yellow; the bar black returns to the supply. A panel explains why the front bar and the rear stick sweep in opposite directions as you look at them, and boxes list the rules, data status and key plan.', caption: 'Bench plan for running the bar from the CanTrol, not yet a test result. My CanTrol harness is custom, so its lead colors are left blank and every lead is identified by pin number. Bar wire colors are from the UBL manual and my 11 Oct bench test. Bar current is still to be measured.' }]} />
+<Gallery photos={[{ src: cfbench, alt: 'Bench wiring diagram: a 12V 30A bench supply feeds the Whelen CanTrol WC. J1 outputs 6 and 1 feed the bar red and orange through 5A fuses; LED outputs 10, 1, 2, 11 and 9 feed brown, white, blue, green and yellow; the bar black returns to the supply. A panel explains why the front bar and the rear stick sweep in opposite directions as you look at them, and boxes list the rules, data status and key plan.', caption: 'Bench plan for running the bar from the CanTrol, drawn before the test. The 12 Nov run added a 1N4004 diode on yellow, which this drawing does not show. My CanTrol harness is custom, so its lead colors are left blank and every lead is identified by pin number. Bar wire colors are from the UBL manual and my 11 Oct bench test. Bar current is still to be measured.' }]} />
 
 The arrow keys are planned so each button ends on the same side of the truck front and rear: right arrow ends on the passenger side on both the Color Flood bar and the E68Xtreme stick. Seen from the front of the truck, that means the bar sweeps right to left as you look at it.
 
@@ -179,15 +180,16 @@ The arrow keys are planned so each button ends on the same side of the truck fro
 ## Lessons learned
 
 - The red lead is power only. Red alone does nothing, and joining it to a mode wire defeats the mode logic, so it needs its own output.
-- On my bar, a quick double tap on yellow changes color. UBL's sheet says three taps.
+- On my bar, a quick double tap on yellow changed color on the 295HFSA6 bench (11 Oct). On the CanTrol (12 Nov), a triple tap set the color, as UBL's sheet says.
+- The yellow input misbehaves on a CanTrol LED output without a series diode: the bar shuts down. A 1N4004 fixed it.
 - Because the bar handles its own priority (Mode 3 over 2 over 1, arrows over all), the CanTrol only needs simple steady outputs. No CanTrol flash patterns are needed for this bar.
 
 ## Open items
 
-- Measure the draw on the red wire, and record the in-line fuse's amp rating (5A planned for C1).
+- Measure the draw on the red wire (the in-line fuse is 5A, read 12 Nov).
 - Confirm the bar's IP rating with UBL.
 - Confirm J1-6 is in the positive-switching fuse slot.
-- Identify the J4-15 lead by pin and meter.
+- Decide where the yellow wire's 1N4004 diode lives in the truck (guard end or module end), soldered and heat-shrunk over the whole diode.
 - Find the ground point on the frame rail side, or match the Q-231 point to Ford's bulletin photo.
 - Decide the truck terminations (crimp butt splice with adhesive heat shrink, or a sealed connector at the guard so it can come off).
 - Optional: move orange (Mode 2) from J1-1 to a spare LED output to keep a 10A output free.
@@ -198,6 +200,7 @@ The arrow keys are planned so each button ends on the same side of the truck fro
 
 <Changelog
 	entries={[
+		{ date: '2026-11-12', change: 'Passed the CanTrol bench test with a 1N4004 diode on the yellow wire. In-line fuse read as 5A. J4-15 corrected to Violet. Command programming done in CF1 to CF4.', rollback: 'Revert the commit that added the 12 Nov upfit update.', log: '/log/2026-11-12-color-flood-bench-pass/' },
 		{ date: '2026-11-10', change: 'LED Output 11 (J4-15, left arrow) recorded as Gray and LED Output 9 (J4-13, pattern wire) as Green on my harness.', rollback: 'Revert the commit that recorded J4-15 as Gray.' },
 		{ date: '2026-11-10', change: 'Added the CanTrol bench wiring diagram (Rev 2, custom harness identified by pin). It is a bench plan; the bar is not yet tested on the CanTrol. Removed the Whelen guide lead colors from the wiring table, because my harness is custom.', rollback: 'Revert the commit that added the bench wiring diagrams.', log: '/log/2026-11-10-bench-wiring-diagrams/' },
 		{ date: '2026-10-27', change: 'Wire IDs renamed from CF1–CF8 to C1–C8 to match the project document and the power and wiring page. Colors and functions unchanged.', rollback: 'Revert the commit that made this change.' },

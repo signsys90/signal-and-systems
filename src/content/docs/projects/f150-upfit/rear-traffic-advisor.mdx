@@ -1,12 +1,12 @@
 ---
-title: Rear window warning light (BooYu now, E68Xtreme planned)
-description: The F-150's rear-window warning light. Today a BooYu 8-head amber traffic advisor on SpeedTech headrest brackets fed from Whelen CanTrol WC output J1-3; planned replacement a Strobes N' More E68Xtreme 8-module LED stick (R/A/W/W/W/W/A/R) on a Federal Signal SLB-FRD15ND no-drill headliner bracket, each head flashed by its own CanTrol LED output.
-summary: The BooYu amber traffic advisor is installed and stays in use until the planned Strobes N' More E68Xtreme stick (red/amber/white, 35.5 in) and its Federal Signal no-drill bracket are bought. The CanTrol becomes the stick's flasher, one LED output per head.
+title: Rear window warning lights (BooYu and E68Xtreme)
+description: The F-150's rear-window warning lights. A BooYu 8-head amber traffic advisor on SpeedTech headrest brackets, fed from Whelen CanTrol WC output J1-3, stays in the truck below a Strobes N' More E68Xtreme 8-module LED stick (R/A/W/W/W/W/A/R) whose heads are each flashed by their own CanTrol LED output.
+summary: Two rear lights. The BooYu amber traffic advisor stays installed, below the Strobes N' More E68Xtreme stick (red/amber/white, 35.5 in), which is bought and on the bench. The CanTrol is the stick's flasher, one LED output per head.
 status: Installed
 category: Vehicle Upfit and 12V
-updated: 2026-11-10
+updated: 2026-11-12
 sidebar:
-  label: Rear window light (BooYu, E68Xtreme)
+  label: Rear window lights (BooYu, E68Xtreme)
   order: 13
 ---
 
@@ -28,20 +28,19 @@ import e68bench from '../../../../assets/f150/e68xtreme-bench-wiring.png';
 Emergency lighting and siren use is regulated by state law and permits. This page documents a personal build and is not legal guidance. The planned stick includes red and white heads; check what colors are allowed for the vehicle before wiring them.
 </Callout>
 
-## Where this stands (27 Oct 2026)
+## Where this stands (12 Nov 2026)
 
 | Item | Status |
 | --- | --- |
-| BooYu Rear LED TIR Amber Warning Light & Traffic Advisor | Installed in the rear window. Stays in use until the E68Xtreme is fitted |
-| Strobes N' More E68Xtreme LED Stick (8 Module), R/A/W/W/W/W/A/R | Planned (my decision, 27 Oct). Not bought. Priced in the cart on 27 Oct |
-| Federal Signal SLB-FRD15ND No-Drill Mount Kit | Planned. Not bought. Lead time 1–3 weeks |
-| Whelen Dominator Plus 8-head TA (used, all amber) | Dropped. Replaced in the plan by the E68Xtreme on 27 Oct |
+| BooYu Rear LED TIR Amber Warning Light & Traffic Advisor | Installed. **Stays in the truck,** mounted below the E68Xtreme on the SpeedTech headrest brackets, still on CanTrol J1-3 |
+| Strobes N' More E68Xtreme LED Stick (8 Module), R/A/W/W/W/W/A/R | Bought. Bench testing on the CanTrol |
+| Federal Signal SLB-FRD15ND No-Drill Mount Kit | Planned. Not bought. Lead time 1–3 weeks. Fit unconfirmed |
 
 I asked for an "E86" traffic advisor; the project files of 27 October name the part as the Strobes N' More **E68**Xtreme LED Stick, so this page uses that name.
 
 ## Goal
 
-Rear-facing warning and directional lighting in the rear window, inside the cab, switched on and off with the rest of the system from the CanTrol. Done means the E68Xtreme is on the Federal Signal brackets, each of its eight heads is flashed by its own CanTrol LED output with flash patterns only, the ground and draw are confirmed on the bench, and the BooYu and its wiring are removed.
+Rear-facing warning and directional lighting in the rear window, inside the cab, switched on and off with the rest of the system from the CanTrol. Done means the E68Xtreme is mounted, each of its eight heads is flashed by its own CanTrol LED output with flash patterns only, the ground and draw are confirmed on the bench, and the BooYu sits below it, still switched by J1-3.
 
 ## Constraints
 
@@ -52,29 +51,48 @@ Rear-facing warning and directional lighting in the rear window, inside the cab,
 - **Flash only, never steady.** The seller's warranty excludes heads damaged by running constantly on. Every K output is set to a flash pattern in Whelen Command, never steady.
 - **Grounds.** All added grounds go to a steel frame rail side or the Ford Q-231 ground point, never battery negative or the aluminum body (section rule).
 
-## Current light: BooYu traffic advisor
+## BooYu traffic advisor (stays)
 
 <SpecBox
 	title="BooYu Rear LED TIR Amber Warning Light & Traffic Advisor"
 	specs={[
 		['Heads', '8, all amber LEDs (checked 10 Oct)'],
 		['Power', '12V cigarette-lighter plug with an on/off switch. Listing says it can be hardwired: red +, black −'],
-		['Controller cable', '4- or 5-pin plug (listing photo)'],
+		['Controller cable', 'Round 5-pin connector between the controller and the bar (my controller video, 12 Nov)'],
+		['Controller', 'Keys, left to right: LEFT, CENTER-OUT, RIGHT, NEXT, LAST, POWER. 2-digit display, 8 amber indicator lights. 28 patterns (01 to 28) plus 3 arrow modes (L1 left fill, L2 center-out, L3 right fill). Remembers the last pattern at the next power-on'],
 		['Draw', 'Not listed. Measure on the bench'],
-		['Mount', 'Rear window, SpeedTech headrest rear brackets'],
+		['Mount', 'Rear window, SpeedTech headrest rear brackets, below the E68Xtreme'],
 		['Paid', '$39.99, plus $19.99 for the bracket 2-pack'],
 	]}
-	source={{ label: 'BooYu listing, and my notes of 8 and 10 Oct 2026' }}
+	source={{ label: 'BooYu listing, my notes of 8 and 10 Oct 2026, and my video of the controller, 12 Nov 2026' }}
 />
 
-- **Its own controller.** The cable between the controller and the bar has a 4- or 5-pin plug (listing photo), too few wires for one per head, so the CanTrol can't run the heads one by one. The CanTrol's J10 traffic advisor port isn't used.
+- **Its own controller.** The controller joins the bar with a round 5-pin connector, too few wires for one per head, so the bar almost certainly has its own driver board (inferred, not checked). Today the CanTrol only switches its power.
 - **Manual power button.** It needs its power button pressed every time it gets power, even after a power cut (confirmed 10 Oct 2026).
 
 ### How it's used
 
-It stays manual. I keep the controller within reach and press it on when it's needed. J1-3 still cuts its power with the slide switch, so it can never be left running with the system off. In the five-modes plan it can only do amber flash (M3, and the amber part of M5).
+Today it's manual. J1-3 cuts its power with the slide switch, so it can never be left running with the system off, and I press POWER on the controller when it's needed. Because it remembers its last pattern, I pick the pattern once with NEXT and LAST.
 
-### BooYu wiring (until the E68Xtreme goes in)
+### Controller patterns (from my video, 12 Nov)
+
+Read frame by frame from the controller's 8 indicator lights, not from the bar. Timings are approximate. That indicator 1 to 8 matches bar heads 1 to 8 is my inference, not checked.
+
+| Group | Patterns |
+| --- | --- |
+| Steady | 01 all 8 on |
+| Chases and bounces | 02, 03, 08, 12, 13, 16, 17, 18, 20, 22, 23 (chases one way); 04, 19 (bounce) |
+| Wig-wag halves | 05 fast, 09 medium, 10 slow; 06 halves with triple flash |
+| Odd/even and pairs | 07 odd/even triple flash; 24 odd/even fast; 11 pairs double flash; 25 pairs slow |
+| All flash | 15 fast, 21 slow |
+| Combinations | 14 and 26 (mixed cycles; 14 to check on the bar); 27 and 28 split steady and double flash |
+| Arrow keys | L1 left fill, L2 center-out, L3 right fill |
+
+### Making the CanTrol press POWER (proposed, not tested)
+
+The plan is a Phipps Electronics FRM01 programmable relay module, powered from the same J1-3 feed. About 1.5 s after J1-3 comes on, its relay closes for about 0.3 s across the controller's POWER key, just like a finger press. The BooYu always starts off after power-up, so one press always means on. A later option is to drive the 8 heads straight from the CanTrol instead. Both are proposals: nothing is bought, wired or bench-tested yet.
+
+### BooYu wiring
 
 <WiringTable
 	rows={[
@@ -84,9 +102,9 @@ It stays manual. I keep the controller within reach and press it on when it's ne
 	]}
 />
 
-When the E68Xtreme is fitted, B1 to B3 come out. That frees J1-3 (10A); the project document doesn't reassign it yet.
+B1 to B3 stay when the E68Xtreme goes in. J1-3 stays assigned to the BooYu.
 
-## Planned light: Strobes N' More E68Xtreme LED Stick
+## Strobes N' More E68Xtreme LED Stick (bought)
 
 <Gallery wide photos={[{ src: e68, alt: 'Two Strobes N\' More Xtreme LED sticks in black housings with red, amber and white modules, with a V.2 new optics, combination flood and spot badge.', caption: 'Strobes N\' More E68Xtreme LED stick, seller image (V.2 optics). The color layout shown is the seller\'s example; mine is ordered R/A/W/W/W/W/A/R. Not my unit.' }]} />
 
@@ -105,7 +123,7 @@ When the E68Xtreme is fitted, B1 to B3 come out. That frees J1-3 (10A); the proj
 		['Draw', 'Not published for the stick. About 0.9A max per head, from the seller\'s single E6 head spec (0.9A max, 0.7A average at 12.8V). About 7.2A max for all eight. Inferred, measure on the bench'],
 		['Wire colors', 'Not published. One positive per head plus a common ground is assumed. Inferred'],
 		['Warranty', '5 years. Heads damaged by running constantly on are not covered'],
-		['Price', '$284.99 list, less the FIRST10 code ($28.49) = $256.50, plus $18.11 shipping and $16.47 estimated tax = $291.08 (cart, 27 Oct). Not bought'],
+		['Price', '$284.99 list, less the FIRST10 code ($28.49) = $256.50, plus $18.11 shipping and $16.47 estimated tax = $291.08 (cart, 27 Oct). Bought'],
 	]}
 	source={{ label: 'Strobes N\' More product page', href: 'https://strobesnmore.com/products/strobes-n-more-e68xtreme-led-stick' }}
 />
@@ -170,11 +188,11 @@ The wire colors, the common ground and the 0.9A per-head draw are all inferred: 
 
 | Before (23 Oct files) | After (27 Oct files) |
 | --- | --- |
-| LED Outputs 6–8: reserved for the Dominator TA option (end flash, TA left, TA right) | LED Outputs 6–8: E68Xtreme heads 1–3 (K1–K3) |
+| LED Outputs 6–8: reserved for another rear option | LED Outputs 6–8: E68Xtreme heads 1–3 (K1–K3) |
 | LED Outputs 14–32: spare (14–15 front Z-6 option) | LED Outputs 27–31: E68Xtreme heads 4–8 (K4–K8). Spare: 14–26 and 32 (14–15 front Z-6 option, 16–26 proposed in the five-modes plan) |
-| K1–K6: Dominator power on J1-3, ground, TA flash, end flash, TA left, TA right | K1–K8: one + per E68Xtreme head; K9 common ground; K10 route |
+| K1–K6: an earlier rear option | K1–K8: one + per E68Xtreme head; K9 common ground; K10 route |
 | X1, X2: LED Outputs 7 and 8 spare | X1: LED Output 32 spare. X2 removed |
-| J1-3: BooYu | J1-3: BooYu until the E68Xtreme goes in, then free (not reassigned in the document) |
+| J1-3: BooYu | J1-3: BooYu (stays) |
 
 ### Rear color combinations (Putco Work Blade chart)
 
@@ -182,13 +200,9 @@ The wire colors, the common ground and the 0.9A per-head draw are all inferred: 
 
 This chart is for the [Putco Work Blade](/projects/f150-upfit/putco-work-blade/) on the tailgate, which sits below this light on the back of the truck. It's here so the rear colors can be planned together. The E68Xtreme's own colors are fixed by its heads (R/A/W/W/W/W/A/R) and its patterns come from the CanTrol, so none of the Work Blade's stored patterns or wig-wag combinations apply to the stick.
 
-## Dropped option: Whelen Dominator Plus (11 Oct)
-
-On 11 October I found a used Whelen 8-head Dominator Plus traffic advisor, all amber (AAAAAAAA), with LIN6 optics and end flashers, at Brooks Government Surplus for $325.00 (listing price, condition A, never bought). The listing's example unit was model DPTAW8, PN 01-0688639-F80, LINZ6 Super-LED, 12VDC, made 05/20. It had four control wires (TA left, TA right, end flash only, TA flash), so the CanTrol would only have switched it: power on J1-3, TA flash joined to power, end flash on LED 6, TA left on LED 7, TA right on LED 8 (all inferred at the time). On 27 October the E68Xtreme replaced it in the plan, and the Dominator listing images were removed from the project files.
-
 ## Bench test
 
-- **BooYu:** power-on behavior noted (it needs its button every time). Still to do: measure the draw with a meter in series on red so the 10A fuse can be confirmed.
+- **BooYu:** power-on behavior noted (it needs POWER pressed every time, and comes back in its last pattern). Still to do: measure the draw with a meter in series on red so the 10A fuse can be confirmed, then bench the FRM01 power-press idea.
 - **E68Xtreme:** on 12V through a fused lead, find each head's positive and the ground with a meter, measure each head's current, then run each head from its CanTrol output with a flash pattern (never steady) before anything is mounted.
 
 ### E68Xtreme bench wiring (Rev 2, 10 Nov 2026)
@@ -208,28 +222,30 @@ This is the wiring plan for the bench, drawn before the test. Every stick output
 
 ## Open items
 
-- Measure the BooYu draw (until it's removed).
-- Buy the E68Xtreme ($291.08 in the 27 Oct cart) and the SLB-FRD15ND kit ($49.00, 1–3 week lead time).
+- Measure the BooYu draw.
+- Bench test the FRM01 power-press plan for the BooYu (proposed).
+- Buy the SLB-FRD15ND kit ($49.00, 1–3 week lead time), if the stick's brackets fit it.
 - Confirm the E68Xtreme's wire colors, ground arrangement and per-head draw on the bench.
 - Confirm at the mock-up how the stick's 2 in brackets fix to the Federal Signal brackets, and the clearance at the panoramic roof trim and third brake light.
 - Pick the K9 ground point (Q-231 point or frame rail).
 - Program LED Outputs 6–8 and 27–31 in Command with flash patterns and phases, and assign them to slide positions and buttons.
-- Decide what J1-3 does once the BooYu is out.
 
 ## Sources
 
 - [Strobes N' More E68Xtreme LED Stick product page](https://strobesnmore.com/products/strobes-n-more-e68xtreme-led-stick) (heads, size, cable, brackets, optics, flasher requirement, warranty) and my cart of 27 Oct 2026
 - Federal Signal SLB-FRD15ND instructions 25500520; listings at [WFGear](https://www.wfgear.com/p-21696-federal-signal-slb-frd15nd-brkt-kitcnsmlat15f-150.aspx), [Vehicle Safety Supply](https://www.vehiclesafetysupply.com/federal-signal-head-rear-headliner-bracket-no-drill-slb-frd15nd-p-93505.html) and [FinditParts](https://www.finditparts.com/products/11842158/federal-signal-slb-frd15nd)
 - BooYu listing (power, plug, hardwire colors)
-- [Whelen Dominator Plus traffic advisor install guide, form 14D06](https://www.manualslib.com/manual/2520118/Whelen-Engineering-Company-Dominator-Plus-Traffic-Advisor.html) and [flasher series DP2 to DP8, form 14D05](https://www.vehiclesafetysupply.com/images/files/DP6.pdf) (dropped option)
+- My video of the BooYu controller, 12 Nov 2026 (patterns, keys, connector, pattern memory)
+- [Phipps Electronics FRM01 programmable relay module](https://www.phippselectronics.com/support/frm01-multifunction-programmable-relay-module/) (proposed power-press timer)
 - F-150 project document of 27 Oct 2026 (cover still reads revision 8), sections 3, 8, 9.2 K, 9.3 (B1 to B3, K1 to K10, X1) and 9.7
 
 ## Changelog
 
 <Changelog entries={[
+	{ date: '2026-11-12', change: 'BooYu stays in the truck, below the E68Xtreme on J1-3 (it is no longer being removed). Added its controller details from my 12 Nov video (28 patterns, 3 arrow modes, keys, 5-pin connector, pattern memory) and the proposed FRM01 power-press plan. E68Xtreme marked bought.', rollback: 'Revert the commit that added the 12 Nov upfit update.', log: '/log/2026-11-12-color-flood-bench-pass/' },
 	{ date: '2026-11-10', change: 'Added the E68Xtreme bench wiring diagram (Rev 2, with the corrected J2-11 and J2-12 harness colors). It is a bench plan; nothing on it is tested yet.', rollback: 'Revert the commit that added the bench wiring diagrams.', log: '/log/2026-11-10-bench-wiring-diagrams/' },
 	{ date: '2026-10-31', change: 'E68Xtreme photo now shows full width instead of as a thumbnail.', rollback: 'Revert the commit that widened the photo.' },
 	{ date: '2026-10-31', change: 'Added the Putco Work Blade color combination chart under the E68Xtreme section, for planning the rear colors together.', rollback: 'Revert the commit that added the chart.' },
-	{ date: '2026-10-27', change: 'Added the planned Strobes N\' More E68Xtreme stick and Federal Signal SLB-FRD15ND bracket from the 27 October files, new K1–K10 wiring, output plan changes, and moved the Whelen Dominator to a dropped option.', rollback: 'Revert the commit that added the E68Xtreme.' },
+	{ date: '2026-10-27', change: 'Added the planned Strobes N\' More E68Xtreme stick and Federal Signal SLB-FRD15ND bracket from the 27 October files, new K1–K10 wiring, output plan changes, replacing an earlier rear option.', rollback: 'Revert the commit that added the E68Xtreme.' },
 	{ date: '2026-10-27', change: 'Page published from the 23 October project files.', rollback: 'Revert the commit that rebuilt the F-150 section.' },
 ]} />

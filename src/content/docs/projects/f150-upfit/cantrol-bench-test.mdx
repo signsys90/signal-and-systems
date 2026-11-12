@@ -1,10 +1,10 @@
 ---
 title: CanTrol bench test plan
 description: A ten-stage plan to bench test the Whelen CanTrol WC on a 12V supply with every product in the F-150 build, programmed from the Toughbook CF-33, before any of it goes in the truck.
-summary: Ten stages, one product at a time, on a 30A bench supply. Every stage ends with a reading I write down. Nothing in it has been run yet.
-status: Planned
+summary: Ten stages, one product at a time, on a 30A bench supply. Every stage ends with a reading I write down. Stage 4 (Color Flood bar) passed on 12 Nov 2026; the other stages are still to run.
+status: In progress
 category: Vehicle Upfit and 12V
-updated: 2026-11-10
+updated: 2026-11-12
 sidebar:
   order: 4
 ---
@@ -197,10 +197,10 @@ Nothing is connected to the outputs yet. Each input is switched on from the head
 | Red (power, keeps its own in-line fuse) | J1-6 | Slide 2, 3, SCENE, arrows |
 | White (Mode 3, flood) | LED 1 | SCENE |
 | Blue (right arrow) | LED 2 | → and ↔ |
-| Yellow (pattern) | LED 9 (J4-13, Green on my harness) | Blank 2, momentary |
+| Yellow (pattern) | LED 9 (J4-13, Green on my harness) through a 1N4004 diode: plain end on J4-13, banded end toward the bar | Blank 2, momentary |
 | Brown (Mode 1) | LED 10 | Slide 2 and 3 |
 | Orange (Mode 2) | J1-1 | Slide 3 |
-| Green (left arrow) | LED 11 (J4-15, Gray on my harness) | ← and ↔ |
+| Green (left arrow) | LED 11 (J4-15, Violet on my harness) | ← and ↔ |
 | Black | Supply V− 2 | |
 
 Mode 3 overrides 2 overrides 1, and arrows override every mode. Red must never be joined to a mode wire.
@@ -218,6 +218,8 @@ Mode 3 overrides 2 overrides 1, and arrows override every mode. Red must never b
 | 4.11 | Meter in series on red, slide 3 and SCENE | Up to 3.3A |
 
 Blank 2 must be momentary. If the yellow wire is held on, the bar reads it as a 2 s hold and changes to steady color.
+
+**Result, 12 Nov 2026: passed.** Without the diode, the bar shut down every time its yellow wire was joined to J4-13. With a 1N4004 diode in series on yellow, everything passed: slide 2 ran for 60 s; Blank 2 taps stepped patterns, a 2 s hold gave steady and a tap went back to flashing; STEADY, SCENE, RIGHT, LEFT and FLASH each ran 30 s without the bar dying; and it came back after a power cycle. SCENE gives steady white, and the arrows sweep amber in the right directions. A triple tap on Blank 2 set slide 2's color to amber/white. Why the diode works is my inference: it stops current feeding back from the bar's yellow input into the CanTrol output. The bar's factory in-line fuse is 5A. Its current draw was not measured.
 
 ## Stage 5: two UBL U-Lite grille lights
 
@@ -346,10 +348,10 @@ Every line below gets filled in on bench day and published here.
 | Previous config extracted? | Pending |
 | CANport: Brake and Park listed for 2017 F-150? | Pending |
 | J1-5 / J1-6 indicator color | Pending |
-| LED 11 / LED 12 lead colors on my unit | Harness is custom, so guide colors don't apply. LED 11 (J4-15) is Gray, found 10 Nov with the Color Flood left arrow working on it. LED 9 (J4-13) is Green, metered 10 Nov. LED 12 still to record |
+| LED 11 / LED 12 lead colors on my unit | Harness is custom, so guide colors don't apply. LED 11 (J4-15) is Violet, confirmed 12 Nov (the 10 Nov Gray was wrong). LED 9 (J4-13) is Green, metered 10 Nov. LED 12 still to record |
 | LED 27 / LED 28 harness wire colors (J2-11, J2-12) | Found 9 Nov: my harness is custom, so guide colors do not apply. LED 27 is White/Amber and LED 28 is Yellow/White. All other harness colors still unverified |
 | LED 4 / LED 5 OFF voltage | Pending |
-| Color Flood draw (slide 3 / SCENE) | Pending |
+| Color Flood draw (slide 3 / SCENE) | Not measured (meter read 0 on 12 Nov; skipped). Stage 4 passed 12 Nov with the 1N4004 diode on yellow. Bar fuse 5A (factory) |
 | U-Lites draw | Pending |
 | Z-6 draw (Mode 1 / brake), Steady Burn color | Pending |
 | Putco bar draw, white override draw, remote standby draw | Pending |
@@ -362,4 +364,4 @@ Every line below gets filled in on bench day and published here.
 
 ## Changelog
 
-<Changelog entries={[{ date: '2026-11-10', change: 'LED 11 (J4-15) recorded as Gray and LED 9 (J4-13) as Green on my harness.', rollback: 'Revert the commit that recorded J4-15 as Gray.' }, { date: '2026-11-10', change: 'LED 11 and LED 12 lead colors: identify by pin, since my harness is custom.', rollback: 'Revert the commit that added the bench wiring diagrams.' }, { date: '2026-10-26', change: 'Bench test plan published from bench guide version 1 (23 October 2026). No stages run yet.', rollback: 'Revert the commit that added this page.' }]} />
+<Changelog entries={[{ date: '2026-11-12', change: 'Stage 4 (Color Flood bar) passed with a 1N4004 diode on the yellow wire. LED 11 (J4-15) corrected to Violet.', rollback: 'Revert the commit that added the 12 Nov upfit update.', log: '/log/2026-11-12-color-flood-bench-pass/' }, { date: '2026-11-10', change: 'LED 11 (J4-15) recorded as Gray and LED 9 (J4-13) as Green on my harness.', rollback: 'Revert the commit that recorded J4-15 as Gray.' }, { date: '2026-11-10', change: 'LED 11 and LED 12 lead colors: identify by pin, since my harness is custom.', rollback: 'Revert the commit that added the bench wiring diagrams.' }, { date: '2026-10-26', change: 'Bench test plan published from bench guide version 1 (23 October 2026). No stages run yet.', rollback: 'Revert the commit that added this page.' }]} />

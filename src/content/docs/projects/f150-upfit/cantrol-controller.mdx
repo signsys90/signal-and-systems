@@ -4,7 +4,7 @@ description: The used Whelen CanTrol WC set that runs every light and the siren 
 summary: The controller at the center of the build. What the used set is, every pin, how it gets power and ground on a 2015+ F-150, and the rules for programming it.
 status: In progress
 category: Vehicle Upfit and 12V
-updated: 2026-11-10
+updated: 2026-11-12
 sidebar:
   order: 2
 ---
@@ -91,7 +91,7 @@ End of life matters for a used controller. Spares and repairs now come from the 
 Confirmed from guide 14580G pages 3 to 10 unless marked.
 
 <Callout type="unverified" title="My harness is custom, so these lead colors do not apply to it">
-The colors in the tables below are Whelen's. The CanTrol harness on my bench is custom, and its wire colors do not follow the guide. On 9 November 2026 I found that LED Output 27 (J2-11) is the White/Amber wire, where the guide shows Violet, and LED Output 28 (J2-12) is the Yellow/White wire, where the guide shows Gray. On 10 November I found that LED Output 11 (J4-15) is the Gray wire, where the guide shows Violet on page 7 and Orange on page 10; the Color Flood left arrow works on it. The same day I metered LED Output 9 (J4-13) as the Green wire (0V at rest, 12V with its key pressed), which happens to match the guide. Every other lead color on my harness is still unverified. Identify leads by connector and pin position, never by guide color.
+The colors in the tables below are Whelen's. The CanTrol harness on my bench is custom, and its wire colors do not follow the guide. On 9 November 2026 I found that LED Output 27 (J2-11) is the White/Amber wire, where the guide shows Violet, and LED Output 28 (J2-12) is the Yellow/White wire, where the guide shows Gray. On 12 November I confirmed that LED Output 11 (J4-15) is the Violet wire, which matches the guide's page 7 but not page 10 (Orange). I had recorded it as Gray on 10 November; that was wrong. On 10 November I metered LED Output 9 (J4-13) as the Green wire (0V at rest, 12V with its key pressed), which happens to match the guide. Every other lead color on my harness is still unverified. Identify leads by connector and pin position, never by guide color.
 </Callout>
 
 ### Power and siren
@@ -145,7 +145,7 @@ Standby draw: about 80 mA with ignition on, about 100 microamps with ignition of
 </div>
 
 <Callout type="unverified" title="The guide disagrees with itself">
-Page 7 and the J4 worksheet give one set of colors for LED outputs 11, 12, 15 and 16. Page 10 gives another, which would make LED 3 and LED 11 both orange and LED 4 and LED 12 both yellow. This build uses LED 11 (light bar left arrow) and LED 12 (Z-6 heads), so those two leads get identified by pin number and a meter, never by color. On my custom harness LED 11 turned out to be Gray (10 Nov), matching neither page.
+Page 7 and the J4 worksheet give one set of colors for LED outputs 11, 12, 15 and 16. Page 10 gives another, which would make LED 3 and LED 11 both orange and LED 4 and LED 12 both yellow. This build uses LED 11 (light bar left arrow) and LED 12 (Z-6 heads), so those two leads get identified by pin number and a meter, never by color. On my custom harness LED 11 turned out to be Violet (confirmed 12 Nov), matching page 7.
 </Callout>
 
 LED outputs 17 to 32 are on J2 (J2-1 brown through J2-16 white/gray, same color order). The LED outputs are protected in groups by 20A fuses on the module. All outputs together are limited to **40A**.
@@ -231,6 +231,19 @@ The amateur radio stays on its own battery feed and its own ground. Whelen's gui
 6. Priorities decide which button wins when two are on. Arrows go above slide positions 2 and 3.
 7. Command's "cruise" workaround (Turn On with Low Power at 1%) is never used on an output that feeds a device input.
 8. Save the configuration file and keep a backup with the project files.
+
+### Command files on the bench (12 Nov 2026)
+
+Each new file is a Save As of the last good one, so there is always a tested file to roll back to. The file in the module now is CF4.
+
+| File | What it adds | Status |
+| --- | --- | --- |
+| S4h | E68Xtreme stick bench file | Tested 9 Nov. The rollback point |
+| CF1 | Steady rows for the UBL Color Flood 2.0 bar: slide 2 and 3, the arrows, FLASH, STEADY, SCENE, TAKE DOWN, and the pattern key (momentary) | Transferred and run on the bench |
+| CF2 | CanTrol-flashed white on the WHITE key, built only if the bar followed fast switching | Rows not recorded |
+| CF3, CF4 | TAKE DOWN also flashes the E68Xtreme white heads (modules 3 to 6, Double Flash 150). LEFT, RIGHT and FLASH turn the bar's orange Mode 2 off so the slide 1 sweeps are clean. FLASH ranks above LEFT and RIGHT on the stick. Head key labels and icons set (top row STBY, RAD, HF, WAIL, YELP, PIER, MAN, HORN) | Transferred and passed on the bench, 12 Nov |
+
+Arrow direction tests A1 to A3 passed: on both the bar and the stick, RIGHT ends on the passenger side and LEFT on the driver side. Still open: the rest of the E68Xtreme sync tests with the bar.
 
 ## CANport and brake pop
 
@@ -321,4 +334,4 @@ These went to the main project document as recommendations. The ground changes a
 
 ## Changelog
 
-<Changelog entries={[{ date: '2026-11-10', change: 'Recorded LED Output 11 (J4-15) as Gray and LED Output 9 (J4-13) as Green on my custom harness (both found 10 Nov).', rollback: 'Revert the commit that recorded J4-15 as Gray.' }, { date: '2026-10-31', change: 'CANport: Brake and Park confirmed in Command\'s F150 2017 list; link to the eight-input CANport plan.', rollback: 'Revert the commit that added the CANport section.' }, { date: '2026-10-27', change: 'CC5K1 arrived 26 Oct (27 October files).', rollback: 'Revert the commit that added the E68Xtreme.' }, { date: '2026-10-26', change: 'Controller page published from the 21 October wiring research and my own photos of the set.', rollback: 'Revert the commit that added this page.' }]} />
+<Changelog entries={[{ date: '2026-11-12', change: 'LED Output 11 (J4-15) corrected to Violet (confirmed 12 Nov; the 10 Nov Gray was wrong). Added the Command bench files CF1 to CF4, now in the module.', rollback: 'Revert the commit that added the 12 Nov upfit update.', log: '/log/2026-11-12-color-flood-bench-pass/' }, { date: '2026-11-10', change: 'Recorded LED Output 11 (J4-15) as Gray and LED Output 9 (J4-13) as Green on my custom harness (both found 10 Nov).', rollback: 'Revert the commit that recorded J4-15 as Gray.' }, { date: '2026-10-31', change: 'CANport: Brake and Park confirmed in Command\'s F150 2017 list; link to the eight-input CANport plan.', rollback: 'Revert the commit that added the CANport section.' }, { date: '2026-10-27', change: 'CC5K1 arrived 26 Oct (27 October files).', rollback: 'Revert the commit that added the E68Xtreme.' }, { date: '2026-10-26', change: 'Controller page published from the 21 October wiring research and my own photos of the set.', rollback: 'Revert the commit that added this page.' }]} />

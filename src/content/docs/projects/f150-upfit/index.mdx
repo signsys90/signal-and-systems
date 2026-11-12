@@ -5,7 +5,7 @@ summary: Emergency lighting, siren and 12V build on a 2017 F-150 Lariat SuperCre
 status: In progress
 category: Vehicle Upfit and 12V
 started: Spring 2026
-updated: 2026-11-06
+updated: 2026-11-12
 project: true
 sidebar:
   label: Overview
@@ -69,7 +69,7 @@ Build a clean, serviceable warning light and siren package on a daily-driven tru
 | Whelen CanTrol WC | Complete used set programmed over USB | Bought 16 Oct ($425.00 shipped). Bench test next. Main power 2 x 40A at the battery |
 | Control head mount | Ben3DBuild overhead mount in the sunglasses holder opening | Received 5 Nov; head fitted in it. Cable route to the module next |
 | Grille guard package | 2 speakers, Color Flood bar, 2 U-Lites | Parts bought, mounts decided 7 Oct. Touch-up done 23 Oct (in-progress photos added 6 Nov). Shop install to book |
-| Other warning lights | Visor bar, BooYu (to be replaced by the E68Xtreme stick), rocker bars via relay, Putco Work Blade, rear plate Z-6 heads | Visor and BooYu installed. Putco and Z-6 bought. E68Xtreme, its Federal Signal bracket and rocker bars to buy |
+| Other warning lights | Visor bar, BooYu (stays, below the E68Xtreme stick), E68Xtreme stick, rocker bars via relay, Putco Work Blade, rear plate Z-6 heads, BU97LL back-up alarm | Visor and BooYu installed. E68Xtreme, Putco (and its mounting brackets), Z-6 and BU97LL bought. Federal Signal bracket and rocker bars to buy |
 | Factory lamps | EFM 3.0 and F150LEDs CREE bulbs | Installed and flashing clean 8 Oct. Voltage input harness to buy |
 | Power and wiring | Full wire schedule, two fuse blocks, amp under the rear seat | Planned. Parts to buy |
 | Laptop | Toughbook CF-33 programs both modules; passenger-seat mount planned | Laptop on hand. Mount waiting on a used RAM setup |
@@ -99,7 +99,7 @@ Battery (Optima Yellow Top) ── 2 x 40A fuses at battery ── Whelen CanTro
                                                               ├── Siren amp ── 2 x UBL 100W speakers (parallel, 5.5 Ω)
                                                               ├── J1-1/J1-6 + LED outputs ── UBL Color Flood 2.0 20" bar
                                                               ├── J1-2 ── SpeedTech Grand Control Box ── Raptor visor bar
-                                                              ├── J1-3 ── BooYu rear traffic advisor controller (until the E68Xtreme)
+                                                              ├── J1-3 ── BooYu rear traffic advisor controller
                                                               ├── LED out 6–8, 27–31 ── E68Xtreme rear stick, one output per head (planned)
                                                               ├── J1-4 ── 2 x UBL U-Lite grille lights
                                                               ├── J1-5 ── Putco 60" Work Blade (tailgate)
@@ -127,7 +127,7 @@ The full output assignment is on the [CanTrol output plan](/projects/f150-upfit/
 | [UBL Color Flood 2.0 light bar](/projects/f150-upfit/ubl-color-flood-light-bar/) | Wire-by-wire plan for all eight leads, CanTrol programming, bench results | Bench-tested |
 | [UBL U-Lite grille lights](/projects/f150-upfit/ubl-u-lite-grille-lights/) | Two amber/white lights on J1-4, synced and alternating | Bench-tested |
 | [Visor light bar](/projects/f150-upfit/visor-light-bar/) | SpeedTech Raptor split bar and Grand Control Box on J1-2 | Installed |
-| [Rear window light](/projects/f150-upfit/rear-traffic-advisor/) | BooYu 8-head amber bar on J1-3 today; planned Strobes N' More E68Xtreme stick (R/A/W/W/W/W/A/R) on a Federal Signal SLB-FRD15ND bracket, flashed head by head from LED Outputs 6–8 and 27–31 | Installed (E68Xtreme planned) |
+| [Rear window lights](/projects/f150-upfit/rear-traffic-advisor/) | BooYu 8-head amber bar on J1-3 (stays, below the stick) and the Strobes N' More E68Xtreme stick (R/A/W/W/W/W/A/R), flashed head by head from LED Outputs 6–8 and 27–31 | BooYu installed; E68Xtreme bought, on the bench |
 | [Rocker panel lights](/projects/f150-upfit/rocker-panel-lights/) | Two UBL 60" bars on a 30A relay, sync steps | Planned |
 | [Putco Work Blade (tailgate)](/projects/f150-upfit/putco-work-blade/) | 60" amber/white bar on J1-5 with the Putco remote | In progress |
 | [Rear plate Z-6 and brake pop](/projects/f150-upfit/rear-plate-z6-brake-pop/) | Plate bracket, two Z-6 heads, brake over OBD-II, front plate option | In progress |
@@ -169,13 +169,15 @@ Prices are what I paid, before tax and shipping unless noted.
 		{ name: 'SpeedTech Lights Grand Control Box', price: '$39.99', specs: 'Required for visor bar patterns', status: 'Installed' },
 		{ name: 'BooYu Rear LED TIR Amber Warning Light & Traffic Advisor', price: '$39.99', specs: '8 heads, all amber; manual power button', status: 'Installed' },
 		{ name: 'SpeedTech Lights headrest rear mounting brackets (2-pack)', price: '$19.99', status: 'Installed' },
-		{ name: 'Strobes N\' More E68Xtreme LED Stick (8 Module), R/A/W/W/W/W/A/R', sku: 'E68XTREMECUSTOM', price: '$291.08 (cart, 27 Oct)', specs: '35.5 in, 8 heads, 12V, 44 in cable; needs an external flasher (the CanTrol). Replaces the BooYu', source: 'https://strobesnmore.com/products/strobes-n-more-e68xtreme-led-stick', status: 'Planned' },
+		{ name: 'Strobes N\' More E68Xtreme LED Stick (8 Module), R/A/W/W/W/W/A/R', sku: 'E68XTREMECUSTOM', price: '$291.08 incl. shipping and tax', specs: '35.5 in, 8 heads, 12V, 44 in cable; needs an external flasher (the CanTrol); the BooYu stays below it', source: 'https://strobesnmore.com/products/strobes-n-more-e68xtreme-led-stick', status: 'In progress' },
 		{ name: 'Federal Signal SLB-FRD15ND No-Drill Mount Kit (F-150 2015+, Super Duty 2017+)', sku: 'SLB-FRD15ND', price: '$49.00', specs: 'Rear headliner brackets for the E68Xtreme; stick bracket fit unconfirmed', source: 'https://www.wfgear.com/p-21696-federal-signal-slb-frd15nd-brkt-kitcnsmlat15f-150.aspx', status: 'Planned' },
 		{ name: 'Speed Turtle Engineering Easy Flash Module 3.0 (EFM 3.0), Ford', price: '$200.00', specs: 'Inline at BCM; firmware v3.36', source: 'https://www.speedturtleengineering.com/', status: 'Installed' },
 		{ name: 'Speed Turtle Engineering EFM 2.0 / 3.0 Voltage Input Harness', price: '$15.00', specs: '5–17V trigger inputs, no load', source: 'https://www.speedturtleengineering.com/', status: 'Planned' },
 		{ name: 'Steelcraft HD Grille Guard', sku: '50-1420C', price: '$450.00 (used)', specs: '2015–2017 F-150 fitment', status: 'In progress' },
 		{ name: 'UBL 100W Large Siren Speaker (x2)', price: '$171.00 pair', specs: '100W, 11 Ω each', status: 'In progress' },
-		{ name: 'UBL Color Flood 2.0 20" Amber/White LED Light Bar', price: '$152.00', specs: '3.3A max (108W), 10–30V', status: 'Bench-tested' },
+		{ name: 'UBL Color Flood 2.0 20" Amber/White LED Light Bar', price: '$152.00', specs: '3.3A max (108W), 10–30V, 5A in-line fuse. Passed on the CanTrol bench 12 Nov with a 1N4004 diode on yellow', status: 'Bench-tested' },
+		{ name: 'Whelen Back-Up Alarm, 97 dB, 12–24 VDC, Light Duty, Universal Mount, Blunt Cut Wires', sku: 'BU97LL', price: '$30.58', specs: 'Bought 11 Nov, not received. Plan (proposed): LED 18, on in reverse over CANport, MUTE key', status: 'Planned' },
+		{ name: 'Putco Blade Mounting Brackets', price: '$27.89 (product page)', specs: '4 clips and 4 3M strips for the Work Blade', source: 'https://www.putco.com/product/blade-mounting-clips-6500/', status: 'In progress' },
 		{ name: 'UBL U-Lite Surface Mount LED Grille Light, Amber/White (x2)', sku: 'UBL-UL2-SM', price: '$85.50 pair', specs: '350 mA max each, 12V', status: 'In progress' },
 		{ name: 'UBL LED Running Board Rocker Panel Lights (x2)', sku: 'UBL-TGB-AW2', specs: '60", 12–24V DC, SAE J595 Class 1; draw not listed', status: 'Planned' },
 		{ name: 'Putco Amber & White Work Blade LED Lights, 60", with Putco Wireless Remote Kit V3', price: '$253.37 shipped', specs: 'Tailgate, 3M tape mount', status: 'In progress' },
@@ -316,7 +318,8 @@ If the player doesn't load, [watch the video on Google Drive](https://drive.goog
 		{ date: '2026-10-31', change: 'Linked the Whelen Command CANport setup (eight CAN inputs) in Upfit Studio and the output plan.', rollback: 'Revert the commit that added the CANport section.' },
 		{ date: '2026-10-31', change: 'Linked Upfit Studio, which now generates the output plan; rocker bars shown on relays A and B (LED Output 3 and J1 Output 7) per the 31 Oct approved wiring; rocker and U-Lite pages given the 31 Oct wiring.', rollback: 'Revert the commit that added Upfit Studio.', log: '/log/2026-10-31-upfit-studio-sync/' },
 		{ date: '2026-10-27', change: 'Build video reviewed for privacy (no VIN or location details; the plate is a vanity plate) and captioned. Start date set to Spring 2026.', rollback: 'Revert the commit that made this change.' },
-		{ date: '2026-10-27', change: 'Updated from the 27 October project files: planned Strobes N\' More E68Xtreme rear stick on a Federal Signal SLB-FRD15ND bracket replaces the BooYu and the dropped Whelen Dominator option (LED Outputs 6–8 and 27–31, wires K1–K10); CC5K1 arrived 26 Oct.', rollback: 'Revert the commit that added the E68Xtreme.', log: '/log/2026-10-27-e68xtreme-rear-stick/' },
+		{ date: '2026-11-12', change: 'Color Flood bar passed on the CanTrol bench with a 1N4004 diode on yellow; Command files CF1 to CF4; BooYu stays below the E68Xtreme; BU97LL back-up alarm and Putco brackets bought.', rollback: 'Revert the commit that added the 12 Nov upfit update.', log: '/log/2026-11-12-color-flood-bench-pass/' },
+		{ date: '2026-10-27', change: 'Updated from the 27 October project files: planned Strobes N\' More E68Xtreme rear stick on a Federal Signal SLB-FRD15ND bracket (LED Outputs 6–8 and 27–31, wires K1–K10); CC5K1 arrived 26 Oct.', rollback: 'Revert the commit that added the E68Xtreme.', log: '/log/2026-10-27-e68xtreme-rear-stick/' },
 		{ date: '2026-10-27', change: 'F-150 section rebuilt from the 23 October project files: thirteen new pages (power and wire schedule, install plan, parts list, siren speakers, U-Lites, visor bar, rear traffic advisor, rocker bars, Putco, rear plate Z-6 and brake pop, factory lamps, CF-33 mount, decisions and sources), the grille guard page rewritten to the final mounts, and the overview given the vehicle baseline, workstreams, full open items and troubleshooting.', rollback: 'Revert the commit that rebuilt the F-150 section.', log: '/log/2026-10-27-f150-rebuild/' },
 		{ date: '2026-10-26', change: 'Replaced the header image with the front grille guard setup photo.', rollback: 'Revert the commit that changed the header image.' },
 		{ date: '2026-10-26', change: 'Added the build video under Testing and verification.', rollback: 'Revert the commit that added the video.' },
