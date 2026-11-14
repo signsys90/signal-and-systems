@@ -20,7 +20,7 @@ import keyboardWide from '../../../../assets/cf33-night-vision/keyboard-red-wide
 import carryGround from '../../../../assets/cf33-night-vision/carry-ground-light.jpg';
 import carryBar from '../../../../assets/cf33-night-vision/carry-front-bar.jpg';
 
-<ProjectHeader hero={heroNight} heroAlt="A Panasonic Toughbook CF-33 open in a dark room. A red LED bar under the display washes the keyboard in red light, and a second red LED bar along the front edge of the base lights the counter in front of it. The screen is blurred." />
+<ProjectHeader hero={heroNight} heroAlt="A Panasonic Toughbook CF-33 open in a dark room. A red LED bar under the display washes the keyboard in red light, and a second red LED bar along the front edge of the base lights the counter in front of it. The screen shows a LinkedIn profile page." />
 
 **Night vision matters when you're on duty.**
 
@@ -33,7 +33,7 @@ That's how we approach every build. Solve the real-world problem, respect the or
 Then we took it a step further. We designed the package to also provide night-vision-safe ground lighting when the CF-33 is carried by its handle, so the responder can move from the vehicle to the scene without losing their dark adaptation or their footing.
 
 <Callout type="unverified" title="What this page does and does not document">
-The narrative above is the client story as I described it. The build details below come from four photos of the finished unit. The LED bars are a generic product whose specs come from the seller's listing. The power, mounting and switching details are from me. Anything not confirmed, such as current draw, is listed as untested instead of being filled in with a guess. The client and agency are not named, and identifying details are blurred in every photo.
+The narrative above is the client story as I described it. The build details below come from four photos of the finished unit. The LED bars are a generic product whose specs come from the seller's listing. The power, mounting and switching details are from me. Anything not confirmed, such as current draw, is listed as untested instead of being filled in with a guess. The client and agency are not named, and a client sticker on the lid is blurred in the carry photos.
 </Callout>
 
 ## Goal
@@ -70,8 +70,8 @@ The CF-33's carry handle is on the opposite edge of the base. When the unit is c
 
 <Gallery
 	photos={[
-		{ src: heroNight, alt: 'CF-33 open in a dark room. Red light from a bar below the display covers the keyboard, and a red bar on the front edge lights the counter. Screen blurred.', caption: 'Night use. The keyboard bar under the display lights the keys red, and the front-edge bar spills red light onto the work surface. Screen content blurred.' },
-		{ src: keyboardWide, alt: 'CF-33 open under room light with both red LED bars on. The bar below the display and the bar along the front edge of the base are both visible. Screen blurred.', caption: 'The same setup under room light, showing where both bars sit: along the hinge line below the display, and along the front edge of the base.' },
+		{ src: heroNight, alt: 'CF-33 open in a dark room. Red light from a bar below the display covers the keyboard, and a red bar on the front edge lights the counter.', caption: 'Night use. The keyboard bar under the display lights the keys red, and the front-edge bar spills red light onto the work surface.' },
+		{ src: keyboardWide, alt: 'CF-33 open under room light with both red LED bars on. The bar below the display and the bar along the front edge of the base are both visible.', caption: 'The same setup under room light, showing where both bars sit: along the hinge line below the display, and along the front edge of the base.' },
 		{ src: carryGround, alt: 'CF-33 closed and hanging from its carry handle in a dim room. Red light from the bottom edge floods the wall and counter below.', caption: 'Carried by the handle. The front-edge bar now points down and floods the area below with red light. A sticker on the lid is blurred.' },
 		{ src: carryBar, alt: 'Close view of the closed CF-33 hanging by its handle, showing the red LED bar mounted along the bottom edge of the unit.', caption: 'Close-up of the front-edge bar in carry position. A sticker on the lid is blurred.' },
 	]}
@@ -165,4 +165,4 @@ Power comes from the CF-33's own USB port, in the vehicle and on foot. Not docum
 
 ## Changelog
 
-<Changelog entries={[{ date: '2026-11-14', change: "Power source confirmed: the CF-33's own USB port, so the ground light works when the unit is carried.", rollback: 'Revert the power rows and wiring text.' }, { date: '2026-11-14', change: 'USB-powered variant with an inline USB switch, mounted with 3M adhesive. Status set to Delivered. The coiled cable in the photos is not part of the lighting.', rollback: 'Revert to the previous parts list, wiring section and status.' }, { date: '2026-11-14', change: 'Added the LED bar specs from the product listing: generic 12V bars, red, cigarette lighter plug. No brand or model number.', rollback: 'Revert the parts list, LED spec box and wiring section to TBD.' }, { date: '2026-11-14', change: 'Page created from the client brief and four photos of the finished unit. Screen content and a lid sticker are blurred.', rollback: 'Delete the page folder, its photos and its sidebar entry.', log: '/log/2026-11-14-cf33-night-vision/' }]} />
+<Changelog entries={[{ date: '2026-11-14', change: 'Keyboard photos now show the CF-33 screen unblurred, at William\'s request.', rollback: 'Re-export the two keyboard photos with the screen blurred.' }, { date: '2026-11-14', change: "Power source confirmed: the CF-33's own USB port, so the ground light works when the unit is carried.", rollback: 'Revert the power rows and wiring text.' }, { date: '2026-11-14', change: 'USB-powered variant with an inline USB switch, mounted with 3M adhesive. Status set to Delivered. The coiled cable in the photos is not part of the lighting.', rollback: 'Revert to the previous parts list, wiring section and status.' }, { date: '2026-11-14', change: 'Added the LED bar specs from the product listing: generic 12V bars, red, cigarette lighter plug. No brand or model number.', rollback: 'Revert the parts list, LED spec box and wiring section to TBD.' }, { date: '2026-11-14', change: 'Page created from the client brief and four photos of the finished unit. A lid sticker is blurred.', rollback: 'Delete the page folder, its photos and its sidebar entry.', log: '/log/2026-11-14-cf33-night-vision/' }]} />
