@@ -33,7 +33,7 @@ That's how we approach every build. Solve the real-world problem, respect the or
 Then we took it a step further. We designed the package to also provide night-vision-safe ground lighting when the CF-33 is carried by its handle, so the responder can move from the vehicle to the scene without losing their dark adaptation or their footing.
 
 <Callout type="unverified" title="What this page does and does not document">
-The narrative above is the client story as I described it. The build details below come from four photos of the finished unit. The LED parts, power source, mounting method and switching are not documented yet, so they are listed as open items instead of being filled in with guesses. The client and agency are not named, and identifying details are blurred in every photo.
+The narrative above is the client story as I described it. The build details below come from four photos of the finished unit. The LED bars are generic 12V units whose specs come from the product listing. The mounting method, switching and the exact power path are not documented yet, so they are listed as open items instead of being filled in with guesses. The client and agency are not named, and identifying details are blurred in every photo.
 </Callout>
 
 ## Goal
@@ -90,27 +90,47 @@ All four are photos of the finished, working unit, taken on 14 November 2026. Th
 		['Ground lighting', 'LED bar on the front edge of the base, aimed down when carried by the handle'],
 		['Factory functions', 'All retained (client brief)'],
 		['Permanent changes to the CF-33', 'None (client brief)'],
-		['LED part, power source, mounting, switching', 'Not documented yet (see Open items)'],
+		['LED bars', 'Generic 12V LED bar lights, red variant (product listing, no brand or model number)'],
+		['Power', '12V vehicle accessory (cigarette lighter) socket plug, per the product listing'],
+		['Mounting, switching, carry-mode power', 'Not documented yet (see Open items)'],
 	]}
 />
 
 ## Parts list
 
-The parts are not documented yet. Rows stay TBD until they are confirmed from receipts or the parts themselves.
+The LED bars are a generic, unbranded 12V product. The listing gives no brand, model number or price, so those stay TBD. Everything else stays TBD until it is confirmed from receipts or the parts themselves.
 
 <PartsTable
 	parts={[
-		{ name: 'Red LED bar, keyboard (hinge line)', status: 'Installed' },
-		{ name: 'Red LED bar, front edge of base (ground light)', status: 'Installed' },
-		{ name: 'Power source and cable', status: 'Installed' },
+		{ name: 'Red LED bar light, 12V, keyboard (hinge line)', specs: 'Generic 12V LED bar, red. Silica gel and LED construction. Plugs into a 12V cigarette lighter socket. Listing: 0.09 kg, 5 x 5 x 5 cm, CE marked', status: 'Installed' },
+		{ name: 'Red LED bar light, 12V, front edge of base (ground light)', specs: 'Same product as the keyboard bar (to confirm)', status: 'Installed' },
+		{ name: 'Power cable and plug', specs: '12V cigarette lighter plug, per the listing', status: 'Installed' },
 		{ name: 'Mounting hardware or adhesive', status: 'Installed' },
 		{ name: 'Switch or control', status: 'Installed' },
 	]}
 />
 
+<SpecBox
+	title="LED bar light, as listed by the seller"
+	specs={[
+		['Type', '12V LED bar light ("atmosphere lamp") for car interiors'],
+		['Power', '12V, plugs into a standard cigarette lighter socket'],
+		['Colors offered', 'Blue, Green, Ice Blue, Orange, Pink, Red, White, plus USB-powered variants. Red is used here'],
+		['Material', 'Silica gel and LED'],
+		['Weight', '0.09 kg'],
+		['Size', '5 x 5 x 5 cm (as listed; this does not match the length of the bars in the photos and may be a package size)'],
+		['Certification', 'CE marked (seller claim)'],
+		['Brand, model, price', 'Not given in the listing'],
+		['Current draw, LED count, wavelength', 'Not given in the listing'],
+	]}
+	source={{ label: 'Product listing description supplied by William, 14 Nov 2026 (no link, seller not named)' }}
+/>
+
 ## Wiring or configuration
 
-Not documented yet. This page will add the power path, current draw, fusing (if powered from the vehicle) and switching once they are confirmed. Nothing is guessed here.
+The bars are made to run from a vehicle's 12V accessory (cigarette lighter) socket, so in the vehicle they need no hardwiring and no changes to the CF-33 or its dock. The socket's own factory fuse protects the circuit.
+
+Not documented yet: how the bars are switched, how the cables are routed, and how the ground light is powered when the CF-33 is carried away from the vehicle. Current draw has not been measured. Nothing is guessed here.
 
 ## Testing and verification
 
@@ -122,14 +142,14 @@ Not documented yet. This page will add the power path, current draw, fusing (if 
 | CF-33 powered on and usable with the lighting installed | Seen working | Photos 1 and 2 (display on) |
 | Factory functions all intact | Client brief | Not separately tested on this page |
 | Use in the vehicle on an overnight shift | Not documented | No field photos or notes yet |
-| Current draw, battery impact, run time | Not measured | |
+| Current draw, battery impact, run time | Not measured | Not given in the product listing |
 | Fit in the vehicle dock or mount with the bars installed | Not documented | |
 
 ## Safety notes
 
 - **Keep it night-vision-safe.** Red only, and no brighter than needed. A light bright enough to dazzle the operator defeats the purpose.
 - **Nothing in the way.** Keep cables and bars clear of the keyboard, ports, latch, handle and any vehicle dock or mount.
-- **Vehicle power.** If the lighting is ever powered from the vehicle, it needs its own fuse at the source and cable routing clear of airbag deployment zones, like any other in-cab equipment.
+- **Vehicle power.** The bars plug into the vehicle's 12V accessory socket, which is fused at the factory. Route the cords clear of airbag deployment zones, pedals and the dock's release, and don't use a socket splitter beyond its rating.
 - **No permanent changes.** The build is meant to come off without leaving damage, so the computer can go back to factory condition at any time.
 
 ## Lessons learned
@@ -139,8 +159,9 @@ Not documented yet. This page will add the power path, current draw, fusing (if 
 
 ## Open items
 
-- Confirm the LED product or products (name, part number, price, LED count, length, color wavelength if published).
-- Confirm the power source: the CF-33's USB port, a separate battery, or vehicle 12V.
+- Find the seller listing link or order record for the LED bars (brand or seller name, price, bar length). The listed 5 x 5 x 5 cm size does not match the bars in the photos.
+- Confirm both bars are the same product and the 12V plug version (not the USB variant).
+- Confirm how the ground light is powered when the CF-33 is carried away from the vehicle and its 12V socket.
 - Confirm the mounting method for each bar (and that it is fully removable).
 - Confirm how the lights are switched on and off, and whether brightness is adjustable.
 - Confirm whether the coiled cable on the right side in the photos belongs to the lighting.
@@ -149,4 +170,4 @@ Not documented yet. This page will add the power path, current draw, fusing (if 
 
 ## Changelog
 
-<Changelog entries={[{ date: '2026-11-14', change: 'Page created from the client brief and four photos of the finished unit. Screen content and a lid sticker are blurred.', rollback: 'Delete the page folder, its photos and its sidebar entry.', log: '/log/2026-11-14-cf33-night-vision/' }]} />
+<Changelog entries={[{ date: '2026-11-14', change: 'Added the LED bar specs from the product listing: generic 12V bars, red, cigarette lighter plug. No brand or model number.', rollback: 'Revert the parts list, LED spec box and wiring section to TBD.' }, { date: '2026-11-14', change: 'Page created from the client brief and four photos of the finished unit. Screen content and a lid sticker are blurred.', rollback: 'Delete the page folder, its photos and its sidebar entry.', log: '/log/2026-11-14-cf33-night-vision/' }]} />
