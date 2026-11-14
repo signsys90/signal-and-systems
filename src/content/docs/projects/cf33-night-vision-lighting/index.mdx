@@ -1,0 +1,152 @@
+---
+title: CF-33 Night Vision Lighting
+description: Red, night-vision-safe keyboard and ground lighting for a Panasonic Toughbook CF-33 used in a public safety vehicle, with every factory function kept.
+summary: Red keyboard lighting for overnight shifts, plus ground lighting when the CF-33 is carried by its handle. No permanent changes to the Toughbook.
+status: Installed
+category: Vehicle Upfit and 12V
+started: TBD
+updated: 2026-11-14
+project: true
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import PartsTable from '../../../../components/PartsTable.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+import Gallery from '../../../../components/Gallery.astro';
+import heroNight from '../../../../assets/cf33-night-vision/keyboard-night-red.jpg';
+import keyboardWide from '../../../../assets/cf33-night-vision/keyboard-red-wide.jpg';
+import carryGround from '../../../../assets/cf33-night-vision/carry-ground-light.jpg';
+import carryBar from '../../../../assets/cf33-night-vision/carry-front-bar.jpg';
+
+<ProjectHeader hero={heroNight} heroAlt="A Panasonic Toughbook CF-33 open in a dark room. A red LED bar under the display washes the keyboard in red light, and a second red LED bar along the front edge of the base lights the counter in front of it. The screen is blurred." />
+
+**Night vision matters when you're on duty.**
+
+A client running a Panasonic Toughbook CF-33 in a public safety vehicle came to us with a real problem. During overnight shifts, the factory backlit keyboard wasn't cutting it. It was either too bright for dark-adapted eyes or not readable enough to work quickly, and neither is acceptable in the field.
+
+Signal & Systems Engineering designed a practical, cost-effective fix that went well beyond what the client expected. Every factory function stayed intact, and the installation footprint stayed minimal. Nothing permanent, nothing in the way, and no compromise on the tools responders depend on.
+
+That's how we approach every build. Solve the real-world problem, respect the original equipment, and keep it simple enough to trust at 3 AM.
+
+Then we took it a step further. We designed the package to also provide night-vision-safe ground lighting when the CF-33 is carried by its handle, so the responder can move from the vehicle to the scene without losing their dark adaptation or their footing.
+
+<Callout type="unverified" title="What this page does and does not document">
+The narrative above is the client story as I described it. The build details below come from four photos of the finished unit. The LED parts, power source, mounting method and switching are not documented yet, so they are listed as open items instead of being filled in with guesses. The client and agency are not named, and identifying details are blurred in every photo.
+</Callout>
+
+## Goal
+
+Give a responder working at night a keyboard they can read quickly without wrecking their dark adaptation, and keep that same night-safe light with them when they pick up the computer and walk to the scene.
+
+"Done" means:
+
+- The keys are readable at a glance in a dark cab, under red light.
+- Every factory function of the CF-33 still works, including the factory keyboard backlight.
+- Nothing on the Toughbook is drilled, cut or permanently changed, and the lighting does not get in the way of typing, docking or carrying.
+- When the CF-33 is carried by its handle, the lighting falls on the ground ahead of the responder's feet.
+
+## Why red light
+
+Red light is the usual choice for night work because it disturbs dark adaptation much less than white or blue light, which is why it shows up in cockpits, on ships and in tactical flashlights. The goal here is the same: enough light to read the keys and see the ground, at a color that lets the eyes stay adjusted to the dark.
+
+## Constraints
+
+- **Respect the original equipment.** The CF-33 is a rugged, mission-critical computer. No drilling, cutting or permanent adhesive changes to the unit, and no loss of any factory function.
+- **Minimal footprint.** The lighting must not block the keyboard, touchpad, display, ports, the detach latch or the carry handle.
+- **Readable, not bright.** Too much light defeats the purpose. The red light has to be just enough to read keys and see footing.
+- **Cost-effective.** The client asked for a practical fix, not a custom electronics project.
+- **Simple enough to trust at 3 AM.** No software, no settings to manage, nothing that can confuse a tired operator mid-shift.
+
+## What was built
+
+From the photos of the finished unit, the package has two red LED light bars:
+
+1. **Keyboard bar.** A slim red LED bar runs along the hinge line, at the bottom edge of the display, and casts red light down across the keys.
+2. **Front-edge bar.** A second red LED bar, in a clear housing, runs along the front edge of the keyboard base, below the palm rest.
+
+The CF-33's carry handle is on the opposite edge of the base. When the unit is closed and carried by that handle, the front-edge bar faces the ground, so the same bar that lights the desk in front of the keyboard becomes a downward ground light while walking.
+
+<Gallery
+	photos={[
+		{ src: heroNight, alt: 'CF-33 open in a dark room. Red light from a bar below the display covers the keyboard, and a red bar on the front edge lights the counter. Screen blurred.', caption: 'Night use. The keyboard bar under the display lights the keys red, and the front-edge bar spills red light onto the work surface. Screen content blurred.' },
+		{ src: keyboardWide, alt: 'CF-33 open under room light with both red LED bars on. The bar below the display and the bar along the front edge of the base are both visible. Screen blurred.', caption: 'The same setup under room light, showing where both bars sit: along the hinge line below the display, and along the front edge of the base.' },
+		{ src: carryGround, alt: 'CF-33 closed and hanging from its carry handle in a dim room. Red light from the bottom edge floods the wall and counter below.', caption: 'Carried by the handle. The front-edge bar now points down and floods the area below with red light. A sticker on the lid is blurred.' },
+		{ src: carryBar, alt: 'Close view of the closed CF-33 hanging by its handle, showing the red LED bar mounted along the bottom edge of the unit.', caption: 'Close-up of the front-edge bar in carry position. A sticker on the lid is blurred.' },
+	]}
+/>
+
+All four are photos of the finished, working unit, taken on 14 November 2026. They are not renders or mockups.
+
+## Key capabilities
+
+<SpecBox
+	title="What the package does (from the photos and the client brief)"
+	specs={[
+		['Host computer', 'Panasonic Toughbook CF-33 (2-in-1, detachable display)'],
+		['Light color', 'Red'],
+		['Keyboard lighting', 'LED bar along the hinge line, aimed down across the keys'],
+		['Ground lighting', 'LED bar on the front edge of the base, aimed down when carried by the handle'],
+		['Factory functions', 'All retained (client brief)'],
+		['Permanent changes to the CF-33', 'None (client brief)'],
+		['LED part, power source, mounting, switching', 'Not documented yet (see Open items)'],
+	]}
+/>
+
+## Parts list
+
+The parts are not documented yet. Rows stay TBD until they are confirmed from receipts or the parts themselves.
+
+<PartsTable
+	parts={[
+		{ name: 'Red LED bar, keyboard (hinge line)', status: 'Installed' },
+		{ name: 'Red LED bar, front edge of base (ground light)', status: 'Installed' },
+		{ name: 'Power source and cable', status: 'Installed' },
+		{ name: 'Mounting hardware or adhesive', status: 'Installed' },
+		{ name: 'Switch or control', status: 'Installed' },
+	]}
+/>
+
+## Wiring or configuration
+
+Not documented yet. This page will add the power path, current draw, fusing (if powered from the vehicle) and switching once they are confirmed. Nothing is guessed here.
+
+## Testing and verification
+
+| Check | Result | Evidence |
+| --- | --- | --- |
+| Both bars light red with the CF-33 open | Seen working | Photos 1 and 2 |
+| Keys readable under the red light in a dark room | Seen working | Photo 1 |
+| Front-edge bar lights the ground with the unit carried by its handle | Seen working | Photos 3 and 4 |
+| CF-33 powered on and usable with the lighting installed | Seen working | Photos 1 and 2 (display on) |
+| Factory functions all intact | Client brief | Not separately tested on this page |
+| Use in the vehicle on an overnight shift | Not documented | No field photos or notes yet |
+| Current draw, battery impact, run time | Not measured | |
+| Fit in the vehicle dock or mount with the bars installed | Not documented | |
+
+## Safety notes
+
+- **Keep it night-vision-safe.** Red only, and no brighter than needed. A light bright enough to dazzle the operator defeats the purpose.
+- **Nothing in the way.** Keep cables and bars clear of the keyboard, ports, latch, handle and any vehicle dock or mount.
+- **Vehicle power.** If the lighting is ever powered from the vehicle, it needs its own fuse at the source and cable routing clear of airbag deployment zones, like any other in-cab equipment.
+- **No permanent changes.** The build is meant to come off without leaving damage, so the computer can go back to factory condition at any time.
+
+## Lessons learned
+
+- **Solve the actual problem.** The issue was not "the keyboard is too dark". It was that neither factory setting worked for dark-adapted eyes. A different color of light solved what more or less brightness could not.
+- **Reuse the same hardware for a second job.** Placing the front bar where it lands on the ground in carry position turned a keyboard fix into a scene-walk light at no extra footprint.
+
+## Open items
+
+- Confirm the LED product or products (name, part number, price, LED count, length, color wavelength if published).
+- Confirm the power source: the CF-33's USB port, a separate battery, or vehicle 12V.
+- Confirm the mounting method for each bar (and that it is fully removable).
+- Confirm how the lights are switched on and off, and whether brightness is adjustable.
+- Confirm whether the coiled cable on the right side in the photos belongs to the lighting.
+- Confirm the build date, and whether the status should read Delivered.
+- Optional: field photos or feedback from an overnight shift, and a photo of the installed bars in the vehicle dock.
+
+## Changelog
+
+<Changelog entries={[{ date: '2026-11-14', change: 'Page created from the client brief and four photos of the finished unit. Screen content and a lid sticker are blurred.', rollback: 'Delete the page folder, its photos and its sidebar entry.', log: '/log/2026-11-14-cf33-night-vision/' }]} />

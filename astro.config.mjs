@@ -62,6 +62,7 @@ export default defineConfig({
 							items: [
 								{ label: 'F-150 Upfit', items: [{ autogenerate: { directory: 'projects/f150-upfit' } }] },
 								{ label: "Quest Angler 10' Upfit", link: '/projects/quest-angler-10-upfit/' },
+								{ label: 'CF-33 Night Vision Lighting', link: '/projects/cf33-night-vision-lighting/' },
 							],
 						},
 						{
