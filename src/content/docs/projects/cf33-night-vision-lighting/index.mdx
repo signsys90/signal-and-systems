@@ -33,7 +33,7 @@ That's how we approach every build. Solve the real-world problem, respect the or
 Then we took it a step further. We designed the package to also provide night-vision-safe ground lighting when the CF-33 is carried by its handle, so the responder can move from the vehicle to the scene without losing their dark adaptation or their footing.
 
 <Callout type="unverified" title="What this page does and does not document">
-The narrative above is the client story as I described it. The build details below come from four photos of the finished unit. The LED bars are a generic product whose specs come from the seller's listing. The mounting and switching details are from me. What the USB cable plugs into is not documented yet, so it is listed as an open item instead of being filled in with a guess. The client and agency are not named, and identifying details are blurred in every photo.
+The narrative above is the client story as I described it. The build details below come from four photos of the finished unit. The LED bars are a generic product whose specs come from the seller's listing. The power, mounting and switching details are from me. Anything not confirmed, such as current draw, is listed as untested instead of being filled in with a guess. The client and agency are not named, and identifying details are blurred in every photo.
 </Callout>
 
 ## Goal
@@ -66,7 +66,7 @@ From the photos of the finished unit, the package has two red LED light bars:
 1. **Keyboard bar.** A slim red LED bar runs along the hinge line, at the bottom edge of the display, and casts red light down across the keys.
 2. **Front-edge bar.** A second red LED bar, in a clear housing, runs along the front edge of the keyboard base, below the palm rest.
 
-The CF-33's carry handle is on the opposite edge of the base. When the unit is closed and carried by that handle, the front-edge bar faces the ground, so the same bar that lights the desk in front of the keyboard becomes a downward ground light while walking.
+The CF-33's carry handle is on the opposite edge of the base. When the unit is closed and carried by that handle, the front-edge bar faces the ground, so the same bar that lights the desk in front of the keyboard becomes a downward ground light while walking. Because the bars draw power from the CF-33's own USB port, the ground light keeps working away from the vehicle with no separate battery or cable to manage.
 
 <Gallery
 	photos={[
@@ -93,7 +93,7 @@ All four are photos of the finished, working unit, taken on 14 November 2026. Th
 		['LED bars', 'Generic LED bar lights, red, USB-powered variant (product listing, no brand or model number)'],
 		['Switching', 'Inline USB switch on the cable'],
 		['Mounting', '3M adhesive'],
-		['USB power source (in the vehicle and when carried)', 'Not documented yet (see Open items)'],
+		['Power source', "The CF-33's own USB port, so the lights go wherever the computer goes"],
 	]}
 />
 
@@ -130,7 +130,7 @@ The LED bars are a generic, unbranded product, the USB-powered variant of a car 
 
 The bars are the USB-powered variant, so there is no hardwiring, no vehicle 12V circuit and no fuse to add. An inline USB switch in the cable turns them on and off, so the operator can kill the light without unplugging anything. Each bar is mounted to the CF-33 with 3M adhesive, so nothing is drilled or screwed into the unit.
 
-Not documented yet: what the USB cable plugs into, in the vehicle and when the CF-33 is carried to the scene, and how the cable is routed. Current draw has not been measured. Nothing is guessed here.
+Power comes from the CF-33's own USB port, in the vehicle and on foot. Not documented yet: how the cable is routed, and the bars' current draw and effect on the CF-33's battery run time, which have not been measured.
 
 ## Testing and verification
 
@@ -149,7 +149,7 @@ Not documented yet: what the USB cable plugs into, in the vehicle and when the C
 
 - **Keep it night-vision-safe.** Red only, and no brighter than needed. A light bright enough to dazzle the operator defeats the purpose.
 - **Nothing in the way.** Keep cables and bars clear of the keyboard, ports, latch, handle and any vehicle dock or mount.
-- **Low-voltage USB power.** The bars run on USB, not vehicle 12V, so there is no new circuit in the vehicle to fuse. Route the USB cable clear of airbag deployment zones, the keyboard, the dock's release and the carry handle.
+- **Low-voltage USB power.** The bars run from the CF-33's USB port, not vehicle 12V, so there is no new circuit in the vehicle to fuse. Using one USB port for the lights leaves one fewer port for other devices. Route the USB cable clear of airbag deployment zones, the keyboard, the dock's release and the carry handle.
 - **No permanent changes.** The build is meant to come off without leaving damage, so the computer can go back to factory condition at any time.
 
 ## Lessons learned
@@ -160,9 +160,9 @@ Not documented yet: what the USB cable plugs into, in the vehicle and when the C
 ## Open items
 
 - Find the seller listing link or order record for the LED bars (brand or seller name, price, bar length). The listed 5 x 5 x 5 cm size does not match the bars in the photos.
-- Confirm what the USB cable plugs into: a CF-33 USB port, a USB power bank, or a USB port in the vehicle, and how the ground light is powered when the unit is carried to the scene.
+- Measure the bars' current draw from the USB port and the effect on the CF-33's battery run time.
 - Optional: field photos or feedback from an overnight shift, and a photo of the installed bars in the vehicle dock.
 
 ## Changelog
 
-<Changelog entries={[{ date: '2026-11-14', change: 'USB-powered variant with an inline USB switch, mounted with 3M adhesive. Status set to Delivered. The coiled cable in the photos is not part of the lighting.', rollback: 'Revert to the previous parts list, wiring section and status.' }, { date: '2026-11-14', change: 'Added the LED bar specs from the product listing: generic 12V bars, red, cigarette lighter plug. No brand or model number.', rollback: 'Revert the parts list, LED spec box and wiring section to TBD.' }, { date: '2026-11-14', change: 'Page created from the client brief and four photos of the finished unit. Screen content and a lid sticker are blurred.', rollback: 'Delete the page folder, its photos and its sidebar entry.', log: '/log/2026-11-14-cf33-night-vision/' }]} />
+<Changelog entries={[{ date: '2026-11-14', change: "Power source confirmed: the CF-33's own USB port, so the ground light works when the unit is carried.", rollback: 'Revert the power rows and wiring text.' }, { date: '2026-11-14', change: 'USB-powered variant with an inline USB switch, mounted with 3M adhesive. Status set to Delivered. The coiled cable in the photos is not part of the lighting.', rollback: 'Revert to the previous parts list, wiring section and status.' }, { date: '2026-11-14', change: 'Added the LED bar specs from the product listing: generic 12V bars, red, cigarette lighter plug. No brand or model number.', rollback: 'Revert the parts list, LED spec box and wiring section to TBD.' }, { date: '2026-11-14', change: 'Page created from the client brief and four photos of the finished unit. Screen content and a lid sticker are blurred.', rollback: 'Delete the page folder, its photos and its sidebar entry.', log: '/log/2026-11-14-cf33-night-vision/' }]} />
