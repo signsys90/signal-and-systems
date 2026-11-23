@@ -4,7 +4,7 @@ description: The used Whelen CanTrol WC set that runs every light and the siren 
 summary: The controller at the center of the build. What the used set is, every pin, how it gets power and ground on a 2015+ F-150, and the rules for programming it.
 status: In progress
 category: Vehicle Upfit and 12V
-updated: 2026-11-12
+updated: 2026-11-23
 sidebar:
   order: 2
 ---
@@ -24,6 +24,10 @@ import moduleConnectors from '../../../../assets/f150/cantrol-module-connectors.
 
 <Callout type="safety" title="Legal notice">
 Emergency lighting and siren use is regulated by state law and permits. This page documents a personal build and is not legal guidance.
+</Callout>
+
+<Callout type="open" title="Moving to Whelen Core (23 Nov 2026)">
+I decided to move the build to a Whelen CenCom Core (C399), keeping the CanTrol set for now, with an OBD-II cable for the Core in place of the CC5K1 (which will be sold new, unopened). This page stays as the record of the CanTrol build until the Core plan is written. See the [Whelen Core changeover](/projects/f150-upfit/whelen-core-changeover/).
 </Callout>
 
 This page collects the research done on 21 October 2026 before the controller goes on the bench. Every claim carries the same tags the project files use:
@@ -334,4 +338,4 @@ These went to the main project document as recommendations. The ground changes a
 
 ## Changelog
 
-<Changelog entries={[{ date: '2026-11-12', change: 'LED Output 11 (J4-15) corrected to Violet (confirmed 12 Nov; the 10 Nov Gray was wrong). Added the Command bench files CF1 to CF4, now in the module.', rollback: 'Revert the commit that added the 12 Nov upfit update.', log: '/log/2026-11-12-color-flood-bench-pass/' }, { date: '2026-11-10', change: 'Recorded LED Output 11 (J4-15) as Gray and LED Output 9 (J4-13) as Green on my custom harness (both found 10 Nov).', rollback: 'Revert the commit that recorded J4-15 as Gray.' }, { date: '2026-10-31', change: 'CANport: Brake and Park confirmed in Command\'s F150 2017 list; link to the eight-input CANport plan.', rollback: 'Revert the commit that added the CANport section.' }, { date: '2026-10-27', change: 'CC5K1 arrived 26 Oct (27 October files).', rollback: 'Revert the commit that added the E68Xtreme.' }, { date: '2026-10-26', change: 'Controller page published from the 21 October wiring research and my own photos of the set.', rollback: 'Revert the commit that added this page.' }]} />
+<Changelog entries={[{ date: '2026-11-23', change: 'Moving to Whelen Core: recorded my Whelen Core changeover decision.', rollback: 'Revert the commit that recorded the Whelen Core changeover.', log: '/log/2026-11-23-lighting-roster/' }, { date: '2026-11-12', change: 'LED Output 11 (J4-15) corrected to Violet (confirmed 12 Nov; the 10 Nov Gray was wrong). Added the Command bench files CF1 to CF4, now in the module.', rollback: 'Revert the commit that added the 12 Nov upfit update.', log: '/log/2026-11-12-color-flood-bench-pass/' }, { date: '2026-11-10', change: 'Recorded LED Output 11 (J4-15) as Gray and LED Output 9 (J4-13) as Green on my custom harness (both found 10 Nov).', rollback: 'Revert the commit that recorded J4-15 as Gray.' }, { date: '2026-10-31', change: 'CANport: Brake and Park confirmed in Command\'s F150 2017 list; link to the eight-input CANport plan.', rollback: 'Revert the commit that added the CANport section.' }, { date: '2026-10-27', change: 'CC5K1 arrived 26 Oct (27 October files).', rollback: 'Revert the commit that added the E68Xtreme.' }, { date: '2026-10-26', change: 'Controller page published from the 21 October wiring research and my own photos of the set.', rollback: 'Revert the commit that added this page.' }]} />

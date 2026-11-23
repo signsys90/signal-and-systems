@@ -4,7 +4,7 @@ description: How the Steelcraft HD grille guard (50-1420C) goes on a 2017 F-150,
 summary: The grille guard carries the whole front package. Final mounting decisions, measured tube data, every fastener, the touch-up record, the shop install steps and torque notes.
 status: In progress
 category: Vehicle Upfit and 12V
-updated: 2026-11-06
+updated: 2026-11-23
 sidebar:
   order: 8
 ---
@@ -80,6 +80,10 @@ Mount the whole front warning package on the grille guard, so the bumper and fac
 	]}
 />
 
+<Callout type="open" title="Upper punch plate change, 16 Nov 2026">
+My 16 Nov lighting roster replaces the two U-Lites (row 3) with four [HELLA Quad Color heads](/projects/f150-upfit/hella-quad-color-heads/) on the upper punch plate (row 4). The heads arrived 19 Nov. Their mount and wiring are proposed, not final, so the U-Lite hardware below is no longer on the shopping list.
+</Callout>
+
 <div class="ss-table-wrap" tabindex="0">
 
 | # | Component | Qty | Size and draw | Location | Final mounting (7 Oct) |
@@ -87,6 +91,7 @@ Mount the whole front warning package on the grille guard, so the bumper and fac
 | 1 | [UBL 100W Large Siren Speaker](/projects/f150-upfit/siren-speakers/) | 2 | 7.5 H x 6.5 W x 3.5 D in with bracket. 11 Ω, 120 to 124 dB (listing) | Above the lower horizontal tube, against the outside of each center vertical tube | The speaker's own center bolt straight through the punch plate, with washers and a nyloc nut. No L-bracket |
 | 2 | [UBL Color Flood 2.0 20" light bar](/projects/f150-upfit/ubl-color-flood-light-bar/) | 1 | 20 x 1.625 x 3 in. 3.3A max (108W), 10 to 30V (proposal figures) | Under the lower horizontal tube, above the license plate | Its own included L-brackets, tied to the tube with black-coated stainless ties |
 | 3 | [UBL U-Lite surface lights, amber/white](/projects/f150-upfit/ubl-u-lite-grille-lights/) | 2 | 4.40 x 1.25 x 0.40 in. 350 mA max each, 12V | Upper left and upper right corners of the punch plate | #6-32 black machine screws through the plate, fender washers and nyloc nuts, each light centered over a plate hole |
+| 4 | [HELLA Quad Color LED heads (358118591)](/projects/f150-upfit/hella-quad-color-heads/), replacing row 3 | 4 | About 5.13 x 0.97 x 0.69 in, holes 4.75 in apart. 10 to 30 VDC, 18 W each (HELLA sheet) | Upper punch plate (proposed, 16 Nov) | Seller brackets (2 single, 1 double). How they fix to the plate is still open |
 
 </div>
 
@@ -412,6 +417,7 @@ The 5 October proposal priced each part from Ultra Bright Lightz listings (speak
 ## Changelog
 
 <Changelog entries={[
+	{ date: '2026-11-23', change: 'Four HELLA Quad Color heads replace the two U-Lites on the upper punch plate (16 Nov roster; heads received 19 Nov).', rollback: 'Revert the commit that added the 13–23 Nov upfit update.', log: '/log/2026-11-23-lighting-roster/' },
 	{ date: '2026-11-06', change: 'Added 13 of my in-progress touch-up photos from 22 Oct (sanding, feathering and scuffing, masked and painted; location data stripped). Heat shrink tubing from the 6 Nov order replaces the planned end caps for stored lead ends.', rollback: 'Revert the commit that added the 6 Nov upfit update.', log: '/log/2026-11-06-head-mounted-tools-touch-up/' },
 	{ date: '2026-10-27', change: 'Removed spend, order and group totals (privacy rule). Per-item prices stay.', rollback: 'Revert the commit that removed the totals.' },
 	{ date: '2026-10-27', change: 'Rewrote the mounting sections to the final 7 October decisions (speaker center bolt, light bar on its own L-brackets with stainless ties, #6-32 U-Lite screws), replacing the superseded 5 October proposal hardware. Added the measured tube data and photos, the wire storage plan, the touch-up record, the mock-up checks and the shop install quote.', rollback: 'Revert the commit that rebuilt the F-150 section.' },

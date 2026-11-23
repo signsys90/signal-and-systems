@@ -5,7 +5,7 @@ summary: Emergency lighting, siren and 12V build on a 2017 F-150 Lariat SuperCre
 status: In progress
 category: Vehicle Upfit and 12V
 started: Spring 2026
-updated: 2026-11-12
+updated: 2026-11-23
 project: true
 sidebar:
   label: Overview
@@ -33,6 +33,10 @@ import head from '../../../../assets/f150/cantrol-head-lit.jpg';
 
 <Callout type="safety" title="Legal notice">
 Emergency lighting and siren use is regulated by state law and permits. This page documents a personal build and is not legal guidance.
+</Callout>
+
+<Callout type="open" title="Moving to Whelen Core (23 Nov 2026)">
+I decided to move the build to a Whelen CenCom Core (C399). Whelen Tracer Trio sticks replace the UBL rockers, the Putco Work Blade and the UBL Color Flood, a Whelen FST Trio replaces the STL visor bar, and an OBD-II cable for the Core replaces the CC5K1. The LUMENIX pairs are on hold. Nothing new is bought or wired yet, and the CanTrol pages below describe the earlier build until the Core plan is written. Full list: [Whelen Core changeover](/projects/f150-upfit/whelen-core-changeover/).
 </Callout>
 
 ## Goal
@@ -68,11 +72,12 @@ Build a clean, serviceable warning light and siren package on a daily-driven tru
 | --- | --- | --- |
 | Whelen CanTrol WC | Complete used set programmed over USB | Bought 16 Oct ($425.00 shipped). Bench test next. Main power 2 x 40A at the battery |
 | Control head mount | Ben3DBuild overhead mount in the sunglasses holder opening | Received 5 Nov; head fitted in it. Cable route to the module next |
-| Grille guard package | 2 speakers, Color Flood bar, 2 U-Lites | Parts bought, mounts decided 7 Oct. Touch-up done 23 Oct (in-progress photos added 6 Nov). Shop install to book |
-| Other warning lights | Visor bar, BooYu (stays, below the E68Xtreme stick), E68Xtreme stick, rocker bars via relay, Putco Work Blade, rear plate Z-6 heads, BU97LL back-up alarm | Visor and BooYu installed. E68Xtreme, Putco (and its mounting brackets), Z-6 and BU97LL bought. Federal Signal bracket and rocker bars to buy |
+| Grille guard package | 2 speakers, Color Flood bar, 4 HELLA Quad Color heads on the upper punch plate (replacing the 2 U-Lites, 16 Nov) | Speakers and bar bought, mounts decided 7 Oct. HELLA heads received 19 Nov; mount and wiring proposed. Touch-up done 23 Oct (in-progress photos added 6 Nov). Shop install to book |
+| Other warning lights | Visor bar, E68Xtreme stick (headrest brackets), Whelen RST red/amber/white Trio (rear headliner), LUMENIX bed-rail bars (2 pairs), Putco Work Blade, rear plate Z-6 heads, UBL Mini-X pair under the rear bumper (proposed), BU97LL back-up alarm | Visor installed. E68Xtreme, Putco (and brackets), Z-6, BU97LL and LUMENIX pair 1 bought. Federal Signal bracket, LUMENIX pair 2 and the Mini-X to buy. The BooYu comes out (23 Nov) and the rocker bars aren't in the 16–23 Nov lighting list; the X-Lite dash light is on the backburner |
 | Factory lamps | EFM 3.0 and F150LEDs CREE bulbs | Installed and flashing clean 8 Oct. Voltage input harness to buy |
 | Power and wiring | Full wire schedule, two fuse blocks, amp under the rear seat | Planned. Parts to buy |
-| Laptop | Toughbook CF-33 programs both modules; passenger-seat mount planned | Laptop on hand. Mount waiting on a used RAM setup |
+| Laptop | Toughbook CF-33 programs both modules; RAM Mounts passenger-side mount | RAM laptop mount, screen arm and phone mount installed 19 Nov. Vehicle power supply still to buy |
+| Cab safety and bed | Extinguisher, window decals, LED bed lights | Extinguisher and decals installed 14 Nov. Bed lights bought; feed not decided |
 
 ## Photos and diagrams
 
@@ -99,22 +104,25 @@ Battery (Optima Yellow Top) ── 2 x 40A fuses at battery ── Whelen CanTro
                                                               ├── Siren amp ── 2 x UBL 100W speakers (parallel, 5.5 Ω)
                                                               ├── J1-1/J1-6 + LED outputs ── UBL Color Flood 2.0 20" bar
                                                               ├── J1-2 ── SpeedTech Grand Control Box ── Raptor visor bar
-                                                              ├── J1-3 ── BooYu rear traffic advisor controller
+                                                              ├── J1-3 ── LUMENIX inline controller ── 2 pairs on the bed rails (proposed)
                                                               ├── LED out 6–8, 27–31 ── E68Xtreme rear stick, one output per head (planned)
-                                                              ├── J1-4 ── 2 x UBL U-Lite grille lights
+                                                              ├── J1-4 ── 2 x UBL Mini-X sides, rear bumper (proposed)
+                                                              ├── LED out 14–17, 24 ── relays ── 4 x HELLA Quad Color heads (proposed)
                                                               ├── J1-5 ── Putco 60" Work Blade (tailgate)
-                                                              ├── LED out 3 / J1-7 ── relays A and B ── 2 x UBL rocker panel bars (Mode 1 / Mode 2)
+                                                              ├── J1-8 ── Putco white override + Mini-X center whites (REAR FLOOD, reverse)
                                                               ├── LED out 4/5 ── Speed Turtle EFM 3.0 ── BCM ── factory lamps
                                                               ├── LED out 12/13 ── 2 x SpeedTech Z-6 heads (rear plate)
+                                                              ├── LC AUX 2 ── Mini-X yellows; J17-3/-4/-9 ── 433 MHz 4-channel remote (proposed)
                                                               └── OBDII CANport (CC5K1) ── brake signal for brake pop
 ```
 
-The full output assignment is on the [CanTrol output plan](/projects/f150-upfit/cantrol-output-plan/) page. Since 31 Oct 2026 that plan is generated from [Upfit Studio](/projects/upfit-studio/), the offline app that now holds every part, circuit, wire and the control plan for this build, checks the 12V design and simulates the control head. It also holds the [Whelen Command CANport setup](/projects/upfit-studio/#whelen-command-canport-setup): eight vehicle signals (brake, reverse, doors, hazards, Park, parking brake and Drive) that the CanTrol reads through the CC5K1 kit.
+The full output assignment is on the [CanTrol output plan](/projects/f150-upfit/cantrol-output-plan/) page. Its Upfit Studio tables predate my 16–23 Nov lighting changes, so that page lists the current assignments above them. Since 31 Oct 2026 that plan is generated from [Upfit Studio](/projects/upfit-studio/), the offline app that now holds every part, circuit, wire and the control plan for this build, checks the 12V design and simulates the control head. It also holds the [Whelen Command CANport setup](/projects/upfit-studio/#whelen-command-canport-setup): eight vehicle signals (brake, reverse, doors, hazards, Park, parking brake and Drive) that the CanTrol reads through the CC5K1 kit.
 
 ## Component pages
 
 | Page | What it covers | Status |
 | --- | --- | --- |
+| [Whelen Core changeover](/projects/f150-upfit/whelen-core-changeover/) | 23 Nov decision: Tracer Trio and FST Trio lights, Core OBD-II cable, and which old parts are returned or sold | Planned |
 | [CanTrol output plan](/projects/f150-upfit/cantrol-output-plan/) | Every output, what it feeds and which control turns it on | In progress |
 | [Whelen CanTrol WC controller](/projects/f150-upfit/cantrol-controller/) | The used set, full pinout, power and grounding on an aluminum-body F-150, programming rules, CANport brake pop | In progress |
 | [Power, grounds and wire schedule](/projects/f150-upfit/power-and-wiring/) | Every wire end to end, main power, fuse table, load budget, amp mount under the rear seat | Planned |
@@ -125,15 +133,19 @@ The full output assignment is on the [CanTrol output plan](/projects/f150-upfit/
 | [Steelcraft HD grille guard and front package](/projects/f150-upfit/grille-guard/) | Final mounts, measured tube, hardware, wire storage, touch-up, shop install | In progress |
 | [Siren speakers](/projects/f150-upfit/siren-speakers/) | Two UBL 100W speakers on their own center bolts, parallel 5.5 Ω wiring | In progress |
 | [UBL Color Flood 2.0 light bar](/projects/f150-upfit/ubl-color-flood-light-bar/) | Wire-by-wire plan for all eight leads, CanTrol programming, bench results | Bench-tested |
-| [UBL U-Lite grille lights](/projects/f150-upfit/ubl-u-lite-grille-lights/) | Two amber/white lights on J1-4, synced and alternating | Bench-tested |
+| [HELLA Quad Color heads](/projects/f150-upfit/hella-quad-color-heads/) | Four heads on the upper punch plate, a relay per color leg, remote color and pattern steps | In progress |
+| [UBL U-Lite grille lights](/projects/f150-upfit/ubl-u-lite-grille-lights/) | Two amber/white lights, replaced by the HELLA heads on 16 Nov | Bench-tested |
 | [Visor light bar](/projects/f150-upfit/visor-light-bar/) | SpeedTech Raptor split bar and Grand Control Box on J1-2 | Installed |
-| [Rear window lights](/projects/f150-upfit/rear-traffic-advisor/) | BooYu 8-head amber bar on J1-3 (stays, below the stick) and the Strobes N' More E68Xtreme stick (R/A/W/W/W/W/A/R), flashed head by head from LED Outputs 6–8 and 27–31 | BooYu installed; E68Xtreme bought, on the bench |
-| [Rocker panel lights](/projects/f150-upfit/rocker-panel-lights/) | Two UBL 60" bars on a 30A relay, sync steps | Planned |
+| [Rear window lights](/projects/f150-upfit/rear-traffic-advisor/) | Strobes N' More E68Xtreme stick (R/A/W/W/W/W/A/R) on the headrest brackets, flashed head by head from LED Outputs 6–8 and 27–31, and a Whelen RST on the rear headliner. The BooYu comes out (23 Nov) | E68Xtreme bought, on the bench; RST part number to confirm; BooYu installed until removed |
+| [Rocker panel lights](/projects/f150-upfit/rocker-panel-lights/) | Two UBL 60" bars on a 30A relay. Never bought; their outputs are spare since 23 Nov | Planned |
+| [LUMENIX bed-rail bars](/projects/f150-upfit/lumenix-side-bars/) | Two pairs of amber/white bars behind the cab on J1-3, one controller | In progress |
+| [UBL Mini-X rear bumper](/projects/f150-upfit/ubl-mini-x-rear-bumper/) | Proposed pair under the rear bumper, sides on J1-4, white with reverse; X-Lite dash light on the backburner | Planned |
 | [Putco Work Blade (tailgate)](/projects/f150-upfit/putco-work-blade/) | 60" amber/white bar on J1-5 with the Putco remote | In progress |
 | [Rear plate Z-6 and brake pop](/projects/f150-upfit/rear-plate-z6-brake-pop/) | Plate bracket, two Z-6 heads, brake over OBD-II, front plate option | In progress |
 | [Factory lamps (EFM 3.0)](/projects/f150-upfit/factory-lamps-efm/) | Speed Turtle EFM 3.0 config and the F150LEDs bulbs | Installed |
 | [Control head mount](/projects/f150-upfit/control-head-mount/) | Locations considered and the overhead console mount | In progress |
-| [CF-33 laptop mount](/projects/f150-upfit/cf33-laptop-mount/) | The programming laptop and the planned passenger-seat mount | Planned |
+| [CF-33 laptop mount](/projects/f150-upfit/cf33-laptop-mount/) | The programming laptop and its RAM Mounts passenger-side mount | Installed |
+| [Cab safety and bed lights](/projects/f150-upfit/cab-safety-and-bed-lights/) | Extinguisher, window decals, LED bed light strips | In progress |
 | [Decisions, revisions and sources](/projects/f150-upfit/decisions-and-sources/) | Source conflicts, superseded plans, revision history, every source | In progress |
 | [Upfit Studio](/projects/upfit-studio/) | The offline Windows app that holds this build as one config file, checks it, simulates the CCTL7 head and publishes the output plan here | In progress |
 | [Mobile Ham Radio Install](/projects/mobile-ham-radio/) | The radio in the same truck, kept on its own power and ground | Installed |
@@ -167,9 +179,14 @@ Prices are what I paid, before tax and shipping unless noted.
 		{ name: 'SpeedTech Lights Super Takedown Raptor Elite Striker-TIR Split LED Visor Light Bar (Dual Memory), amber/amber', sku: 'B-RTXE8', price: '$150.00', specs: 'Draws under 2.4A', status: 'Installed' },
 		{ name: 'SpeedTech Lights Raptor visor brackets', sku: 'Q-RVF15', price: '$49.99', status: 'Installed' },
 		{ name: 'SpeedTech Lights Grand Control Box', price: '$39.99', specs: 'Required for visor bar patterns', status: 'Installed' },
-		{ name: 'BooYu Rear LED TIR Amber Warning Light & Traffic Advisor', price: '$39.99', specs: '8 heads, all amber; manual power button', status: 'Installed' },
+		{ name: 'BooYu Rear LED TIR Amber Warning Light & Traffic Advisor', price: '$39.99', specs: '8 heads, all amber; manual power button. Coming out (23 Nov decision)', status: 'Installed' },
+		{ name: 'LUMENIX LED Traffic Advisor Strobe Light Bar w/Controller, 2 x 19 in, Amber White', sku: 'B0CDH4PL6P', price: '$31.79 per pair', specs: 'Pair 1 arrived 16 Nov; pair 2 and a 2-way splitter to buy. J1-3', status: 'In progress' },
+		{ name: 'HELLA Quad Color LED Light Head, Regular 24 LED (x4, used)', sku: '358118591', price: '$50.00 each', specs: '10–30 VDC, 18 W each. Received 19 Nov; seller brackets $40.00', status: 'In progress' },
+		{ name: 'UBL Color Flood Mini-X (4 Color) (x2, proposed)', sku: 'UBL-CFM-4', price: '$49.99 each', specs: 'Rear bumper. Not bought', status: 'Planned' },
+		{ name: 'RAM Mounts F-150 no-drill laptop mount, screen support arm, Quick-Grip XL phone mount', sku: 'RAM-VB-195-SW3, RAM-234-S2U, RAM-B-138-PD4U', price: '$425.09 order', specs: 'For the CF-33. Installed 19 Nov', status: 'Installed' },
+		{ name: 'H3R Performance HalGuard Pro 2.5 lb fire extinguisher', price: '$20.00', specs: 'Driver headrest, quick-detach mount', status: 'Installed' },
 		{ name: 'SpeedTech Lights headrest rear mounting brackets (2-pack)', price: '$19.99', status: 'Installed' },
-		{ name: 'Strobes N\' More E68Xtreme LED Stick (8 Module), R/A/W/W/W/W/A/R', sku: 'E68XTREMECUSTOM', price: '$291.08 incl. shipping and tax', specs: '35.5 in, 8 heads, 12V, 44 in cable; needs an external flasher (the CanTrol); the BooYu stays below it', source: 'https://strobesnmore.com/products/strobes-n-more-e68xtreme-led-stick', status: 'In progress' },
+		{ name: 'Strobes N\' More E68Xtreme LED Stick (8 Module), R/A/W/W/W/W/A/R', sku: 'E68XTREMECUSTOM', price: '$291.08 incl. shipping and tax', specs: '35.5 in, 8 heads, 12V, 44 in cable; needs an external flasher (the CanTrol); moves to the BooYu\'s headrest bracket spot (23 Nov)', source: 'https://strobesnmore.com/products/strobes-n-more-e68xtreme-led-stick', status: 'In progress' },
 		{ name: 'Federal Signal SLB-FRD15ND No-Drill Mount Kit (F-150 2015+, Super Duty 2017+)', sku: 'SLB-FRD15ND', price: '$49.00', specs: 'Rear headliner brackets for the E68Xtreme; stick bracket fit unconfirmed', source: 'https://www.wfgear.com/p-21696-federal-signal-slb-frd15nd-brkt-kitcnsmlat15f-150.aspx', status: 'Planned' },
 		{ name: 'Speed Turtle Engineering Easy Flash Module 3.0 (EFM 3.0), Ford', price: '$200.00', specs: 'Inline at BCM; firmware v3.36', source: 'https://www.speedturtleengineering.com/', status: 'Installed' },
 		{ name: 'Speed Turtle Engineering EFM 2.0 / 3.0 Voltage Input Harness', price: '$15.00', specs: '5–17V trigger inputs, no load', source: 'https://www.speedturtleengineering.com/', status: 'Planned' },
@@ -178,8 +195,8 @@ Prices are what I paid, before tax and shipping unless noted.
 		{ name: 'UBL Color Flood 2.0 20" Amber/White LED Light Bar', price: '$152.00', specs: '3.3A max (108W), 10–30V, 5A in-line fuse. Passed on the CanTrol bench 12 Nov with a 1N4004 diode on yellow', status: 'Bench-tested' },
 		{ name: 'Whelen Back-Up Alarm, 97 dB, 12–24 VDC, Light Duty, Universal Mount, Blunt Cut Wires', sku: 'BU97LL', price: '$30.58', specs: 'Bought 11 Nov, not received. Plan (proposed): LED 18, on in reverse over CANport, MUTE key', status: 'Planned' },
 		{ name: 'Putco Blade Mounting Brackets', price: '$27.89 (product page)', specs: '4 clips and 4 3M strips for the Work Blade', source: 'https://www.putco.com/product/blade-mounting-clips-6500/', status: 'In progress' },
-		{ name: 'UBL U-Lite Surface Mount LED Grille Light, Amber/White (x2)', sku: 'UBL-UL2-SM', price: '$85.50 pair', specs: '350 mA max each, 12V', status: 'In progress' },
-		{ name: 'UBL LED Running Board Rocker Panel Lights (x2)', sku: 'UBL-TGB-AW2', specs: '60", 12–24V DC, SAE J595 Class 1; draw not listed', status: 'Planned' },
+		{ name: 'UBL U-Lite Surface Mount LED Grille Light, Amber/White (x2)', sku: 'UBL-UL2-SM', price: '$85.50 pair', specs: '350 mA max each, 12V. Replaced by the HELLA heads (16 Nov)', status: 'Bench-tested' },
+		{ name: 'UBL LED Running Board Rocker Panel Lights (x2)', sku: 'UBL-TGB-AW2', specs: '60", 12–24V DC, SAE J595 Class 1. Not bought; dropped from the 23 Nov list', status: 'Planned' },
 		{ name: 'Putco Amber & White Work Blade LED Lights, 60", with Putco Wireless Remote Kit V3', price: '$253.37 shipped', specs: 'Tailgate, 3M tape mount', status: 'In progress' },
 		{ name: 'SpeedTech Lights License Plate Bracket', sku: 'Q-LPB', price: '$19.99', status: 'In progress' },
 		{ name: 'SpeedTech Lights Brake Light (Secondary Red) Z-6 TIR Surface Mount Heads, Amber Clear (x2)', price: '$119.98 pair', specs: 'Red brake wire for brake pop', status: 'In progress' },
@@ -223,8 +240,10 @@ Every output, with its trigger wire and button, is on the [CanTrol output plan](
 | F150LEDs bulbs flashing on the EFM 3.0 | n/a | Yes (2026-10-08): clean flashing, no hyperflash |
 | UBL U-Lites alternate white and amber on their own | Yes (2026-10-10) | Not yet |
 | BooYu power-on behavior | Yes (2026-10-10): needs its button every time | Installed |
+| HELLA Quad Color heads: which wire powers them | Yes (2026-11-19): red is +12V power; red + orange gives blue/amber (to reprogram). Draw not measured | Not yet |
+| Color Flood 2.0 bar on the CanTrol, with a 1N4004 on yellow | Yes (2026-11-12) | Not yet |
 | Visor bar, EFM 3.0 | Visor not documented; EFM can't be benched | Installed. CanTrol control not yet tested |
-| CanTrol WC, speakers, Putco, Z-6 heads, rocker bars | Not yet | Not yet |
+| Speakers, Z-6 heads, LUMENIX bars, Mini-X | Not yet | Not yet |
 
 ### Video
 
@@ -268,27 +287,29 @@ If the player doesn't load, [watch the video on Google Drive](https://drive.goog
 **Measurements**
 
 - Siren speaker bolt: confirm a 1/4"-28 nut spins on and two threads show past it; confirm each speaker fits its punch plate bay.
-- U-Lites: confirm #6-32 screws, exact spots in the upper corners, each centered over a plate hole.
+- HELLA heads: each head's draw on the bench, and how the seller brackets fix to the upper punch plate.
+- LUMENIX: draw of four bars on one controller (sets the J1-3 fuse) and a 10-minute heat check.
+- Mini-X: quantity, the spot under the rear bumper (hitch, parking sensors, exhaust, spare tire hoist) and the side draw.
 - Head cable length from the overhead console to the module under the driver-side rear seat.
 - Wire runs: battery to under the rear seat, battery to the grille, rear seat to the visor.
 
 **Decisions**
 
-- All-lights five modes: A. head layout option 1, 2 or 3; B. visor bar direct or kept on its Grand Control Box; C. rocker bars on J1-7/J1-8 or kept on the relay; D. Putco white on the CanTrol only, or with remote button A through diodes.
-- Toughbook CF-33 mount and hardwired power: base, arm, dock and power supply models, fuse and wire from their manuals.
+- All-lights five modes: visor bar direct or kept on its Grand Control Box, and Putco white on the CanTrol only or with remote button A through diodes. (Head layout Option 1 was approved 31 Oct; the rocker bars are out of the plan.)
+- Whelen RST red/amber/white Trio for the rear headliner (decided 23 Nov): confirm the part number, specs, draw, mount and CanTrol outputs.
+- Toughbook CF-33: whether the RAM mount needs a keyboard dock, and the vehicle power supply model (fuse and wire from its manual).
 - When programming: whether blank button 1 stays latched after a restart, and how long the system stays on after the key is off.
 
 **Confirmations**
 
 - The CanTrol set's parts against the photos.
 - The module label reads CANWCT3 (needed for brake pop), and Whelen Command lists Brake for the 2017 F-150.
-- Each rocker bar's draw, and the momentary switch for their yellow wires.
 - The Color Flood bar's IP rating and in-line fuse rating.
 - Optima DH7 tray fit and terminal orientation.
 
 **Purchases and records**
 
-- Order the rocker bars, the EFM Voltage Input Harness ($15), the relay, fuse blocks and wire.
+- Order the EFM Voltage Input Harness ($15), fuse blocks and wire, LUMENIX pair 2 and its splitter, and the 433 MHz 4-channel remote parts.
 - Order the Strobes N' More E68Xtreme stick and the Federal Signal SLB-FRD15ND kit (1–3 week lead time). Then confirm its wire colors, ground and per-head draw on the bench, the bracket fit at the mock-up, and program LED Outputs 6–8 and 27–31 with flash patterns only.
 - Control head: route the head cable from the overhead console to the module (mount received and head fitted 5 Nov).
 - Book the shop install of the grille guard.
@@ -313,7 +334,8 @@ If the player doesn't load, [watch the video on Google Drive](https://drive.goog
 ## Changelog
 
 <Changelog
-	entries={[
+	entries={[{ date: '2026-11-23', change: 'Recorded the Whelen Core changeover decision (Tracer Trio, FST Trio, Core OBD-II cable; LUMENIX on hold) and added its page.', rollback: 'Revert the commit that recorded the Whelen Core changeover.', log: '/log/2026-11-23-lighting-roster/' }, 
+		{ date: '2026-11-23', change: '13–23 Nov update: HELLA Quad Color heads replace the U-Lites (received 19 Nov), LUMENIX bed-rail bars on J1-3, UBL Mini-X rear bumper pair proposed and the X-Lite dash light on the backburner, RAM Mounts CF-33 mount installed, extinguisher, decals and bed lights. BooYu and rocker bars are out of the current lighting list. Four new component pages.', rollback: 'Revert the commit that added the 13–23 Nov upfit update.', log: '/log/2026-11-23-lighting-roster/' },
 		{ date: '2026-11-06', change: 'Control head mount received and the head fitted (5 Nov); bench and wiring tools bought 6 Nov; touch-up in-progress photos; Upfit Studio to 0.8.14.', rollback: 'Revert the commit that added the 6 Nov upfit update.', log: '/log/2026-11-06-head-mounted-tools-touch-up/' },
 		{ date: '2026-10-31', change: 'Linked the Whelen Command CANport setup (eight CAN inputs) in Upfit Studio and the output plan.', rollback: 'Revert the commit that added the CANport section.' },
 		{ date: '2026-10-31', change: 'Linked Upfit Studio, which now generates the output plan; rocker bars shown on relays A and B (LED Output 3 and J1 Output 7) per the 31 Oct approved wiring; rocker and U-Lite pages given the 31 Oct wiring.', rollback: 'Revert the commit that added Upfit Studio.', log: '/log/2026-10-31-upfit-studio-sync/' },

@@ -1,0 +1,106 @@
+---
+title: HELLA Quad Color grille heads
+description: Four used HELLA Quad Color LED light heads planned for the upper punch plate of the F-150's Steelcraft grille guard, on four CanTrol LED outputs through relays, with color and pattern stepped from a 433 MHz remote.
+summary: Four HELLA Quad Color 24-LED heads for the upper punch plate (received 19 Nov). Wiring Rev 2 puts each color leg on its own relay; first bench found RED is the power wire. Proposed, not wired.
+status: In progress
+category: Vehicle Upfit and 12V
+updated: 2026-11-23
+sidebar:
+  label: HELLA Quad Color heads
+  order: 21
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import PartsTable from '../../../../components/PartsTable.astro';
+import WiringTable from '../../../../components/WiringTable.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+
+<ProjectHeader />
+
+<Callout type="safety" title="Legal notice">
+Emergency lighting and siren use is regulated by state law and permits. Red and blue on these heads are for off-road use only on this truck. This page documents a personal build and is not legal guidance.
+</Callout>
+
+## Goal
+
+Four small, bright heads high on the grille guard's upper punch plate, in the spot the two UBL U-Lites held in the earlier plan. On the road they show amber and white only. Done means all four are on the plate, each color leg is fused and switched by a relay from the CanTrol, the four heads flash in sync, and every function is bench-tested before the guard goes on the truck.
+
+## What changed
+
+- **16 Nov 2026:** I set the lighting roster to four HELLA Quad Color heads on the upper punch plate. They replace the two U-Lites, and LED Outputs 14 to 17 and 24 move to them. The front vanity plate Z-6 option gave those outputs up and is now a future option with no outputs.
+- **13 Nov:** seller brackets bought: two single and one double.
+- **18 Nov:** wiring Rev 2 (below), with a 433 MHz 4-channel remote for color and pattern steps.
+- **19 Nov:** all four heads received (bought used). First bench on the same day.
+
+<SpecBox
+	title="HELLA Quad Color LED Light Head, Regular 24 LED"
+	specs={[
+		['Part number', '358118591'],
+		['Quantity', '4, bought used'],
+		['Size', 'About 5.13 x 0.97 x 0.69 in'],
+		['Mounting holes', '4.75 in apart'],
+		['Voltage', '10–30 VDC'],
+		['Power', '18 W each (HELLA sheet)'],
+		['Colors', 'Red, blue, amber, white'],
+		['Location', 'Upper punch plate of the Steelcraft HD grille guard (proposed)'],
+	]}
+	source={{ label: 'HELLA data sheet, as quoted in my F-150 project document, section 6.1 (rev. 36, 23 Nov 2026)' }}
+/>
+
+## First bench, 19 Nov
+
+- **RED is the +12V power wire**, not a red-color wire.
+- Red alone, and red with white, gives an amber/white flash.
+- Red with orange gives blue/amber. That isn't road-legal, so that group gets reprogrammed.
+- Current was **not measured yet**. The wiring below stays as planned until it is.
+
+## Wiring, Rev 2 (18 Nov, proposed)
+
+Each color leg runs through its own relay, with a 2A fuse per head on each leg and a 10A feed on 14 AWG to the relays. The CanTrol only drives the relay coils and two signal wires. CanTrol lead colors on my harness don't follow the Whelen guide, so every CanTrol connection is identified by pin.
+
+<WiringTable
+	rows={[
+		{ wire: 'HA', color: 'Orange', function: 'Color leg via relay HA', source: 'CanTrol LED Output 14 (relay coil)', draw: 'Not measured', fuse: '2A per head', gauge: '14 AWG relay feed', relay: 'HA', termination: 'Head orange leads' },
+		{ wire: 'HW', color: 'White', function: 'Color leg via relay HW', source: 'CanTrol LED Output 15 (relay coil)', draw: 'Not measured', fuse: '2A per head', gauge: '14 AWG relay feed', relay: 'HW', termination: 'Head white leads' },
+		{ wire: 'HR', color: 'Red (power)', function: 'Power leg via relay HR, off-road only', source: 'CanTrol LED Output 16 (relay coil)', draw: 'Not measured', fuse: '2A per head', gauge: '14 AWG relay feed', relay: 'HR', termination: 'Head red leads' },
+		{ wire: 'HG', color: 'Green', function: 'Color step', source: 'CanTrol LED Output 17 (remote CH2 on J17-4)', draw: 'Signal', fuse: '1A', gauge: 'TBD', relay: '—', termination: 'Head green leads' },
+		{ wire: 'HB', color: 'Blue', function: 'Pattern step: relay contact grounds BLUE only', source: 'CanTrol LED Output 24 (remote CH3 on J17-9)', draw: 'Signal', fuse: 'TBD', gauge: 'TBD', relay: 'HB', termination: 'Head blue leads' },
+		{ wire: 'HY', color: 'Yellow', function: 'Sync', source: '—', draw: 'Signal', fuse: '—', gauge: '—', relay: '—', termination: 'All four yellows joined' },
+		{ wire: 'HK', color: 'Black', function: 'Ground', source: '—', draw: 'Return', fuse: '—', gauge: 'TBD', relay: '—', termination: 'Ring terminal', ground: 'Ford factory ground point or steel frame rail. Never battery negative' },
+	]}
+/>
+
+The remote is one 433 MHz 4-channel receiver shared with the rear [UBL Mini-X plan](/projects/f150-upfit/ubl-mini-x-rear-bumper/): CH2 closes J17-4 (HELLA color), CH3 closes J17-9 (HELLA pattern), CH1 runs the Mini-X and CH4 is spare. No control head keys change.
+
+<Callout type="unverified" title="Open check">
+LED Output 17 overlaps with the front vanity plate Z-6 option. That option is now future-only with no outputs, but the overlap is flagged to check if it ever comes back.
+</Callout>
+
+## Parts
+
+<PartsTable
+	parts={[
+		{ name: 'HELLA Quad Color LED Light Head, Regular 24 LED (x4, used)', sku: '358118591', price: '$50.00 each', specs: '10–30 VDC, 18 W each. Received 19 Nov', status: 'In progress' },
+		{ name: 'Seller mounting brackets: 2 single + 1 double', price: '$40.00', specs: 'Bought 13 Nov. How they fix to the punch plate is still open', status: 'In progress' },
+		{ name: '433 MHz 4-channel wireless remote receiver, 5V buck converter, in-line fuse holders', specs: 'Shared with the Mini-X plan. Prices not set', status: 'Planned' },
+		{ name: 'Relays HA, HW, HR, HB and fuses', specs: 'Ratings set after the bench draw', status: 'Planned' },
+	]}
+/>
+
+## Open items
+
+- Measure each head's draw on the bench, then confirm the fuse and wire sizes.
+- Reprogram the blue/amber group so the road look is amber/white only.
+- Decide how the seller brackets fix to the upper punch plate.
+- Bench the remote channels against J17-4 and J17-9 before anything is keyed in Whelen Command.
+
+## Sources
+
+- F-150 project document, revisions 22, 32, 33 and 34 (16–19 Nov 2026), sections 3.1 and 6.1, and my bench notes from 19 Nov.
+- HELLA data sheet for 358118591, as quoted in section 6.1.
+
+## Changelog
+
+<Changelog entries={[{ date: '2026-11-23', change: 'Page published from the F-150 project document, revisions 19 to 36.', rollback: 'Revert the commit that added the 13–23 Nov upfit update.', log: '/log/2026-11-23-lighting-roster/' }]} />

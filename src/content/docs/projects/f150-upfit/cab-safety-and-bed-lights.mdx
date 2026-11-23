@@ -1,0 +1,68 @@
+---
+title: Cab safety gear and bed lights
+description: Fire extinguisher, extinguisher and first aid window decals, and LED truck bed lights on the 2017 F-150 Lariat upfit.
+summary: A 2.5 lb clean-agent extinguisher on the driver headrest, matching window decals, and three 60-inch white COB bed light strips (bought, feed not decided).
+status: In progress
+category: Vehicle Upfit and 12V
+updated: 2026-11-23
+sidebar:
+  label: Cab safety and bed lights
+  order: 24
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import PartsTable from '../../../../components/PartsTable.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+import Gallery from '../../../../components/Gallery.astro';
+import extinguisher from '../../../../assets/f150/h3r-halguard-pro.jpg';
+import decals from '../../../../assets/f150/fire-firstaid-decals.jpg';
+import bed from '../../../../assets/f150/truck-bed-lights.jpg';
+
+<ProjectHeader hero={bed} heroAlt="Product photo: a pickup bed lit white by LED strips along both bed rails and the front, with three coiled 60-inch COB strips in front." />
+
+## Goal
+
+Small items that make the truck a working vehicle: an extinguisher within reach, decals that tell responders where it is, and white light in the bed for work at night.
+
+## Fire extinguisher (installed 14 Nov)
+
+- **What:** H3R Performance HalGuard Pro, 2.5 lb clean-agent extinguisher with a pressure gauge and strap bracket. The brand and part number (28131) were read from the label in the product photo and are still to check on the unit.
+- **Where:** back of the driver-side headrest, on a quick-detach mount.
+- **Care (general knowledge, not from the maker):** check each month that the gauge needle stays in the green and that the quick-detach latch holds firmly over bumps.
+
+## Window decals (installed 14 Nov)
+
+Two pairs of 2 x 2 in waterproof vinyl decals, a green first aid cross and a red fire extinguisher, on the rear passenger windows. They match the extinguisher behind the driver seat.
+
+## LED truck bed lights (bought 14 Nov)
+
+Three 60 in 12V 6500K white COB LED strips with an IP67 housing, a splitter cable, a blade fuse, an on/off switch and mounting hardware, per the listing. This is work lighting, not a warning light.
+
+<Callout type="unverified" title="Still to confirm">
+The listing gives no current draw or wire colors. I'll measure the draw with the AstroAI meter before picking the feed and fuse, and check the colors on arrival. Placement on the bed rails and the power source aren't decided yet. The ground goes to a Ford factory ground point or the frame rail, never the battery negative post.
+</Callout>
+
+<Gallery photos={[
+	{ src: extinguisher, alt: 'H3R Performance HalGuard Pro 2.5 lb fire extinguisher with gauge, product photo.', caption: 'H3R HalGuard Pro 2.5 lb (product photo). Mounted on the back of the driver headrest.' },
+	{ src: decals, alt: 'Two square vinyl decals: a green first aid cross and a red fire extinguisher.', caption: 'First aid and extinguisher decals (product image). On the rear passenger windows.' },
+	{ src: bed, alt: 'Pickup bed lit by white LED strips, with three coiled strips in front, product photo.', caption: 'Bed light strips (product photo from the listing).' },
+]} />
+
+## Parts
+
+<PartsTable
+	parts={[
+		{ name: 'H3R Performance HalGuard Pro 2.5 lb fire extinguisher, quick-detach mount', sku: '28131 (from photo, to check)', price: '$20.00', status: 'Installed' },
+		{ name: '2" Fire Extinguisher / First Aid Kit vinyl decals, pair (x2)', price: '$13.90', status: 'Installed' },
+		{ name: 'LED truck bed lights, 3 x 60 in 12V 6500K white COB, with switch and blade fuse splitter', price: '$24.91', specs: 'Draw and wire colors not listed', status: 'Planned' },
+	]}
+/>
+
+## Sources
+
+- F-150 project document, revision 20 (14 Nov 2026), sections 8.5, 12.6 and 12.7.
+
+## Changelog
+
+<Changelog entries={[{ date: '2026-11-23', change: 'Page published from the F-150 project document, revisions 19 to 36.', rollback: 'Revert the commit that added the 13–23 Nov upfit update.', log: '/log/2026-11-23-lighting-roster/' }]} />

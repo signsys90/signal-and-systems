@@ -1,0 +1,127 @@
+---
+title: Signal & Systems Shop (concept)
+description: Concept and working prototype for an online shop selling replacement and custom key legends for emergency vehicle control heads, with a phased plan to add tested surplus equipment and then new upfit equipment.
+summary: Upfitter and EVT parts shop. Phase 1 sells key legend packs for 25 control heads, 102 vehicle packs and custom sheets; tested surplus and new equipment follow. Working prototype built 22 Nov 2026; not launched.
+status: In progress
+category: Business Systems
+updated: 2026-11-23
+project: true
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import Gallery from '../../../../components/Gallery.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+import hero from '../../../../assets/shop/shop-hero.jpg';
+import catalog from '../../../../assets/shop/shop-catalog.jpg';
+import vehicle from '../../../../assets/shop/shop-vehicle.jpg';
+import custom from '../../../../assets/shop/shop-custom.jpg';
+import roadmap from '../../../../assets/shop/shop-roadmap.jpg';
+
+<ProjectHeader hero={hero} heroAlt="Shop prototype home page: dark hero reading Every key, labeled right, beside an interactive Whelen-fit control head console with selectors for make, head, specialty pack, vehicle pack, service and light colors." />
+
+<Callout type="open" title="Status and what this page leaves out">
+This is a concept and a working prototype, not a live store. Nothing has been sold, so there are no sales figures. Prices, supplier and production partners, order contacts, shipping origin and restricted pack lines are left off this public page on purpose. Brand names describe fit only: the shop is not made by, affiliated with or endorsed by Whelen Engineering, SoundOff Signal, Federal Signal, Code 3 or any other maker named here.
+</Callout>
+
+## Goal
+
+Start a parts business that grows out of my own upfit work. The first product is something every emergency vehicle needs and few suppliers do well: clear, correct key legends for the control head. Done for Phase 1 means a public store where an agency, upfitter or volunteer can pick their control head and vehicle, order a printed legend set laid out for that exact head, and get it right the first time.
+
+<SpecBox
+	title="At a glance"
+	specs={[
+		['Business', 'Signal & Systems Engineering, LLC.'],
+		['Working name', 'Signal & Systems Shop (SIGSYSSHOP)'],
+		['Tagline', 'Every key, labeled right. Built in the field, engineered for the cab.'],
+		['Phase 1 product', 'Key legend packs and custom legend sheets, printed to order'],
+		['Control heads in the selector', '45'],
+		['Standard packs', '25 control heads'],
+		['Specialty add-on packs', '129'],
+		['Vehicle-specific packs', '102, each in 8 service versions'],
+		['Media', 'Clear Lexan with function-color legends, or white-on-black sticker'],
+		['Status', 'Prototype built 22 Nov 2026. Not launched'],
+	]}
+	source={{ label: 'My shop proposal and prototype, November 2026' }}
+/>
+
+## Phased plan
+
+Labels come first because they're low-risk to make, ship flat, and prove demand from the same buyers who later need equipment.
+
+| Phase | Status | What it sells |
+| --- | --- | --- |
+| 1. Key labels and legend sheets | Now (prototype) | Brand standard packs, specialty add-on packs, vehicle-specific packs, custom sheets in any color, icon, size, font or media |
+| 2. Tested surplus equipment | Next | Siren speakers and amplifiers, lighting controllers and control heads, interior and exterior light bars and LED heads, custom cables and wiring harnesses |
+| 3. New emergency equipment | Later | Complete lighting and siren packages, upfit kits matched to the vehicle platform, quoting for agencies and upfitters |
+
+A fourth line, 3D-printed upfit parts, is in development alongside Phase 1: a scanner console shroud (first design done; release after fit and heat testing), plus planned control head pods and angle wedges, mic hangers, radar remote and keypad holders, console filler plates, cable clips and grommet rings, and perimeter light and speaker brackets. Printed parts are accessories, not crash-rated mounts: load-bearing mounts use a metal bracket and nothing goes in an airbag deployment zone.
+
+## Product lines (Phase 1)
+
+### Brand standard packs
+
+One pack per control head family. Siren and emergency legends print red, traffic advisor and warning print amber, and everything else prints black, so the head reads at a glance in a dark cab. A pack covers the full working library for that head: siren tones, light modes, scene and alley, traffic advisor, DVI, legacy switch legends, numbers, icons and blanks.
+
+### Specialty add-on packs
+
+129 add-on packs that stack on any standard pack, made to order for the chosen head. Service groups include law enforcement, fire and rescue, EMS and healthcare, emergency communications, volunteer and civilian, protection and escort, security, construction, utilities and municipal, transport and roadside, investigations and forensics, water and dive rescue, aviation and UAS, special units, community and disaster, industry and field, collector and display, and international.
+
+### Vehicle-specific packs
+
+102 packs for what the vehicle itself adds to the head: hatches, cargo and scene lights, upfitter switches, 4x4 and tow modes, EV charge and climate keys, armored vehicle systems and apparatus loads. They're sorted by make, platform and model year, from police utility vehicles and pickups to motorcycles, UTVs, armored rescue vehicles, fire apparatus and ambulance bodies. Each comes in 8 service versions: Police / Sheriff, Fire / Rescue, EMS / Ambulance, Volunteer POV, Command / Chief / EM, Search & Rescue, Security / Campus / Private, and Utility / Tow / Public Works.
+
+### Custom sheets
+
+The buyer types their own legends and picks the head, media, font and color, and a live preview builds the sheet. Nothing prints until they approve a low-resolution watermarked sample, and changes before printing are free.
+
+## Compatibility list
+
+Standard packs are laid out for heads in these families (fit only, no affiliation):
+
+- Whelen-fit (for example CanTrol WC 21-button, Carbide, CenCom Core CCTL7 and WeCanX systems)
+- SoundOff-fit
+- Federal Signal-fit
+- Code 3-fit
+- Feniex-fit
+- D&R-fit
+- Star-fit
+
+## How an order is designed to work
+
+1. The buyer picks packs or builds a custom sheet and sends an order form. There's no payment on the site.
+2. They get an invoice (agencies can send a purchase order), and the control head model is confirmed.
+3. The layout is checked against that head before the print run.
+4. Sheets are printed to order and shipped flat.
+
+A fit promise backs it: if a label doesn't fit the head it was ordered for, it's reprinted free. Pack artwork and production files are never sold or shared, and packs ship only as printed sheets, never as digital files.
+
+## Prototype
+
+The prototype is a single-page storefront with a working control head console: choose a make, head, specialty pack, vehicle pack, service and light colors, then press keys to hear siren tones and watch the front, rear, traffic advisor and scene lights follow. Screenshots below are from 23 Nov 2026, with pricing and contact sections removed.
+
+<Gallery photos={[
+	{ src: hero, alt: 'Prototype hero with the interactive control head console showing Whelen Core keys and front and rear light previews.', caption: 'Hero and interactive console. Keys drive the light and siren preview.' },
+	{ src: catalog, alt: 'Brand standard packs grid with brand filter chips and three Whelen-fit pack cards showing sample legends, fit lists and SKUs.', caption: 'Brand standard packs, filtered by brand family.' },
+	{ src: vehicle, alt: 'Vehicle-specific pack list with make filter chips and Police Interceptor Utility packs by model year with sample legends.', caption: 'Vehicle-specific packs by make, platform and year.' },
+	{ src: custom, alt: 'Custom sheet builder with head, media, font and legend color pickers and a live watermarked sheet preview.', caption: 'Custom sheet builder with a live preview.' },
+	{ src: roadmap, alt: 'Three phase cards: key labels now, tested surplus equipment next, new emergency equipment later.', caption: 'The three-phase roadmap as shown on the site.' },
+]} />
+
+## What I built and why it matters
+
+- **Market read:** in my own upfit work, getting legends that match the head, the vehicle and the service took real effort. A shop that lays them out per head, per vehicle and per service also starts a relationship with the buyers who later need equipment. This is my read, not market research.
+- **Product architecture:** a three-layer catalog (standard, specialty add-on, vehicle-specific) plus custom sheets, so a few hundred designs combine into a very large number of correct kits.
+- **Risk controls built in:** compatibility-only brand language and trademark notices, sample approval before printing, no digital file sales, and safety limits on printed mounts.
+- **Proof from my own truck:** the legends and layouts come from real cab work, including my [F-150 upfit](/projects/f150-upfit/) and [Upfit Studio](/projects/upfit-studio/).
+
+## Open items
+
+- Launch date and storefront platform are not decided.
+- Phase 2 and Phase 3 suppliers and sourcing are not set.
+- The scanner shroud still needs fit and heat testing before release.
+
+## Changelog
+
+<Changelog entries={[{ date: '2026-11-23', change: 'Concept page published from my shop proposal and the 22 Nov prototype. Prices, partners, contacts, shipping origin and restricted pack lines left off.', rollback: 'Revert the commit that added the Shop concept page.', log: '/log/2026-11-23-lighting-roster/' }]} />
