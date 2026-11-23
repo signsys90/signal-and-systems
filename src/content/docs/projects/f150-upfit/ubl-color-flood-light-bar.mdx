@@ -4,7 +4,7 @@ description: Wire-by-wire plan for the UBL Color Flood 2.0 20-inch amber/white l
 summary: 20" amber/white warning and white flood bar under the grille guard's lower tube, with seven CanTrol outputs for power, three modes, two arrows and pattern.
 status: Bench-tested
 category: Vehicle Upfit and 12V
-updated: 2026-11-12
+updated: 2026-11-23
 sidebar:
   label: UBL Color Flood 2.0 light bar
   order: 10
@@ -24,6 +24,10 @@ import cfbench from '../../../../assets/f150/colorflood-cantrol-bench-wiring.png
 
 <Callout type="safety" title="Legal notice">
 Emergency lighting and siren use is regulated by state law and permits. This page documents a personal build and is not legal guidance.
+</Callout>
+
+<Callout type="open" title="Being replaced (23 Nov 2026)">
+A Whelen Tracer Trio 3-module red/amber/white takes the front grille guard position. The Color Flood goes to the parts and sales bin. Its bench results below stay as the record. See the [Whelen Core changeover](/projects/f150-upfit/whelen-core-changeover/).
 </Callout>
 
 ## Goal
@@ -199,7 +203,7 @@ The arrow keys are planned so each button ends on the same side of the truck fro
 ## Changelog
 
 <Changelog
-	entries={[
+	entries={[{ date: '2026-11-23', change: 'Being replaced: recorded my Whelen Core changeover decision.', rollback: 'Revert the commit that recorded the Whelen Core changeover.', log: '/log/2026-11-23-lighting-roster/' }, 
 		{ date: '2026-11-12', change: 'Passed the CanTrol bench test with a 1N4004 diode on the yellow wire. In-line fuse read as 5A. J4-15 corrected to Violet. Command programming done in CF1 to CF4.', rollback: 'Revert the commit that added the 12 Nov upfit update.', log: '/log/2026-11-12-color-flood-bench-pass/' },
 		{ date: '2026-11-10', change: 'LED Output 11 (J4-15, left arrow) recorded as Gray and LED Output 9 (J4-13, pattern wire) as Green on my harness.', rollback: 'Revert the commit that recorded J4-15 as Gray.' },
 		{ date: '2026-11-10', change: 'Added the CanTrol bench wiring diagram (Rev 2, custom harness identified by pin). It is a bench plan; the bar is not yet tested on the CanTrol. Removed the Whelen guide lead colors from the wiring table, because my harness is custom.', rollback: 'Revert the commit that added the bench wiring diagrams.', log: '/log/2026-11-10-bench-wiring-diagrams/' },

@@ -1,0 +1,58 @@
+---
+title: Whelen Core changeover
+description: My 23 Nov 2026 decision to move the F-150 upfit to a Whelen Core system with Whelen Tracer Trio and FST Trio lights, what each new light replaces, and which parts go to the parts and sales bin.
+summary: Decided 23 Nov 2026. Whelen Tracer Trio sticks replace the UBL rockers, the Putco Work Blade and the UBL Color Flood; a Whelen FST Trio replaces the STL visor bar; an OBD-II cable for the Core replaces the CC5K1. Nothing bought, wired or tested yet.
+status: Planned
+category: Vehicle Upfit and 12V
+updated: 2026-11-23
+sidebar:
+  label: Whelen Core changeover
+  order: 1
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+
+<ProjectHeader />
+
+<Callout type="safety" title="Legal notice">
+Emergency lighting and siren use is regulated by state law and permits. The new lights include red heads; check what colors are allowed for the vehicle before wiring them. This page documents a personal build and is not legal guidance.
+</Callout>
+
+<Callout type="unverified" title="Decision only">
+This page records what I decided on 23 Nov 2026. None of the new Whelen parts are bought, wired or bench-tested. Their specs, current draw, wire colors, mounts and Core output assignments aren't documented yet, so none are listed here. The CanTrol output plan and wiring pages describe the earlier CanTrol build until the Core plan is written.
+</Callout>
+
+## What changes
+
+| Position | New light (planned) | Replaces | What happens to the old part |
+| --- | --- | --- | --- |
+| Rocker panels | Whelen Tracer Trio, 6-module, red/amber/white | [UBL rocker panel lights](/projects/f150-upfit/rocker-panel-lights/) | Returned |
+| Under the tailgate, rear bumper | Whelen Tracer Trio, 5-module, red/amber/white | [Putco 60 in Work Blade](/projects/f150-upfit/putco-work-blade/) | Parts and sales bin |
+| Front, on the grille guard | Whelen Tracer Trio, 3-module, red/amber/white | [UBL Color Flood 2.0](/projects/f150-upfit/ubl-color-flood-light-bar/) | Parts and sales bin |
+| Windshield visor | Whelen FST Trio visor light bar, red/amber/white | [SpeedTech Raptor (STL) visor bar](/projects/f150-upfit/visor-light-bar/) | To be sold with its Grand Control Box and all brackets |
+| Rear window, headrest brackets | Strobes N' More E68Xtreme stick (already bought) | BooYu traffic advisor | BooYu comes out |
+| Rear headliner | Whelen RST, red/amber/white Trio for the 2015–2020 F-150 (made 2025) | E68Xtreme's planned spot | — |
+| Vehicle interface | OBD-II cable for the Core system | Whelen CC5K1 CANport kit | Sold new, unopened in its bag |
+| Bed rails | [LUMENIX bar pairs](/projects/f150-upfit/lumenix-side-bars/) | — | On hold. Their role with the Core system isn't decided |
+
+The Federal Signal SLB-FRD15ND no-drill bracket kit, bought for the E68Xtreme's headliner mount, is not needed now that the stick goes on the headrest brackets. It's new in an opened bag and will be sold.
+
+## What this means for the rest of the build
+
+- **Controller.** The CanTrol WC output plan, bench files and CANport setup were built for the CanTrol. Moving to Core means a new output plan and new programming. Until I confirm the Core model and write that plan, the CanTrol pages stay as the record of the earlier build.
+- **CANport.** The CC5K1 was the CanTrol's OBD-II interface for the eight CAN vehicle inputs set up on 31 Oct. Its replacement is the Core's OBD-II cable, so the CANport setup will change. Per my rule, that change goes on both these F-150 pages and the [Upfit Studio](/projects/upfit-studio/) page.
+- **Other planned lights.** The HELLA heads, the UBL Mini-X pair, the E68Xtreme and the LUMENIX bars were all assigned to CanTrol outputs. They need new assignments on the Core.
+
+## Open items
+
+- Confirm the Whelen Core controller and control head model, and whether the CanTrol WC set is sold.
+- Confirm the part numbers for each Tracer Trio, the FST Trio, the RST and the Core OBD-II cable, then add specs from Whelen's pages.
+- Write the Core output plan, wire schedule and bench test.
+- Decide the LUMENIX pairs' role, and whether the HELLA heads and Mini-X plan carry over.
+- Update the CANport setup on the F-150 and Upfit Studio pages once the Core cable is in.
+
+## Changelog
+
+<Changelog entries={[{ date: '2026-11-23', change: 'Page added from my 23 Nov decision to move to a Whelen Core system with Tracer Trio and FST Trio lights.', rollback: 'Revert the commit that recorded the Whelen Core changeover.', log: '/log/2026-11-23-lighting-roster/' }]} />

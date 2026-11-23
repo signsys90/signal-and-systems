@@ -28,8 +28,12 @@ import e68bench from '../../../../assets/f150/e68xtreme-bench-wiring.png';
 Emergency lighting and siren use is regulated by state law and permits. This page documents a personal build and is not legal guidance. The planned stick includes red and white heads; check what colors are allowed for the vehicle before wiring them.
 </Callout>
 
+<Callout type="open" title="Federal Signal bracket not needed (23 Nov 2026)">
+With the E68Xtreme on the headrest brackets, the SLB-FRD15ND kit (new, bag opened) will be sold. See the [Whelen Core changeover](/projects/f150-upfit/whelen-core-changeover/).
+</Callout>
+
 <Callout type="open" title="Decision, 23 Nov 2026: the BooYu comes out">
-The BooYu is coming out of the truck. J1 Output 3, which fed it, already powers the [LUMENIX bed-rail bars](/projects/f150-upfit/lumenix-side-bars/) (16 Nov roster). The E68Xtreme stick (my "E68 #1") moves down to the BooYu's spot on the SpeedTech headrest brackets, and a **Whelen RST** takes the rear headliner position the stick was planned for. The RST's exact model, size, colors, draw and CanTrol outputs aren't documented yet, so none are listed here. The BooYu sections below are kept as the record of what was installed until now.
+The BooYu is coming out of the truck. J1 Output 3, which fed it, already powers the [LUMENIX bed-rail bars](/projects/f150-upfit/lumenix-side-bars/) (16 Nov roster). The E68Xtreme stick moves down to the BooYu's spot on the SpeedTech headrest brackets, and a **Whelen RST** takes the rear headliner position the stick was planned for. Mine is a red/amber/white Trio unit made in 2025, for the 2015–2020 F-150. Its part number, size, draw and outputs aren't documented yet, so none are listed here. The BooYu sections below are kept as the record of what was installed until now.
 </Callout>
 
 ## Where this stands (23 Nov 2026)
@@ -37,8 +41,8 @@ The BooYu is coming out of the truck. J1 Output 3, which fed it, already powers 
 | Item | Status |
 | --- | --- |
 | BooYu Rear LED TIR Amber Warning Light & Traffic Advisor | Installed today. **Coming out** (decided 23 Nov). Its headrest bracket spot goes to the E68Xtreme |
-| Strobes N' More E68Xtreme LED Stick (8 Module), R/A/W/W/W/W/A/R ("E68 #1") | Bought. Bench testing on the CanTrol. New location: the SpeedTech headrest brackets (23 Nov) |
-| Whelen RST | Planned for the rear headliner position (23 Nov). Model, specs and wiring to confirm |
+| Strobes N' More E68Xtreme LED Stick (8 Module), R/A/W/W/W/W/A/R | Bought. Bench testing on the CanTrol. New location: the SpeedTech headrest brackets (23 Nov) |
+| Whelen RST, red/amber/white Trio, 2015–2020 F-150 fit (made 2025) | Planned for the rear headliner position (23 Nov). Part number, specs and wiring to confirm |
 | Federal Signal SLB-FRD15ND No-Drill Mount Kit | Planned for the stick on the headliner. Whether the RST uses it is to confirm. Not bought |
 
 I asked for an "E86" traffic advisor; the project files of 27 October name the part as the Strobes N' More **E68**Xtreme LED Stick, so this page uses that name.
@@ -227,9 +231,8 @@ This is the wiring plan for the bench, drawn before the test. Every stick output
 
 ## Open items
 
-- Confirm the Whelen RST model and part number, then add its specs, colors, draw, mount and CanTrol outputs.
+- Confirm the Whelen RST part number, then add its specs, draw, mount and outputs from Whelen's documents.
 - Check how the E68Xtreme's 2 in brackets fix to the SpeedTech headrest brackets, and that the stick clears the rear seat headrests and the rear window defroster lines.
-- Confirm whether "E68 #1" means a second E68Xtreme is planned.
 - Measure the BooYu draw.
 - Bench test the FRM01 power-press plan for the BooYu (proposed).
 - Buy the SLB-FRD15ND kit ($49.00, 1–3 week lead time), if the stick's brackets fit it.
@@ -249,7 +252,7 @@ This is the wiring plan for the bench, drawn before the test. Every stick output
 
 ## Changelog
 
-<Changelog entries={[
+<Changelog entries={[{ date: '2026-11-23', change: 'Federal Signal bracket not needed: recorded my Whelen Core changeover decision.', rollback: 'Revert the commit that recorded the Whelen Core changeover.', log: '/log/2026-11-23-lighting-roster/' }, 
 	{ date: '2026-11-23', change: 'BooYu coming out. The E68Xtreme moves to the BooYu\'s headrest bracket spot and a Whelen RST takes the rear headliner position (my decision, 23 Nov). RST details to confirm.', rollback: 'Revert the commit that recorded the 23 Nov rear window decision.', log: '/log/2026-11-23-lighting-roster/' },
 	{ date: '2026-11-12', change: 'BooYu stays in the truck, below the E68Xtreme on J1-3 (it is no longer being removed). Added its controller details from my 12 Nov video (28 patterns, 3 arrow modes, keys, 5-pin connector, pattern memory) and the proposed FRM01 power-press plan. E68Xtreme marked bought.', rollback: 'Revert the commit that added the 12 Nov upfit update.', log: '/log/2026-11-12-color-flood-bench-pass/' },
 	{ date: '2026-11-10', change: 'Added the E68Xtreme bench wiring diagram (Rev 2, with the corrected J2-11 and J2-12 harness colors). It is a bench plan; nothing on it is tested yet.', rollback: 'Revert the commit that added the bench wiring diagrams.', log: '/log/2026-11-10-bench-wiring-diagrams/' },
