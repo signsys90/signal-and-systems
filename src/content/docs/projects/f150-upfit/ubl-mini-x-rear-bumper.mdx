@@ -1,0 +1,101 @@
+---
+title: UBL Color Flood Mini-X rear bumper lights
+description: Proposed pair of UBL Color Flood Mini-X 4-color lights under the F-150's rear bumper for rear warning and backup flood, with pattern and color stepped from a 433 MHz key fob through the CanTrol. Also records the UBL X-Lite 2X dash light, now on the backburner.
+summary: Two UBL Mini-X lights upside down under the rear bumper, sides on J1 Output 4 and center white on J1 Output 8 with reverse. Proposed 18 Nov; not bought or bench-tested.
+status: Planned
+category: Vehicle Upfit and 12V
+updated: 2026-11-23
+sidebar:
+  label: UBL Mini-X rear bumper
+  order: 23
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import SpecBox from '../../../../components/SpecBox.astro';
+import PartsTable from '../../../../components/PartsTable.astro';
+import WiringTable from '../../../../components/WiringTable.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+
+<ProjectHeader />
+
+<Callout type="safety" title="Legal notice">
+Emergency lighting and siren use is regulated by state law and permits. The road look here is amber/white only. This page documents a personal build and is not legal guidance.
+</Callout>
+
+<Callout type="unverified" title="Proposed">
+Everything on this page is a plan I chose on 18 Nov 2026. Nothing is bought, wired or bench-tested yet, and the quantity of two is an assumption to confirm.
+</Callout>
+
+## Goal
+
+Rear warning low on the truck, plus a bright white backup flood. Done means both lights are mounted under the rear bumper, the sides flash with the warning slide, the center white comes on in reverse and with REAR FLOOD, and pattern and color can be changed from a key fob without giving up any control head key.
+
+## Placement
+
+Two units upside down under the rear bumper, one each side of the hitch, facing back. Before buying, check the spot against the hitch, the parking sensors, the exhaust and the spare tire hoist.
+
+<SpecBox
+	title="UBL Color Flood Mini-X (4 Color)"
+	specs={[
+		['Part number', 'UBL-CFM-4'],
+		['LEDs', '30 x 4 W (6 center white flood + 24 side shooters)'],
+		['Output', '3,200 lumens'],
+		['Side colors', 'Amber, blue, red, white'],
+		['Patterns', '19; white flood and sides controlled separately'],
+		['Spread', '180° sides, 30° flood'],
+		['Housing', 'Cast aluminum, polycarbonate lens, breathable membrane (no IP number listed)'],
+		['Power', '12V DC; nameplate 96 W for the sides per unit'],
+		['Size', '3.75 in W x 3 in H x 2.4 in D'],
+		['Warranty', '2 years'],
+	]}
+	source={{ label: 'UBL product page, as quoted in my F-150 project document, section 8 (18 Nov 2026)' }}
+/>
+
+## Wiring (final choice, 18 Nov, proposed)
+
+<WiringTable
+	rows={[
+		{ wire: 'MX1', color: 'Red (both units)', function: 'Sides. Slide 1 steady; slides 2 and 3 a Whelen flash pattern each. Also on with the REAR LAMPS key', source: 'CanTrol J1 Output 4', draw: 'Nameplate 96 W per unit; measure', fuse: 'In-line within 12 in of the lead, rated after the bench draw', gauge: 'TBD', relay: 'Solid-state relay with its own fused feed if both measure over 8A', termination: 'Mini-X red leads' },
+		{ wire: 'MX2', color: 'Green (both units)', function: 'Center white flood: REAR FLOOD and reverse', source: 'CanTrol J1 Output 8, own fused branch beside the Putco white', draw: 'Measure', fuse: 'Own branch fuse', gauge: 'TBD', relay: '—', termination: 'Mini-X green leads' },
+		{ wire: 'MX3', color: 'Yellow (both units)', function: 'Pattern and color step', source: 'CanTrol LC AUX 2 (250 mA), through a 1N4004: plain end on J4-2, stripe toward the lights', draw: 'Under 250 mA (to confirm)', fuse: '—', gauge: 'TBD', relay: '—', termination: 'Mini-X yellow leads' },
+		{ wire: 'MX4', color: 'Remote CH1 contacts', function: 'Closes J17-3 (Logic 3); Command turns LC AUX 2 on while it is active', source: '433 MHz 4-channel receiver on a 5V buck converter', draw: 'Signal', fuse: '1A on the ignition feed to the buck converter', gauge: 'TBD', relay: '—', termination: 'J17-3' },
+		{ wire: 'MXK', color: 'Black (both units)', function: 'Ground', source: '—', draw: 'Return', fuse: '—', gauge: 'TBD', relay: '—', termination: 'Ring terminal', ground: 'Steel frame rail. The manual\'s battery-post ground is rejected' },
+	]}
+/>
+
+Blue and white leads are capped. If the bench shows the lights can't follow a CanTrol flash pattern cleanly, they run their own pattern in all slides instead.
+
+The same 4-channel remote also runs the [HELLA heads](/projects/f150-upfit/hella-quad-color-heads/): CH2 for color and CH3 for pattern. CH4 is spare.
+
+## Bench checks
+
+- Current draw of both sides together (over 8A means a solid-state relay on J1-4).
+- LC AUX 2 polarity, and both yellows together under 250 mA.
+- Pattern memory after power off.
+- No backfeed between the Putco white override and the Mini-X greens on J1 Output 8.
+
+## UBL X-Lite 2X dash light (backburner)
+
+On 16 Nov I planned a UBL X-Lite 2X dash light (UBL-XL-2X), low center on the windshield and clear of the airbag, red on LED Output 25, with a 2-channel 433 MHz relay remote on J17-3 for pattern and color. On 18 Nov I put it on the backburner and the Mini-X took its place. It stays a future option: it's out of the to-buy total and its outputs (LED 25, LC AUX 2, J17-3) were released, then LC AUX 2 and J17-3 went to the Mini-X.
+
+## Parts
+
+<PartsTable
+	parts={[
+		{ name: 'UBL Color Flood Mini-X (4 Color) (x2, quantity assumed)', sku: 'UBL-CFM-4', price: '$49.99 each', specs: 'Not bought', status: 'Planned' },
+		{ name: '433 MHz 4-channel wireless remote receiver', specs: 'Shared with the HELLA heads. Price not set', status: 'Planned' },
+		{ name: '5V buck converter and in-line fuse holders', specs: 'Price not set', status: 'Planned' },
+		{ name: 'BOJACK 1N4004 diode', specs: 'On hand from the Color Flood bench', status: 'In progress' },
+		{ name: 'UBL X-Lite 2X Dash Light', sku: 'UBL-XL-2X', specs: 'Future option, not in the to-buy total', status: 'Planned' },
+	]}
+/>
+
+## Sources
+
+- F-150 project document, revisions 23, 28 to 32 (16–18 Nov 2026), sections 3.1 and 8.
+- UBL product page for the Mini-X, as quoted in section 8.
+
+## Changelog
+
+<Changelog entries={[{ date: '2026-11-23', change: 'Page published from the F-150 project document, revisions 19 to 36.', rollback: 'Revert the commit that added the 13–23 Nov upfit update.', log: '/log/2026-11-23-lighting-roster/' }]} />

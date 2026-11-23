@@ -1,0 +1,85 @@
+---
+title: LUMENIX bed-rail warning bars
+description: Two pairs of LUMENIX amber/white traffic advisor bars on the F-150's bed side rails behind the cab, on one inline controller fed from CanTrol J1 Output 3. Current build and a future 8-bar option.
+summary: Four LUMENIX 19-inch amber/white bars, one pair per bed rail behind the cab, on one inline controller and a 2-way splitter, powered from J1 Output 3. Proposed; bench test pending.
+status: In progress
+category: Vehicle Upfit and 12V
+updated: 2026-11-23
+sidebar:
+  label: LUMENIX bed-rail bars
+  order: 22
+---
+
+import ProjectHeader from '../../../../components/ProjectHeader.astro';
+import PartsTable from '../../../../components/PartsTable.astro';
+import WiringTable from '../../../../components/WiringTable.astro';
+import Callout from '../../../../components/Callout.astro';
+import Changelog from '../../../../components/Changelog.astro';
+
+<ProjectHeader />
+
+<Callout type="safety" title="Legal notice">
+Emergency lighting and siren use is regulated by state law and permits. This page documents a personal build and is not legal guidance.
+</Callout>
+
+## Goal
+
+Side warning on both sides of the bed, low and out of the way under the tonneau cover. Done means both pairs are mounted on the bed rails, run from one controller on one CanTrol output, flash in sync, and pass a draw and heat check on the bench.
+
+## Current build (18 Nov 2026)
+
+- **Bars:** LUMENIX LED Traffic Advisor Strobe Light Bar with Controller, 2 x 19 in, Amber White. Two pairs, four bars.
+- **Where:** pair 1 on the driver-side bed rail behind the cab, pair 2 on the passenger-side bed rail behind the cab. Both are already mounted.
+- **Path:** 12V into pair 1's inline controller, then one small 3-pin 2-way splitter to pair 1 and pair 2. Pair 2's own controller and cigarette plug go in the parts bin as spares.
+- **Power:** the cigarette plug comes off and the lead is fed from CanTrol J1 Output 3 (10A). It's on in slide positions 1, 2 and 3.
+- **Pattern:** the controller's own memory recall. There's no CanTrol pattern wire.
+
+How it got here: on 16 Nov I bought the first pair and planned one bar per bed rail. On 17 Nov I approved an 8-bar plan. On 18 Nov I set the current build back to 2 pairs and kept the 8-bar layout as a future option only.
+
+<WiringTable
+	rows={[
+		{ wire: 'B1', color: 'LUMENIX power lead (plug removed)', function: '+12V to the inline controller', source: 'CanTrol J1 Output 3', draw: 'Not measured (4 bars on one controller)', fuse: 'In-line, sized to the measured draw', gauge: 'TBD', relay: '—', termination: 'Pair 1 inline controller' },
+		{ wire: 'B2', color: 'LUMENIX ground lead', function: 'Ground', source: '—', draw: 'Return', fuse: '—', gauge: 'TBD', relay: '—', termination: 'Ring terminal', ground: 'Ford factory ground point or steel frame rail. Never battery negative' },
+		{ wire: 'B3', color: 'Supplied 3-pin', function: 'Controller output to pairs 1 and 2', source: 'Inline controller', draw: '—', fuse: '—', gauge: 'Supplied', relay: '—', termination: 'Small 3-pin 2-way splitter' },
+	]}
+/>
+
+## Mount hardware (bought 16 Nov)
+
+- Scotch VHB Extreme Mounting Tape, 60 in.
+- #8 x 3/8 in flat head screws for the tight C-channel on the bed rail.
+- #10 lock washers. These are loose on a #8 screw, so what each is for still needs confirming.
+
+## Bench checks before wiring
+
+- Draw of all four bars on one controller, measured in series. The J1-3 fuse is picked from it.
+- A 10-minute heat check on the controller box.
+- Both pairs flash in sync.
+- The splitter matches the LUMENIX plug.
+
+## Future option, not planned now
+
+Four pairs, eight bars, on the same controller through a 3-way splitter, an extension and a 2-way splitter. Pairs 3 and 4 would wrap the rear corners: bar A on the bed cap end facing out and bar B on the tailgate corner facing rear (wiring diagram Rev 2, approved 17 Nov, not built or tested).
+
+## Parts
+
+<PartsTable
+	parts={[
+		{ name: 'LUMENIX LED Traffic Advisor Strobe Light Bar w/Controller, 2 x 19 in, Amber White (pair 1)', sku: 'Amazon B0CDH4PL6P', price: '$31.79', specs: 'Arrived 16 Nov', status: 'In progress' },
+		{ name: 'LUMENIX bars, pair 2', sku: 'Amazon B0CDH4PL6P', specs: 'Price to confirm', status: 'Planned' },
+		{ name: 'Small 3-pin 2-way splitter', specs: 'Price to confirm', status: 'Planned' },
+		{ name: 'Scotch VHB Extreme Mounting Tape 60 in, #8 x 3/8 in flat head screws, #10 lock washers', price: '$14.97 with tax', specs: 'Home Depot, 16 Nov', status: 'In progress' },
+	]}
+/>
+
+## What this replaced
+
+J1 Output 3 fed the BooYu rear window traffic advisor in the earlier plan. The 16 Nov roster puts the LUMENIX bars on J1-3, and the BooYu isn't in the current lighting list. See [rear window lights](/projects/f150-upfit/rear-traffic-advisor/).
+
+## Sources
+
+- F-150 project document, revisions 21, 24, 25, 26 and 27 (16–18 Nov 2026), sections 3.1 and 8.
+
+## Changelog
+
+<Changelog entries={[{ date: '2026-11-23', change: 'Page published from the F-150 project document, revisions 19 to 36.', rollback: 'Revert the commit that added the 13–23 Nov upfit update.', log: '/log/2026-11-23-lighting-roster/' }]} />
