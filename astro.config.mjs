@@ -2,9 +2,9 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
-// Update `site` when the custom domain is live. Until then the free pages.dev address is used.
+// Canonical address. www.signalsystemseng.com and signal-and-systems.pages.dev serve the same build.
 export default defineConfig({
-	site: 'https://signal-and-systems.pages.dev',
+	site: 'https://signalsystemseng.com',
 	integrations: [
 		starlight({
 			title: 'Signal & Systems Engineering, LLC.',
@@ -32,12 +32,12 @@ export default defineConfig({
 				{ tag: 'link', attrs: { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' } },
 				{ tag: 'meta', attrs: { name: 'theme-color', content: '#0b1220' } },
 				// Social share preview (1200x630 center crop of the cover banner)
-				{ tag: 'meta', attrs: { property: 'og:image', content: 'https://signal-and-systems.pages.dev/og-image.png' } },
+				{ tag: 'meta', attrs: { property: 'og:image', content: 'https://signalsystemseng.com/og-image.png' } },
 				{ tag: 'meta', attrs: { property: 'og:image:width', content: '1200' } },
 				{ tag: 'meta', attrs: { property: 'og:image:height', content: '630' } },
 				{ tag: 'meta', attrs: { property: 'og:image:alt', content: 'Signal & Systems Engineering, LLC. Built in the field. Engineered for business.' } },
 				{ tag: 'meta', attrs: { name: 'twitter:card', content: 'summary_large_image' } },
-				{ tag: 'meta', attrs: { name: 'twitter:image', content: 'https://signal-and-systems.pages.dev/og-image.png' } },
+				{ tag: 'meta', attrs: { name: 'twitter:image', content: 'https://signalsystemseng.com/og-image.png' } },
 				// Cloudflare Web Analytics: enable it in the Cloudflare Pages dashboard (one click, no script needed),
 				// or paste the beacon snippet here with your token.
 			],

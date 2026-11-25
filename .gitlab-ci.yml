@@ -1,5 +1,5 @@
 # Build the site and publish it to the existing Cloudflare Pages project
-# (signal-and-systems.pages.dev) on every push to main.
+# (signalsystemseng.com, also signal-and-systems.pages.dev) on every push to main.
 #
 # Needs two CI/CD variables in GitLab (Settings > CI/CD > Variables):
 #   CLOUDFLARE_API_TOKEN   - token with "Cloudflare Pages: Edit" (masked, protected)

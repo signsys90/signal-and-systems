@@ -32,7 +32,7 @@ import mobile from '../../../../assets/site/home-mobile.jpg';
 		['Docs theme', 'Starlight 0.42.7'],
 		['Hosting', 'Cloudflare Pages, free tier'],
 		['Deploys', 'Automatic on every push to main'],
-		['Address', 'signal-and-systems.pages.dev'],
+		['Address', 'signalsystemseng.com (custom domain, Nov 2026; signal-and-systems.pages.dev still works)'],
 		['Budget', '$0'],
 	]}
 	source={{ label: 'Source in a private GitLab repository (moved from GitHub, Nov 2026)' }}
@@ -64,7 +64,7 @@ Give every project one public home where the parts, wiring, code and test result
 ## Architecture
 
 ```text
-MDX pages in GitLab ─► push to main ─► GitLab CI (astro build, Node 24) ─► wrangler pages deploy ─► static site on pages.dev
+MDX pages in GitLab ─► push to main ─► GitLab CI (astro build, Node 24) ─► wrangler pages deploy ─► static site on signalsystemseng.com
 ```
 
 Until 6 Nov 2026, Cloudflare Pages built the site itself from a GitHub repository. After that GitHub account was suspended, the source moved to GitLab. Cloudflare can't switch an existing Pages project to a different Git provider without making a new project and a new address, so a GitLab CI job now builds the site and publishes it to the same Pages project with Wrangler. The address stays the same.
